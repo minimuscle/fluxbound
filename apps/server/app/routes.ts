@@ -13,4 +13,7 @@ export const routes = {
   "/api/user/signup": {
     POST: user.signup.POST,
   },
+  "/api/user/login": {
+    POST: user.login.POST,
+  },
 } satisfies Bun.Serve.Options<undefined>["routes"];
