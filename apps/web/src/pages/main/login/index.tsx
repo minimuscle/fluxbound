@@ -1,19 +1,37 @@
-import { use } from "react";
-import Logo from "../../assets/images/logo.png";
-import { Button } from "../../components/Button";
-import { GlobalContext } from "../../utils/context";
-import "./mainpage.scss";
+import { Input, PasswordInput } from "@mantine/core";
+import { Form } from "utils/form/form";
+import { useAppForm } from "utils/form/useForm";
+import "./login.scss";
 
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
 export const LoginForm = () => {
-  const { setActivePage } = use(GlobalContext)!;
+  /***** QUERIES *****/
+  // const { mutate } = useMutation({
+  //   mutationFn: (data) => {
+  //     return fetch("http://localhost:3000/login", {
+  //       method: "POST",
+  //       body: JSON.stringify(data),
+  //     });
+  //   },
+  // });
+
+  /***** FORM *****/
+  const form = useAppForm({
+    onSubmit: ({ value }) => {
+      console.log("Submitted", value);
+    },
+  });
+
   /***** RENDER *****/
   return (
-    <div className="MainPage">
-      <img src={Logo} alt="" height={300} />
-      <Button onClick={() => setActivePage("GAME")}>Start New Game</Button>
+    <div className="LoginForm">
+      <Form form={form}>
+        <Input placeholder="email" />
+        <PasswordInput placeholder="password" />
+        <button type="submit">Login</button>
+      </Form>
     </div>
   );
 };

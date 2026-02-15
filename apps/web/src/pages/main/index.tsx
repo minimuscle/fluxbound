@@ -1,7 +1,7 @@
 import { use } from "react";
 import Logo from "../../assets/images/logo.png";
-import { Button } from "../../components/Button";
 import { GlobalContext } from "../../utils/context";
+import { LoginForm } from "./login";
 import "./mainpage.scss";
 
 /**********************************************************************************************************
@@ -13,7 +13,8 @@ export const MainPage = () => {
   return (
     <div className="MainPage">
       <img src={Logo} alt="" height={300} />
-      <Button onClick={() => setActivePage("GAME")}>Start New Game</Button>
+      <LoginForm />
+      {/* <Button onClick={() => setActivePage("GAME")}>Start New Game</Button> */}
     </div>
   );
 };
