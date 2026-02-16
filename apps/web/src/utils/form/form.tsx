@@ -10,5 +10,9 @@ export const Form = ({ children, form }: { children: React.ReactNode; form: any 
 
   /***** RENDER *****/
 
-  return <form onSubmit={handleSubmit}>{children}</form>;
+  return (
+    <form onSubmit={handleSubmit}>
+      <form.AppForm>{children}</form.AppForm>
+    </form>
+  );
 };

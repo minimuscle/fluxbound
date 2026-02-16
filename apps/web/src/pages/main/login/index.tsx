@@ -1,6 +1,9 @@
 import { Input, PasswordInput } from "@mantine/core";
+import { useMutation } from "@tanstack/react-query";
 import { Form } from "utils/form/form";
 import { useAppForm } from "utils/form/useForm";
+import { z } from "zod";
+import { user } from "../../../api/user";
 import "./login.scss";
 
 /**********************************************************************************************************
@@ -8,19 +11,26 @@ import "./login.scss";
  **********************************************************************************************************/
 export const LoginForm = () => {
   /***** QUERIES *****/
-  // const { mutate } = useMutation({
-  //   mutationFn: (data) => {
-  //     return fetch("http://localhost:3000/login", {
-  //       method: "POST",
-  //       body: JSON.stringify(data),
-  //     });
-  //   },
-  // });
+  const { mutateAsync } = useMutation({
+    mutationFn: ({ email, password }: { email: string; password: string }) => {
+      return user.login.POST({ email, password });
+    },
+  });
 
   /***** FORM *****/
   const form = useAppForm({
+    validators: {
+      onSubmit: z.object({
+        email: z.email("Email is required"),
+        password: z.string().min(1, "Password is required"),
+      }),
+    },
+    defaultValues: {
+      email: "",
+      password: "",
+    },
     onSubmit: ({ value }) => {
-      console.log("Submitted", value);
+      mutateAsync(value);
     },
   });
 
@@ -28,8 +38,14 @@ export const LoginForm = () => {
   return (
     <div className="LoginForm">
       <Form form={form}>
-        <Input placeholder="email" />
-        <PasswordInput placeholder="password" />
+        <form.AppField
+          name="email"
+          children={(field) => <Input value={field.state.value} onChange={(e) => field.handleChange(e.target.value)} placeholder="Email" />}
+        />
+        <form.AppField
+          name="password"
+          children={(field) => <PasswordInput value={field.state.value} onChange={(e) => field.handleChange(e.target.value)} placeholder="Password" />}
+        />
         <button type="submit">Login</button>
       </Form>
     </div>

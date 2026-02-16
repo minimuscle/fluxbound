@@ -10,6 +10,9 @@ export const routes = {
   "/api/user": {
     GET: user.GET,
   },
+  "/api/user/details": {
+    GET: user.details.GET,
+  },
   "/api/user/signup": {
     POST: user.signup.POST,
   },

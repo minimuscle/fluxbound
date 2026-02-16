@@ -9,21 +9,36 @@ const signupSchema = z.object({
 
 export const user = {
   GET: withAuth(async ({ supabase, userId }) => {
-    const { data: existingUser, error: fetchError } = await supabase.from("users").select("*").maybeSingle();
-    if (fetchError) {
-      return ErrorResponse(fetchError.message, 500);
+    const { data, error } = await supabase.auth.getUser();
+    if (error) {
+      return ErrorResponse(error.message, 500);
     }
-    if (existingUser) {
-      return SuccessResponse(existingUser);
+    if (!data) {
+      return ErrorResponse("No session found", 401);
     }
-
-    const { data: newUser, error: insertError } = await supabase.from("users").insert({ id: userId, display_name: "Anon" }).select("*").single();
-    if (insertError) {
-      return ErrorResponse(insertError.message, 500);
+    if (data.user.id !== userId) {
+      return ErrorResponse("Session user does not match user id", 401);
     }
-
-    return SuccessResponse(newUser);
+    return SuccessResponse(data);
   }),
+  details: {
+    GET: withAuth(async ({ supabase, userId }) => {
+      const { data: existingUser, error: fetchError } = await supabase.from("users").select("*").maybeSingle();
+      if (fetchError) {
+        return ErrorResponse(fetchError.message, 500);
+      }
+      if (existingUser) {
+        return SuccessResponse(existingUser);
+      }
+
+      const { data: newUser, error: insertError } = await supabase.from("users").insert({ id: userId, display_name: "Anon" }).select("*").single();
+      if (insertError) {
+        return ErrorResponse(insertError.message, 500);
+      }
+
+      return SuccessResponse(newUser);
+    }),
+  },
   signup: {
     POST: withJsonBody(signupSchema, async ({ body }) => {
       const { email, password } = body;
