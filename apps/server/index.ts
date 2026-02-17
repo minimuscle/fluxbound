@@ -2,12 +2,6 @@ import { routes } from "./app/routes";
 
 const server = Bun.serve({
   routes,
-  fetch(req, server) {
-    if (server.upgrade(req)) {
-      return;
-    }
-    return new Response("Not Found", { status: 404 });
-  },
   websocket: {
     open(ws) {
       ws.send("Connection established");
