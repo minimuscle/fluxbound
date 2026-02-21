@@ -2,11 +2,11 @@ import { apiFetch } from "./functions";
 
 export const user = {
   GET: async () => {
-    return await apiFetch("/api/user");
+    return await (await apiFetch("/api/user")).json();
   },
   details: {
     GET: async () => {
-      return await apiFetch("/api/user/details");
+      return await (await apiFetch("/api/user/details")).json();
     },
   },
   login: {
@@ -16,7 +16,7 @@ export const user = {
         body: JSON.stringify({ email, password }),
       });
       const data = await login.json();
-      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("access_token", data.session.access_token);
       return data;
     },
   },

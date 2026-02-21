@@ -1,5 +1,5 @@
 import { Input, PasswordInput } from "@mantine/core";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Form } from "utils/form/form";
 import { useAppForm } from "utils/form/useForm";
 import { z } from "zod";
@@ -10,6 +10,9 @@ import "./login.scss";
  *   COMPONENT START
  **********************************************************************************************************/
 export const LoginForm = () => {
+  /***** HOOKS *****/
+  const queryClient = useQueryClient();
+
   /***** QUERIES *****/
   const { mutateAsync } = useMutation({
     mutationFn: ({ email, password }: { email: string; password: string }) => {
@@ -31,6 +34,7 @@ export const LoginForm = () => {
     },
     onSubmit: ({ value }) => {
       mutateAsync(value);
+      queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
 

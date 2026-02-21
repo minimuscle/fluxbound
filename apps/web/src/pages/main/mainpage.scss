@@ -3,4 +3,10 @@
   flex-direction: column;
   margin-top: -300px;
   gap: 20px;
+
+  &__loginStatus {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
