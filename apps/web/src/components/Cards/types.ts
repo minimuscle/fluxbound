@@ -7,13 +7,11 @@ export type GameCardId = Tagged<"GameCardId", number>;
 
 export type CardTrigger = "onPlay" | "onTurnStart" | "onTurnEnd" | "onDeath" | "onActivated" | "onAttack";
 
-type DottedIds<T, Prefix extends string = ""> =
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  T extends { run: (...args: any[]) => any }
-    ? Prefix
-    : {
-        [K in keyof T & string]: DottedIds<T[K], Prefix extends "" ? K : `${Prefix}.${K}`>;
-      }[keyof T & string];
+type DottedIds<T, Prefix extends string = ""> = T extends { run: (...args: any[]) => any }
+  ? Prefix
+  : {
+      [K in keyof T & string]: DottedIds<T[K], Prefix extends "" ? K : `${Prefix}.${K}`>;
+    }[keyof T & string];
 
 type EffectId = DottedIds<typeof EFFECTS>;
 
@@ -25,9 +23,7 @@ type GetByPath<T, P extends string> = P extends `${infer Head}.${infer Tail}`
     ? T[P]
     : never;
 
-type EffectArgs<Id extends EffectId> =
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  GetByPath<typeof EFFECTS, Id> extends { run: (ctx: any, args: infer A) => any } ? A : never;
+type EffectArgs<Id extends EffectId> = GetByPath<typeof EFFECTS, Id> extends { run: (ctx: any, args: infer A) => any } ? A : never;
 
 export type EffectRef = {
   [Id in EffectId]: EffectArgs<Id> extends never ? { id: Id } : { id: Id; args: EffectArgs<Id> };
