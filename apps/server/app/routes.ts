@@ -1,5 +1,8 @@
 import type { Server } from "bun";
 import { user } from "./routes/user";
+import { supabase } from "../utils/database";
+
+export type GameSocketData = { userId: string };
 
 export const routes = {
   /***** PUBLIC ROUTES *****/
@@ -9,8 +12,16 @@ export const routes = {
 
   /***** WEBSOCKETS *****/
   "/game": {
-    GET: (request: Request, server: Server<any>) => {
-      const upgraded = server.upgrade(request);
+    GET: async (request: Request, server: Server<GameSocketData>) => {
+      const authorizationHeader = request.headers.get("authorization");
+      const match = authorizationHeader?.match(/^Bearer\s+(.+)$/i);
+      const accessToken = match?.[1] ?? new URL(request.url).searchParams.get("access_token");
+      if (!accessToken) return new Response("Unauthorized", { status: 401 });
+
+      const { data, error } = await supabase.auth.getUser(accessToken);
+      if (error || !data.user) return new Response("Unauthorized", { status: 401 });
+
+      const upgraded = server.upgrade(request, { data: { userId: data.user.id } });
       if (upgraded) return; // Bun takes over
       return new Response("Expected WebSocket upgrade", { status: 426 });
     },
@@ -29,4 +40,4 @@ export const routes = {
   "/api/user/login": {
     POST: user.login.POST,
   },
-} satisfies Bun.Serve.Options<undefined>["routes"];
+} satisfies Bun.Serve.Options<GameSocketData>["routes"];

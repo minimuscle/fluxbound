@@ -9,13 +9,23 @@ export const Route = createFileRoute("/_app/game")({
 function RouteComponent() {
   /***** HOOKS *****/
   const websocketRef = useRef<WebSocket | null>(null);
+
   const handleSendMessage = () => {
     websocketRef.current?.send("Hello!");
   };
 
   /***** EFFECTS *****/
   useEffect(() => {
-    const websocket = new WebSocket("ws://localhost:3000/game");
+    const accessToken = localStorage.getItem("access_token");
+    if (!accessToken) {
+      console.error("Missing access token for websocket auth");
+      return;
+    }
+
+    const websocketUrl = new URL("ws://localhost:3000/game");
+    websocketUrl.searchParams.set("access_token", accessToken);
+
+    const websocket = new WebSocket(websocketUrl);
     websocketRef.current = websocket;
     websocket.onopen = () => {
       console.log("WebSocket connected");
