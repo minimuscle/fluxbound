@@ -1,6 +1,6 @@
 import { enemyStarterTestDeck } from "components/Cards/starterDecks/enemyDeck";
 import { playerStarterTestDeck } from "components/Cards/starterDecks/playerDeck";
-import { generateRandomPlayer, shuffle } from "pages/Game/utils/functions";
+import { generateRandomPlayer, shuffle } from "pages/SoloGame/utils/functions";
 import type { State } from "utils/types/game";
 
 export const restartGame = (): State => {

@@ -1,4 +1,4 @@
-import { drawCard } from "pages/Game/utils/functions";
+import { drawCard } from "pages/SoloGame/utils/functions";
 import type { State } from "utils/types/game";
 
 export const startTurn = (state: State): State => {

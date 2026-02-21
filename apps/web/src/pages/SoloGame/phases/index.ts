@@ -1,9 +1,9 @@
-import { activateCard } from "pages/Game/phases/activateCard";
-import { endTurn } from "pages/Game/phases/endTurn";
-import { playCard } from "pages/Game/phases/playCard";
-import { restartGame } from "pages/Game/phases/restartGame";
-import { startGame } from "pages/Game/phases/startGame";
-import { startTurn } from "pages/Game/phases/startTurn";
+import { activateCard } from "pages/SoloGame/phases/activateCard";
+import { endTurn } from "pages/SoloGame/phases/endTurn";
+import { playCard } from "pages/SoloGame/phases/playCard";
+import { restartGame } from "pages/SoloGame/phases/restartGame";
+import { startGame } from "pages/SoloGame/phases/startGame";
+import { startTurn } from "pages/SoloGame/phases/startTurn";
 import type { Phases, State } from "../../../utils/types/game";
 
 /**********************************************************************************************************

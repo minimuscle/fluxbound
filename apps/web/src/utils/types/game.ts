@@ -1,7 +1,7 @@
 import type { Element, GameCard, GameCardId } from "components/Cards/types";
 
 export type Player = "PLAYER" | "ENEMY";
-export type Page = "GAME" | "MAIN";
+export type Page = "GAME" | "MAIN" | "SOLO_GAME";
 
 type GameInfo = {
   deck: GameCard[];

@@ -1,6 +1,6 @@
 import { CARD_LIBRARY } from "components/Cards/library";
-import { damageTaken } from "pages/Game/utils/audio";
-import { runCardTrigger } from "pages/Game/utils/functions";
+import { damageTaken } from "pages/SoloGame/utils/audio";
+import { runCardTrigger } from "pages/SoloGame/utils/functions";
 import type { State } from "utils/types/game";
 
 const DAMAGE_SOUND_POOL_SIZE = 6;

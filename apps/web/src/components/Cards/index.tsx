@@ -1,9 +1,9 @@
 import { FireSimpleIcon } from "@phosphor-icons/react";
 import classNames from "classnames";
-import { checkIsActionable } from "pages/Game/utils/functions";
+import { checkIsActionable } from "pages/SoloGame/utils/functions";
 import { use } from "react";
 import type { Player } from "utils/types/game";
-import { GameContext } from "../../pages/Game/utils/context";
+import { GameContext } from "../../pages/SoloGame/utils/context";
 import "./cards.scss";
 import { CARD_LIBRARY } from "./library";
 import { CardTooltip } from "./tooltip";

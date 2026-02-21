@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.scss";
-import { GamePage } from "./pages/Game";
+import { GamePage } from "./pages/SoloGame";
 import { MainPage } from "./pages/main";
 import { GlobalContext } from "./utils/context";
 import type { Page } from "./utils/types/game";
@@ -14,6 +14,7 @@ export const App = () => {
   const RenderPage: Record<Page, React.ReactNode> = {
     MAIN: <MainPage />,
     GAME: <GamePage />,
+    SOLO_GAME: <GamePage />,
   };
 
   /***** RENDER *****/

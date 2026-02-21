@@ -1,6 +1,6 @@
 import { use } from "react";
 import type { Player } from "utils/types/game";
-import { GameContext } from "../../../pages/Game/utils/context";
+import { GameContext } from "../../../pages/SoloGame/utils/context";
 import { CARD_LIBRARY } from "../library";
 import { CardTooltip } from "../tooltip";
 import { ELEMENTS, type Element } from "../types";

@@ -1,7 +1,7 @@
 import { CrownSimpleIcon, SkullIcon } from "@phosphor-icons/react";
 import classNames from "classnames";
 import { Button } from "components/Button";
-import { GameContext } from "pages/Game/utils/context";
+import { GameContext } from "pages/SoloGame/utils/context";
 import React, { use } from "react";
 import "./coin.scss";
 

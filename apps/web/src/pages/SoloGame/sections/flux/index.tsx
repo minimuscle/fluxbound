@@ -1,6 +1,6 @@
 import { BoulesIcon, DropIcon, FireSimpleIcon, MoonIcon, PlantIcon, ShovelIcon, SkullIcon, SparkleIcon, SunIcon, WindIcon } from "@phosphor-icons/react";
 import type { Element } from "components/Cards/types";
-import { GameContext } from "pages/Game/utils/context";
+import { GameContext } from "pages/SoloGame/utils/context";
 import { use } from "react";
 import type { Player } from "utils/types/game";
 import "./flux.scss";

@@ -27,7 +27,8 @@
       "components/*": ["./src/components/*"],
       "pages/*": ["./src/pages/*"],
       "utils/*": ["./src/utils/*"],
-      "assets/*": ["./src/assets/*"]
+      "assets/*": ["./src/assets/*"],
+      "api/*": ["./src/api/*"]
     }
   },
   "include": ["src"]

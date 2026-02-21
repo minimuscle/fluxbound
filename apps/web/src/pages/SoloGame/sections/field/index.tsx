@@ -1,7 +1,7 @@
 import { Card } from "components/Cards";
 import { CARD_LIBRARY } from "components/Cards/library";
 import type { GameCardId } from "components/Cards/types";
-import { GameContext } from "pages/Game/utils/context";
+import { GameContext } from "pages/SoloGame/utils/context";
 import { use, useRef } from "react";
 import type { Player } from "utils/types/game";
 import "./field.scss";

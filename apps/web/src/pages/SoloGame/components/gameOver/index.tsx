@@ -1,5 +1,5 @@
 import { Button } from "components/Button";
-import { GameContext } from "pages/Game/utils/context";
+import { GameContext } from "pages/SoloGame/utils/context";
 import { use } from "react";
 import "./gameover.scss";
 

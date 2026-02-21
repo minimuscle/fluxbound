@@ -1,4 +1,4 @@
-import { runCardTrigger } from "pages/Game/utils/functions";
+import { runCardTrigger } from "pages/SoloGame/utils/functions";
 import type { Action, State } from "utils/types/game";
 
 export const activateCard = (state: State, action: Action): State => {

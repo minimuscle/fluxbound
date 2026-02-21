@@ -12,19 +12,18 @@ import "./mainpage.scss";
  **********************************************************************************************************/
 export const MainPage = () => {
   const { setActivePage } = use(GlobalContext)!;
-  const { data: userData, status } = useQuery({
+  const { data: userData } = useQuery({
     queryKey: ["user"],
     queryFn: () => user.details.GET(),
   });
-
-  console.log(userData, status);
 
   /***** RENDER *****/
   return (
     <div className="MainPage">
       <div className="MainPage__loginStatus">{userData && <p>Logged in as {userData.display_name}</p>}</div>
       <img src={Logo} alt="" height={300} />
-      {userData ? <Button onClick={() => setActivePage("GAME")}>Start New Game</Button> : <LoginForm />}
+      <Button onClick={() => setActivePage("SOLO_GAME")}>Start New Game (Local)</Button>
+      {userData ? <Button onClick={() => setActivePage("GAME")}>Start New Game (Multiplayer)</Button> : <LoginForm />}
     </div>
   );
 };
