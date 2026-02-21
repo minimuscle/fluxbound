@@ -9,13 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AppLobbyIndexRouteImport } from './routes/_app/lobby/index'
+import { Route as AppGameRouteRouteImport } from './routes/_app/game/route'
 import { Route as AppGame_oldIndexRouteImport } from './routes/_app/game_old/index'
 import { Route as AppHomeIndexRouteImport } from './routes/_app/_home/index'
+import { Route as AppGameLobbyIndexRouteImport } from './routes/_app/game/lobby/index'
 
-const AppLobbyIndexRoute = AppLobbyIndexRouteImport.update({
-  id: '/_app/lobby/',
-  path: '/lobby/',
+const AppGameRouteRoute = AppGameRouteRouteImport.update({
+  id: '/_app/game',
+  path: '/game',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppGame_oldIndexRoute = AppGame_oldIndexRouteImport.update({
@@ -28,44 +29,57 @@ const AppHomeIndexRoute = AppHomeIndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppGameLobbyIndexRoute = AppGameLobbyIndexRouteImport.update({
+  id: '/lobby/',
+  path: '/lobby/',
+  getParentRoute: () => AppGameRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
+  '/game': typeof AppGameRouteRouteWithChildren
   '/': typeof AppHomeIndexRoute
   '/game_old/': typeof AppGame_oldIndexRoute
-  '/lobby/': typeof AppLobbyIndexRoute
+  '/game/lobby/': typeof AppGameLobbyIndexRoute
 }
 export interface FileRoutesByTo {
+  '/game': typeof AppGameRouteRouteWithChildren
   '/': typeof AppHomeIndexRoute
   '/game_old': typeof AppGame_oldIndexRoute
-  '/lobby': typeof AppLobbyIndexRoute
+  '/game/lobby': typeof AppGameLobbyIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/_app/game': typeof AppGameRouteRouteWithChildren
   '/_app/_home/': typeof AppHomeIndexRoute
   '/_app/game_old/': typeof AppGame_oldIndexRoute
-  '/_app/lobby/': typeof AppLobbyIndexRoute
+  '/_app/game/lobby/': typeof AppGameLobbyIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/game_old/' | '/lobby/'
+  fullPaths: '/game' | '/' | '/game_old/' | '/game/lobby/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/game_old' | '/lobby'
-  id: '__root__' | '/_app/_home/' | '/_app/game_old/' | '/_app/lobby/'
+  to: '/game' | '/' | '/game_old' | '/game/lobby'
+  id:
+    | '__root__'
+    | '/_app/game'
+    | '/_app/_home/'
+    | '/_app/game_old/'
+    | '/_app/game/lobby/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  AppGameRouteRoute: typeof AppGameRouteRouteWithChildren
   AppHomeIndexRoute: typeof AppHomeIndexRoute
   AppGame_oldIndexRoute: typeof AppGame_oldIndexRoute
-  AppLobbyIndexRoute: typeof AppLobbyIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_app/lobby/': {
-      id: '/_app/lobby/'
-      path: '/lobby'
-      fullPath: '/lobby/'
-      preLoaderRoute: typeof AppLobbyIndexRouteImport
+    '/_app/game': {
+      id: '/_app/game'
+      path: '/game'
+      fullPath: '/game'
+      preLoaderRoute: typeof AppGameRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_app/game_old/': {
@@ -82,13 +96,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppHomeIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/game/lobby/': {
+      id: '/_app/game/lobby/'
+      path: '/lobby'
+      fullPath: '/game/lobby/'
+      preLoaderRoute: typeof AppGameLobbyIndexRouteImport
+      parentRoute: typeof AppGameRouteRoute
+    }
   }
 }
 
+interface AppGameRouteRouteChildren {
+  AppGameLobbyIndexRoute: typeof AppGameLobbyIndexRoute
+}
+
+const AppGameRouteRouteChildren: AppGameRouteRouteChildren = {
+  AppGameLobbyIndexRoute: AppGameLobbyIndexRoute,
+}
+
+const AppGameRouteRouteWithChildren = AppGameRouteRoute._addFileChildren(
+  AppGameRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
+  AppGameRouteRoute: AppGameRouteRouteWithChildren,
   AppHomeIndexRoute: AppHomeIndexRoute,
   AppGame_oldIndexRoute: AppGame_oldIndexRoute,
-  AppLobbyIndexRoute: AppLobbyIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -21,7 +21,7 @@ function RouteComponent() {
       <div className="MainPage__loginStatus">{userData && <p>Logged in as {userData.display_name}</p>}</div>
       <img src={Logo} alt="" height={300} />
       <Link to="/game_old">Start New Game (Local)</Link>
-      <Link to="/lobby">Start New Game (Multiplayer)</Link>
+      <Link to="/game/lobby">Start New Game (Multiplayer)</Link>
     </div>
   );
 }
