@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { Button } from "components/Button";
 import { useEffect, useRef } from "react";
+import { WebSocketContext } from "./-components/context";
 
 export const Route = createFileRoute("/_app/game")({
   component: RouteComponent,
@@ -44,9 +45,11 @@ function RouteComponent() {
 
   /***** RENDER *****/
   return (
-    <div>
-      <Button onClick={handleSendMessage}>Send Message Test</Button>
-      <Outlet />
-    </div>
+    <WebSocketContext value={websocketRef}>
+      <div>
+        <Button onClick={handleSendMessage}>Send Message Test</Button>
+        <Outlet />
+      </div>
+    </WebSocketContext>
   );
 }
