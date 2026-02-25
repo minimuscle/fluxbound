@@ -9,15 +9,15 @@ export const Route = createFileRoute("/_app/game/lobby/")({
 function RouteComponent() {
   /***** HOOKS *****/
   const hash = useLocation({ select: ({ hash }) => hash });
-  const ws = use(WebSocketContext);
+  const ws = use(WebSocketContext)?.current;
 
   /***** EFFECTS *****/
   useEffect(() => {
     //Create a room if hash does not exist.
-    if (hash || !ws?.current) return;
+    if (hash || !ws) return;
     console.log("Creating room");
-    ws.current.send(JSON.stringify("CREATE_ROOM"));
-  }, [hash, ws, ws?.current?.readyState]);
+    ws.send(JSON.stringify("CREATE_ROOM"));
+  }, [hash, ws, ws?.readyState]);
 
   /***** RENDER *****/
   return <div>Hello "/_app/lobby/"!</div>;
