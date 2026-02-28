@@ -34,6 +34,7 @@ function RouteComponent() {
 
       switch (parsed.type) {
         case "lobby/created":
+        case "lobby/joined":
           setRoomId(parsed.roomId);
           break;
         default:

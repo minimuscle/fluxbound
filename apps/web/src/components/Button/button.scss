@@ -16,4 +16,8 @@
   &:active {
     background-color: #111111;
   }
+
+  &:disabled {
+    color: red;
+  }
 }

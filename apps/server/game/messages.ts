@@ -6,6 +6,8 @@ export function message(ws: Bun.ServerWebSocket<GameSocketData>, message: string
   switch (parsed.type) {
     case "lobby/create":
       return lobby.create(ws);
+    case "lobby/join":
+      return lobby.join(ws, parsed.roomId);
     default:
       console.log("Received unknown message", parsed);
       break;
