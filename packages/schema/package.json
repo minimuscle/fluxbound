@@ -14,5 +14,9 @@
     "dev": "tsc --watch"
   },
   "types": "./index.ts",
-  "main": "./index.ts"
+  "main": "./index.ts",
+  "dependencies": {
+    "type-fest": "^5.4.4",
+    "zod": "^4.3.6"
+  }
 }

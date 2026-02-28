@@ -1,3 +1,16 @@
-import { createContext, type RefObject } from "react";
+import type { Lobby } from "@fluxbound/schema/src/lobby";
+import { createContext } from "react";
+import type { createTypedWebSocketSender } from "utils/functions";
 
-export const WebSocketContext = createContext<RefObject<WebSocket | null> | null>(null);
+/**********************************************************************************************************
+ *   TYPE DEFINITIONS
+ **********************************************************************************************************/
+export type WebSocketContext = {
+  websocket: ReturnType<typeof createTypedWebSocketSender> | null;
+  roomId: Lobby.RoomId | null;
+};
+
+/**********************************************************************************************************
+ *   COMPONENT START
+ **********************************************************************************************************/
+export const WebSocketContext = createContext<WebSocketContext | null>(null);

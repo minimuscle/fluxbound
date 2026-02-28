@@ -1,6 +1,7 @@
+import type { Lobby } from "@fluxbound/schema/src/lobby";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { Button } from "components/Button";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
+import { createTypedWebSocketSender } from "utils/functions";
 import { WebSocketContext } from "./-components/context";
 
 export const Route = createFileRoute("/_app/game")({
@@ -9,11 +10,8 @@ export const Route = createFileRoute("/_app/game")({
 
 function RouteComponent() {
   /***** HOOKS *****/
-  const websocketRef = useRef<WebSocket | null>(null);
-
-  const handleSendMessage = () => {
-    websocketRef.current?.send("Hello!");
-  };
+  const [websocketState, setWebsocket] = useState<ReturnType<typeof createTypedWebSocketSender> | null>(null);
+  const [roomId, setRoomId] = useState<Lobby.RoomId | null>(null);
 
   /***** EFFECTS *****/
   useEffect(() => {
@@ -27,29 +25,40 @@ function RouteComponent() {
     websocketUrl.searchParams.set("access_token", accessToken);
 
     const websocket = new WebSocket(websocketUrl);
-    websocketRef.current = websocket;
-    websocket.onopen = () => {
-      console.log("WebSocket connected");
-    };
+    setWebsocket(createTypedWebSocketSender(websocket));
+    // websocket.onopen = () => {
+    //   console.log("WebSocket connected");
+    // };
     websocket.onmessage = (event) => {
-      console.log("WebSocket message received:", event.data);
+      const parsed = JSON.parse(event.data);
+
+      switch (parsed.type) {
+        case "lobby/created":
+          setRoomId(parsed.roomId);
+          break;
+        default:
+          console.log("Received unknown message", parsed);
+          break;
+      }
     };
-    websocket.onclose = () => {
-      console.log("WebSocket connection closed");
-    };
+    // websocket.onclose = () => {
+    //   console.log("WebSocket connection closed");
+    // };
     return () => {
       websocket.close();
-      websocketRef.current = null;
+      setWebsocket(null);
     };
   }, []);
 
+  const context: WebSocketContext = {
+    websocket: websocketState,
+    roomId: roomId,
+  };
+
   /***** RENDER *****/
   return (
-    <WebSocketContext value={websocketRef}>
-      <div>
-        <Button onClick={handleSendMessage}>Send Message Test</Button>
-        <Outlet />
-      </div>
+    <WebSocketContext value={context}>
+      <Outlet />
     </WebSocketContext>
   );
 }
