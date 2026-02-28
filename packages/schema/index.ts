@@ -1,7 +1,2 @@
-import { Lobby } from "./src/lobby";
-
-export const ClientRegistry = {
-  ...Lobby,
-};
-
-export type ClientRegistry = typeof ClientRegistry;
+export * from "./src/game";
+export * from "./src/lobby";

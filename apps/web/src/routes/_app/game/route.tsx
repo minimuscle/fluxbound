@@ -56,7 +56,7 @@ function RouteComponent() {
       websocket.close();
       setWebsocket(null);
     };
-  }, []);
+  }, [navigate]);
 
   const context: WebSocketContext = {
     websocket: websocketState,

@@ -18,6 +18,5 @@ export namespace Game {
     player1: PlayerState;
     player2: PlayerState;
     turn: `${number}-${1 | 2}`;
-    coinTossWinner: PlayerId;
   };
 }

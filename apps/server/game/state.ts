@@ -1,4 +1,4 @@
-import type { Game } from "@fluxbound/schema/src/game";
+import type { Game } from "@fluxbound/schema";
 
 export const getState = (): Game.GameState => {
   return {
@@ -22,6 +22,5 @@ export const getState = (): Game.GameState => {
       attunement: "FIRE",
     },
     turn: "1-1",
-    coinTossWinner: "PLAYER",
   };
 };

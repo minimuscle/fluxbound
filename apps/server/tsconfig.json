@@ -10,6 +10,11 @@
 
     // Bundler mode
     "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@fluxbound/schema": ["../../packages/schema/index.ts"],
+      "@fluxbound/schema/*": ["../../packages/schema/*"]
+    },
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "noEmit": true,
