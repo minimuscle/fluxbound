@@ -1,5 +1,5 @@
 import { type GameSocketData, routes } from "./app/routes";
-import { message } from "./game/messages";
+import { message as wsMessage } from "./game/messages";
 
 const server = Bun.serve<GameSocketData>({
   routes,
@@ -10,7 +10,9 @@ const server = Bun.serve<GameSocketData>({
     close(ws, code, reason) {
       console.log("WebSocket closed", code, ws.data.userId);
     },
-    message,
+    message(ws, message): void | Promise<void> {
+      return wsMessage(server, ws, message);
+    },
   },
 });
 

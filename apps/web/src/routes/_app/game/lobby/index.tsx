@@ -29,6 +29,7 @@ function RouteComponent() {
           Join Lobby
         </Button>
       </div>
+      <Button onClick={() => ws.send({ type: "game/start" })}>Start Game</Button>
     </div>
   );
 }

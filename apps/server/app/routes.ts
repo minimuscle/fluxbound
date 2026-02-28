@@ -1,8 +1,8 @@
 import type { Server } from "bun";
-import { user } from "./routes/user";
 import { supabase } from "../utils/database";
+import { user } from "./routes/user";
 
-export type GameSocketData = { userId: string };
+export type GameSocketData = { userId: string; roomId?: string };
 
 export const routes = {
   /***** PUBLIC ROUTES *****/

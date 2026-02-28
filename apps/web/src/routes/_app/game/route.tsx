@@ -12,6 +12,7 @@ function RouteComponent() {
   /***** HOOKS *****/
   const [websocketState, setWebsocket] = useState<ReturnType<typeof createTypedWebSocketSender> | null>(null);
   const [roomId, setRoomId] = useState<Lobby.RoomId | null>(null);
+  const navigate = Route.useNavigate();
 
   /***** EFFECTS *****/
   useEffect(() => {
@@ -30,6 +31,7 @@ function RouteComponent() {
     //   console.log("WebSocket connected");
     // };
     websocket.onmessage = (event) => {
+      console.log("message: ", event.data);
       const parsed = JSON.parse(event.data);
 
       switch (parsed.type) {
@@ -37,6 +39,8 @@ function RouteComponent() {
         case "lobby/joined":
           setRoomId(parsed.roomId);
           break;
+        case "game/started":
+          return navigate({ to: "/game", replace: true });
         default:
           console.log("Received unknown message", parsed);
           break;

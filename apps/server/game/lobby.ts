@@ -9,14 +9,16 @@ export const lobby = {
     const wsRoom = getRoomId(roomId);
 
     ws.subscribe(`room:${wsRoom}`);
+    ws.data.roomId = roomId;
     ws.send(JSON.stringify({ type: "lobby/created", roomId }));
   },
-  join: (ws: Bun.ServerWebSocket<GameSocketData>, roomId: string) => {
+  join: (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>, roomId: string) => {
     console.log("Joining lobby for", ws.data.userId);
     const wsRoom = getRoomId(roomId);
-
+    console.log("Joining room", wsRoom, roomId);
     ws.subscribe(`room:${wsRoom}`);
+    ws.data.roomId = roomId;
     ws.send(JSON.stringify({ type: "lobby/joined", roomId }));
-    ws.publish(`room:${wsRoom}`, JSON.stringify({ type: "lobby/player-joined" }));
+    server.publish(`room:${wsRoom}`, JSON.stringify({ type: "lobby/player-joined" }));
   },
 };
