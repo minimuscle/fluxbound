@@ -1,8 +1,8 @@
 import { CrownSimpleIcon, SkullIcon } from "@phosphor-icons/react";
 import classNames from "classnames";
 import { Button } from "components/Button";
-import { GameContext } from "pages/SoloGame/utils/context";
 import React, { use } from "react";
+import { GameContext } from "../../../../routes/_app/game/-components/context";
 import "./coin.scss";
 
 /**********************************************************************************************************
@@ -17,9 +17,7 @@ type CoinToss = React.FC<{
  **********************************************************************************************************/
 export const CoinToss: CoinToss = ({ startGame }) => {
   /***** HOOKS *****/
-  const {
-    state: { activePlayer },
-  } = use(GameContext)!;
+  const { activePlayer } = use(GameContext)!;
 
   /***** RENDER *****/
   return (

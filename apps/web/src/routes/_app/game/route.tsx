@@ -1,8 +1,9 @@
+import type { Game } from "@fluxbound/schema/src/game";
 import type { Lobby } from "@fluxbound/schema/src/lobby";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { createTypedWebSocketSender } from "utils/functions";
-import { WebSocketContext } from "./-components/context";
+import { GameContext, WebSocketContext } from "./-components/context";
 
 export const Route = createFileRoute("/_app/game")({
   component: RouteComponent,
@@ -11,6 +12,7 @@ export const Route = createFileRoute("/_app/game")({
 function RouteComponent() {
   /***** HOOKS *****/
   const [websocketState, setWebsocket] = useState<ReturnType<typeof createTypedWebSocketSender> | null>(null);
+  const [gameState, setGameState] = useState<Game.GameState | null>(null);
   const [roomId, setRoomId] = useState<Lobby.RoomId | null>(null);
   const navigate = Route.useNavigate();
 
@@ -40,15 +42,16 @@ function RouteComponent() {
           setRoomId(parsed.roomId);
           break;
         case "game/started":
+          setGameState(parsed.state);
           return navigate({ to: "/game", replace: true });
         default:
           console.log("Received unknown message", parsed);
           break;
       }
     };
-    // websocket.onclose = () => {
-    //   console.log("WebSocket connection closed");
-    // };
+    websocket.onclose = () => {
+      // return navigate({ to: "/", replace: true });
+    };
     return () => {
       websocket.close();
       setWebsocket(null);
@@ -63,7 +66,9 @@ function RouteComponent() {
   /***** RENDER *****/
   return (
     <WebSocketContext value={context}>
-      <Outlet />
+      <GameContext value={gameState}>
+        <Outlet />
+      </GameContext>
     </WebSocketContext>
   );
 }
