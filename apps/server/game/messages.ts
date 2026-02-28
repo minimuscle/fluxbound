@@ -1,9 +1,15 @@
+import type { ClientGame, ClientLobby } from "@fluxbound/schema";
 import type { GameSocketData } from "../app/routes";
 import { game } from "./game";
 import { lobby } from "./lobby";
 
-export function message(server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>, message: string): void | Promise<void> {
-  const parsed = JSON.parse(message);
+export function message(
+  server: Bun.Server<GameSocketData>,
+  ws: Bun.ServerWebSocket<GameSocketData>,
+  message: string | Buffer<ArrayBuffer>,
+): void | Promise<void> {
+  if (typeof message !== "string") return;
+  const parsed: ClientLobby | ClientGame = JSON.parse(message);
   switch (parsed.type) {
     case "lobby/create":
       return lobby.create(ws);

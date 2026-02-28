@@ -17,7 +17,10 @@ type CoinToss = React.FC<{
  **********************************************************************************************************/
 export const CoinToss: CoinToss = ({ startGame }) => {
   /***** HOOKS *****/
-  const { activePlayer } = use(GameContext)!;
+  const {
+    state: { activePlayer },
+    playerId,
+  } = use(GameContext)!;
 
   /***** RENDER *****/
   return (
@@ -26,23 +29,23 @@ export const CoinToss: CoinToss = ({ startGame }) => {
         <div className="coinToss">
           <div
             className={classNames("coinToss--heads", {
-              "coinToss--heads--selected": activePlayer === "PLAYER",
-              "coinToss--heads--notSelected": activePlayer === "ENEMY",
+              "coinToss--heads--selected": activePlayer === playerId,
+              "coinToss--heads--notSelected": activePlayer !== playerId,
             })}
           >
             <CrownSimpleIcon weight="bold" size={64} />
           </div>
           <div
             className={classNames("coinToss--tails", {
-              "coinToss--heads--selected": activePlayer === "ENEMY",
-              "coinToss--heads--notSelected": activePlayer === "PLAYER",
+              "coinToss--heads--selected": activePlayer !== playerId,
+              "coinToss--heads--notSelected": activePlayer === playerId,
             })}
           >
             <SkullIcon weight="bold" size={64} />
           </div>
         </div>
         <div className="coinToss__button">
-          <p className="coinTossText">{activePlayer === "PLAYER" ? "You have" : "The Enemy has"} won the coin toss</p>
+          <p className="coinTossText">{activePlayer === playerId ? "You have" : "The Enemy has"} won the coin toss</p>
           <Button onClick={startGame} className="coinTossClose">
             Start Game
           </Button>

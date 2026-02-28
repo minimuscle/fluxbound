@@ -1,24 +1,48 @@
+import type { Game } from "@fluxbound/schema";
+import { GameResponse } from "utils/responses";
 import type { GameSocketData } from "../app/routes";
-import { getRoomId } from "./utils";
+
+type Players = {
+  room: `room:${Game.RoomId}`;
+  player1: Game.PlayerId;
+  player2?: Game.PlayerId;
+};
+
+export const rooms = new Map<Game.RoomId, Players>();
 
 export const lobby = {
   create: (ws: Bun.ServerWebSocket<GameSocketData>) => {
-    console.log("Creating lobby for", ws.data.userId);
-    // Generate room id a 6-letter/digit string
-    const roomId = Math.random().toString(36).slice(2, 7).toUpperCase();
-    const wsRoom = getRoomId(roomId);
+    // Generate RoomId
+    const roomId = Math.random().toString(36).slice(2, 7).toUpperCase() as Game.RoomId;
 
-    ws.subscribe(`room:${wsRoom}`);
+    // Set the room up
+    rooms.set(roomId, {
+      room: `room:${roomId}`,
+      player1: ws.data.userId,
+    });
+
+    // Subscribe to the room
+    const channel = rooms.get(roomId)!.room;
+    ws.subscribe(channel);
+
     ws.data.roomId = roomId;
-    ws.send(JSON.stringify({ type: "lobby/created", roomId }));
+
+    ws.send(GameResponse({ type: "lobby/created", roomId }));
   },
-  join: (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>, roomId: string) => {
-    console.log("Joining lobby for", ws.data.userId);
-    const wsRoom = getRoomId(roomId);
-    console.log("Joining room", wsRoom, roomId);
-    ws.subscribe(`room:${wsRoom}`);
+  join: (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>, roomId: Game.RoomId) => {
+    // Check if room exists and is not full
+    if (!rooms.has(roomId)) ws.send(GameResponse({ type: "lobby/error", error: "Room does not exist" }));
+    if (rooms.get(roomId)?.player2) ws.send(GameResponse({ type: "lobby/error", error: "Room is full" }));
+
+    // Join the room
+    rooms.set(roomId, { ...rooms.get(roomId)!, player2: ws.data.userId });
+
+    // Subscribe to the room
+    const channel = rooms.get(roomId)!.room;
+    ws.subscribe(channel);
+
     ws.data.roomId = roomId;
-    ws.send(JSON.stringify({ type: "lobby/joined", roomId }));
-    server.publish(`room:${wsRoom}`, JSON.stringify({ type: "lobby/player-joined" }));
+
+    server.publish(channel, JSON.stringify({ type: "lobby/player-joined" }));
   },
 };

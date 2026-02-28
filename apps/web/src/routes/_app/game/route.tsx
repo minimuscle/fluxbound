@@ -4,6 +4,8 @@ import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { createTypedWebSocketSender } from "utils/functions";
 import { GameContext, WebSocketContext } from "./-components/context";
+import { useQuery } from "@tanstack/react-query";
+import { user } from "api/user";
 
 export const Route = createFileRoute("/_app/game")({
   component: RouteComponent,
@@ -15,6 +17,11 @@ function RouteComponent() {
   const [gameState, setGameState] = useState<Game.GameState | null>(null);
   const [roomId, setRoomId] = useState<Lobby.RoomId | null>(null);
   const navigate = Route.useNavigate();
+
+  const { data: userData } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => user.details.GET(),
+  });
 
   /***** EFFECTS *****/
   useEffect(() => {
@@ -66,7 +73,7 @@ function RouteComponent() {
   /***** RENDER *****/
   return (
     <WebSocketContext value={context}>
-      <GameContext value={gameState}>
+      <GameContext value={gameState ? { state: gameState, playerId: userData?.id } : null}>
         <Outlet />
       </GameContext>
     </WebSocketContext>

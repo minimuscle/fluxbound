@@ -1,8 +1,9 @@
+import type { Game } from "@fluxbound/schema";
 import type { Server } from "bun";
 import { supabase } from "../utils/database";
 import { user } from "./routes/user";
 
-export type GameSocketData = { userId: string; roomId?: string };
+export type GameSocketData = { userId: Game.PlayerId; roomId?: Game.RoomId };
 
 export const routes = {
   /***** PUBLIC ROUTES *****/
@@ -21,7 +22,7 @@ export const routes = {
       const { data, error } = await supabase.auth.getUser(accessToken);
       if (error || !data.user) return new Response("Unauthorized", { status: 401 });
 
-      const upgraded = server.upgrade(request, { data: { userId: data.user.id } });
+      const upgraded = server.upgrade(request, { data: { userId: data.user.id as Game.PlayerId } });
       if (upgraded) return; // Bun takes over
       return new Response("Expected WebSocket upgrade", { status: 426 });
     },

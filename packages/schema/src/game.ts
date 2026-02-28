@@ -1,13 +1,20 @@
+import type { Tagged } from "type-fest";
+
 export namespace Game {
-  export const ELEMENTS = ["FIRE", "EARTH", "WATER", "AIR", "LIGHT", "DARK", "LIFE", "DEATH", "AETHER", "VOID"] as const;
-  export type Element = (typeof ELEMENTS)[number];
-  export type PlayerId = string;
+  export type RoomId = Tagged<string, "roomId">;
+  export type PlayerId = Tagged<string, "playerId">;
+  export type CardId = Tagged<string, "cardId">;
+
+  export type Card = {
+    id: CardId;
+    cardId: string; // The non-unique id of the card to match to the library
+  };
 
   export type PlayerState = {
     id: PlayerId;
-    deck: object[];
-    hand: object[];
-    field: object[];
+    deck: Card[];
+    hand: Card[];
+    field: Card[];
     health: number;
     healthMax: 100;
     attunement: string;
