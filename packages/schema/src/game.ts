@@ -16,7 +16,7 @@ export namespace Game {
     hand: Card[];
     field: Card[];
     health: number;
-    healthMax: 100;
+    healthMax: number;
     attunement: string;
   };
 

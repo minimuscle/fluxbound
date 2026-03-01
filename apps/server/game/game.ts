@@ -1,5 +1,6 @@
 import type { Game } from "@fluxbound/schema";
 import { rooms } from "game/lobby";
+import { supabase } from "utils/database";
 import { GameResponse } from "utils/responses";
 import type { GameSocketData } from "../app/routes";
 import { GameStateClass } from "./GameStateClass";
@@ -42,7 +43,7 @@ export const game = {
 
     server.publish(room.room, GameResponse({ type: "game/started", state: state.gameState }));
   },
-  startSolo: (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>) => {
+  startSolo: async (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>) => {
     if (!ws.data.roomId) return void ws.send(GameResponse({ type: "game/error", error: "No Room ID" }));
     if (!rooms.has(ws.data.roomId)) return void ws.send(GameResponse({ type: "game/error", error: "Room does not exist" }));
 
@@ -51,27 +52,32 @@ export const game = {
 
     console.log(`Starting solo game for room:${ws.data.roomId}`);
 
+    const { data } = await supabase.from("users").select("*").maybeSingle();
+
+    const firstPlayer = Math.random() < 0.5 ? "player" : "ai";
+
+    const player = {
+      id: room.player1,
+      deck: [],
+      hand: [],
+      field: [],
+      health: 100,
+      healthMax: 100,
+      attunement: "FIRE",
+    };
+    const ai = {
+      id: "AI_0" as Game.PlayerId,
+      deck: [],
+      hand: [],
+      field: [],
+      health: 100,
+      healthMax: 100,
+      attunement: "FIRE",
+    };
+    const players: [Game.PlayerState, Game.PlayerState] = firstPlayer === "player" ? [player, ai] : [ai, player];
+
     // Create the game state
-    const state = new GameStateClass(
-      {
-        id: room.player1,
-        deck: [],
-        hand: [],
-        field: [],
-        health: 100,
-        healthMax: 100,
-        attunement: "FIRE",
-      },
-      {
-        id: "AI_0" as Game.PlayerId,
-        deck: [],
-        hand: [],
-        field: [],
-        health: 100,
-        healthMax: 100,
-        attunement: "FIRE",
-      },
-    );
+    const state = new GameStateClass(players[0], players[1]);
 
     gameStatesByRoomId.set(ws.data.roomId, state);
 
