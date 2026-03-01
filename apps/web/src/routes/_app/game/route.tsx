@@ -1,11 +1,10 @@
-import type { Game } from "@fluxbound/schema/src/game";
-import type { Lobby } from "@fluxbound/schema/src/lobby";
+import type { Game } from "@fluxbound/schema";
+import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { user } from "api/user";
 import { useEffect, useState } from "react";
 import { createTypedWebSocketSender } from "utils/functions";
 import { GameContext, WebSocketContext } from "./-components/context";
-import { useQuery } from "@tanstack/react-query";
-import { user } from "api/user";
 
 export const Route = createFileRoute("/_app/game")({
   component: RouteComponent,
@@ -15,7 +14,7 @@ function RouteComponent() {
   /***** HOOKS *****/
   const [websocketState, setWebsocket] = useState<ReturnType<typeof createTypedWebSocketSender> | null>(null);
   const [gameState, setGameState] = useState<Game.GameState | null>(null);
-  const [roomId, setRoomId] = useState<Lobby.RoomId | null>(null);
+  const [roomId, setRoomId] = useState<Game.RoomId | null>(null);
   const navigate = Route.useNavigate();
 
   const { data: userData } = useQuery({

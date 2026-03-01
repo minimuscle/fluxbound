@@ -1,8 +1,8 @@
-import type { ClientRegistry } from "@fluxbound/schema";
+import type { ClientGame, ClientLobby } from "@fluxbound/schema";
 
 export const createTypedWebSocketSender = (ws: WebSocket) => {
   return {
-    send: (message: ClientRegistry[keyof ClientRegistry]) => {
+    send: (message: ClientLobby | ClientGame) => {
       ws.send(JSON.stringify(message));
     },
     close: (code?: number, reason?: string) => {

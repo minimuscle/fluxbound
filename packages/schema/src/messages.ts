@@ -32,7 +32,9 @@ export type ServerLobby = z.infer<typeof serverLobby>;
 export const clientGame = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("game/start"),
-    roomId: z.custom<Game.RoomId>(z.coerce.string().parse),
+  }),
+  z.object({
+    type: z.literal("game/startSolo"),
   }),
 ]);
 

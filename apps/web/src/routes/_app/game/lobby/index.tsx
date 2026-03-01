@@ -1,3 +1,4 @@
+import type { Game } from "@fluxbound/schema";
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "components/Button";
 import { useContext, useState } from "react";
@@ -9,7 +10,7 @@ export const Route = createFileRoute("/_app/game/lobby/")({
 
 function RouteComponent() {
   /***** STATE *****/
-  const [joinRoomId, setJoinRoomId] = useState("");
+  const [joinRoomId, setJoinRoomId] = useState<Game.RoomId>("" as Game.RoomId);
 
   /***** HOOKS *****/
   const context = useContext(WebSocketContext);
@@ -24,12 +25,13 @@ function RouteComponent() {
       <h2>Room ID: {roomId}</h2>
       <Button onClick={() => ws.send({ type: "lobby/create" })}>Create Lobby</Button>
       <div>
-        <input type="text" placeholder="Room ID" value={joinRoomId} onChange={(e) => setJoinRoomId(e.target.value)} />
+        <input type="text" placeholder="Room ID" value={joinRoomId} onChange={(e) => setJoinRoomId(e.target.value as Game.RoomId)} />
         <Button onClick={() => ws.send({ type: "lobby/join", roomId: joinRoomId })} disabled={!joinRoomId}>
           Join Lobby
         </Button>
       </div>
       <Button onClick={() => ws.send({ type: "game/start" })}>Start Game</Button>
+      <Button onClick={() => ws.send({ type: "game/startSolo" })}>Start Solo Game</Button>
     </div>
   );
 }

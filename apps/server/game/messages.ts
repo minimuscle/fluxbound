@@ -10,6 +10,7 @@ export function message(
 ): void | Promise<void> {
   if (typeof message !== "string") return;
   const parsed: ClientLobby | ClientGame = JSON.parse(message);
+
   switch (parsed.type) {
     case "lobby/create":
       return lobby.create(ws);
@@ -18,6 +19,9 @@ export function message(
 
     case "game/start":
       return game.start(server, ws);
+
+    case "game/startSolo":
+      return game.startSolo(server, ws);
 
     default:
       console.log("Received unknown message", parsed);
