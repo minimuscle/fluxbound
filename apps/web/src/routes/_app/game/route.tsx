@@ -34,6 +34,8 @@ function RouteComponent() {
     websocketUrl.searchParams.set("access_token", accessToken);
 
     const websocket = new WebSocket(websocketUrl);
+
+    // eslint-disable-next-line
     setWebsocket(createTypedWebSocketSender(websocket));
     // websocket.onopen = () => {
     //   console.log("WebSocket connected");

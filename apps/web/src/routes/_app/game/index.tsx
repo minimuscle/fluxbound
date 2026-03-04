@@ -18,7 +18,13 @@ function RouteComponent() {
   if (!ws || !gamecontext) return <h1>Loading...</h1>;
   return (
     <div>
-      <CoinToss startGame={() => {}} />
+      {showCoinToss && (
+        <CoinToss
+          startGame={() => {
+            setShowCoinToss(false);
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -1,20 +1,21 @@
 import type { Tagged } from "type-fest";
+import type { Cards } from "./cards";
 
 export namespace Game {
   export type RoomId = Tagged<string, "roomId">;
   export type PlayerId = Tagged<string, "playerId">;
-  export type CardId = Tagged<string, "cardId">;
+  export type CardId = Tagged<string, "gameCardId">;
 
-  export type Card = {
+  export type GameCard = {
     id: CardId;
-    cardId: string; // The non-unique id of the card to match to the library
+    cardId: Cards.CardId; // The non-unique id of the card to match to the library
   };
 
   export type PlayerState = {
     id: PlayerId;
-    deck: Card[];
-    hand: Card[];
-    field: Card[];
+    deck: GameCard[];
+    hand: GameCard[];
+    field: GameCard[];
     health: number;
     healthMax: number;
     attunement: string;
