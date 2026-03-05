@@ -2,7 +2,7 @@ import { CrownSimpleIcon, SkullIcon } from "@phosphor-icons/react";
 import classNames from "classnames";
 import { Button } from "components/Button";
 import React, { use } from "react";
-import { GameContext } from "../../../../routes/_app/game/-components/context";
+import { GameContext } from "../../context";
 import "./coin.scss";
 
 /**********************************************************************************************************

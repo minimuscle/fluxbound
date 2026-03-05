@@ -12,7 +12,7 @@ import { Card } from "../../components/Cards";
 import { CARD_LIBRARY } from "../../components/Cards/library";
 import { CardPermanents } from "../../components/Cards/variantDesigns/permanents";
 import { CardRunes } from "../../components/Cards/variantDesigns/runes";
-import { CoinToss } from "./components/coin";
+import { CoinToss } from "../../routes/_app/game/-components/game/coinToss";
 import "./game.scss";
 import { phases } from "./phases";
 import { FluxSection } from "./sections/flux";
