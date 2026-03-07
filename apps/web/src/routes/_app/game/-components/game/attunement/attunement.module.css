@@ -1,0 +1,57 @@
+.container {
+  border: 1px solid red;
+  display: flex;
+  align-items: end;
+  flex-direction: row-reverse;
+
+  .circles {
+    border: 1px solid red;
+    display: flex;
+    align-items: end;
+    flex-direction: column-reverse;
+
+    .attunement {
+      border: 1px solid green;
+      border-radius: 100%;
+      height: 125px;
+      width: 125px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-size: 2rem;
+    }
+
+    .permanent {
+      border: 1px solid blue;
+      border-radius: 100%;
+      height: 50px;
+      width: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .health {
+    border: 1px solid yellow;
+    height: 50px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+  }
+}
+
+.enemy {
+  &.container {
+    flex-direction: row;
+    align-items: start;
+
+    .circles {
+      align-items: start;
+      flex-direction: column;
+    }
+  }
+}

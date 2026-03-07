@@ -28,7 +28,9 @@
       "pages/*": ["./src/pages/*"],
       "utils/*": ["./src/utils/*"],
       "assets/*": ["./src/assets/*"],
-      "api/*": ["./src/api/*"]
+      "api/*": ["./src/api/*"],
+      "routes/*": ["./src/routes/*"],
+      "queries/*": ["./src/queries/*"]
     }
   },
   "include": ["src"]
