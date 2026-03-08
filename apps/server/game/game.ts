@@ -62,6 +62,18 @@ export const game = {
       health: 100,
       healthMax: 100,
       attunement: "FIRE",
+      mana: {
+        FIRE: 10,
+        WATER: 0,
+        EARTH: 0,
+        AIR: 0,
+        LIGHT: 0,
+        DARK: 0,
+        LIFE: 0,
+        DEATH: 0,
+        AETHER: 0,
+        VOID: 0,
+      },
     };
     const ai = {
       id: "AI_0" as Game.PlayerId,
@@ -71,6 +83,18 @@ export const game = {
       health: 100,
       healthMax: 100,
       attunement: "FIRE",
+      mana: {
+        FIRE: 0,
+        WATER: 0,
+        EARTH: 0,
+        AIR: 0,
+        LIGHT: 0,
+        DARK: 0,
+        LIFE: 0,
+        DEATH: 0,
+        AETHER: 0,
+        VOID: 0,
+      },
     };
     const players: [Game.PlayerState, Game.PlayerState] = firstPlayer === "player" ? [player, ai] : [ai, player];
 

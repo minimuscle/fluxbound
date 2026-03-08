@@ -19,6 +19,7 @@ export namespace Game {
     health: number;
     healthMax: number;
     attunement: string;
+    mana: Record<Cards.Domain, number>;
   };
 
   export type GameState = {
