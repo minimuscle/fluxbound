@@ -1,4 +1,11 @@
 .container {
   border: 1px solid red;
   flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  overflow: auto;
+  gap: var(--dynamic-gap, 0);
 }

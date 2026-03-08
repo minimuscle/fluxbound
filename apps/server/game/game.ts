@@ -1,6 +1,7 @@
 import type { Game } from "@fluxbound/schema";
 import { rooms } from "game/lobby";
-import { supabase } from "utils/database";
+import { enemyStarterTestDeck } from "testData/enemyDeck";
+import { playerStarterTestDeck } from "testData/playerDeck";
 import { GameResponse } from "utils/responses";
 import type { GameSocketData } from "../app/routes";
 import { GameStateClass } from "./GameStateClass";
@@ -49,16 +50,13 @@ export const game = {
 
     const room = rooms.get(ws.data.roomId)!;
     if (room.player2) return void ws.send(GameResponse({ type: "game/error", error: "Too many players" }));
-
     console.log(`Starting solo game for room:${ws.data.roomId}`);
-
-    const { data } = await supabase.from("users").select("*").maybeSingle();
 
     const firstPlayer = Math.random() < 0.5 ? "player" : "ai";
 
-    const player = {
+    const player: Game.PlayerState = {
       id: room.player1,
-      deck: [],
+      deck: playerStarterTestDeck,
       hand: [],
       field: [],
       health: 100,
@@ -67,7 +65,7 @@ export const game = {
     };
     const ai = {
       id: "AI_0" as Game.PlayerId,
-      deck: [],
+      deck: enemyStarterTestDeck,
       hand: [],
       field: [],
       health: 100,
