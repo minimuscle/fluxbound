@@ -14,13 +14,12 @@ export const Hand = () => {
   const card_width = 200;
   // Set the gap so that card are evenly spaced, and 5 fit within the width, but any more and they overlap
   const gap = (width - card_width * 4) / 10;
-  console.log(gap);
 
   /***** RENDER *****/
   return (
     <div className={styles.container} style={{ "--dynamic-gap": `${gap}px` } as CSSProperties}>
-      {player.hand.map((cardId, index) => {
-        return <Card key={index} cardId={cardId} style={{ zIndex: index + 1 }} />;
+      {player.hand.map((card, index) => {
+        return <Card key={index} cardId={card.cardId} />;
       })}
     </div>
   );

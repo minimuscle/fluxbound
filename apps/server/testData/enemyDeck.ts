@@ -1,6 +1,6 @@
-import type { CardNames } from "components/Cards/types";
+import type { Cards } from "@fluxbound/schema";
 
-export const enemyStarterTestDeck: CardNames[] = [
+export const enemyStarterTestDeck: Cards.CardKey[] = [
   "BASE_FIRE_PERMANENT_RUNE",
   "BASE_FIRE_PERMANENT_RUNE",
   "BASE_FIRE_PERMANENT_RUNE",

@@ -1,6 +1,6 @@
-import type { CardNames } from "components/Cards/types";
+import type { Cards } from "@fluxbound/schema";
 
-export const playerStarterTestDeck: CardNames[] = [
+export const playerStarterTestDeck: Cards.CardKey[] = [
   "BASE_FIRE_SHIELD_HEAT_SHIELD",
   "BASE_FIRE_SHIELD_HEAT_SHIELD",
   "BASE_FIRE_SHIELD_HEAT_SHIELD",

@@ -2,6 +2,23 @@
   height: 250px;
   min-width: 180px;
   max-width: 180px;
-  border: 1px solid yellowgreen;
-  background-color: rgb(90, 122, 41);
+  border-radius: 10px;
+  background-color: rgb(238, 236, 198);
+  color: black;
+  position: relative;
+  padding: 10px;
+
+  &__cost {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgb(90, 122, 41);
+  }
 }

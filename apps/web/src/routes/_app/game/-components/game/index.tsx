@@ -21,6 +21,7 @@ export const Game = () => {
   /***** RENDER *****/
   return (
     <div className={styles.container}>
+      {/* <CoinToss startGame={() => {}} /> */}
       <PlayerContext value={{ stage: "ENEMY", player: enemy }}>
         <div className={styles.enemySection}>
           <AttunementArea />

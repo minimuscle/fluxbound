@@ -1,5 +1,14 @@
-import type { Game } from "@fluxbound/schema";
+import type { Cards, Game } from "@fluxbound/schema";
+/**********************************************************************************************************
+ *   TYPE DEFINITIONS
+ **********************************************************************************************************/
+export type InitialPlayerState = Omit<Game.PlayerState, "deck"> & {
+  deck: Cards.CardId[];
+};
 
+/**********************************************************************************************************
+ *   CLASS START
+ **********************************************************************************************************/
 export class GameStateClass {
   private activePlayer: Game.PlayerId;
   private player1: Game.PlayerState;
@@ -7,9 +16,12 @@ export class GameStateClass {
   private turn: `${number}-${1 | 2}`;
 
   // Initial Game State
-  constructor(player1: Game.PlayerState, player2: Game.PlayerState) {
-    const shuffledPlayer1Deck = this.shuffleDeck(player1.deck);
-    const shuffledPlayer2Deck = this.shuffleDeck(player2.deck);
+  constructor(player1: InitialPlayerState, player2: InitialPlayerState) {
+    const player1Deck = this.assignCardIds(player1.id, player1.deck);
+    const player2Deck = this.assignCardIds(player2.id, player2.deck);
+
+    const shuffledPlayer1Deck = this.shuffleDeck(player1Deck);
+    const shuffledPlayer2Deck = this.shuffleDeck(player2Deck);
 
     const initialPlayer1Hand = this.drawCard(shuffledPlayer1Deck, 6);
     const initialPlayer2Hand = this.drawCard(shuffledPlayer2Deck, 6);
@@ -36,6 +48,14 @@ export class GameStateClass {
       player2: this.player2,
       turn: this.turn,
     };
+  }
+
+  // Gives each card in the starting player's deck a unique id for the game
+  private assignCardIds(playerId: Game.PlayerId, deck: Cards.CardId[]): Game.GameCard[] {
+    return deck.map((cardId, index) => ({
+      id: `${playerId}-${index}` as Game.CardId,
+      cardId,
+    }));
   }
 
   // Shuffles the Deck
