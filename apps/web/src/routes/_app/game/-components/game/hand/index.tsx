@@ -1,4 +1,5 @@
 import { Card } from "components/Card";
+import { EmptyCard } from "components/Card/empty";
 import { use, type CSSProperties } from "react";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
 import styles from "./hand.module.css";
@@ -19,6 +20,7 @@ export const Hand = () => {
   return (
     <div className={styles.container} style={{ "--dynamic-gap": `${gap}px` } as CSSProperties}>
       {player.hand.map((card, index) => {
+        if (!card) return <EmptyCard key={index} />;
         return <Card key={index} cardId={card.cardId} />;
       })}
     </div>

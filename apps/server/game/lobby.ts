@@ -24,6 +24,7 @@ export const lobby = {
     // Subscribe to the room
     const channel = rooms.get(roomId)!.room;
     ws.subscribe(channel);
+    ws.subscribe(`player:${ws.data.userId}`);
 
     ws.data.roomId = roomId;
 
@@ -40,6 +41,7 @@ export const lobby = {
     // Subscribe to the room
     const channel = rooms.get(roomId)!.room;
     ws.subscribe(channel);
+    ws.subscribe(`player:${ws.data.userId}`);
 
     ws.data.roomId = roomId;
 

@@ -124,10 +124,12 @@ export const game = {
 
     // Create the game state
     const state = new GameStateClass(players[0], players[1]);
+    console.log(state);
 
     gameStatesByRoomId.set(ws.data.roomId, state);
 
-    server.publish(room.room, GameResponse({ type: "game/started", state: state.gameState }));
+    console.log(state.getStateForPlayer(ws.data.userId));
+    server.publish(`player:${ws.data.userId}`, GameResponse({ type: "game/started", state: state.getStateForPlayer(ws.data.userId) }));
   },
   // playCard: (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>, cardId: ) => {
   //   console.log("Playing card", card);

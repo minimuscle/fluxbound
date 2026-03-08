@@ -13,8 +13,8 @@ export namespace Game {
 
   export type PlayerState = {
     id: PlayerId;
-    deck: GameCard[];
-    hand: GameCard[];
+    deck: GameCard[] | null[];
+    hand: GameCard[] | null[];
     field: GameCard[];
     health: number;
     healthMax: number;

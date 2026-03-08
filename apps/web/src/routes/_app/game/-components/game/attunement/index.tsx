@@ -1,4 +1,6 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import classNames from "classnames";
+import { getUserDetailsOptions } from "queries/getUserDetails";
 import { use } from "react";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
 import styles from "./attunement.module.css";
@@ -9,6 +11,7 @@ import styles from "./attunement.module.css";
 export const AttunementArea = () => {
   /***** HOOKS *****/
   const { stage, player } = use(PlayerContext);
+  const { data: user_name } = useSuspenseQuery({ ...getUserDetailsOptions, select: (data) => (data.id === player.id ? "You" : "Enemy") });
 
   /***** RENDER *****/
   return (
@@ -21,6 +24,7 @@ export const AttunementArea = () => {
         <div className={styles.permanent}>Sword</div>
         <div className={styles.permanent}>Shield</div>
         <div className={styles.permanent}>Potion</div>
+        <div>{user_name}</div>
       </div>
       <div className={styles.health}>
         {player.health} / {player.healthMax}

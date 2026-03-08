@@ -78,11 +78,29 @@ export class GameStateClass {
     return nextDeck;
   }
 
+  private showOnlyCartCount(playerId: Game.PlayerId): Game.PlayerState {
+    const player = playerId === this.player1.id ? this.player1 : this.player2;
+    return {
+      ...player,
+      hand: Array(player.hand.length).fill(null),
+      deck: Array(player.field.length).fill(null),
+    };
+  }
+
   // Draws a card from the deck
   drawCard(deck: Game.GameCard[], numberOfCards = 1): { deck: Game.GameCard[]; cards: Game.GameCard[] } {
     const cards = deck.slice(0, numberOfCards);
     const rest = deck.slice(numberOfCards);
 
     return { deck: rest, cards };
+  }
+
+  getStateForPlayer(playerId: Game.PlayerId): Game.GameState {
+    return {
+      activePlayer: playerId,
+      player1: playerId === this.player1.id ? this.player1 : this.showOnlyCartCount(this.player1.id),
+      player2: playerId === this.player2.id ? this.player2 : this.showOnlyCartCount(this.player2.id),
+      turn: this.turn,
+    };
   }
 }
