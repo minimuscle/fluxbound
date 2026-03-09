@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { Card } from "components/Card";
 import { EmptyCard } from "components/Card/empty";
 import { use, type CSSProperties } from "react";
@@ -18,10 +19,10 @@ export const Hand = () => {
 
   /***** RENDER *****/
   return (
-    <div className={styles.container} style={{ "--dynamic-gap": `${gap}px` } as CSSProperties}>
+    <div className={classNames(styles.container, { [styles.enemy]: stage === "ENEMY" })} style={{ "--dynamic-gap": `${gap}px` } as CSSProperties}>
       {player.hand.map((card, index) => {
         if (!card) return <EmptyCard key={index} />;
-        return <Card key={index} cardId={card.cardId} />;
+        return <Card key={index} card={card} />;
       })}
     </div>
   );

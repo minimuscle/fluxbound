@@ -36,6 +36,10 @@ export const clientGame = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("game/startSolo"),
   }),
+  z.object({
+    type: z.literal("game/play-card"),
+    cardId: z.custom<Game.CardId>(z.coerce.string().parse),
+  }),
 ]);
 
 export type ClientGame = z.infer<typeof clientGame>;

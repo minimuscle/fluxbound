@@ -1,34 +1,41 @@
 .Card {
-  height: 250px;
-  min-width: 180px;
-  max-width: 180px;
+  height: 200px;
+  min-width: 150px;
+  max-width: 150px;
   border-radius: 10px;
-  background-color: rgb(238, 236, 198);
+  background-color: rgb(238, 222, 198);
   color: black;
   position: relative;
-  padding: 10px;
+  padding: 25px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 
   &__cost {
     position: absolute;
-    top: -15px;
-    left: -15px;
+    top: 0px;
+    left: 0px;
     border-radius: 100%;
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    background-color: rgb(90, 122, 41);
+    background-color: rgb(16, 84, 129);
   }
 }
 
 .Card {
   &__empty {
-    height: 250px;
-    min-width: 180px;
-    max-width: 180px;
+    height: 200px;
+    min-width: 150px;
+    max-width: 150px;
     border-radius: 10px;
-    background-color: rgb(86, 85, 62);
+    background-color: rgb(114, 88, 123);
   }
 }

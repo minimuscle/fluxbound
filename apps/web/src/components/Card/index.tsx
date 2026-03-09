@@ -1,28 +1,33 @@
-import { CARD_LIBRARY, type Cards } from "@fluxbound/schema";
+import { CARD_LIBRARY, type Game } from "@fluxbound/schema";
+import { use } from "react";
+import { WebSocketContext } from "routes/_app/game/-components/context";
+import { useIsActivePlayer } from "utils/hooks/isActivePlayer";
 import "./card.scss";
 
 /**********************************************************************************************************
  *   TYPE DEFINITIONS
  **********************************************************************************************************/
 type Card = React.FC<{
-  cardId: Cards.CardId;
+  card: Game.GameCard;
 }>;
 
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
-export const Card: Card = ({ cardId }) => {
-  const cardInfo = CARD_LIBRARY[cardId];
-  console.log(cardInfo);
+export const Card: Card = ({ card }) => {
+  const cardInfo = CARD_LIBRARY[card.cardId];
+
+  /***** HOOKS *****/
+  const isActivePlayer = useIsActivePlayer();
+  const context = use(WebSocketContext);
+  const ws = context?.websocket;
 
   /***** RENDER *****/
   return (
-    <div className="Card">
-      <div className="Card__cost">{cardInfo.cost}</div>
-      <div className="Card__image"></div>
+    <button disabled={!isActivePlayer} className="Card" onClick={() => ws?.send({ type: "game/play-card", cardId: card.id })}>
+      {!!cardInfo.cost && <div className="Card__cost">{cardInfo.cost}</div>}
+      {/* <div className="Card__image"></div> */}
       <div className="Card__name">{cardInfo.name}</div>
-      <div className="Card__description">{cardInfo.description}</div>
-      <div className="Card__type">{cardInfo.type}</div>
-    </div>
+    </button>
   );
 };

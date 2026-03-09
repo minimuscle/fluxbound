@@ -1,4 +1,5 @@
 import type { Cards } from "@fluxbound/schema";
+import CardsIcon from "assets/images/cards.svg";
 import AirIcon from "assets/images/domains/block_air_jelly.png";
 import DarkIcon from "assets/images/domains/block_demon_jelly.png";
 import EarthIcon from "assets/images/domains/block_earth_jelly.png";
@@ -34,6 +35,8 @@ export const Mana = () => {
     VOID: VoidIcon,
   };
 
+  console.log(player.deck);
+
   /***** RENDER *****/
   return (
     <div className={classNames(styles.container, { [styles.enemy]: stage === "ENEMY" })}>
@@ -42,6 +45,7 @@ export const Mana = () => {
           <img src={Icons[domain as keyof typeof Icons]} alt={domain} width={30} /> {mana}
         </div>
       ))}
+      <img src={CardsIcon} alt="Cards" width={30} /> {player.deck.length}
     </div>
   );
 };
