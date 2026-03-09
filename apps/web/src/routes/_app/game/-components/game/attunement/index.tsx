@@ -17,10 +17,8 @@ export const AttunementArea = () => {
   return (
     <div className={classNames(styles.container, { [styles.enemy]: stage === "ENEMY" })}>
       <div className={styles.circles}>
-        <div className={styles.attunement}>
-          <p style={{ fontSize: "16px" }}>Attunement:</p>
-          {player.attunement}
-        </div>
+        {stage === "PLAYER" && <div className={styles.endTurn}>End Turn</div>}
+        <div className={styles.attunement}>{player.attunement}</div>
         <div className={styles.permanent}>Sword</div>
         <div className={styles.permanent}>Shield</div>
         <div className={styles.permanent}>Potion</div>

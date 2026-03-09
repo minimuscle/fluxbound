@@ -1,14 +1,30 @@
 .container {
-  /* border: 1px solid red; */
-  max-width: 400px;
-  min-width: 400px;
+  max-width: 200px;
+  min-width: 200px;
   display: flex;
   align-items: end;
   flex-wrap: wrap;
+  align-content: end;
+  margin-right: 150px;
+  gap: 10px;
+
+  &.enemy {
+    justify-content: end;
+    align-content: start;
+    margin-right: 0px;
+    margin-left: 150px;
+  }
 
   .item {
-    border: 1px solid green;
+    border: 1px solid #b1b1b1;
     width: 80px;
-    height: 80px;
+    /* height: 80px; */
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 700;
+    gap: 5px;
+    padding: 10px;
+    border-radius: 10px;
   }
 }
