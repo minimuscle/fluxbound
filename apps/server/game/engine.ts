@@ -1,4 +1,4 @@
-import type { Game } from "@fluxbound/schema";
+import type { Game, GameResponse } from "@fluxbound/schema";
 import { createInitialState } from "game/actions/create-initial-state";
 import { getOpponent } from "game/helpers/get-opponent";
 import { getPlayer } from "game/helpers/get-player";
@@ -27,9 +27,10 @@ export class GameEngine {
   }
 
   // Play a card into the field or run its trigger
-  public playCard(cardId: Game.CardId) {
+  public playCard(cardId: Game.CardId): GameResponse {
     const turnValidation = isPlayersTurn(this.state, this.playerId);
     if (!turnValidation.ok) return turnValidation;
+    return { ok: true };
 
     //TODO continue with this play card
   }

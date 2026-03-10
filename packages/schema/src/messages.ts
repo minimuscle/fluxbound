@@ -51,8 +51,20 @@ export const serverGame = z.discriminatedUnion("type", [
   }),
   z.object({
     type: z.literal("game/error"),
-    error: z.string(),
+    code: z.string(),
+    message: z.string(),
+    ok: z.literal(false),
   }),
 ]);
 
 export type ServerGame = z.infer<typeof serverGame>;
+
+export type GameResponse =
+  | {
+      ok: true;
+    }
+  | {
+      ok: false;
+      code: string;
+      message: string;
+    };
