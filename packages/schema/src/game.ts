@@ -13,13 +13,19 @@ export namespace Game {
 
   export type PlayerState = {
     id: PlayerId;
-    deck: GameCard[] | null[];
-    hand: GameCard[] | null[];
+    deck: GameCard[];
+    hand: GameCard[];
     field: GameCard[];
     health: number;
     healthMax: number;
     attunement: string;
     mana: Record<Cards.Domain, number>;
+  };
+
+  export type InitialPlayerState = Omit<PlayerState, "deck" | "hand" | "field"> & {
+    deck: Cards.CardId[];
+    hand: never[];
+    field: never[];
   };
 
   export type GameState = {

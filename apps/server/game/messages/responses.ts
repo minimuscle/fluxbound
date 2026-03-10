@@ -1,10 +1,10 @@
 import type { Cards, Game } from "@fluxbound/schema";
-import { rooms } from "game/lobby";
+import type { GameSocketData } from "app/routes";
+import { GameStateClass, type InitialPlayerState } from "game/GameStateClass";
+import { rooms } from "game/messages/lobby";
 import { enemyStarterTestDeck } from "testData/enemyDeck";
 import { playerStarterTestDeck } from "testData/playerDeck";
 import { GameResponse } from "utils/responses";
-import type { GameSocketData } from "../app/routes";
-import { GameStateClass, type InitialPlayerState } from "./GameStateClass";
 
 const gameStatesByRoomId = new Map<string, GameStateClass>();
 
@@ -131,7 +131,15 @@ export const game = {
     console.log(state.getStateForPlayer(ws.data.userId));
     server.publish(`player:${ws.data.userId}`, GameResponse({ type: "game/started", state: state.getStateForPlayer(ws.data.userId) }));
   },
-  // playCard: (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>, cardId: ) => {
-  //   console.log("Playing card", card);
-  // },
+  playCard: (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>, cardId: Game.CardId) => {
+    const game = gameStatesByRoomId.get(ws.data?.roomId ?? "")!;
+    if (!ws.data.roomId || game.gameState.activePlayer !== ws.data.userId) {
+      return void ws.send(GameResponse({ type: "game/error", error: "Not your turn" }));
+    }
+
+    const card = game.playCard(ws.data.userId, cardId);
+    if (!card) return void ws.send(GameResponse({ type: "game/error", error: "Card not in hand" }));
+
+    gameStatesByRoomId.set(ws.data.roomId, game);
+  },
 };

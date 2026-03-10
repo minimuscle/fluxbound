@@ -1,6 +1,6 @@
 import type { Game } from "@fluxbound/schema";
 import { GameResponse } from "utils/responses";
-import type { GameSocketData } from "../app/routes";
+import type { GameSocketData } from "../../app/routes";
 
 type Players = {
   room: `room:${Game.RoomId}`;

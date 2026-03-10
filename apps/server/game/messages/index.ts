@@ -1,7 +1,7 @@
 import type { ClientGame, ClientLobby } from "@fluxbound/schema";
-import type { GameSocketData } from "../app/routes";
-import { game } from "./game";
+import type { GameSocketData } from "../../app/routes";
 import { lobby } from "./lobby";
+import { game } from "./responses";
 
 export function message(
   server: Bun.Server<GameSocketData>,
@@ -19,9 +19,10 @@ export function message(
 
     case "game/start":
       return game.start(server, ws);
-
     case "game/startSolo":
       return game.startSolo(server, ws);
+    case "game/play-card":
+      return game.playCard(server, ws, parsed.cardId);
 
     default:
       console.log("Received unknown message", parsed);

@@ -7,7 +7,7 @@ const server = Bun.serve<GameSocketData>({
     open(ws) {
       console.log("WebSocket opened", ws.data.userId);
     },
-    close(ws, code, reason) {
+    close(ws, code) {
       console.log("WebSocket closed", code, ws.data.userId);
     },
     message(ws, message): void | Promise<void> {
