@@ -34,4 +34,16 @@ export namespace Game {
     player2: PlayerState;
     turn: `${number}-${1 | 2}`;
   };
+
+  export type PublicPlayerStateView = Omit<PlayerState, "deck" | "hand"> & {
+    deckCount: number;
+    handCount: number;
+  };
+
+  export type GameStateView = {
+    activePlayer: PlayerId;
+    you: PlayerState;
+    opponent: PublicPlayerStateView;
+    turn: `${number}-${1 | 2}`;
+  };
 }

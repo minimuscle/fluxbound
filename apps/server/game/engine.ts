@@ -1,15 +1,19 @@
 import type { Game } from "@fluxbound/schema";
 import { createInitialState } from "game/actions/create-initial-state";
+import { getOpponent } from "game/helpers/get-opponent";
 import { getPlayer } from "game/helpers/get-player";
+import { isPlayersTurn } from "game/rules/is-players-turn";
 
 /**********************************************************************************************************
  *   CLASS START
  **********************************************************************************************************/
 export class GameEngine {
   private state: Game.GameState;
+  private playerId: Game.PlayerId;
 
-  constructor(initialGameState: Game.GameState) {
+  constructor(initialGameState: Game.GameState, playerId: Game.PlayerId) {
     this.state = initialGameState;
+    this.playerId = playerId;
   }
 
   // Gets Current Game State
@@ -23,16 +27,31 @@ export class GameEngine {
   }
 
   // Play a card into the field or run its trigger
-  public playCard(playerId: Game.PlayerId, cardId: Game.CardId) {
-    // return this.state;
+  public playCard(cardId: Game.CardId) {
+    const turnValidation = isPlayersTurn(this.state, this.playerId);
+    if (!turnValidation.ok) return turnValidation;
+
+    //TODO continue with this play card
   }
 
   // End the players turn
-  public endTurn(playerId: Game.PlayerId) {
+  public endTurn() {
     // return this.state;
   }
 
-  public getPlayerView(playerId: Game.PlayerId): Readonly<Game.PlayerState> {
-    return getPlayer(this.state, playerId);
+  // Get the player view of the game state hiding opponents private information
+  public getPlayerView(): Readonly<Game.GameStateView> {
+    const player = getPlayer(this.state, this.playerId);
+    const opponent = getOpponent(this.state, this.playerId);
+
+    return {
+      ...this.state,
+      you: player,
+      opponent: {
+        ...opponent,
+        deckCount: opponent.deck.length,
+        handCount: opponent.hand.length,
+      },
+    };
   }
 }
