@@ -21,6 +21,7 @@ function RouteComponent() {
   if (!ws) return null;
   return (
     <div>
+      <Button onClick={() => ws.send({ type: "game/startSolo" })}>Start Solo Game</Button>
       <h1>Lobby</h1>
       <h2>Room ID: {roomId}</h2>
       <Button onClick={() => ws.send({ type: "lobby/create" })}>Create Lobby</Button>
@@ -30,8 +31,9 @@ function RouteComponent() {
           Join Lobby
         </Button>
       </div>
-      <Button onClick={() => ws.send({ type: "game/start" })}>Start Game</Button>
-      <Button onClick={() => ws.send({ type: "game/startSolo" })}>Start Solo Game</Button>
+      <div>
+        <Button onClick={() => ws.send({ type: "game/start" })}>Start Game</Button>
+      </div>
     </div>
   );
 }

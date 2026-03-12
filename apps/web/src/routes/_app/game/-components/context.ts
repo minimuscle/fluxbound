@@ -11,7 +11,7 @@ export type WebSocketContext = {
 };
 
 export type GameContext = {
-  state: Game.GameState;
+  state: Game.GameStateView;
   playerId: Game.PlayerId;
 };
 

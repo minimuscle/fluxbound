@@ -15,14 +15,12 @@ import { Play } from "./play";
 export const Game = () => {
   const { state } = use(GameContext)!;
   const { data: userId } = useSuspenseQuery({ ...getUserDetailsOptions, select: (data) => data.id });
-  const player = userId === state.player1.id ? state.player1 : state.player2;
-  const enemy = userId === state.player1.id ? state.player2 : state.player1;
 
   /***** RENDER *****/
   return (
     <div className={styles.container}>
       {/* <CoinToss startGame={() => {}} /> */}
-      <PlayerContext value={{ stage: "ENEMY", player: enemy }}>
+      <PlayerContext value={{ stage: "ENEMY", player: state.opponent }}>
         <div className={styles.enemySection}>
           <AttunementArea />
 
@@ -34,7 +32,7 @@ export const Game = () => {
         </div>
       </PlayerContext>
       <hr className={styles.divider} />
-      <PlayerContext value={{ stage: "PLAYER", player }}>
+      <PlayerContext value={{ stage: "PLAYER", player: state.you }}>
         <div className={styles.playerSection}>
           <Mana />
 

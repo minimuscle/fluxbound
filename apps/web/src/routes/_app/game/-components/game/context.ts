@@ -6,7 +6,7 @@ import { createContext } from "react";
  **********************************************************************************************************/
 type PlayerContext = {
   stage: "PLAYER" | "ENEMY";
-  player: Game.PlayerState;
+  player: Game.PlayerState | Game.PublicPlayerStateView;
 };
 
 /**********************************************************************************************************

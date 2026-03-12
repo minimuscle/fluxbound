@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { user } from "api/user";
 import Logo from "assets/images/logo.png";
+import { Button } from "components/Button";
 import "./-components/home.scss";
 
 export const Route = createFileRoute("/_app/_home/")({
@@ -9,6 +10,9 @@ export const Route = createFileRoute("/_app/_home/")({
 });
 
 function RouteComponent() {
+  /***** HOOKS *****/
+  const navigate = Route.useNavigate();
+
   /***** QUERIES *****/
   const { data: userData } = useQuery({
     queryKey: ["user"],
@@ -20,8 +24,7 @@ function RouteComponent() {
     <div className="MainPage">
       <div className="MainPage__loginStatus">{userData && <p>Logged in as {userData.display_name}</p>}</div>
       <img src={Logo} alt="" height={300} />
-      <Link to="/game_old">Start New Game (Local)</Link>
-      <Link to="/game/lobby">Start New Game (Multiplayer)</Link>
+      <Button onClick={() => navigate({ to: "/game/lobby" })}>Start New Game</Button>
     </div>
   );
 }

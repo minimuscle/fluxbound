@@ -13,7 +13,7 @@ export const Route = createFileRoute("/_app/game")({
 function RouteComponent() {
   /***** HOOKS *****/
   const [websocketState, setWebsocket] = useState<ReturnType<typeof createTypedWebSocketSender> | null>(null);
-  const [gameState, setGameState] = useState<Game.GameState | null>(null);
+  const [gameState, setGameState] = useState<Game.GameStateView | null>(null);
   const [roomId, setRoomId] = useState<Game.RoomId | null>(null);
   const navigate = Route.useNavigate();
 
@@ -37,11 +37,7 @@ function RouteComponent() {
 
     // eslint-disable-next-line
     setWebsocket(createTypedWebSocketSender(websocket));
-    // websocket.onopen = () => {
-    //   console.log("WebSocket connected");
-    // };
     websocket.onmessage = (event) => {
-      console.log("message: ", event.data);
       const parsed = JSON.parse(event.data);
 
       switch (parsed.type) {
@@ -58,7 +54,7 @@ function RouteComponent() {
       }
     };
     websocket.onclose = () => {
-      // return navigate({ to: "/", replace: true });
+      return navigate({ to: "/game/lobby" });
     };
     return () => {
       websocket.close();

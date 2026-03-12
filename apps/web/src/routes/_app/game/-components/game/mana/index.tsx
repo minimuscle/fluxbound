@@ -35,8 +35,6 @@ export const Mana = () => {
     VOID: VoidIcon,
   };
 
-  console.log(player.deck);
-
   /***** RENDER *****/
   return (
     <div className={classNames(styles.container, { [styles.enemy]: stage === "ENEMY" })}>

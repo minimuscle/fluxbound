@@ -17,13 +17,20 @@ export const Hand = () => {
   // Set the gap so that card are evenly spaced, and 5 fit within the width, but any more and they overlap
   const gap = (width - card_width * 4) / 10;
 
+  /***** RENDER HELPERS *****/
+  const renderCards = () => {
+    if ("handCount" in player) {
+      return Array.from({ length: player.handCount }).map((_, id) => <EmptyCard key={id} />);
+    }
+    return player.hand.map((card, index) => {
+      return <Card key={index} card={card} />;
+    });
+  };
+
   /***** RENDER *****/
   return (
     <div className={classNames(styles.container, { [styles.enemy]: stage === "ENEMY" })} style={{ "--dynamic-gap": `${gap}px` } as CSSProperties}>
-      {player.hand.map((card, index) => {
-        if (!card) return <EmptyCard key={index} />;
-        return <Card key={index} card={card} />;
-      })}
+      {renderCards()}
     </div>
   );
 };

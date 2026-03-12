@@ -1,5 +1,4 @@
 import type { Game, GameResponse } from "@fluxbound/schema";
-import { createInitialState } from "game/actions/create-initial-state";
 import { getOpponent } from "game/helpers/get-opponent";
 import { getPlayer } from "game/helpers/get-player";
 import { isPlayersTurn } from "game/rules/is-players-turn";
@@ -19,11 +18,6 @@ export class GameEngine {
   // Gets Current Game State
   get gameState(): Readonly<Game.GameState> {
     return this.state;
-  }
-
-  // Inital Game state
-  public initializeGame(player1: Game.InitialPlayerState, player2: Game.InitialPlayerState) {
-    this.state = createInitialState(player1, player2);
   }
 
   // Play a card into the field or run its trigger
