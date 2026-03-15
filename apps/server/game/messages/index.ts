@@ -10,6 +10,7 @@ export function message(
 ): void | Promise<void> {
   if (typeof message !== "string") return;
   const parsed: ClientLobby | ClientGame = JSON.parse(message);
+  console.log("Received message", parsed);
 
   switch (parsed.type) {
     case "lobby/create":

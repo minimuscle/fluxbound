@@ -1,0 +1,36 @@
+.yourTurn {
+  width: max-content;
+  position: relative;
+  height: max-content;
+  width: max-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  padding: 40px;
+  border: 1px solid #d5b864;
+  border-radius: 10px;
+
+  &--heads {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background-color: #d5b864;
+    color: #7f6a2b;
+    border-radius: 75px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &Text {
+    font-size: 32px;
+    margin: 0;
+    padding: 0;
+    color: #d5b864;
+    font-weight: 700;
+    text-align: center;
+  }
+}

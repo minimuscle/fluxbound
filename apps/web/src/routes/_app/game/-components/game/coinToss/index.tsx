@@ -1,28 +1,23 @@
 import { CrownSimpleIcon, SkullIcon } from "@phosphor-icons/react";
 import classNames from "classnames";
 import { Button } from "components/Button";
-import React, { use } from "react";
+import { use, useState } from "react";
 import { GameContext } from "../../context";
 import "./coin.scss";
 
 /**********************************************************************************************************
- *   TYPE DEFINITIONS
- **********************************************************************************************************/
-type CoinToss = React.FC<{
-  startGame: () => void;
-}>;
-
-/**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
-export const CoinToss: CoinToss = ({ startGame }) => {
+export const CoinToss = () => {
   /***** HOOKS *****/
   const {
     state: { activePlayer },
     playerId,
   } = use(GameContext)!;
+  const [showCoinToss, setShowCoinToss] = useState(true);
 
   /***** RENDER *****/
+  if (!showCoinToss) return null;
   return (
     <div className="coinTossWrapper">
       <div className="coinToss__main">
@@ -46,7 +41,7 @@ export const CoinToss: CoinToss = ({ startGame }) => {
         </div>
         <div className="coinToss__button">
           <p className="coinTossText">{activePlayer === playerId ? "You have" : "The Enemy has"} won the coin toss</p>
-          <Button onClick={startGame} className="coinTossClose">
+          <Button onClick={() => setShowCoinToss(false)} className="coinTossClose">
             Start Game
           </Button>
         </div>

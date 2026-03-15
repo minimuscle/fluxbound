@@ -20,6 +20,7 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
   }
   return {
     ...state,
+    activePlayer: state.player1.id === state.activePlayer ? state.player2.id : state.player1.id,
     turn: turn.join("-") as Game.GameState["turn"],
   };
 };

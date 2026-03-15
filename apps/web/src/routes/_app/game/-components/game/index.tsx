@@ -1,7 +1,7 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { getUserDetailsOptions } from "queries/getUserDetails";
 import { use } from "react";
 import { GameContext } from "routes/_app/game/-components/context";
+import { CoinToss } from "routes/_app/game/-components/game/coinToss";
+import { YourTurn } from "routes/_app/game/-components/game/yourTurn";
 import { AttunementArea } from "./attunement";
 import { PlayerContext } from "./context";
 import { Field } from "./Field";
@@ -14,12 +14,12 @@ import { Mana } from "./mana";
  **********************************************************************************************************/
 export const Game = () => {
   const { state } = use(GameContext)!;
-  const { data: userId } = useSuspenseQuery({ ...getUserDetailsOptions, select: (data) => data.id });
 
   /***** RENDER *****/
   return (
     <div className={styles.container}>
-      {/* <CoinToss startGame={() => {}} /> */}
+      <YourTurn />
+      <CoinToss />
       <PlayerContext value={{ stage: "ENEMY", player: state.opponent }}>
         <div className={styles.enemySection}>
           <AttunementArea />
