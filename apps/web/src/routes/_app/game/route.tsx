@@ -48,6 +48,9 @@ function RouteComponent() {
         case "game/started":
           setGameState(parsed.state);
           return navigate({ to: "/game", replace: true });
+        case "game/stateUpdated":
+          setGameState(parsed.state);
+          break;
         default:
           console.log("Received unknown message", parsed);
           break;

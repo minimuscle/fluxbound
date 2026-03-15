@@ -6,6 +6,5 @@ import { GameContext } from "routes/_app/game/-components/context";
  **********************************************************************************************************/
 export const useIsActivePlayer = () => {
   const { state, playerId } = use(GameContext)!;
-  console.log(state);
   return state.activePlayer === playerId;
 };

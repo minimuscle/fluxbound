@@ -4,10 +4,10 @@ import { use } from "react";
 import { GameContext } from "routes/_app/game/-components/context";
 import { AttunementArea } from "./attunement";
 import { PlayerContext } from "./context";
+import { Field } from "./Field";
 import styles from "./game.module.css";
 import { Hand } from "./hand";
 import { Mana } from "./mana";
-import { Play } from "./play";
 
 /**********************************************************************************************************
  *   COMPONENT START
@@ -26,7 +26,7 @@ export const Game = () => {
 
           <div className={styles.middleSection}>
             <Hand />
-            <Play />
+            <Field />
           </div>
           <Mana />
         </div>
@@ -37,7 +37,7 @@ export const Game = () => {
           <Mana />
 
           <div className={styles.middleSection}>
-            <Play />
+            <Field />
             <Hand />
           </div>
 

@@ -19,7 +19,7 @@ export const Card: Card = ({ card }) => {
 
   /***** HOOKS *****/
   const isActivePlayer = useIsActivePlayer();
-  console.log(isActivePlayer);
+
   const context = use(WebSocketContext);
   const ws = context?.websocket;
 

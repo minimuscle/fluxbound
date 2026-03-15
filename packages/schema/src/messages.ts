@@ -50,6 +50,10 @@ export const serverGame = z.discriminatedUnion("type", [
     state: z.custom<Game.GameStateView>(),
   }),
   z.object({
+    type: z.literal("game/stateUpdated"),
+    state: z.custom<Game.GameStateView>(),
+  }),
+  z.object({
     type: z.literal("game/error"),
     code: z.string(),
     message: z.string(),

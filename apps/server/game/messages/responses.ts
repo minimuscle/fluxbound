@@ -7,7 +7,7 @@ import { enemyStarterTestDeck } from "testData/enemyDeck";
 import { playerStarterTestDeck } from "testData/playerDeck";
 import { GameResponse } from "utils/responses";
 
-const gameStatesByRoomId = new Map<string, GameEngine>();
+const gameStatesByRoomId = new Map<string, Game.GameState>();
 
 export const game = {
   start: (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>) => {},
@@ -59,8 +59,20 @@ export const game = {
     const initialGameState = createInitialState(player1, player2);
     const engine = new GameEngine(initialGameState, ws.data.userId);
 
-    gameStatesByRoomId.set(ws.data.roomId, engine);
+    gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
     server.publish(`player:${ws.data.userId}`, GameResponse({ type: "game/started", state: engine.getPlayerView() }));
   },
-  playCard: (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>, cardId: Game.CardId) => {},
+  playCard: (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>, cardId: Game.CardId) => {
+    if (!ws.data.roomId || !gameStatesByRoomId.has(ws.data.roomId)) {
+      return void ws.send(GameResponse({ type: "game/error", ok: false, code: "NO_ROOM_ID", message: "No Room ID" }));
+    }
+    const initialGameState = gameStatesByRoomId.get(ws.data.roomId)!;
+    const engine = new GameEngine(initialGameState, ws.data.userId);
+
+    const result = engine.playCard(cardId);
+    if (!result.ok) return void ws.send(GameResponse({ type: "game/error", ...result }));
+
+    gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
+    return void ws.send(GameResponse({ type: "game/stateUpdated", state: engine.getPlayerView() }));
+  },
 };
