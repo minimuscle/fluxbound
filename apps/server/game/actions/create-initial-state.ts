@@ -14,7 +14,7 @@ export function createInitialState(player1: Game.InitialPlayerState, player2: Ga
   const initialPlayer2Hand = drawCard(shuffledPlayer2Deck, 6);
 
   const turn = "1-1";
-  const activePlayer = Math.random() < 0.5 ? player1.id : player2.id;
+  const activePlayer = player1.id; //Math.random() < 0.5 ? player1.id : player2.id; // TEMP
   return {
     activePlayer,
     player1: {

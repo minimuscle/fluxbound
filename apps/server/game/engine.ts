@@ -1,7 +1,8 @@
-import { CARD_LIBRARY, type Game, type GameResponse } from "@fluxbound/schema";
+import { type Game, type GameResponse } from "@fluxbound/schema";
 import { playACard } from "game/actions/play-card";
 import { getOpponent } from "game/helpers/get-opponent";
 import { getPlayer } from "game/helpers/get-player";
+import { canPlayCard } from "game/rules/can-play-card";
 import { isPlayersTurn } from "game/rules/is-players-turn";
 
 /**********************************************************************************************************
@@ -26,24 +27,21 @@ export class GameEngine {
     const turnValidation = isPlayersTurn(this.state, this.playerId);
     if (!turnValidation.ok) return turnValidation;
 
-    const player = getPlayer(this.state, this.playerId);
-    const card = player.hand.find((handCard) => handCard.id === cardId);
-    if (!card) return { ok: false, code: "CARD_NOT_IN_HAND", message: "Card is not in your hand" };
+    const player = getPlayer(this.state, this.playerId)!;
+    const cardValidation = canPlayCard(player, cardId);
+    if (!cardValidation.ok) return cardValidation;
 
-    const cardData = CARD_LIBRARY[card.cardId];
-    if (!cardData) return { ok: false, code: "CARD_NOT_FOUND", message: "Card does not exist" };
-    if (player.mana[cardData.domain] < cardData.cost) {
-      return { ok: false, code: "INSUFFICIENT_MANA", message: "Not enough mana to play this card" };
-    }
-
-    player.mana[cardData.domain] -= cardData.cost;
     this.state = playACard(this.state, cardId);
+
     return { ok: true };
   }
 
   // End the players turn
-  public endTurn() {
+  public endTurn(): GameResponse {
+    const turnValidation = isPlayersTurn(this.state, this.playerId);
+    if (!turnValidation.ok) return turnValidation;
     // return this.state;
+    return { ok: true };
   }
 
   // Get the player view of the game state hiding opponents private information
