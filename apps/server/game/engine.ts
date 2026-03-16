@@ -1,4 +1,5 @@
 import { type Game, type GameResponse } from "@fluxbound/schema";
+import { endTurn as endTurnAction } from "game/actions/end-turn";
 import { playACard } from "game/actions/play-card";
 import { getOpponent } from "game/helpers/get-opponent";
 import { getPlayer } from "game/helpers/get-player";
@@ -40,7 +41,8 @@ export class GameEngine {
   public endTurn(): GameResponse {
     const turnValidation = isPlayersTurn(this.state, this.playerId);
     if (!turnValidation.ok) return turnValidation;
-    // return this.state;
+    this.state = endTurnAction(this.state);
+
     return { ok: true };
   }
 

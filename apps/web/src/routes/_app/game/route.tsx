@@ -49,6 +49,7 @@ function RouteComponent() {
           setGameState(parsed.state);
           return navigate({ to: "/game", replace: true });
         case "game/stateUpdated":
+          console.log("state updated", parsed.state);
           setGameState(parsed.state);
           break;
         default:

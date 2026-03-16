@@ -17,13 +17,14 @@ export function message(
       return lobby.create(ws);
     case "lobby/join":
       return lobby.join(server, ws, parsed.roomId);
-
     case "game/start":
       return game.start(server, ws);
     case "game/startSolo":
       return game.startSolo(server, ws);
     case "game/play-card":
       return game.playCard(server, ws, parsed.cardId);
+    case "game/end-turn":
+      return game.endTurn(server, ws);
 
     default:
       console.log("Received unknown message", parsed);

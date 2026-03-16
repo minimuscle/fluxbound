@@ -9,12 +9,10 @@ import styles from "./play.module.css";
 export const Field = () => {
   const { player } = use(PlayerContext);
 
-  console.log(player);
   /***** RENDER *****/
   return (
     <div className={styles.container}>
       {player.field?.map((card) => {
-        console.log("runnning this: ", card);
         if (!card) return null;
         return <div key={card.id}>{CARD_LIBRARY[card.cardId].name}</div>;
       })}
