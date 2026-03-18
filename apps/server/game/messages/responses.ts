@@ -85,7 +85,16 @@ export const game = {
     const result = engine.endTurn();
     if (!result.ok) return void ws.send(GameResponse({ type: "game/error", ...result }));
 
+    server.publish(`player:${ws.data.userId}`, GameResponse({ type: "game/stateUpdated", state: engine.getPlayerView() }));
+
+    if (engine.gameState.activePlayer.includes("AI")) {
+      // Do AI Turn
+      const AIResult = engine.playAITurn();
+      if (!AIResult.ok) return void ws.send(GameResponse({ type: "game/error", ...AIResult }));
+      server.publish(`player:${ws.data.userId}`, GameResponse({ type: "game/stateUpdated", state: engine.getPlayerView() }));
+    }
+
     gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
-    return void server.publish(`player:${ws.data.userId}`, GameResponse({ type: "game/stateUpdated", state: engine.getPlayerView() }));
+    return;
   },
 };

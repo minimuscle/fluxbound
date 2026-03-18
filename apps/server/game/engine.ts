@@ -1,5 +1,6 @@
 import { type Game, type GameResponse } from "@fluxbound/schema";
 import { endTurn as endTurnAction } from "game/actions/end-turn";
+import { playAITurn } from "game/actions/play-ai-turn";
 import { playACard } from "game/actions/play-card";
 import { getOpponent } from "game/helpers/get-opponent";
 import { getPlayer } from "game/helpers/get-player";
@@ -33,6 +34,12 @@ export class GameEngine {
     if (!cardValidation.ok) return cardValidation;
 
     this.state = playACard(this.state, cardId);
+
+    return { ok: true };
+  }
+
+  public playAITurn(): GameResponse {
+    this.state = playAITurn(this.state);
 
     return { ok: true };
   }
