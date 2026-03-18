@@ -1,6 +1,7 @@
 import { ClickAwayListener } from "@mui/material";
 import { Button } from "components/Button";
-import { use, useEffect, useState } from "react";
+import { useState } from "react";
+import { useInvariant } from "utils/hooks/useInvariant";
 import { GameContext } from "../../context";
 import "./yourTurn.scss";
 
@@ -12,20 +13,21 @@ export const YourTurn = () => {
   const {
     state: { activePlayer, turn },
     playerId,
-  } = use(GameContext)!;
-  const [showYourTurn, setShowYourTurn] = useState(activePlayer === playerId && turn.split("-")[0] !== "1");
+  } = useInvariant(GameContext);
+  const [dismissed, setDismissed] = useState(false);
 
-  useEffect(() => {
-    if (activePlayer === playerId && turn.split("-")[0] !== "1") setShowYourTurn(true);
-  }, [activePlayer, turn, playerId]);
+  const isYourTurn = activePlayer === playerId && turn.split("-")[0] !== "1";
+  const showYourTurn = isYourTurn && !dismissed;
+
+  console.log("isYourTurn", isYourTurn);
 
   /***** RENDER *****/
   if (!showYourTurn) return null;
   return (
-    <ClickAwayListener onClickAway={() => setShowYourTurn(false)}>
+    <ClickAwayListener onClickAway={() => setDismissed(true)}>
       <div className="yourTurn">
         <p className="yourTurnText">It is your turn</p>
-        <Button onClick={() => setShowYourTurn(false)} className="yourTurnClose">
+        <Button onClick={() => setDismissed(true)} className="yourTurnClose">
           Start Turn
         </Button>
       </div>
