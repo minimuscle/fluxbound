@@ -1,8 +1,7 @@
 import { ClickAwayListener } from "@mui/material";
 import { Button } from "components/Button";
 import { useState } from "react";
-import { useInvariant } from "utils/hooks/useInvariant";
-import { GameContext } from "../../context";
+import { useIsActivePlayer } from "utils/hooks/isActivePlayer";
 import "./yourTurn.scss";
 
 /**********************************************************************************************************
@@ -10,19 +9,15 @@ import "./yourTurn.scss";
  **********************************************************************************************************/
 export const YourTurn = () => {
   /***** HOOKS *****/
-  const {
-    state: { activePlayer, turn },
-    playerId,
-  } = useInvariant(GameContext);
-  const [dismissed, setDismissed] = useState(false);
+  const isActivePlayer = useIsActivePlayer();
+  const [dismissed, setDismissed] = useState(true);
 
-  const isYourTurn = activePlayer === playerId && turn.split("-")[0] !== "1";
-  const showYourTurn = isYourTurn && !dismissed;
-
-  console.log("isYourTurn", isYourTurn);
+  if (!isActivePlayer && dismissed) {
+    setDismissed(false);
+  }
 
   /***** RENDER *****/
-  if (!showYourTurn) return null;
+  if (dismissed || !isActivePlayer) return null;
   return (
     <ClickAwayListener onClickAway={() => setDismissed(true)}>
       <div className="yourTurn">
