@@ -14,6 +14,7 @@ export namespace Cards {
     description: string;
     cost: number;
     price: number;
+    triggers: object;
   };
   export type DomainList = Record<CardKey, Card>;
 }
