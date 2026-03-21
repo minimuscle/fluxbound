@@ -1,62 +1,79 @@
-# 🔮 FluxBound 🔮
+# FluxBound
 
-**FluxBound** is a turn-based, elemental card battle game inspired by _Elements The Game_, rebuilt from the ground up with modern web tech and a strong focus on clear systems, determinism, and extensibility.
+FluxBound is a turn-based elemental card game being built as a modern web project with a strong emphasis on deterministic rules, maintainable architecture, and long-term extensibility.
 
-This project explores a clean separation between **game logic**, **effect resolution**, and **rendering**, with the long-term goal of becoming a fully playable, moddable, browser-based card game.
+The project is inspired by classic elemental battlers and Trading Card Games and is structured to keep core game rules, effect resolution, and application layers clearly separated. The goal is to support a reliable gameplay foundation that can evolve into a polished browser-based card game.
 
----
+## Current Status
 
-## ✨ Core Ideas
+FluxBound is in *active* **early development**. The repository contains the foundational workspace structure and project scaffolding, but the game is not yet in a playable state yet.
 
-- **Elemental deckbuilding** with 10 different resource types
-- Deterministic, turn-based state machine
-- Cleanly typed game rules using TypeScript
+## Overview
 
----
+FluxBound is designed around a few core principles:
 
-## 🕹️ Current State
+- Deterministic, turn-based game logic
+- Strongly typed rules and data structures with TypeScript
+- Clear separation between domain logic and application code
+- A workspace structure that supports growth across multiple apps and packages
 
-Overall here is the state of the core concepts of the game and if its _usable_ not if it works well or doesn't have bugs.
+## Workspace
 
-- Playable ❌
-- Enemy AI ❌
-  - Level 0 ❌
-  - Level 1 ❌
-  - Level 2 ❌
-  - Level 3 ❌
-  - Level 4 ❌
-  - Level 5 ❌
-- Singleplayer ❌
-- Multiplayer ❌
-- Graphics ❌
+This repository is organized as a monorepo and currently includes:
 
-As for specific mechanics, here are some other pending stats, this is more of a roadmap, and if completed, show progress in the game. I've _very roughly_ put them in order of completion:
+- `apps/web` for the frontend client
+- `apps/server` for backend services
+- `packages/schema` for shared types and schema-related code
 
-- Coin Toss ❌
-- Start Game ❌
-- Draw Cards ❌
-- Play Cards ❌
-  - Play Runes ❌
-  - Play Creatures ❌
-  - Play Sheilds ❌
-  - Play Weaponds ❌
-  - Play Permanents ❌
-  - Play Spells ❌
-- End Turn ❌
-- Generate Flux ❌
-- Basic Card Effects ❌
-- Advanced Card Effects ❌
-- Enemy AI Turn ❌
-- Restart Game ❌
-- End Game Screen ❌
-- Max Hand Size ❌
-- Deck Builder ❌
-- Card Store (Purchase / Sell Cards) ❌
-- Attunement Selection ❌
-- Starter Decks ❌
-- Accounts ❌
-- Save Ability ❌
-- Autosave Ability ❌
-- Online System ❌
-- Multiplayer ❌
-- VS Game ❌
+The workspace is managed with Bun and Nx.
+
+## Development
+
+### Tech Stack
+
+
+#### Global
+- [TypeScript GO (v7)](https://www.typescriptlang.org/)
+- [Bun](https://bun.sh/)
+- [Nx](https://nx.dev/)
+- [Oxc](https://oxc.dev/) (oxlint and oxfmt)
+
+#### Frontend
+- [React](https://reactjs.org/)
+- [Tanstack Router](https://tanstack.com/router)
+- [Tanstack Query](https://tanstack.com/query)
+- [Tanstack Form](https://tanstack.com/form)
+- [Mantine](https://mantine.dev/)
+ 
+
+### Prerequisites
+
+- Bun
+
+### Install
+
+```bash
+bun install && cd apps/web && bun install && cd ../server && bun install
+```
+
+### Run the workspace
+
+```bash
+bun dev
+```
+
+### Build
+
+```bash
+bun build
+```
+
+### Lint
+
+```bash
+bun lint
+```
+
+## License
+
+This project is not allowed to be copied or distributed without permission from the original author.
