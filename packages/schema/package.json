@@ -3,23 +3,21 @@
   "private": true,
   "type": "module",
   "sideEffects": false,
+  "main": "./index.ts",
+  "types": "./index.ts",
   "exports": {
     ".": "./index.ts",
     "./src/game": "./src/game.ts",
     "./src/lobby": "./src/lobby.ts"
   },
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch"
+    "build": "bunx tsgo",
+    "dev": "bunx tsgo --watch"
   },
-  "main": "./index.ts",
-  "types": "./index.ts",
   "dependencies": {
+    "@typescript/native-preview": "^7.0.0-dev.20260321.1",
     "type-fest": "^5.4.4",
     "zod": "^4.3.6"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
   },
   "devDependencies": {
     "@types/bun": "latest"
