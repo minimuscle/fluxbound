@@ -3,8 +3,8 @@ import type { GameSocketData } from "app/routes";
 import { createInitialState } from "game/actions/create-initial-state";
 import { GameEngine } from "game/engine";
 import { lobby } from "game/messages/lobby";
-import { enemyStarterTestDeck } from "testData/enemyDeck";
-import { playerStarterTestDeck } from "testData/playerDeck";
+import { enemyStarterTestDeck } from "game/testData/enemyDeck";
+import { playerStarterTestDeck } from "game/testData/playerDeck";
 import { GameResponse } from "utils/responses";
 
 const gameStatesByRoomId = new Map<string, Game.GameState>();

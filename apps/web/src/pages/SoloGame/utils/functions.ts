@@ -38,9 +38,7 @@ export const generateRandomPlayer = () => (Math.random() < 0.5 ? "PLAYER" : "ENE
 const runEffect = (state: State, ctx: { owner: Player; gameCardId: GameCardId }, eff: EffectRef): State => {
   const [group, name] = eff.id.split(".") as [string, string];
 
-  const runner = (
-    (EFFECTS as unknown as Record<string, Record<string, { run: (ctx: unknown, args: unknown) => State } | undefined>>)[group]?.[name]?.run
-  );
+  const runner = (EFFECTS as unknown as Record<string, Record<string, { run: (ctx: unknown, args: unknown) => State } | undefined>>)[group]?.[name]?.run;
 
   if (!runner) {
     console.warn(`Unknown effect id: ${eff.id}`);

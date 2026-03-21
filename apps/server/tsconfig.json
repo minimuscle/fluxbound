@@ -10,10 +10,13 @@
 
     // Bundler mode
     "moduleResolution": "bundler",
-    "baseUrl": ".",
     "paths": {
       "@fluxbound/schema": ["../../packages/schema/index.ts"],
-      "@fluxbound/schema/*": ["../../packages/schema/*"]
+      "@fluxbound/schema/*": ["../../packages/schema/*"],
+      "game/*": ["./game/*"],
+      "utils/*": ["./utils/*"],
+      "app/*": ["./app/*"],
+      "src/*": ["./src/*"],
     },
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
@@ -29,6 +32,6 @@
     // Some stricter flags (disabled by default)
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false
-  }
+    "noPropertyAccessFromIndexSignature": false,
+  },
 }
