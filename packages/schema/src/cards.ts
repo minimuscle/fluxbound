@@ -7,7 +7,7 @@ export namespace Cards {
   export type CardKey = `${Expansion}_${Domain}_${CardType}_${string}`;
   export type CardId = Tagged<CardKey, "cardId">;
 
-   type Base = {
+  type Base = {
     domain: Domain;
     name: string;
     description: string;
@@ -16,23 +16,23 @@ export namespace Cards {
     triggers: object;
   };
 
-  type Creature = Base & {
+  export type Creature = Base & {
     type: "CREATURE";
     damage: number;
     health: number;
     activations: number;
-  } 
+  };
 
-  type Weapon = Base & {
+  export type Weapon = Base & {
     type: "WEAPON";
     damage: number;
-  }
+  };
 
-  type Others = Base & {
-    type: Omit<CardType, 'CREATURE' | 'WEAPON'>;
-  }
+  export type Others = Base & {
+    type: Omit<CardType, "CREATURE" | "WEAPON">;
+  };
 
+  export type Card = Creature | Weapon | Others;
 
-
-  export type CardDefinition = Record<CardKey, Creature | Weapon | Others>;
+  export type CardDefinition = Record<CardKey, Card>;
 }

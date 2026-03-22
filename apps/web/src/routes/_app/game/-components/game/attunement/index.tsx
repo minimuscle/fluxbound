@@ -1,3 +1,4 @@
+import { CARD_LIBRARY } from "@fluxbound/schema";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import { getUserDetailsOptions } from "queries/getUserDetails";
@@ -40,6 +41,26 @@ export const AttunementArea = () => {
         <div className={styles.permanent}>Shield</div>
         <div className={styles.permanent}>Potion</div>
         <div>{user_name}</div>
+        <div className={styles.runes}>
+          Runes:
+          {Array.from(
+            player.field.reduce((runes, { cardId }) => {
+              const card = CARD_LIBRARY[cardId];
+
+              if (card.type !== "RUNE") {
+                return runes;
+              }
+
+              runes.set(card.name, (runes.get(card.name) ?? 0) + 1);
+
+              return runes;
+            }, new Map<string, number>()),
+          ).map(([name, count]) => (
+            <div key={name}>
+              {name} x{count}
+            </div>
+          ))}
+        </div>
       </div>
       <div className={styles.health}>
         {player.health} / {player.healthMax}

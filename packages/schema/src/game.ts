@@ -11,6 +11,13 @@ export namespace Game {
     cardId: Cards.CardId; // The non-unique id of the card to match to the library
   };
 
+  export type GameCreatureCard = GameCard & {
+    damage: number;
+    health: number;
+    maxHealth: number;
+    activations: number;
+  };
+
   export type PlayerState = {
     id: PlayerId;
     deck: GameCard[];

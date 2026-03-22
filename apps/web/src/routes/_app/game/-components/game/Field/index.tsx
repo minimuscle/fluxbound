@@ -1,6 +1,7 @@
 import { CARD_LIBRARY } from "@fluxbound/schema";
 import { use } from "react";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
+import { CreatureCard } from "./creatureCard";
 import styles from "./play.module.css";
 
 /**********************************************************************************************************
@@ -13,8 +14,10 @@ export const Field = () => {
   return (
     <div className={styles.container}>
       {player.field?.map((card) => {
-        if (!card) return null;
-        return <div key={card.id}>{CARD_LIBRARY[card.cardId].name}</div>;
+        const cardData = CARD_LIBRARY[card.cardId];
+        if (!card || !cardData || cardData.type !== "CREATURE") return null;
+        console.log(card);
+        return <CreatureCard key={card.id} cardId={card.id} />;
       })}
     </div>
   );
