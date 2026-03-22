@@ -22,7 +22,7 @@ export const EFFECTS = {
       arguments: z.object({
         stats: z.array(z.object({ stat: z.enum(["health", "damage", "defense"]), amount: z.number() })),
         cost: z.object({
-          element: z.custom<Cards.Domain>(),
+          domain: z.custom<Cards.Domain>(),
           amount: z.number(),
         }),
       }),

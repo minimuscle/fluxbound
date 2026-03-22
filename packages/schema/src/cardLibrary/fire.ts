@@ -46,7 +46,7 @@ export const FIRE_CARDS: Cards.CardDefinition = {
               { stat: "health", amount: 1 },
             ],
             cost: {
-              element: "FIRE",
+              domain: "FIRE",
               amount: 2,
             },
           },
