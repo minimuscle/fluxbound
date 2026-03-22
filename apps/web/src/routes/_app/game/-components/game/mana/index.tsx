@@ -43,7 +43,7 @@ export const Mana = () => {
           <img src={Icons[domain as keyof typeof Icons]} alt={domain} width={30} /> {mana}
         </div>
       ))}
-      <img src={CardsIcon} alt="Cards" width={30} /> {player.deck?.length ?? player.deckCount}
+      <img src={CardsIcon} alt="Cards" width={30} /> {stage === 'PLAYER' ? player.deck.length : player.deckCount}
     </div>
   );
 };

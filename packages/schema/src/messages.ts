@@ -1,5 +1,5 @@
 import z from "zod";
-import type { CODES } from "./codes";
+import { CODES } from "./codes";
 import type { Game } from "./game";
 
 export const clientLobby = z.discriminatedUnion("type", [
@@ -55,7 +55,7 @@ export const serverGame = z.discriminatedUnion("type", [
   }),
   z.object({
     type: z.literal("game/error"),
-    code: z.string(),
+    code: z.enum(CODES),
     message: z.string(),
     ok: z.literal(false),
   }),

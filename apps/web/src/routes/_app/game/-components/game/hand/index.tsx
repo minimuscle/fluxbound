@@ -3,6 +3,7 @@ import { Card } from "components/Card";
 import { EmptyCard } from "components/Card/empty";
 import { use, type CSSProperties } from "react";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
+import { GameErrorContext } from "../../context";
 import styles from "./hand.module.css";
 
 /**********************************************************************************************************
@@ -10,6 +11,7 @@ import styles from "./hand.module.css";
  **********************************************************************************************************/
 export const Hand = () => {
   /***** HOOKS *****/
+  const gameError = use(GameErrorContext);
   const { stage, player } = use(PlayerContext);
 
   const width = 1170;
@@ -28,6 +30,7 @@ export const Hand = () => {
   };
 
   /***** RENDER *****/
+  if (gameError === "TOO_MANY_CARDS_IN_HAND" && stage === 'PLAYER') return null;
   return (
     <div className={classNames(styles.container, { [styles.enemy]: stage === "ENEMY" })} style={{ "--dynamic-gap": `${gap}px` } as CSSProperties}>
       {renderCards()}

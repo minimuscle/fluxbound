@@ -5,8 +5,11 @@ import { createContext } from "react";
  *   TYPE DEFINITIONS
  **********************************************************************************************************/
 type PlayerContext = {
-  stage: "PLAYER" | "ENEMY";
-  player: Game.PlayerState | Game.PublicPlayerStateView;
+  stage: "PLAYER";
+  player: Game.PlayerState;
+} | {
+  stage: "ENEMY";
+  player: Game.PublicPlayerStateView;
 };
 
 /**********************************************************************************************************

@@ -1,4 +1,4 @@
-import type { Game } from "@fluxbound/schema";
+import type { CODES, Game } from "@fluxbound/schema";
 import { createContext } from "react";
 import type { createTypedWebSocketSender } from "utils/functions";
 
@@ -20,3 +20,4 @@ export type GameContext = {
  **********************************************************************************************************/
 export const WebSocketContext = createContext<WebSocketContext | null>(null);
 export const GameContext = createContext<GameContext | null>(null);
+export const GameErrorContext = createContext<typeof CODES[number] | null>(null);
