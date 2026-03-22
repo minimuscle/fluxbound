@@ -1,6 +1,6 @@
 import type { Cards } from "../cards";
 
-export const FIRE_CARDS: Cards.DomainList = {
+export const FIRE_CARDS: Cards.CardDefinition = {
   /***** RUNE - 1 *****/
   BASE_FIRE_PERMANENT_RUNE: {
     domain: "FIRE",
