@@ -1,4 +1,7 @@
 import type { Game } from "@fluxbound/schema";
+import { drawCard } from "game/helpers/draw-card";
+import { getOpponent } from "game/helpers/get-opponent";
+import { setPlayerState } from "game/helpers/set-player-state";
 
 /**********************************************************************************************************
  *   FUNCTION START
@@ -10,6 +13,18 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
 
   // Trigger any cards in play with the onTurnEnd trigger
 
+  // Draw a card from the deck for the other player
+  const opponent = getOpponent(state);
+  const nextOpponentDeckandHand = drawCard(opponent.deck, 1);
+  const nextTurnState = setPlayerState(state, opponent.id, {
+    ...opponent,
+    deck: nextOpponentDeckandHand.deck,
+    hand: [
+      ...opponent.hand,
+      ...nextOpponentDeckandHand.hand,
+    ]
+  });
+
   // End the turn
   const turn = state.turn.split("-");
   // Check if it is player 1 or 2, and if 1, set turn to X-2 or else X+1-1
@@ -19,7 +34,7 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
     turn[0] = String(Number(turn[0]) + 1);
   }
   return {
-    ...state,
+    ...nextTurnState,
     activePlayer: state.player1.id === state.activePlayer ? state.player2.id : state.player1.id,
     turn: turn.join("-") as Game.GameState["turn"],
   };

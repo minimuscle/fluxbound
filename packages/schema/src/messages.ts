@@ -50,11 +50,7 @@ export type ClientGame = z.infer<typeof clientGame>;
 
 export const serverGame = z.discriminatedUnion("type", [
   z.object({
-    type: z.literal("game/started"),
-    state: z.custom<Game.GameStateView>(),
-  }),
-  z.object({
-    type: z.literal("game/stateUpdated"),
+    type: z.enum(["game/started", "game/turnEnded", "game/stateUpdated"]),
     state: z.custom<Game.GameStateView>(),
   }),
   z.object({

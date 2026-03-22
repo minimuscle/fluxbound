@@ -3,7 +3,7 @@ import { CARD_LIBRARY, type Game, type GameResponse } from "@fluxbound/schema";
 /**********************************************************************************************************
  *   FUNCTION START
  **********************************************************************************************************/
-export const canPlayCard = (player: Game.PlayerState, cardId: Game.CardId): GameResponse => {
+export const canPlayCard = (player: Game.PlayerState, cardId?: Game.CardId): GameResponse => {
   const cardInHand = player.hand.find((handCard) => handCard.id === cardId);
   if (!cardInHand) return { ok: false, code: "CARD_NOT_FOUND", message: "Card is not in your hand" };
 

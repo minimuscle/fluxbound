@@ -1,5 +1,5 @@
 import { type Game, type GameResponse } from "@fluxbound/schema";
-import { endTurn as endTurnAction } from "game/actions/end-turn";
+import { endTurn } from "game/actions/end-turn";
 import { playAITurn } from "game/actions/play-ai-turn";
 import { playACard } from "game/actions/play-card";
 import { getOpponent } from "game/helpers/get-opponent";
@@ -38,17 +38,19 @@ export class GameEngine {
     return { ok: true };
   }
 
+  // Play the turn for the AI
   public playAITurn(): GameResponse {
     this.state = playAITurn(this.state);
-
     return { ok: true };
   }
+
+  //
 
   // End the players turn
   public endTurn(): GameResponse {
     const turnValidation = isPlayersTurn(this.state, this.playerId);
     if (!turnValidation.ok) return turnValidation;
-    this.state = endTurnAction(this.state);
+    this.state = endTurn(this.state);
 
     return { ok: true };
   }
@@ -57,13 +59,19 @@ export class GameEngine {
   public getPlayerView(): Readonly<Game.GameStateView> {
     const player = getPlayer(this.state, this.playerId);
     const opponent = getOpponent(this.state, this.playerId);
+    
 
     return {
       activePlayer: this.state.activePlayer,
       turn: this.state.turn,
       you: player,
       opponent: {
-        ...opponent,
+        attunement: opponent.attunement,
+        field: opponent.field,
+        health: opponent.health,
+        mana: opponent.mana,
+        healthMax: opponent.healthMax,
+        id: opponent.id,
         deckCount: opponent.deck.length,
         handCount: opponent.hand.length,
       },
