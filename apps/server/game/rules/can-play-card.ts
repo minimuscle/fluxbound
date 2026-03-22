@@ -10,8 +10,8 @@ export const canPlayCard = (player: Game.PlayerState, cardId?: Game.CardId): Gam
   const gameCard = CARD_LIBRARY[cardInHand.cardId];
   if (!gameCard) return { ok: false, code: "CARD_NOT_FOUND", message: "Card does not exist" };
 
-  const hasEnoughMana = player.mana[gameCard.domain] >= gameCard.cost;
-  if (!hasEnoughMana) return { ok: false, code: "INSUFFICIENT_MANA", message: "Not enough mana to play this card" };
+  const hasEnoughFlux = player.flux[gameCard.domain] >= gameCard.cost;
+  if (!hasEnoughFlux) return { ok: false, code: "INSUFFICIENT_FLUX", message: "Not enough flux to play this card" };
 
   //TODO check type of card and if those actions it can perform are allowed, such as targeting creature, but there are no targetable creatures
 

@@ -64,8 +64,8 @@ function RouteComponent() {
             case "CARD_NOT_FOUND":
               console.log("Card not found");
               break;
-            case "INSUFFICIENT_MANA":
-              console.log("Insufficient mana");
+            case "INSUFFICIENT_FLUX":
+              console.log("Insufficient flux");
               break;
             case "NO_ROOM_ID":
               console.log("No room id");

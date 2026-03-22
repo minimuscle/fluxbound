@@ -87,7 +87,7 @@ export class GameEngine {
         attunement: opponent.attunement,
         field: opponent.field,
         health: opponent.health,
-        mana: opponent.mana,
+        flux: opponent.flux,
         healthMax: opponent.healthMax,
         id: opponent.id,
         deckCount: opponent.deck.length,

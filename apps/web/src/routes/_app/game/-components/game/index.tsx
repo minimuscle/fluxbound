@@ -7,7 +7,7 @@ import { PlayerContext } from "./context";
 import { Field } from "./Field";
 import styles from "./game.module.css";
 import { Hand } from "./hand";
-import { Mana } from "./mana";
+import { Flux } from "./flux";
 
 /**********************************************************************************************************
  *   COMPONENT START
@@ -28,13 +28,13 @@ export const Game = () => {
             <Hand />
             <Field />
           </div>
-          <Mana />
+          <Flux />
         </div>
       </PlayerContext>
       <hr className={styles.divider} />
       <PlayerContext value={{ stage: "PLAYER", player: state.you }}>
         <div className={styles.playerSection}>
-          <Mana />
+          <Flux />
 
           <div className={styles.middleSection}>
             <Field />

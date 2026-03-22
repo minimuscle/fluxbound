@@ -18,8 +18,8 @@ export function playACard(state: Game.GameState, cardId: Game.CardId): Game.Game
 
   player.field.push(playedCard);
 
-  // Update the mana of the player
-  player.mana[gameCard.domain] -= gameCard.cost;
+  // Update the flux of the player
+  player.flux[gameCard.domain] -= gameCard.cost;
 
   return state;
 }

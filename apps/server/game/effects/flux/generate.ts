@@ -7,6 +7,6 @@ import { getPlayer } from "game/helpers/get-player";
 export const generate: Game.EffectHandlers["flux"]["generate"] = (state, args) => {
   const { domain, amount } = args;
   const player = getPlayer(state, state.activePlayer);
-  player.mana[domain] += amount;
+  player.flux[domain] += amount;
   return state;
 };

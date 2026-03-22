@@ -40,7 +40,7 @@ export namespace Game {
     health: number;
     healthMax: number;
     attunement: string;
-    mana: Record<Cards.Domain, number>;
+    flux: Record<Cards.Domain, number>;
   };
 
   export type InitialPlayerState = Omit<PlayerState, "deck" | "hand" | "field"> & {

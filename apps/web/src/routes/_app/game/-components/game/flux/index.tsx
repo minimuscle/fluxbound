@@ -13,37 +13,39 @@ import WaterIcon from "assets/images/domains/block_water_jelly.png";
 import classNames from "classnames";
 import { use } from "react";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
-import styles from "./mana.module.css";
+import styles from "./flux.module.css";
+
+const DOMAIN_ICONS: Record<Cards.Domain, string> = {
+  FIRE: FireIcon,
+  WATER: WaterIcon,
+  EARTH: EarthIcon,
+  AIR: AirIcon,
+  LIGHT: LightIcon,
+  DARK: DarkIcon,
+  LIFE: LifeIcon,
+  DEATH: DeathIcon,
+  AETHER: AetherIcon,
+  VOID: VoidIcon,
+};
+
+const DOMAINS: Cards.Domain[] = ["FIRE", "WATER", "EARTH", "AIR", "LIGHT", "DARK", "LIFE", "DEATH", "AETHER", "VOID"];
 
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
-export const Mana = () => {
+export const Flux = () => {
   /***** HOOKS *****/
   const { stage, player } = use(PlayerContext);
-
-  const Icons: Record<Cards.Domain, string> = {
-    FIRE: FireIcon,
-    WATER: WaterIcon,
-    EARTH: EarthIcon,
-    AIR: AirIcon,
-    LIGHT: LightIcon,
-    DARK: DarkIcon,
-    LIFE: LifeIcon,
-    DEATH: DeathIcon,
-    AETHER: AetherIcon,
-    VOID: VoidIcon,
-  };
 
   /***** RENDER *****/
   return (
     <div className={classNames(styles.container, { [styles.enemy]: stage === "ENEMY" })}>
-      {Object.entries(player.mana).map(([domain, mana]) => (
+      {DOMAINS.map((domain) => (
         <div key={domain} className={styles.item}>
-          <img src={Icons[domain as keyof typeof Icons]} alt={domain} width={30} /> {mana}
+          <img src={DOMAIN_ICONS[domain]} alt={domain} width={30} /> {player.flux[domain]}
         </div>
       ))}
-      <img src={CardsIcon} alt="Cards" width={30} /> {stage === 'PLAYER' ? player.deck.length : player.deckCount}
+      <img src={CardsIcon} alt="Cards" width={30} /> {stage === "PLAYER" ? player.deck.length : player.deckCount}
     </div>
   );
 };
