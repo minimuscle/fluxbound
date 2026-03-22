@@ -37,4 +37,9 @@
     border-radius: 10px;
     background-color: rgb(114, 88, 123);
   }
+
+  &__disband {
+    border: 1px solid red;
+    box-shadow: 0px 0px 10px red;
+  }
 }

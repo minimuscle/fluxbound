@@ -1,8 +1,10 @@
+import { ClickAwayListener } from "@mui/material";
 import classNames from "classnames";
 import { Card } from "components/Card";
 import { EmptyCard } from "components/Card/empty";
 import { use, type CSSProperties } from "react";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
+import { useInvariant } from "utils/hooks/useInvariant";
 import { GameErrorContext } from "../../context";
 import styles from "./hand.module.css";
 
@@ -11,7 +13,7 @@ import styles from "./hand.module.css";
  **********************************************************************************************************/
 export const Hand = () => {
   /***** HOOKS *****/
-  const gameError = use(GameErrorContext);
+  const { gameError, setGameError } = useInvariant(GameErrorContext);
   const { stage, player } = use(PlayerContext);
 
   const width = 1170;
@@ -21,7 +23,7 @@ export const Hand = () => {
 
   /***** RENDER HELPERS *****/
   const renderCards = () => {
-    if ("handCount" in player) {
+    if (stage === "ENEMY") {
       return Array.from({ length: player.handCount }).map((_, id) => <EmptyCard key={id} />);
     }
     return player.hand.map((card, index) => {
@@ -30,7 +32,17 @@ export const Hand = () => {
   };
 
   /***** RENDER *****/
-  if (gameError === "TOO_MANY_CARDS_IN_HAND" && stage === 'PLAYER') return null;
+  if (gameError === "TOO_MANY_CARDS_IN_HAND" && stage === "PLAYER")
+    return (
+      <ClickAwayListener onClickAway={() => setGameError(null)}>
+        <div className={styles.container} style={{ "--dynamic-gap": `${gap}px` } as CSSProperties}>
+          <div className={styles.modal}>Too many cards, select one to discard</div>
+          {player.hand.map((card, index) => {
+            return <Card key={index} card={card} action="discard" />;
+          })}
+        </div>
+      </ClickAwayListener>
+    );
   return (
     <div className={classNames(styles.container, { [styles.enemy]: stage === "ENEMY" })} style={{ "--dynamic-gap": `${gap}px` } as CSSProperties}>
       {renderCards()}

@@ -44,13 +44,16 @@ function RouteComponent() {
       switch (parsed.type) {
         case "lobby/created":
           // case "lobby/joined":
+          setGameError(null);
           setRoomId(parsed.roomId);
           break;
         case "game/started":
+          setGameError(null);
           setGameState(parsed.state);
           return navigate({ to: "/game", replace: true });
         case "game/stateUpdated":
           console.log("state updated", parsed.state);
+          setGameError(null);
           setGameState(parsed.state);
           break;
         case "game/error":
@@ -97,7 +100,7 @@ function RouteComponent() {
 
   /***** RENDER *****/
   return (
-    <GameErrorContext value={gameError}>
+    <GameErrorContext value={{ gameError, setGameError }}>
       <WebSocketContext value={context}>
         <GameContext value={gameState ? { state: gameState, playerId: userData?.id } : null}>
           <Outlet />
@@ -106,4 +109,3 @@ function RouteComponent() {
     </GameErrorContext>
   );
 }
- 

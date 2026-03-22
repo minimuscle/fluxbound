@@ -1,5 +1,5 @@
 import type { CODES, Game } from "@fluxbound/schema";
-import { createContext } from "react";
+import React, { createContext } from "react";
 import type { createTypedWebSocketSender } from "utils/functions";
 
 /**********************************************************************************************************
@@ -15,9 +15,14 @@ export type GameContext = {
   playerId: Game.PlayerId;
 };
 
+export type GameErrorContext = {
+  gameError: (typeof CODES)[number] | null;
+  setGameError: React.Dispatch<React.SetStateAction<(typeof CODES)[number] | null>>;
+};
+
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
 export const WebSocketContext = createContext<WebSocketContext | null>(null);
 export const GameContext = createContext<GameContext | null>(null);
-export const GameErrorContext = createContext<typeof CODES[number] | null>(null);
+export const GameErrorContext = createContext<GameErrorContext | null>(null);

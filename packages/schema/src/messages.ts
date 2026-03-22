@@ -38,7 +38,7 @@ export const clientGame = z.discriminatedUnion("type", [
     type: z.literal("game/startSolo"),
   }),
   z.object({
-    type: z.literal("game/play-card"),
+    type: z.enum(["game/play-card", "game/discard-card"]),
     cardId: z.custom<Game.CardId>(z.coerce.string().parse),
   }),
   z.object({

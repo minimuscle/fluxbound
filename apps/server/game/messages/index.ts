@@ -25,6 +25,8 @@ export function message(
       return game.playCard(server, ws, parsed.cardId);
     case "game/end-turn":
       return game.endTurn(server, ws);
+    case "game/discard-card":
+      return game.discardCard(server, ws, parsed.cardId);
 
     default:
       console.log("Received unknown message", parsed);
