@@ -16,7 +16,6 @@ export const Field = () => {
       {player.field?.map((card) => {
         const cardData = CARD_LIBRARY[card.cardId];
         if (!card || !cardData || cardData.type !== "CREATURE") return null;
-        console.log(card);
         return <CreatureCard key={card.id} cardId={card.id} />;
       })}
     </div>

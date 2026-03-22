@@ -1,4 +1,5 @@
 import type { Tagged } from "type-fest";
+import type { z } from "zod";
 import type { Cards } from "./cards";
 
 export namespace Game {
@@ -9,6 +10,19 @@ export namespace Game {
   export type GameCard = {
     id: CardId;
     cardId: Cards.CardId; // The non-unique id of the card to match to the library
+  };
+
+  export type EffectHandlers = {
+    [TGroup in keyof Cards.EffectsTree]: {
+      [TName in keyof Cards.EffectsTree[TGroup]]: (
+        state: GameState,
+        args: Cards.EffectsTree[TGroup][TName] extends {
+          arguments: infer TArgs extends z.ZodTypeAny;
+        }
+          ? z.infer<TArgs>
+          : never,
+      ) => GameState | Promise<GameState>;
+    };
   };
 
   export type GameCreatureCard = GameCard & {

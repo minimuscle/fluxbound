@@ -10,7 +10,7 @@ export const FIRE_CARDS: Cards.CardDefinition = {
     cost: 0,
     price: 10,
     triggers: {
-      onTurnEnd: [{ id: "flux.generate", args: { element: "FIRE", amount: 1 } }],
+      onTurnEnd: [{ id: "flux.generate", args: { domain: "FIRE", amount: 1 } }],
     },
   },
 
