@@ -1,16 +1,27 @@
-import type { Cards, Game } from "@fluxbound/schema";
+import { CARD_LIBRARY, type Cards, type Game } from "@fluxbound/schema";
 import { effects } from "game/effects";
+import { getPlayer } from "./get-player";
 
 /**********************************************************************************************************
  *   FUNCTION START
  **********************************************************************************************************/
-export const runCardTrigger = async (state: Game.GameState, card: Cards.Card, triggerType: Cards.TriggerTypes): Promise<Game.GameState> => {
-  const triggers = card.triggers?.[triggerType];
+export const runCardTrigger = async (state: Game.GameState, cardId: Game.CardId, triggerType: Cards.TriggerTypes): Promise<Game.GameState> => {
+  const player = getPlayer(state, state.activePlayer);
+  const card = player.field.find((card) => card.id === cardId);
+  if (!card) return state;
+
+  const triggers = CARD_LIBRARY[card.cardId]?.triggers?.[triggerType];
   if (!triggers) return state;
+
   let newState = state;
   for (const trigger of triggers) {
-    const effect = trigger.id.split(".");
-    newState = await effects[effect[0] as keyof typeof effects][effect[1] as keyof (typeof effects)[keyof typeof effects]](newState, trigger.args);
+    const [group, name] = trigger.id.split(".") as any;
+    const effectHandler = getEffectHandler(group, name);
+    newState = await effectHandler(newState, trigger.args, cardId);
   }
   return newState;
+};
+
+const getEffectHandler = <TGroup extends keyof Game.EffectHandlers>(group: TGroup, name: keyof Game.EffectHandlers[TGroup]) => {
+  return effects[group][name];
 };

@@ -9,4 +9,4 @@ export const effects: Game.EffectHandlers = {
   stats: {
     modify,
   },
-};
+} as const;

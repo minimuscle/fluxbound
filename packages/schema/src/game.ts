@@ -10,12 +10,15 @@ export namespace Game {
   export type GameCard = {
     id: CardId;
     cardId: Cards.CardId; // The non-unique id of the card to match to the library
-  };
+  } & GameCreatureCard;
 
   export type EffectHandlers = {
     [TGroup in keyof Cards.EffectsTree]: {
       [TName in keyof Cards.EffectsTree[TGroup]]: (
-        state: GameState,
+        context: {
+          state: GameState;
+          cardId: CardId;
+        },
         args: Cards.EffectsTree[TGroup][TName] extends {
           arguments: infer TArgs extends z.ZodTypeAny;
         }
@@ -25,12 +28,12 @@ export namespace Game {
     };
   };
 
-  export type GameCreatureCard = GameCard & {
+  export type GameCreatureCard = Partial<{
     damage: number;
     health: number;
     maxHealth: number;
     activations: number;
-  };
+  }>;
 
   export type PlayerState = {
     id: PlayerId;

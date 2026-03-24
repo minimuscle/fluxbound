@@ -4,7 +4,7 @@ import { getPlayer } from "game/helpers/get-player";
 /**********************************************************************************************************
  *   FUNCTION START
  **********************************************************************************************************/
-export const modify: Game.EffectHandlers["stats"]["modify"] = (state, args) => {
+export const modify: Game.EffectHandlers["stats"]["modify"] = ({ state, cardId }, args) => {
   const { stats, cost } = args;
 
   const player = getPlayer(state, state.activePlayer);
@@ -14,9 +14,7 @@ export const modify: Game.EffectHandlers["stats"]["modify"] = (state, args) => {
   if (!foundCard) return state;
 
   for (const { stat, amount } of stats) {
-    if (stat in foundCard) {
-      foundCard[stat] += amount;
-    }
+    foundCard[stat] = (foundCard[stat] ?? 0) + amount;
   }
 
   return state;

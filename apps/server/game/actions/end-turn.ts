@@ -18,7 +18,7 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
   player.field.forEach(async (card) => {
     const cardData = CARD_LIBRARY[card.cardId];
     if (!cardData) return;
-    await runCardTrigger(state, cardData, "onTurnEnd");
+    await runCardTrigger(state, card.id, "onTurnEnd");
   });
 
   // Draw a card from the deck for the other player
