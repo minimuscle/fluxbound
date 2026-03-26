@@ -6,6 +6,7 @@ import { getOpponent } from "game/helpers/get-opponent";
 import { getPlayer } from "game/helpers/get-player";
 import { canPlayCard } from "game/rules/can-play-card";
 import { isPlayersTurn } from "game/rules/is-players-turn";
+import { activateCard } from "./actions/activate-card";
 import { discardCard } from "./actions/discard-card";
 
 /**********************************************************************************************************
@@ -49,15 +50,29 @@ export class GameEngine {
   public discardCard(cardId: Game.CardId): GameResponse {
     const turnValidation = isPlayersTurn(this.state, this.playerId);
     if (!turnValidation.ok) return turnValidation;
-    
+
     const player = getPlayer(this.state, this.playerId);
     const newState = discardCard(this.state, cardId);
     const newPlayerState = getPlayer(newState, this.playerId);
 
-    if (player.hand.length === newPlayerState.hand.length) return {ok: false, code: 'CARD_NOT_FOUND',message: 'The card you are trying to discard does not exist'};
+    if (player.hand.length === newPlayerState.hand.length)
+      return { ok: false, code: "CARD_NOT_FOUND", message: "The card you are trying to discard does not exist" };
     this.state = newState;
     return { ok: true };
+  }
 
+  // Activate a card
+  public activateCard(cardId: Game.CardId): GameResponse {
+    const turnValidation = isPlayersTurn(this.state, this.playerId);
+    if (!turnValidation.ok) return turnValidation;
+
+    const player = getPlayer(this.state, this.playerId);
+    const card = player.hand.find(({ id }) => id === cardId);
+    if (!card) return { ok: false, code: "CARD_NOT_FOUND", message: "The card you are trying to activate does not exist" };
+
+    this.state = activateCard(this.state, card.id);
+
+    return { ok: true };
   }
 
   // End the players turn
@@ -67,7 +82,7 @@ export class GameEngine {
 
     //Check if the player has too many cards (10) in hand
     const player = getPlayer(this.state, this.playerId);
-    if (player.hand.length >= 7) return {ok: false, code: 'TOO_MANY_CARDS_IN_HAND',message: 'You have too many cards in your hand'};
+    if (player.hand.length >= 7) return { ok: false, code: "TOO_MANY_CARDS_IN_HAND", message: "You have too many cards in your hand" };
     this.state = endTurn(this.state);
 
     return { ok: true };
@@ -77,7 +92,6 @@ export class GameEngine {
   public getPlayerView(): Readonly<Game.GameStateView> {
     const player = getPlayer(this.state, this.playerId);
     const opponent = getOpponent(this.state, this.playerId);
-    
 
     return {
       activePlayer: this.state.activePlayer,

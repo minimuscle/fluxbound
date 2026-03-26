@@ -28,3 +28,7 @@
     padding: 10px;
   }
 }
+.isActivatable {
+  box-shadow: 0 0 20px #6aff00;
+  cursor: pointer;
+}

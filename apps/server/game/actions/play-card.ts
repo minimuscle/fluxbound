@@ -16,7 +16,17 @@ export function playACard(state: Game.GameState, cardId: Game.CardId): Game.Game
   const gameCard = CARD_LIBRARY[playedCard.cardId];
   if (!gameCard) return state;
 
-  player.field.push(playedCard);
+  let creatureCard: Game.GameCard = playedCard;
+  if (gameCard.type === "CREATURE") {
+    creatureCard = {
+      ...playedCard,
+      damage: gameCard.damage,
+      health: gameCard.health,
+      activations: gameCard.activations,
+    };
+  }
+
+  player.field.push(creatureCard);
 
   // Update the flux of the player
   player.flux[gameCard.domain] -= gameCard.cost;

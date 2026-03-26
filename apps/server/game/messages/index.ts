@@ -23,13 +23,15 @@ export function message(
       return game.startSolo(server, ws);
     case "game/play-card":
       return game.playCard(server, ws, parsed.cardId);
+    case "game/activate-card":
+      return game.activateCard(server, ws, parsed.cardId);
     case "game/end-turn":
       return game.endTurn(server, ws);
     case "game/discard-card":
       return game.discardCard(server, ws, parsed.cardId);
 
     default:
-      console.log("Received unknown message", parsed);
+      console.error("Received unknown message", parsed);
       break;
   }
 }
