@@ -62,15 +62,16 @@ export class GameEngine {
   }
 
   // Activate a card
-  public activateCard(cardId: Game.CardId): GameResponse {
+  public async activateCard(cardId: Game.CardId): Promise<GameResponse> {
     const turnValidation = isPlayersTurn(this.state, this.playerId);
     if (!turnValidation.ok) return turnValidation;
 
     const player = getPlayer(this.state, this.playerId);
-    const card = player.hand.find(({ id }) => id === cardId);
+    const card = player.field.find(({ id }) => id === cardId);
     if (!card) return { ok: false, code: "CARD_NOT_FOUND", message: "The card you are trying to activate does not exist" };
+    if (card.activations === 0) return { ok: false, code: "CARD_NOT_ACTIVATABLE", message: "The card you are trying to activate is not activable" };
 
-    this.state = activateCard(this.state, card.id);
+    this.state = await activateCard(this.state, card.id);
 
     return { ok: true };
   }

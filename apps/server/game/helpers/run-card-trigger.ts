@@ -17,7 +17,7 @@ export const runCardTrigger = async (state: Game.GameState, cardId: Game.CardId,
   for (const trigger of triggers) {
     const [group, name] = trigger.id.split(".") as any;
     const effectHandler = getEffectHandler(group, name);
-    newState = await effectHandler(newState, trigger.args, cardId);
+    newState = await effectHandler({ state: newState, cardId }, trigger.args, cardId);
   }
   return newState;
 };

@@ -22,7 +22,7 @@ export function playACard(state: Game.GameState, cardId: Game.CardId): Game.Game
       ...playedCard,
       damage: gameCard.damage,
       health: gameCard.health,
-      activations: gameCard.activations,
+      activations: 0,
     };
   }
 
