@@ -42,8 +42,8 @@ export const FIRE_CARDS: Cards.CardDefinition = {
           id: "stats.modify",
           args: {
             stats: [
-              { stat: "damage", amount: 1 },
-              { stat: "health", amount: 1 },
+              { stat: "damage", amount: 2 },
+              { stat: "health", amount: 2 },
             ],
             cost: {
               domain: "FIRE",

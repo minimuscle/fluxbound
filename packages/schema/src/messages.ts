@@ -2,6 +2,10 @@ import z from "zod";
 import { CODES } from "./codes";
 import type { Game } from "./game";
 
+type ServerGameState = typeof process.env.DEBUG extends "true"
+  ? Game.GameState
+  : Game.GameStateView;
+
 export const clientLobby = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("lobby/create"),
@@ -55,7 +59,7 @@ export type ClientGame = z.infer<typeof clientGame>;
 export const serverGame = z.discriminatedUnion("type", [
   z.object({
     type: z.enum(["game/started", "game/turnEnded", "game/stateUpdated"]),
-    state: z.custom<Game.GameStateView>(),
+    state: z.custom<ServerGameState>(),
   }),
   z.object({
     type: z.literal("game/error"),

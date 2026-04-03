@@ -1,3 +1,4 @@
+import type { Game } from "@fluxbound/schema";
 import { ClickAwayListener } from "@mui/material";
 import classNames from "classnames";
 import { Card } from "components/Card";
@@ -24,6 +25,13 @@ export const Hand = () => {
   /***** RENDER HELPERS *****/
   const renderCards = () => {
     if (stage === "ENEMY") {
+      if (import.meta.env.VITE_DEBUG === "true") {
+        // This should only be possible in debug mode, otherwise it will crash
+        const enemy = player as unknown as Game.PlayerState;
+        return enemy.hand.map((card, index) => {
+          return <Card key={index} card={card} />;
+        });
+      }
       return Array.from({ length: player.handCount }).map((_, id) => <EmptyCard key={id} />);
     }
     return player.hand.map((card, index) => {

@@ -23,7 +23,6 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
   const nextState = setPlayerState(state, player.id, {
     field: nextPlayerField,
   });
-  // Do any damage from creatures / weapons in the field
 
   // Do any damage from other spell affects
 
@@ -39,6 +38,7 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
   const nextOpponentDeckandHand = drawCard(opponent.deck, 1);
   const nextTurnState = setPlayerState(nextState, opponent.id, {
     ...opponent,
+    health: opponent.health - player.field.reduce((acc, card) => acc + (card.damage ?? 0), 0),
     deck: nextOpponentDeckandHand.deck,
     hand: [...opponent.hand, ...nextOpponentDeckandHand.hand],
   });

@@ -90,9 +90,14 @@ export class GameEngine {
   }
 
   // Get the player view of the game state hiding opponents private information
-  public getPlayerView(): Readonly<Game.GameStateView> {
+  public getPlayerView(): Readonly<Game.GameStateView | Game.GameState> {
     const player = getPlayer(this.state, this.playerId);
     const opponent = getOpponent(this.state, this.playerId);
+
+    const debugFields = {
+      deck: opponent.deck,
+      hand: opponent.hand,
+    };
 
     return {
       activePlayer: this.state.activePlayer,
@@ -107,6 +112,7 @@ export class GameEngine {
         id: opponent.id,
         deckCount: opponent.deck.length,
         handCount: opponent.hand.length,
+        ...(process.env.DEBUG ? debugFields : {}),
       },
     };
   }
