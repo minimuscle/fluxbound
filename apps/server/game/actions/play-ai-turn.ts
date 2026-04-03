@@ -1,6 +1,7 @@
 import { CARD_LIBRARY, type Game } from "@fluxbound/schema";
 import { endTurn } from "game/actions/end-turn";
 import { getPlayer } from "game/helpers/get-player";
+import { activateCard } from "./activate-card";
 import { playACard } from "./play-card";
 
 /**********************************************************************************************************
@@ -23,6 +24,17 @@ export const playAITurn = (state: Game.GameState): Game.GameState => {
     if (player.flux[cardData.domain] < cardData.cost) return;
 
     state = playACard(state, card.id);
+  });
+
+  // Activate any cards in the field that can be activated
+  player.field.forEach(async (card) => {
+    const cardData = CARD_LIBRARY[card.cardId];
+    if (!cardData) return;
+    if ("activations" in card) {
+      if (!card.activations) return;
+      card.activations--;
+      state = await activateCard(state, card.id);
+    }
   });
 
   const finalState = endTurn(state);
