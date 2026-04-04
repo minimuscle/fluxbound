@@ -91,14 +91,14 @@ export const game = {
     return void server.publish(`player:${ws.data.userId}`, GameResponse({ type: "game/stateUpdated", state: engine.getPlayerView() }));
   },
 
-  endTurn: (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>) => {
+  endTurn: async (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>) => {
     if (!ws.data.roomId || !gameStatesByRoomId.has(ws.data.roomId)) {
       return void ws.send(GameResponse({ type: "game/error", ok: false, code: "NO_ROOM_ID", message: "No Room ID" }));
     }
     const gameState = gameStatesByRoomId.get(ws.data.roomId)!;
     const engine = new GameEngine(gameState, ws.data.userId);
 
-    const result = engine.endTurn();
+    const result = await engine.endTurn();
     if (!result.ok) return void ws.send(GameResponse({ type: "game/error", ...result }));
 
     server.publish(`player:${ws.data.userId}`, GameResponse({ type: "game/turnEnded", state: engine.getPlayerView() }));

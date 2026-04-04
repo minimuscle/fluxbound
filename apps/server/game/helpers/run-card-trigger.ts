@@ -5,7 +5,12 @@ import { getPlayer } from "./get-player";
 /**********************************************************************************************************
  *   FUNCTION START
  **********************************************************************************************************/
-export const runCardTrigger = async (state: Game.GameState, cardId: Game.CardId, triggerType: Cards.TriggerTypes): Promise<Game.GameState> => {
+export const runCardTrigger = async (
+  state: Game.GameState,
+  cardId: Game.CardId,
+  triggerType: Cards.TriggerTypes,
+  gameCardId?: Game.CardId,
+): Promise<Game.GameState> => {
   const player = getPlayer(state, state.activePlayer);
   const card = player.field.find((card) => card.id === cardId);
   if (!card) return state;
@@ -17,7 +22,7 @@ export const runCardTrigger = async (state: Game.GameState, cardId: Game.CardId,
   for (const trigger of triggers) {
     const [group, name] = trigger.id.split(".") as any;
     const effectHandler = getEffectHandler(group, name);
-    newState = await effectHandler({ state: newState, cardId }, trigger.args, cardId);
+    newState = await effectHandler({ state: newState, cardId, gameCardId }, trigger.args, cardId);
   }
   return newState;
 };

@@ -27,5 +27,10 @@ export const EFFECTS = {
         }),
       }),
     }),
+    reduceDamage: defineEffect({
+      arguments: z.object({
+        amount: z.number(),
+      }),
+    }),
   },
 } as const;

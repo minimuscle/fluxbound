@@ -19,7 +19,5 @@ export const modify: Game.EffectHandlers["stats"]["modify"] = ({ state, cardId }
   }
   foundCard.activations = (foundCard.activations ?? 1) - 1;
 
-  console.log(foundCard);
-
   return state;
 };

@@ -76,7 +76,25 @@ export const FIRE_CARDS: Cards.CardDefinition = {
     description: "Reduces enemies attacks by 1",
     cost: 5,
     price: 60,
-    triggers: {},
+    triggers: {
+      onAttacked: [
+        {
+          id: "stats.modify",
+          args: {
+            cost: {
+              domain: "FIRE",
+              amount: 0,
+            },
+            stats: [
+              {
+                stat: "damage",
+                amount: -1,
+              },
+            ],
+          },
+        },
+      ],
+    },
   },
 
   /***** WEAPON - 1 *****/

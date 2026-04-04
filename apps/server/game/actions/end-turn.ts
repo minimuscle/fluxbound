@@ -1,4 +1,5 @@
 import { CARD_LIBRARY, type Game } from "@fluxbound/schema";
+import { calculateDamage } from "game/helpers/calculate-damage";
 import { drawCard } from "game/helpers/draw-card";
 import { getOpponent } from "game/helpers/get-opponent";
 import { getPlayer } from "game/helpers/get-player";
@@ -8,7 +9,7 @@ import { setPlayerState } from "game/helpers/set-player-state";
 /**********************************************************************************************************
  *   FUNCTION START
  **********************************************************************************************************/
-export const endTurn = (state: Game.GameState): Game.GameState => {
+export const endTurn = async (state: Game.GameState): Promise<Game.GameState> => {
   const player = getPlayer(state, state.activePlayer);
   const nextPlayerField = player.field.map((card) => {
     const cardData = CARD_LIBRARY[card.cardId];
@@ -36,9 +37,12 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
   // Draw a card from the deck for the other player
   const opponent = getOpponent(nextState);
   const nextOpponentDeckandHand = drawCard(opponent.deck, 1);
+  const nextStateHealth = await calculateDamage(nextState);
+  const nextOpponentHealth = getOpponent(nextStateHealth).health;
+
   const nextTurnState = setPlayerState(nextState, opponent.id, {
     ...opponent,
-    health: opponent.health - player.field.reduce((acc, card) => acc + (card.damage ?? 0), 0),
+    health: nextOpponentHealth,
     deck: nextOpponentDeckandHand.deck,
     hand: [...opponent.hand, ...nextOpponentDeckandHand.hand],
   });

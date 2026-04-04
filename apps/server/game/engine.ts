@@ -77,14 +77,14 @@ export class GameEngine {
   }
 
   // End the players turn
-  public endTurn(): GameResponse {
+  public async endTurn(): Promise<GameResponse> {
     const turnValidation = isPlayersTurn(this.state, this.playerId);
     if (!turnValidation.ok) return turnValidation;
 
     //Check if the player has too many cards (10) in hand
     const player = getPlayer(this.state, this.playerId);
     if (player.hand.length >= 7) return { ok: false, code: "TOO_MANY_CARDS_IN_HAND", message: "You have too many cards in your hand" };
-    this.state = endTurn(this.state);
+    this.state = await endTurn(this.state);
 
     return { ok: true };
   }
