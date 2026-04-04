@@ -31,7 +31,6 @@ export const AttunementArea = () => {
           <button
             disabled={activePlayer !== player.id}
             onClick={() => {
-              console.log("sending end turn");
               ws?.send({ type: "game/end-turn" });
             }}
             className={styles.endTurn}

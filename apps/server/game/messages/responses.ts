@@ -23,7 +23,7 @@ export const game = {
       healthMax: 100,
       attunement: "FIRE",
       flux: {
-        FIRE: 10,
+        FIRE: 5,
         WATER: 0,
         EARTH: 0,
         AIR: 0,
@@ -44,7 +44,7 @@ export const game = {
       healthMax: 100,
       attunement: "FIRE",
       flux: {
-        FIRE: 0,
+        FIRE: 2,
         WATER: 0,
         EARTH: 0,
         AIR: 0,

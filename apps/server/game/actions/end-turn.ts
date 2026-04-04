@@ -1,8 +1,8 @@
 import { CARD_LIBRARY, type Game } from "@fluxbound/schema";
+import { calculateDamage } from "game/helpers/calculate-damage";
 import { drawCard } from "game/helpers/draw-card";
 import { getOpponent } from "game/helpers/get-opponent";
 import { getPlayer } from "game/helpers/get-player";
-import { runCardTrigger } from "game/helpers/run-card-trigger";
 import { setPlayerState } from "game/helpers/set-player-state";
 
 /**********************************************************************************************************
@@ -26,18 +26,18 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
 
   // Do any damage from other spell affects
 
-  // Trigger any cards in play with the onTurnEnd trigger
-  player.field.forEach(async (card) => await runCardTrigger({ state, cardId: card.id }, "onTurnEnd"));
-
   // Draw a card from the deck for the other player
   const opponent = getOpponent(nextState);
   const nextOpponentDeckandHand = drawCard(opponent.deck, 1);
-  // const nextStateHealth = await calculateDamage(nextState);
-  // const nextOpponentHealth = getOpponent(nextStateHealth).health;
+  const nextStateHealth = calculateDamage(nextState);
+  const nextOpponentHealth = getOpponent(nextStateHealth).health;
+
+  // Trigger any cards in play with the onTurnEnd trigger
+  // player.field.forEach(async (card) => await runCardTrigger({ state, cardId: card.id }, "onTurnEnd"));
 
   const nextTurnState = setPlayerState(nextState, opponent.id, {
     ...opponent,
-    // health: nextOpponentHealth,
+    health: nextOpponentHealth,
     deck: nextOpponentDeckandHand.deck,
     hand: [...opponent.hand, ...nextOpponentDeckandHand.hand],
   });

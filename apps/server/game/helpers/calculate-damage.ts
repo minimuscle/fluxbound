@@ -6,7 +6,7 @@ import { runCardTrigger } from "./run-card-trigger";
 /**********************************************************************************************************
  *   FUNCTION START
  **********************************************************************************************************/
-export const calculateDamage = async (state: Game.GameState): Promise<Game.GameState> => {
+export const calculateDamage = (state: Game.GameState): Game.GameState => {
   const player = getPlayer(state, state.activePlayer);
   const opponent = getOpponent(state, state.activePlayer);
 
@@ -19,8 +19,7 @@ export const calculateDamage = async (state: Game.GameState): Promise<Game.GameS
   for (const card of damageCards) {
     // If the opponent has a shield, reduce the damage by the shield's value
     if (opponentShield) {
-      const newState = await runCardTrigger(state, opponentShield.id, "onAttacked", card.id);
-      console.log(newState);
+      const newState = runCardTrigger({ state, cardId: opponentShield.id, target: card.id, playerId: opponent.id }, "onAttacked");
       const newPlayer = getPlayer(newState, state.activePlayer);
 
       opponent.health = opponent.health - (newPlayer.field.find(({ id }) => id === card.id)?.damage ?? 0);

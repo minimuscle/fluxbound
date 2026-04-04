@@ -5,16 +5,17 @@ import { getPlayer } from "./get-player";
 /**********************************************************************************************************
  *   FUNCTION START
  **********************************************************************************************************/
-export const runCardTrigger = async (
+export const runCardTrigger = (
   context: {
     state: Game.GameState;
     cardId: Game.CardId;
     target?: Game.CardId;
+    playerId?: Game.PlayerId;
   },
   triggerType: Cards.TriggerTypes,
-): Promise<Game.GameState> => {
-  const { state, cardId, target } = context;
-  const player = getPlayer(state, state.activePlayer);
+): Game.GameState => {
+  const { state, cardId, target, playerId } = context;
+  const player = getPlayer(state, playerId ?? state.activePlayer);
   const card = player.field.find((card) => card.id === cardId);
   if (!card) return state;
 
