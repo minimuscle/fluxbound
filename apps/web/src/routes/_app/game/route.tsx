@@ -85,6 +85,7 @@ function RouteComponent() {
       }
     };
     websocket.onclose = () => {
+      setRoomId(null);
       return navigate({ to: "/game/lobby" });
     };
     return () => {

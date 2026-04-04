@@ -1,10 +1,10 @@
-import type { Game } from "@fluxbound/schema";
+import type { Effects } from "@fluxbound/schema";
 import { getPlayer } from "game/helpers/get-player";
 
 /**********************************************************************************************************
  *   FUNCTION START
  **********************************************************************************************************/
-export const modify: Game.EffectHandlers["stats"]["modify"] = ({ state, cardId }, args): Game.GameState => {
+export const modify: Effects.EffectHandler["stats"]["modify"] = ({ state, cardId }, args) => {
   const { stats, cost } = args;
 
   const player = getPlayer(state, state.activePlayer);
@@ -17,7 +17,6 @@ export const modify: Game.EffectHandlers["stats"]["modify"] = ({ state, cardId }
   for (const { stat, amount } of stats) {
     foundCard[stat] = (foundCard[stat] ?? 0) + amount;
   }
-  foundCard.activations = (foundCard.activations ?? 1) - 1;
 
   return state;
 };

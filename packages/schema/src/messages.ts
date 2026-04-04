@@ -2,9 +2,7 @@ import z from "zod";
 import { CODES } from "./codes";
 import type { Game } from "./game";
 
-type ServerGameState = typeof process.env.DEBUG extends "true"
-  ? Game.GameState
-  : Game.GameStateView;
+type ServerGameState = typeof process.env.DEBUG extends "true" ? Game.GameState : Game.GameStateView;
 
 export const clientLobby = z.discriminatedUnion("type", [
   z.object({

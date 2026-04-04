@@ -1,4 +1,4 @@
-import { CARD_LIBRARY, type Cards, type Game } from "@fluxbound/schema";
+import { CARD_LIBRARY, type Cards, type Effects, type Game } from "@fluxbound/schema";
 import { effects } from "game/effects";
 import { getPlayer } from "./get-player";
 
@@ -6,11 +6,14 @@ import { getPlayer } from "./get-player";
  *   FUNCTION START
  **********************************************************************************************************/
 export const runCardTrigger = async (
-  state: Game.GameState,
-  cardId: Game.CardId,
+  context: {
+    state: Game.GameState;
+    cardId: Game.CardId;
+    target?: Game.CardId;
+  },
   triggerType: Cards.TriggerTypes,
-  gameCardId?: Game.CardId,
 ): Promise<Game.GameState> => {
+  const { state, cardId, target } = context;
   const player = getPlayer(state, state.activePlayer);
   const card = player.field.find((card) => card.id === cardId);
   if (!card) return state;
@@ -20,13 +23,22 @@ export const runCardTrigger = async (
 
   let newState = state;
   for (const trigger of triggers) {
-    const [group, name] = trigger.id.split(".") as any;
-    const effectHandler = getEffectHandler(group, name);
-    newState = await effectHandler({ state: newState, cardId, gameCardId }, trigger.args, cardId);
+    const [effectGroup, effectName] = trigger.id.split(".") as [Effects.EffectGroups, string];
+    runEffect(effects, effectGroup, effectName as keyof Effects.Effect[typeof effectGroup] & string, { state, cardId, target }, trigger.args);
   }
   return newState;
 };
 
-const getEffectHandler = <TGroup extends keyof Game.EffectHandlers>(group: TGroup, name: keyof Game.EffectHandlers[TGroup]) => {
-  return effects[group][name];
-};
+function runEffect<TGroup extends Effects.EffectGroups, TName extends keyof Effects.Effect[TGroup] & string>(
+  effects: Effects.EffectHandler,
+  effectGroup: TGroup,
+  effectName: TName,
+  context: {
+    state: Game.GameState;
+    cardId: Game.CardId;
+    target?: Game.CardId;
+  },
+  args: Effects.EffectArgumentsByParts<TGroup, TName>,
+): Game.GameState {
+  return effects[effectGroup][effectName](context, args);
+}

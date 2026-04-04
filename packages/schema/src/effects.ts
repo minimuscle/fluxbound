@@ -1,36 +1,58 @@
 import { z } from "zod";
 import type { Cards } from "./cards";
+import type { Game } from "./game";
 
-// oxlint-disable-next-line typescript/no-empty-object-type
-export const defineEffect = <TArgumentSchema extends z.ZodTypeAny, TMetadata extends Record<string, unknown> = {}>(
+export const defineEffect = <TArgumentSchema extends z.ZodTypeAny, TMetadata extends Record<string, unknown>>(
   config: {
-    arguments: TArgumentSchema;
+    args: TArgumentSchema;
   } & TMetadata,
 ) => config;
 
 export const EFFECTS = {
   flux: {
     generate: defineEffect({
-      arguments: z.object({
+      args: z.object({
         domain: z.custom<Cards.Domain>(),
         amount: z.number(),
       }),
     }),
   },
   stats: {
-    modify: defineEffect({
-      arguments: z.object({
+    modify: {
+      args: z.object({
         stats: z.array(z.object({ stat: z.enum(["health", "damage"]), amount: z.number() })),
         cost: z.object({
           domain: z.custom<Cards.Domain>(),
           amount: z.number(),
         }),
       }),
-    }),
-    reduceDamage: defineEffect({
-      arguments: z.object({
-        amount: z.number(),
-      }),
-    }),
+    },
   },
 } as const;
+
+export namespace Effects {
+  export type Effect = typeof EFFECTS;
+  export type EffectGroups = keyof Effect;
+  export type EffectNames = {
+    [TGroup in EffectGroups]: `${TGroup}.${keyof Effect[TGroup] & string}`;
+  }[keyof Effect];
+
+  export type EffectHandler = {
+    [TGroup in EffectGroups]: {
+      [TName in keyof Effect[TGroup] & string]: (
+        context: {
+          state: Game.GameState;
+          cardId: Game.CardId;
+          target?: Game.CardId;
+        },
+        args: Effect[TGroup][TName] extends { args: infer TArgs extends z.ZodTypeAny } ? z.infer<TArgs> : never,
+      ) => Game.GameState;
+    };
+  };
+
+  export type EffectArgumentsByParts<TGroup extends EffectGroups, TName extends keyof Effect[TGroup] & string> = Effect[TGroup][TName] extends {
+    args: infer TArgs extends z.ZodTypeAny;
+  }
+    ? z.infer<TArgs>
+    : never;
+}

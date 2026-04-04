@@ -5,7 +5,7 @@ import { getPlayer } from "game/helpers/get-player";
 /**********************************************************************************************************
  *   FUNCTION START
  **********************************************************************************************************/
-export const reduceDamage: Game.EffectHandlers["stats"]["reduceDamage"] = ({ state, cardId, gameCardId }, args): Game.GameState => {
+export const reduceDamage: Game.EffectHandlers["stats"]["reduceDamage"] = ({ state, cardId, target }, args): Game.GameState => {
   const { amount } = args;
 
   const player = getPlayer(state, state.activePlayer);
@@ -14,7 +14,7 @@ export const reduceDamage: Game.EffectHandlers["stats"]["reduceDamage"] = ({ sta
   const foundReduction = opponent.field.find((card) => card.id === cardId);
   if (!foundReduction) return state;
 
-  const foundCard = player.field.find((card) => card.id === gameCardId);
+  const foundCard = player.field.find((card) => card.id === target);
   if (!foundCard) return state;
 
   // Reduce the damage of foundCard by the amount, and if it is less than 0, set it to 0

@@ -11,5 +11,6 @@ export const activateCard = async (state: Game.GameState, cardId: Game.CardId): 
   const card = player.field.find((card) => card.id === cardId);
   if (!card) return state;
 
-  return runCardTrigger(state, card.id, "onActivated");
+  card.activations = (card.activations ?? 1) - 1;
+  return runCardTrigger({ state, cardId }, "onActivated");
 };
