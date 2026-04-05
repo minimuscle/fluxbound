@@ -3,6 +3,7 @@ import { calculateDamage } from "game/helpers/calculate-damage";
 import { drawCard } from "game/helpers/draw-card";
 import { getOpponent } from "game/helpers/get-opponent";
 import { getPlayer } from "game/helpers/get-player";
+import { runCardTrigger } from "game/helpers/run-card-trigger";
 import { setPlayerState } from "game/helpers/set-player-state";
 
 /**********************************************************************************************************
@@ -33,7 +34,7 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
   const nextOpponentHealth = getOpponent(nextStateHealth).health;
 
   // Trigger any cards in play with the onTurnEnd trigger
-  // player.field.forEach(async (card) => await runCardTrigger({ state, cardId: card.id }, "onTurnEnd"));
+  player.field.forEach(async (card) => await runCardTrigger({ state, cardId: card.id }, "onTurnEnd"));
 
   const nextTurnState = setPlayerState(nextState, opponent.id, {
     ...opponent,
@@ -49,6 +50,7 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
     turn[1] = "2";
   } else {
     turn[0] = String(Number(turn[0]) + 1);
+    turn[1] = "1";
   }
   return {
     ...nextTurnState,

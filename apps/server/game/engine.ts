@@ -42,6 +42,7 @@ export class GameEngine {
 
   // Play the turn for the AI
   public playAITurn(): GameResponse {
+    console.log("playing AI turn");
     this.state = playAITurn(this.state);
     return { ok: true };
   }

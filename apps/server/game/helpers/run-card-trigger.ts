@@ -24,8 +24,15 @@ export const runCardTrigger = (
 
   let newState = state;
   for (const trigger of triggers) {
+    console.log(playerId, trigger);
     const [effectGroup, effectName] = trigger.id.split(".") as [Effects.EffectGroups, string];
-    runEffect(effects, effectGroup, effectName as keyof Effects.Effect[typeof effectGroup] & string, { state, cardId, target }, trigger.args);
+    newState = runEffect(
+      effects,
+      effectGroup,
+      effectName as keyof Effects.Effect[typeof effectGroup] & string,
+      { state, cardId, target, playerId },
+      trigger.args,
+    );
   }
   return newState;
 };
@@ -38,6 +45,7 @@ function runEffect<TGroup extends Effects.EffectGroups, TName extends keyof Effe
     state: Game.GameState;
     cardId: Game.CardId;
     target?: Game.CardId;
+    playerId?: Game.PlayerId;
   },
   args: Effects.EffectArgumentsByParts<TGroup, TName>,
 ): Game.GameState {

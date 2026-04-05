@@ -79,18 +79,9 @@ export const FIRE_CARDS: Cards.CardDefinition = {
     triggers: {
       onAttacked: [
         {
-          id: "stats.modify",
+          id: "stats.reduceDamage",
           args: {
-            cost: {
-              domain: "FIRE",
-              amount: 0,
-            },
-            stats: [
-              {
-                stat: "damage",
-                amount: -1,
-              },
-            ],
+            amount: 1, // Reduces damage by 1
           },
         },
       ],

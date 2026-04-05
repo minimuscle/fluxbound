@@ -16,10 +16,15 @@ export const calculateDamage = (state: Game.GameState): Game.GameState => {
   // Check if the opponent has a shield
   const opponentShield = opponent.field.find((card) => CARD_LIBRARY[card.cardId]?.type === "SHIELD");
 
+  console.log("my player id: ", player.id);
+
   for (const card of damageCards) {
     // If the opponent has a shield, reduce the damage by the shield's value
     if (opponentShield) {
-      const newState = runCardTrigger({ state, cardId: opponentShield.id, target: card.id, playerId: opponent.id }, "onAttacked");
+      const newState = runCardTrigger(
+        { state: structuredClone(state), cardId: opponentShield.id, target: card.id, playerId: opponent.id },
+        "onAttacked",
+      );
       const newPlayer = getPlayer(newState, state.activePlayer);
 
       opponent.health = opponent.health - (newPlayer.field.find(({ id }) => id === card.id)?.damage ?? 0);
