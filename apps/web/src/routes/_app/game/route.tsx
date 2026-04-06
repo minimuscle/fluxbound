@@ -1,8 +1,8 @@
 import type { CODES, Game, ServerGame, ServerLobby } from "@fluxbound/schema";
 import { useQuery } from "@tanstack/react-query";
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
 import { user } from "api/user";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createTypedWebSocketSender } from "utils/functions";
 import { GameContext, GameErrorContext, WebSocketContext } from "./-components/context";
 
@@ -10,13 +10,23 @@ export const Route = createFileRoute("/_app/game")({
   component: RouteComponent,
 });
 
+const normalizePathname = (pathname: string) => {
+  if (pathname === "/") return pathname;
+  return pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+};
+
 function RouteComponent() {
   /***** HOOKS *****/
   const [websocketState, setWebsocket] = useState<ReturnType<typeof createTypedWebSocketSender> | null>(null);
   const [gameState, setGameState] = useState<Game.GameStateView | null>(null);
   const [gameError, setGameError] = useState<(typeof CODES)[number] | null>(null);
   const [roomId, setRoomId] = useState<Game.RoomId | null>(null);
+  const isIntentionalClose = useRef(false);
   const navigate = Route.useNavigate();
+  const pathname = useRouterState({
+    select: (state) => normalizePathname(state.location.pathname),
+  });
+  const isSinglePlayerRoute = pathname === "/game/lobby/single";
 
   const { data: userData } = useQuery({
     queryKey: ["user"],
@@ -25,6 +35,13 @@ function RouteComponent() {
 
   /***** EFFECTS *****/
   useEffect(() => {
+    if (isSinglePlayerRoute) {
+      setWebsocket(null);
+      setRoomId(null);
+      return;
+    }
+
+    isIntentionalClose.current = false;
     const accessToken = localStorage.getItem("access_token");
     if (!accessToken) {
       console.error("Missing access token for websocket auth");
@@ -86,13 +103,15 @@ function RouteComponent() {
     };
     websocket.onclose = () => {
       setRoomId(null);
+      if (isIntentionalClose.current) return;
       return navigate({ to: "/game/lobby" });
     };
     return () => {
+      isIntentionalClose.current = true;
       websocket.close();
       setWebsocket(null);
     };
-  }, [navigate]);
+  }, [isSinglePlayerRoute, navigate]);
 
   const context: WebSocketContext = {
     websocket: websocketState,

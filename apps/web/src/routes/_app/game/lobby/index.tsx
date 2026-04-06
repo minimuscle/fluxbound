@@ -16,11 +16,21 @@ function RouteComponent() {
   const context = useContext(WebSocketContext);
   const ws = context?.websocket;
   const roomId = context?.roomId;
+  const navigate = Route.useNavigate();
 
   /***** RENDER *****/
   if (!ws) return null;
   return (
     <div>
+      <Button
+        onClick={() =>
+          navigate({
+            to: "/",
+          })
+        }
+      >
+        Back to Main Menu
+      </Button>
       <Button onClick={() => ws.send({ type: "game/startSolo" })}>Start Solo Game</Button>
       <h1>Lobby</h1>
       <h2>Room ID: {roomId}</h2>
