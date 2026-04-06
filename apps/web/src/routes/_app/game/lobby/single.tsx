@@ -9,7 +9,7 @@ function RouteComponent() {
   return (
     <div>
       <h1>Single Player Game</h1>
-      <SinglePlayerSelection level={0} />
+      <SinglePlayerSelection />
     </div>
   );
 }
