@@ -20,10 +20,18 @@ function RouteComponent() {
       <div className={styles.circles} />
       <img src={Logo} alt="" height={300} className={styles.logo} />
       <Button onClick={() => navigate({ to: "/game/lobby/single" })}>New Game</Button>
-      <Button onClick={() => navigate({ to: "/game/lobby" })}>Multiplayer</Button>
-      <Button onClick={() => navigate({ to: "/game/lobby" })}>Cards</Button>
-      <Button onClick={() => navigate({ to: "/game/lobby" })}>Settings</Button>
-      <Button onClick={() => navigate({ to: "/game/lobby" })}>Quit</Button>
+      <Button disabled onClick={() => navigate({ to: "/game/lobby" })}>
+        Multiplayer
+      </Button>
+      <Button disabled onClick={() => navigate({ to: "/game/lobby" })}>
+        Cards
+      </Button>
+      <Button disabled onClick={() => navigate({ to: "/game/lobby" })}>
+        Settings
+      </Button>
+      <Button disabled onClick={() => navigate({ to: "/game/lobby" })}>
+        Quit
+      </Button>
       <div className={styles.buildNumber}>{buildNumber}</div>
     </div>
   );

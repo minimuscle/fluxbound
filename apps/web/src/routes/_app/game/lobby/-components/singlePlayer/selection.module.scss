@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 500px;
+  border: 1px solid #fefefe;
+
+  &__selected {
+    background: hsla(0, 0%, 100%, 0.1);
+  }
+}
+
+.beginButton {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #fefefe;
+  background: hsla(0, 0%, 100%, 0.1);
+}

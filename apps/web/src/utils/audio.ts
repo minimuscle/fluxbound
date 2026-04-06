@@ -65,10 +65,15 @@ export class AudioManager {
   }
 
   public setMusicMuted(muted: boolean) {
+    console.log("set music muted", muted, this.backgroundMusic);
     this.mutedMusic = muted;
     if (this.backgroundMusic) {
       this.backgroundMusic.volume = muted ? 0 : this.musicVolume;
     }
+  }
+
+  public get musicMuted() {
+    return this.mutedMusic;
   }
 
   public setSoundVolume(volume: number) {
@@ -79,10 +84,12 @@ export class AudioManager {
     this.mutedSound = muted;
   }
 
+  public get soundMuted() {
+    return this.mutedSound;
+  }
+
   public playSoundEffect(name: keyof typeof this.soundEffects) {
     if (!this.soundEffects[name] || this.mutedSound) return;
-
-    console.log("stopping sound effect", name, this.soundEffects[name]);
     const audio = new Audio(this.soundEffects[name]);
     audio.volume = this.soundVolume;
     audio.play();

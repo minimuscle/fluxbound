@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { user } from "api/user";
 import { LoginForm } from "pages/main/login";
+import { audioManager } from "utils/audio";
 import "../App.scss";
 
 const RootLayout = () => {
@@ -14,6 +15,9 @@ const RootLayout = () => {
   /***** RENDER *****/
   return (
     <div className="MainContainer">
+      <button className="MainContainer__audio" onClick={() => audioManager.setMusicMuted(!audioManager.musicMuted)}>
+        MUTE
+      </button>
       {userData ? <Outlet /> : <LoginForm />}
       {/* <TanStackRouterDevtools /> */}
     </div>

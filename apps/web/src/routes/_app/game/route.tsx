@@ -1,6 +1,6 @@
 import type { CODES, Game, ServerGame, ServerLobby } from "@fluxbound/schema";
 import { useQuery } from "@tanstack/react-query";
-import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { user } from "api/user";
 import { useEffect, useRef, useState } from "react";
 import { createTypedWebSocketSender } from "utils/functions";
@@ -23,10 +23,6 @@ function RouteComponent() {
   const [roomId, setRoomId] = useState<Game.RoomId | null>(null);
   const isIntentionalClose = useRef(false);
   const navigate = Route.useNavigate();
-  const pathname = useRouterState({
-    select: (state) => normalizePathname(state.location.pathname),
-  });
-  const isSinglePlayerRoute = pathname === "/game/lobby/single";
 
   const { data: userData } = useQuery({
     queryKey: ["user"],
@@ -35,12 +31,6 @@ function RouteComponent() {
 
   /***** EFFECTS *****/
   useEffect(() => {
-    if (isSinglePlayerRoute) {
-      setWebsocket(null);
-      setRoomId(null);
-      return;
-    }
-
     isIntentionalClose.current = false;
     const accessToken = localStorage.getItem("access_token");
     if (!accessToken) {
@@ -104,14 +94,14 @@ function RouteComponent() {
     websocket.onclose = () => {
       setRoomId(null);
       if (isIntentionalClose.current) return;
-      return navigate({ to: "/game/lobby" });
+      // return navigate({ to: "/game/lobby" });
     };
     return () => {
       isIntentionalClose.current = true;
       websocket.close();
       setWebsocket(null);
     };
-  }, [isSinglePlayerRoute, navigate]);
+  }, [navigate]);
 
   const context: WebSocketContext = {
     websocket: websocketState,
