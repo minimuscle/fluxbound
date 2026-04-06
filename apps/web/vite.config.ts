@@ -32,6 +32,9 @@ export default defineConfig({
       queries: path.resolve(__dirname, "./src/queries"),
     },
   },
+  define: {
+    __APP_VERSION__: JSON.stringify("v0.0.1"),
+  },
   server: {
     proxy: {
       "/api": {

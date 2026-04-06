@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { user } from "api/user";
 import Logo from "assets/images/logo.png";
 import { Button } from "components/Button";
-import "./-components/home.scss";
+import styles from "./-components/home.module.scss";
 
 export const Route = createFileRoute("/_app/_home/")({
   component: RouteComponent,
@@ -12,6 +12,7 @@ export const Route = createFileRoute("/_app/_home/")({
 function RouteComponent() {
   /***** HOOKS *****/
   const navigate = Route.useNavigate();
+  const buildNumber = __APP_VERSION__;
 
   /***** QUERIES *****/
   const { data: userData } = useQuery({
@@ -21,10 +22,15 @@ function RouteComponent() {
 
   /***** RENDER *****/
   return (
-    <div className="MainPage">
-      <div className="MainPage__loginStatus">{userData && <p>Logged in as {userData.display_name}</p>}</div>
-      <img src={Logo} alt="" height={300} />
-      <Button onClick={() => navigate({ to: "/game/lobby" })}>Start New Game</Button>
+    <div className={styles.container}>
+      <div className={styles.circles} />
+      <img src={Logo} alt="" height={300} className={styles.logo} />
+      <Button onClick={() => navigate({ to: "/game/lobby" })}>New Game</Button>
+      <Button onClick={() => navigate({ to: "/game/lobby" })}>Multiplayer</Button>
+      <Button onClick={() => navigate({ to: "/game/lobby" })}>Cards</Button>
+      <Button onClick={() => navigate({ to: "/game/lobby" })}>Settings</Button>
+      <Button onClick={() => navigate({ to: "/game/lobby" })}>Quit</Button>
+      <div className={styles.buildNumber}>{buildNumber}</div>
     </div>
   );
 }
