@@ -17,7 +17,6 @@ export const modify: Effects.EffectHandler["stats"]["modify"] = ({ state, cardId
   const targetCard = targetPlayer.field.find((card) => card.id === target);
 
   for (const { stat, amount } of stats) {
-    console.log("card", target, targetCard, stat, amount);
     if (targetCard) {
       targetCard[stat] = (targetCard[stat] ?? 0) + amount;
     } else if (foundCard) {

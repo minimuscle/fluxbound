@@ -24,7 +24,6 @@ export const runCardTrigger = (
 
   let newState = state;
   for (const trigger of triggers) {
-    console.log(playerId, trigger);
     const [effectGroup, effectName] = trigger.id.split(".") as [Effects.EffectGroups, string];
     newState = runEffect(
       effects,
