@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { BackButton } from "components/Button/back";
 import { SinglePlayerSelection } from "./-components/singlePlayer/selection";
 
 export const Route = createFileRoute("/_app/game/lobby/single")({
@@ -8,7 +9,7 @@ export const Route = createFileRoute("/_app/game/lobby/single")({
 function RouteComponent() {
   return (
     <div>
-      <h1>Single Player Game</h1>
+      <BackButton to="/" />
       <SinglePlayerSelection />
     </div>
   );

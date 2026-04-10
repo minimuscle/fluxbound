@@ -10,6 +10,10 @@
   &__selected {
     background: hsla(0, 0%, 100%, 0.1);
   }
+
+  &:disabled {
+    background: hsla(0, 100%, 50%, 0.1);
+  }
 }
 
 .beginButton {
@@ -24,4 +28,11 @@
   display: flex;
   width: 100%;
   gap: 50px;
+}
+
+.flexCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

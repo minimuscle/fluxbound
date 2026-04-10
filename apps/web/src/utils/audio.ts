@@ -1,6 +1,6 @@
 export class AudioManager {
   private backgroundMusic: HTMLAudioElement | null = null;
-  private musicVolume: number = 1;
+  private musicVolume: number = 0.5;
   private soundVolume: number = 1;
   private mutedMusic: boolean = false;
   private mutedSound: boolean = false;
@@ -11,7 +11,6 @@ export class AudioManager {
   } as const;
 
   public playBackgroundMusic(source: string) {
-    console.log("playing music", source);
     if (this.backgroundMusic?.src.includes(source)) return;
 
     this.stopBackgroundMusic();

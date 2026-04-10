@@ -9,10 +9,10 @@
 
   .circles {
     position: absolute;
-    top: -40%;
-    left: -75%;
-    width: 100vw;
-    height: 100vw;
+    top: -210px;
+    left: -1152px;
+    width: 1536px;
+    height: 1536px;
     border: 1px solid #767676;
     border-radius: 100%;
 
@@ -44,7 +44,7 @@
     --button-left-index: 0;
     position: absolute;
     top: calc(6% * var(--button-index) * 3 - 5%);
-    left: calc(2% * var(--button-left-index) + 17%);
+    left: calc(2.5% * var(--button-left-index) + 11%);
 
     &:nth-child(3) {
       --button-index: 1;

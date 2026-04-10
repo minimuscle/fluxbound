@@ -16,24 +16,25 @@ export const SinglePlayerSelection = () => {
 
   /***** RENDER *****/
   return (
-    <>
+    <div className={styles.flexCol}>
+      <h1>Single Player Game</h1>
       <div className={styles.flex}>
         <button onClick={() => setIsSelected(1)} className={classNames(styles.container, { [styles.container__selected]: isSelected === 1 })}>
           Novice
         </button>
-        <button disabled onClick={() => setIsSelected(1)} className={classNames(styles.container, { [styles.container__selected]: isSelected === 1 })}>
+        <button disabled onClick={() => setIsSelected(2)} className={classNames(styles.container, { [styles.container__selected]: isSelected === 2 })}>
           Apprentice
         </button>
-        <button disabled onClick={() => setIsSelected(1)} className={classNames(styles.container, { [styles.container__selected]: isSelected === 1 })}>
+        <button disabled onClick={() => setIsSelected(3)} className={classNames(styles.container, { [styles.container__selected]: isSelected === 3 })}>
           Adept
         </button>
-        <button disabled onClick={() => setIsSelected(1)} className={classNames(styles.container, { [styles.container__selected]: isSelected === 1 })}>
+        <button disabled onClick={() => setIsSelected(4)} className={classNames(styles.container, { [styles.container__selected]: isSelected === 4 })}>
           Master
         </button>
-        <button disabled onClick={() => setIsSelected(1)} className={classNames(styles.container, { [styles.container__selected]: isSelected === 1 })}>
+        <button disabled onClick={() => setIsSelected(5)} className={classNames(styles.container, { [styles.container__selected]: isSelected === 5 })}>
           Grandmaster
         </button>
-        <button disabled onClick={() => setIsSelected(1)} className={classNames(styles.container, { [styles.container__selected]: isSelected === 1 })}>
+        <button disabled onClick={() => setIsSelected(6)} className={classNames(styles.container, { [styles.container__selected]: isSelected === 6 })}>
           THE OLD ONES
         </button>
       </div>
@@ -41,6 +42,6 @@ export const SinglePlayerSelection = () => {
       <Button className={styles.beginButton} disabled={!isSelected} onClick={() => ws?.send({ type: "game/startSolo" })}>
         Begin
       </Button>
-    </>
+    </div>
   );
 };

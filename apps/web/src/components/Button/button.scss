@@ -49,4 +49,16 @@
   &:disabled {
     color: red;
   }
+
+  &__back {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    color: #d5b864;
+    font-size: 18px;
+    cursor: pointer;
+    text-align: center;
+    padding-top: 10px;
+  }
 }
