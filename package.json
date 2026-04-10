@@ -7,6 +7,7 @@
     "packages/*"
   ],
   "scripts": {
+    "ig": "cd ./apps/web && bun install && cd ../server && bun install && cd ../../packages/schema && bun install",
     "dev": "nx run-many -t dev --parallel",
     "build": "nx run-many -t build",
     "lint": "oxlint",
