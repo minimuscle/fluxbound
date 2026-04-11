@@ -36,7 +36,7 @@ export const AttunementArea = () => {
             className={styles.endTurn}
           >
             <div className={styles.endTurnInner}>
-              <span>TURN {turn.split("-")[1]}</span>
+              <span>TURN {turn.split("-")[0]}</span>
               END
               <br />
               TURN
