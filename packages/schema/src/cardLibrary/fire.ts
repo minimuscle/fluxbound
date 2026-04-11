@@ -30,7 +30,7 @@ export const FIRE_CARDS: Cards.CardDefinition = {
     domain: "FIRE",
     type: "CREATURE",
     name: "Ember",
-    description: "A wisp of flame",
+    description: "2x F - Ablaze: Ember gains +2/2",
     cost: 2,
     price: 50,
     damage: 1,

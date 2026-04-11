@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Logo from "assets/images/logo.png";
 import { Button } from "components/Button";
-import styles from "./-components/home.module.scss";
+import styles from "./-components/home.module.css";
 
 export const Route = createFileRoute("/_app/_home/")({
   component: RouteComponent,

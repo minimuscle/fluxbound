@@ -1,15 +1,27 @@
 .Card {
-  height: 200px;
-  min-width: 150px;
-  max-width: 150px;
+  height: mantine.rem(250px);
+  width: mantine.rem(180px);
   border-radius: 10px;
-  background-color: rgb(238, 222, 198);
+  background-color: rgb(238, 198, 198);
+  box-shadow: 0px 0px 10px rgb(0, 0, 0);
   color: black;
   position: relative;
-  padding: 25px;
+  /* padding: 25px; */
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 100ms ease-out,
+    margin-right 100ms ease-out,
+    margin-left 100ms ease-out;
+
+  &:hover {
+    transform: translateY(-50px);
+    margin-right: 10px !important;
+    margin-left: 5px;
+  }
 
   &:disabled {
     opacity: 0.5;
@@ -30,14 +42,56 @@
     background-color: rgb(16, 84, 129);
   }
 
+  &__domain {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    color: black;
+    font-size: 12px;
+  }
+
+  &__info {
+    margin-top: 60px;
+    padding: 0 20px;
+    font-size: 12px;
+  }
+
+  &__damage {
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgb(129, 20, 16);
+  }
+  &__health {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgb(24, 129, 16);
+  }
+
   &__empty {
-    height: mantine.rem(200px);
-    width: mantine.rem(150px);
+    height: mantine.rem(250px);
+    width: mantine.rem(180px);
     border-radius: mantine.rem(10px);
     background-color: rgb(114, 88, 123);
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
     background-image: url("../../assets/images/card_back.svg");
-    // background-size: calc(100% + 20px) calc(100% + 20px);
-    // background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }

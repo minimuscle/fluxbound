@@ -1,30 +1,30 @@
-<svg width="150" height="200" viewBox="0 0 150 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="150" height="200" rx="10" fill="#D5B864"/>
+<svg width="180" height="250" viewBox="0 0 180 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="180" height="250" rx="10" fill="#D5B864"/>
 <g clip-path="url(#clip0_1_2)">
-<rect x="5" y="5" width="140" height="190" rx="5" fill="url(#paint0_linear_1_2)"/>
-<line y1="-1" x2="115.95" y2="-1" transform="matrix(-0.600257 0.799807 -0.832069 -0.554673 74.6001 100)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
-<line y1="-1" x2="101.173" y2="-1" transform="matrix(0.343964 0.938983 -0.95093 0.309406 74.6 100)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
-<line y1="-1" x2="100.767" y2="-1" transform="matrix(-0.333444 0.94277 -0.95403 -0.299712 74.6 100)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
-<line x1="75.6" y1="100" x2="75.5999" y2="195" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
-<line y1="-1" x2="117.062" y2="-1" transform="matrix(0.584305 0.811534 -0.842453 0.53877 74.6 100)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
-<line y1="-1" x2="115.95" y2="-1" transform="matrix(0.600257 -0.799807 0.832069 0.554672 76.3999 99)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
-<line y1="-1" x2="101.173" y2="-1" transform="matrix(-0.343964 -0.938983 0.95093 -0.309407 76.4 98.9999)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
-<line y1="-1" x2="100.767" y2="-1" transform="matrix(0.333443 -0.94277 0.95403 0.299712 76.4 98.9999)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
-<line x1="75.4" y1="99" x2="75.4001" y2="4.00001" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
-<line y1="-1" x2="117.062" y2="-1" transform="matrix(-0.584305 -0.811534 0.842452 -0.538771 76.4 98.9999)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
-<path d="M118.586 100L75 143.586L31.4141 100L75 56.4141L118.586 100Z" stroke="#D5B864" stroke-width="2"/>
-<circle cx="75" cy="100" r="44" stroke="#D5B864" stroke-width="2"/>
-<circle cx="75" cy="100" r="24" stroke="#D5B864" stroke-width="2"/>
-<circle cx="75" cy="100" r="49" stroke="#D5B864" stroke-width="2" stroke-dasharray="4 4"/>
-<path d="M62.5 87.5C69.4036 80.5964 80.5964 80.5964 87.5 87.5V87.5C94.4036 94.4036 94.4036 105.596 87.5 112.5V112.5C80.5964 119.404 69.4036 119.404 62.5 112.5V112.5C55.5964 105.596 55.5964 94.4036 62.5 87.5V87.5Z" fill="#D5B864"/>
+<rect x="5" y="5" width="170" height="240" rx="5" fill="url(#paint0_linear_1_2)"/>
+<line y1="-1" x2="145.168" y2="-1" transform="matrix(-0.590622 0.806948 -0.825564 -0.564308 90.7392 125)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line y1="-1" x2="127.428" y2="-1" transform="matrix(0.336422 0.941711 -0.948598 0.316483 90.7392 125)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line y1="-1" x2="126.938" y2="-1" transform="matrix(-0.326076 0.945344 -0.951834 -0.306614 90.7392 125)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line x1="91.7391" y1="125" x2="91.7391" y2="245" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line y1="-1" x2="146.628" y2="-1" transform="matrix(0.574656 0.818395 -0.836235 0.548371 90.7392 125)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line y1="-1" x2="143.784" y2="-1" transform="matrix(0.589289 -0.807923 0.824651 0.565641 92.2695 124)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line y1="-1" x2="126.316" y2="-1" transform="matrix(-0.33539 -0.94208 0.948268 -0.317472 92.2695 124)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line y1="-1" x2="125.834" y2="-1" transform="matrix(0.325067 -0.945691 0.951523 0.307578 92.2695 124)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line x1="91.2696" y1="124" x2="91.2697" y2="5.00001" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line y1="-1" x2="145.241" y2="-1" transform="matrix(-0.573322 -0.81933 0.835362 -0.549701 92.2696 124)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<path d="M133.586 125L90 168.586L46.4141 125L90 81.4141L133.586 125Z" stroke="#D5B864" stroke-width="2"/>
+<circle cx="90" cy="125" r="44" stroke="#D5B864" stroke-width="2"/>
+<circle cx="90" cy="125" r="24" stroke="#D5B864" stroke-width="2"/>
+<circle cx="90" cy="125" r="49" stroke="#D5B864" stroke-width="2" stroke-dasharray="4 4"/>
+<path d="M77.5 112.5C84.4036 105.596 95.5964 105.596 102.5 112.5C109.404 119.404 109.404 130.596 102.5 137.5C95.5964 144.404 84.4036 144.404 77.5 137.5C70.5964 130.596 70.5964 119.404 77.5 112.5Z" fill="#D5B864"/>
 </g>
 <defs>
-<linearGradient id="paint0_linear_1_2" x1="5" y1="5" x2="134.724" y2="201.774" gradientUnits="userSpaceOnUse">
+<linearGradient id="paint0_linear_1_2" x1="5" y1="5" x2="171.32" y2="247.524" gradientUnits="userSpaceOnUse">
 <stop stop-color="#5A2C5B"/>
 <stop offset="1" stop-color="#22224E"/>
 </linearGradient>
 <clipPath id="clip0_1_2">
-<rect x="5" y="5" width="140" height="190" rx="5" fill="white"/>
+<rect x="5" y="5" width="170" height="240" rx="5" fill="white"/>
 </clipPath>
 </defs>
 </svg>
