@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import Logo from "assets/images/logo.png";
+import Logo from "assets/images/ui/logo.png";
 import { Button } from "components/Button";
 import styles from "./-components/home.module.css";
 

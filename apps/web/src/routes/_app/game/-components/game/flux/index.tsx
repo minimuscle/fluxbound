@@ -1,5 +1,4 @@
 import type { Cards } from "@fluxbound/schema";
-import CardsIcon from "assets/images/cards.svg";
 import AirIcon from "assets/images/domains/block_air_jelly.png";
 import DarkIcon from "assets/images/domains/block_demon_jelly.png";
 import EarthIcon from "assets/images/domains/block_earth_jelly.png";
@@ -10,6 +9,7 @@ import AetherIcon from "assets/images/domains/block_ice_jelly.png";
 import DeathIcon from "assets/images/domains/block_lindworm_jelly.png";
 import VoidIcon from "assets/images/domains/block_spirit_jelly.png";
 import WaterIcon from "assets/images/domains/block_water_jelly.png";
+import CardsIcon from "assets/images/ui/cards.svg";
 import classNames from "classnames";
 import { use } from "react";
 import { PlayerContext } from "routes/_app/game/-components/game/context";

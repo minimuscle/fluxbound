@@ -5,9 +5,9 @@ import { YourTurn } from "routes/_app/game/-components/game/yourTurn";
 import { AttunementArea } from "./attunement";
 import { PlayerContext } from "./context";
 import { Field } from "./Field";
+import { Flux } from "./flux";
 import styles from "./game.module.css";
 import { Hand } from "./hand";
-import { Flux } from "./flux";
 
 /**********************************************************************************************************
  *   COMPONENT START
@@ -17,33 +17,37 @@ export const Game = () => {
 
   /***** RENDER *****/
   return (
-    <div className={styles.container}>
-      <YourTurn />
-      <CoinToss />
-      <PlayerContext value={{ stage: "ENEMY", player: state.opponent }}>
-        <div className={styles.enemySection}>
-          <AttunementArea />
+    <>
+      {/* <div className={styles.topBar}></div> */}
+      <div className={styles.container}>
+        <div className={styles.table} />
+        <YourTurn />
+        <CoinToss />
+        <PlayerContext value={{ stage: "ENEMY", player: state.opponent }}>
+          <div className={styles.enemySection}>
+            <AttunementArea />
 
-          <div className={styles.middleSection}>
-            <Hand />
-            <Field />
+            <div className={styles.middleSection}>
+              <Hand />
+              <Field />
+            </div>
+            <Flux />
           </div>
-          <Flux />
-        </div>
-      </PlayerContext>
-      <hr className={styles.divider} />
-      <PlayerContext value={{ stage: "PLAYER", player: state.you }}>
-        <div className={styles.playerSection}>
-          <Flux />
+        </PlayerContext>
+        {/* <hr className={styles.divider} /> */}
+        <PlayerContext value={{ stage: "PLAYER", player: state.you }}>
+          <div className={styles.playerSection}>
+            <Flux />
 
-          <div className={styles.middleSection}>
-            <Field />
-            <Hand />
+            <div className={styles.middleSection}>
+              <Field />
+              <Hand />
+            </div>
+
+            <AttunementArea />
           </div>
-
-          <AttunementArea />
-        </div>
-      </PlayerContext>
-    </div>
+        </PlayerContext>
+      </div>
+    </>
   );
 };

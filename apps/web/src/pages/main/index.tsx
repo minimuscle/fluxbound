@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Button } from "components/Button";
 import { use } from "react";
 import { user } from "../../api/user";
-import Logo from "../../assets/images/logo.png";
+import Logo from "../../assets/images/ui/logo.png";
 import { GlobalContext } from "../../utils/context";
 import { LoginForm } from "./login";
 import "./mainpage.scss";

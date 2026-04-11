@@ -15,7 +15,7 @@ export const AttunementArea = () => {
   /***** HOOKS *****/
   const { stage, player } = use(PlayerContext);
   const {
-    state: { activePlayer },
+    state: { activePlayer, turn },
   } = useInvariant(GameContext);
   const { websocket: ws } = useInvariant(WebSocketContext);
   const { data: user_name } = useSuspenseQuery({ ...getUserDetailsOptions, select: (data) => (data.id === player.id ? "You" : "Enemy") });
@@ -35,7 +35,12 @@ export const AttunementArea = () => {
             }}
             className={styles.endTurn}
           >
-            End Turn
+            <div className={styles.endTurnInner}>
+              <span>TURN {turn.split("-")[1]}</span>
+              END
+              <br />
+              TURN
+            </div>
           </button>
         )}
         <div className={styles.attunement}>{player.attunement}</div>

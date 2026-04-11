@@ -4,23 +4,45 @@
   height: 100%;
   width: 100%;
   overflow: hidden;
+  background-image: url("../../../../../assets/images/ui/background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2;
+}
+
+.table {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: url("../../../../../assets/images/ui/table.png");
+  background-size: 1550px;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
 }
 
 .playerSection,
 .enemySection {
-  background-color: rgba(213, 184, 100, 0.05);
+  /* background-color: rgba(213, 184, 100, 0.05); */
   height: 100%;
   width: 100%;
   display: flex;
 }
 
+.topBar {
+  height: 30px;
+  width: 100%;
+  background-color: #694d27;
+}
+
 .enemySection {
-  background-color: rgba(213, 100, 100, 0.05);
+  /* background-color: rgba(213, 100, 100, 0.05); */
 }
 
 .divider {
-  border: 1px solid #d5b864;
-  width: 100vw;
+  border: 3px solid #00aaff;
+  width: 1250px;
 }
 
 .middleSection {

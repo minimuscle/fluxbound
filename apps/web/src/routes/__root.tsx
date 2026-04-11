@@ -14,8 +14,6 @@ const RootLayout = () => {
   });
   const scale = useGameScale();
 
-  console.log("scale", scale);
-
   /***** RENDER *****/
   return (
     <div className="MainViewport">
