@@ -40,6 +40,7 @@
     "postcss": "^8.5.8",
     "postcss-preset-mantine": "^1.18.0",
     "postcss-simple-vars": "^7.0.1",
+    "sass-embedded": "^1.99.0",
     "typescript-eslint": "^8.57.1",
     "vite": "^8.0.1",
     "vite-tsconfig-paths": "^6.1.1"

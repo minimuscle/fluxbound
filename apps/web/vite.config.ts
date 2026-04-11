@@ -21,6 +21,14 @@ export default defineConfig({
     }),
     tsConfigPaths(),
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: "modern-compiler",
+        additionalData: `@use "${path.join(process.cwd(), "src/_mantine").replace(/\\/g, "/")}" as mantine;`,
+      },
+    },
+  },
   resolve: {
     alias: {
       pages: path.resolve(__dirname, "./src/pages"),

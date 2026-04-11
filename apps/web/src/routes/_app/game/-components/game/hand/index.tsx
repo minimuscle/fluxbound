@@ -43,11 +43,13 @@ export const Hand = () => {
   if (gameError === "TOO_MANY_CARDS_IN_HAND" && stage === "PLAYER")
     return (
       <ClickAwayListener onClickAway={() => setGameError(null)}>
-        <div className={styles.container} style={{ "--dynamic-gap": `${gap}px` } as CSSProperties}>
+        <div>
           <div className={styles.modal}>Too many cards, select one to discard</div>
-          {player.hand.map((card, index) => {
-            return <Card key={index} card={card} action="discard" />;
-          })}
+          <div className={styles.container} style={{ "--dynamic-gap": `${gap}px` } as CSSProperties}>
+            {player.hand.map((card, index) => {
+              return <Card key={index} card={card} action="discard" />;
+            })}
+          </div>
         </div>
       </ClickAwayListener>
     );

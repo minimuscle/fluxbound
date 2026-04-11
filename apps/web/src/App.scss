@@ -1,13 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Vend+Sans:ital,wght@0,300..700;1,300..700&display=swap");
 
-.MainContainer {
-  margin: 0 auto;
+.MainViewport {
+  width: 100vw;
   height: 100vh;
-  width: 100%;
-  min-width: 1366px;
-  min-height: 920px;
-  max-width: 1920px;
-  max-height: 1080px;
+  overflow: hidden;
+  background: black;
+}
+
+.MainContainer {
+  // transform-origin: top left;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1920px;
+  height: 1080px;
+  image-rendering: crisp-edges;
+  // border: 1px solid red;
+  // height: 100vh;
+  // width: 100%;
+  // min-width: 1366px;
+  // min-height: 920px;
+  // max-width: 1920px;
+  // max-height: 1080px;
   display: flex;
   flex-direction: column;
   align-items: center;

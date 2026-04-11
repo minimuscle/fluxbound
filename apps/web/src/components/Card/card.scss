@@ -31,11 +31,15 @@
   }
 
   &__empty {
-    height: 200px;
-    min-width: 150px;
-    max-width: 150px;
-    border-radius: 10px;
+    height: mantine.rem(200px);
+    width: mantine.rem(150px);
+    border-radius: mantine.rem(10px);
     background-color: rgb(114, 88, 123);
+    background-image: url("../../assets/images/card_back.svg");
+    // background-size: calc(100% + 20px) calc(100% + 20px);
+    // background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
   &__disband {

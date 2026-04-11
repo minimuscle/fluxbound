@@ -1,0 +1,30 @@
+<svg width="150" height="200" viewBox="0 0 150 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="150" height="200" rx="10" fill="#D5B864"/>
+<g clip-path="url(#clip0_1_2)">
+<rect x="5" y="5" width="140" height="190" rx="5" fill="url(#paint0_linear_1_2)"/>
+<line y1="-1" x2="115.95" y2="-1" transform="matrix(-0.600257 0.799807 -0.832069 -0.554673 74.6001 100)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line y1="-1" x2="101.173" y2="-1" transform="matrix(0.343964 0.938983 -0.95093 0.309406 74.6 100)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line y1="-1" x2="100.767" y2="-1" transform="matrix(-0.333444 0.94277 -0.95403 -0.299712 74.6 100)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line x1="75.6" y1="100" x2="75.5999" y2="195" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line y1="-1" x2="117.062" y2="-1" transform="matrix(0.584305 0.811534 -0.842453 0.53877 74.6 100)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line y1="-1" x2="115.95" y2="-1" transform="matrix(0.600257 -0.799807 0.832069 0.554672 76.3999 99)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line y1="-1" x2="101.173" y2="-1" transform="matrix(-0.343964 -0.938983 0.95093 -0.309407 76.4 98.9999)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line y1="-1" x2="100.767" y2="-1" transform="matrix(0.333443 -0.94277 0.95403 0.299712 76.4 98.9999)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line x1="75.4" y1="99" x2="75.4001" y2="4.00001" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<line y1="-1" x2="117.062" y2="-1" transform="matrix(-0.584305 -0.811534 0.842452 -0.538771 76.4 98.9999)" stroke="white" stroke-opacity="0.2" stroke-width="2"/>
+<path d="M118.586 100L75 143.586L31.4141 100L75 56.4141L118.586 100Z" stroke="#D5B864" stroke-width="2"/>
+<circle cx="75" cy="100" r="44" stroke="#D5B864" stroke-width="2"/>
+<circle cx="75" cy="100" r="24" stroke="#D5B864" stroke-width="2"/>
+<circle cx="75" cy="100" r="49" stroke="#D5B864" stroke-width="2" stroke-dasharray="4 4"/>
+<path d="M62.5 87.5C69.4036 80.5964 80.5964 80.5964 87.5 87.5V87.5C94.4036 94.4036 94.4036 105.596 87.5 112.5V112.5C80.5964 119.404 69.4036 119.404 62.5 112.5V112.5C55.5964 105.596 55.5964 94.4036 62.5 87.5V87.5Z" fill="#D5B864"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_1_2" x1="5" y1="5" x2="134.724" y2="201.774" gradientUnits="userSpaceOnUse">
+<stop stop-color="#5A2C5B"/>
+<stop offset="1" stop-color="#22224E"/>
+</linearGradient>
+<clipPath id="clip0_1_2">
+<rect x="5" y="5" width="140" height="190" rx="5" fill="white"/>
+</clipPath>
+</defs>
+</svg>

@@ -1,17 +1,36 @@
 .container {
-  /* border: 1px solid red; */
+  border: 1px solid red;
   flex: 1;
   position: relative;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: nowrap;
-  /* max-width: 100%; */
-  /* gap: var(--dynamic-gap, 0); */
   align-items: end;
+  gap: var(--hand-gap, var(--dynamic-gap));
   max-height: max-content;
+  transform: translateY(50%);
+  transition: transform 160ms ease-out;
+
+  & > * {
+    flex: 0 0 auto;
+  }
 
   &.enemy {
+    min-height: 50%;
     align-items: start;
+    transform: translateY(-50%);
+  }
+
+  &:hover:not(.enemy) {
+    transform: translateY(0);
+  }
+
+  &:has(> :nth-child(6):last-child) {
+    --hand-gap: -6px;
+  }
+
+  &:has(> :nth-child(7):last-child) {
+    --hand-gap: -50px;
   }
 }
 

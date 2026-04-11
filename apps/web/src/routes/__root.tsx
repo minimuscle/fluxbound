@@ -3,6 +3,7 @@ import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { user } from "api/user";
 import { LoginForm } from "pages/main/login";
 import { audioManager } from "utils/audio";
+import { useGameScale } from "utils/hooks/useGameScale";
 import "../App.scss";
 
 const RootLayout = () => {
@@ -11,15 +12,25 @@ const RootLayout = () => {
     queryKey: ["user"],
     queryFn: () => user.details.GET(),
   });
+  const scale = useGameScale();
+
+  console.log("scale", scale);
 
   /***** RENDER *****/
   return (
-    <div className="MainContainer">
-      <button className="MainContainer__audio" onClick={() => audioManager.setMusicMuted(!audioManager.musicMuted)}>
-        MUTE
-      </button>
-      {userData ? <Outlet /> : <LoginForm />}
-      {/* <TanStackRouterDevtools /> */}
+    <div className="MainViewport">
+      <div
+        className="MainContainer"
+        style={{
+          transform: `translate(-50%, -50%) scale(${scale})`,
+        }}
+      >
+        <button className="MainContainer__audio" onClick={() => audioManager.setMusicMuted(!audioManager.musicMuted)}>
+          MUTE
+        </button>
+        {userData ? <Outlet /> : <LoginForm />}
+        {/* <TanStackRouterDevtools /> */}
+      </div>
     </div>
   );
 };
