@@ -30,8 +30,6 @@
   display: flex;
   align-items: end;
   flex-direction: row-reverse;
-  width: 350px;
-  min-width: 350px;
   position: relative;
 
   .circles {
@@ -121,13 +119,38 @@
   }
 
   .health {
-    border: 1px solid yellow;
-    height: 50px;
+    height: 80px;
     width: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
+    background-image: url("../../../../../../assets/images/ui/health_player.svg");
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    font-family: "Cinzel", serif;
+
+    .healthDomain {
+      position: absolute;
+      top: 30px;
+      left: 22px;
+      height: 100%;
+      width: 100%;
+    }
+
+    .healthText {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .healthBar {
+      position: absolute;
+    }
+
+    .healthValue {
+    }
+
+    &.enemy {
+      background-image: url("../../../../../../assets/images/ui/health.svg");
+    }
   }
 
   .runes {

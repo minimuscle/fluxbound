@@ -43,11 +43,10 @@ export const AttunementArea = () => {
             </div>
           </button>
         )}
-        <div className={styles.attunement}>{player.attunement}</div>
-        <div className={styles.permanent}>Sword</div>
+        {/* <div className={styles.permanent}>Sword</div>
         <div className={styles.permanent}>{shieldCard ? CARD_LIBRARY[shieldCard].name : "Shield"}</div>
         <div className={styles.permanent}>Potion</div>
-        <div>{user_name}</div>
+        <div>{user_name}</div> */}
         <div className={styles.runes}>
           Runes:
           {Array.from(
@@ -69,8 +68,13 @@ export const AttunementArea = () => {
           ))}
         </div>
       </div>
-      <div className={styles.health}>
-        {player.health} / {player.healthMax}
+      <div className={classNames(styles.health, { [styles.enemy]: stage === "ENEMY" })}>
+        <div className={styles.healthDomain}>{player.attunement}</div>
+        <div className={styles.healthText}>Health</div>
+        <div className={styles.healthBar}></div>
+        <div className={styles.healthValue}>
+          {player.health} / {player.healthMax}
+        </div>
       </div>
     </div>
   );
