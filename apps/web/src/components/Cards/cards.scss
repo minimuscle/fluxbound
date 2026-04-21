@@ -2,7 +2,7 @@
   width: 90%;
   height: 200px;
   background-color: #ff9494;
-  cursor: pointer;
+  cursor: var(--cursor-pointer, pointer);
   text-align: start;
   align-items: start;
   vertical-align: top;
@@ -44,7 +44,7 @@
     border-radius: 20px;
 
     &--activatable {
-      cursor: pointer;
+      cursor: var(--cursor-pointer, pointer);
       border: 3px solid #1db315;
       box-shadow: 0 0 20px 10px #1db315;
     }

@@ -47,7 +47,7 @@ export const Card: Card = ({ card, action = "play" }) => {
       <div className="Card__name">{cardInfo.name}</div>
       <div className="Card__info">{cardInfo.description}</div>
       {"damage" in cardInfo && <div className="Card__damage">{cardInfo.damage}</div>}
-      {"health" in cardInfo && <div className="Card__health">{cardInfo.health}</div>}
+      {"health" in cardInfo && <div className="Card__health">{cardInfo.health}</div>} d
     </button>
   );
 };

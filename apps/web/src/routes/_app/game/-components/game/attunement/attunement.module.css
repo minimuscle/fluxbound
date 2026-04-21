@@ -49,7 +49,7 @@
       flex-direction: column;
       font-size: 24px;
 
-      cursor: pointer;
+      cursor: var(--cursor-pointer, pointer);
 
       &::before {
         content: "";

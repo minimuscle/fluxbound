@@ -9,7 +9,7 @@
   /* padding: 25px; */
   font-size: 18px;
   font-weight: 700;
-  cursor: pointer;
+  cursor: var(--cursor-pointer, pointer);
   display: flex;
   flex-direction: column;
   transition:
