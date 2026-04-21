@@ -1,6 +1,9 @@
+import { GearSixIcon, PlayIcon, SignOutIcon, StackIcon, UsersIcon } from "@phosphor-icons/react";
 import { createFileRoute } from "@tanstack/react-router";
 import Logo from "assets/images/ui/logo.png";
-import { Button } from "components/Button";
+import Movie from "assets/images/ui/menu/main/background_movie.mp4";
+import Sigil from "assets/images/ui/menu/main/sigil.svg";
+import { NavButton } from "routes/_app/_home/-components/navButton";
 import styles from "./-components/home.module.css";
 
 export const Route = createFileRoute("/_app/_home/")({
@@ -17,21 +20,42 @@ function RouteComponent() {
   /***** RENDER *****/
   return (
     <div className={styles.container}>
-      <div className={styles.circles} />
-      <img src={Logo} alt="" height={300} className={styles.logo} />
-      <Button onClick={() => navigate({ to: "/game/lobby/single" })}>New Game</Button>
-      <Button disabled onClick={() => navigate({ to: "/game/lobby" })}>
+      <div className={styles.background} />
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        className={styles.backgroundVideo}
+        ref={(videoElement) => {
+          if (videoElement) {
+            videoElement.playbackRate = 1;
+          }
+        }}
+      >
+        <source src={Movie} type="video/mp4" />
+      </video>
+      <div className={styles.overlay} />
+      <img src={Sigil} alt="" className={styles.sigil} />
+      <img src={Sigil} alt="" className={styles.sigil2} />
+      <img src={Sigil} alt="" className={styles.sigil3} />
+      <img src={Logo} alt="" className={styles.logo} />
+      <NavButton to="/game/lobby/single" icon={PlayIcon}>
+        New Game
+      </NavButton>
+      <NavButton to="/game/lobby/single" icon={UsersIcon}>
         Multiplayer
-      </Button>
-      <Button disabled onClick={() => navigate({ to: "/game/lobby" })}>
+      </NavButton>
+      <NavButton to="/game/lobby/single" icon={StackIcon}>
         Cards
-      </Button>
-      <Button disabled onClick={() => navigate({ to: "/game/lobby" })}>
+      </NavButton>
+      <NavButton to="/game/lobby/single" icon={GearSixIcon}>
         Settings
-      </Button>
-      <Button disabled onClick={() => navigate({ to: "/game/lobby" })}>
+      </NavButton>
+      <NavButton to="/game/lobby/single" icon={SignOutIcon}>
         Quit
-      </Button>
+      </NavButton>
       <div className={styles.buildNumber}>{buildNumber}</div>
     </div>
   );

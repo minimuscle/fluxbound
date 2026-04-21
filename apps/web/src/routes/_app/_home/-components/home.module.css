@@ -2,89 +2,140 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: rem(20px);
   overflow: hidden;
-  height: 100vh;
-  width: 100vw;
+  height: rem(100vh);
+  width: rem(100vw);
 
-  .circles {
+  .background {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("/src/assets/images/ui/menu/main/background.png");
+    background-size: cover;
     position: absolute;
-    top: -210px;
-    left: -1152px;
-    width: 1536px;
-    height: 1536px;
-    border: 1px solid #767676;
-    border-radius: 100%;
-
-    &::before {
-      content: "";
-      position: absolute;
-      left: 100px;
-      width: 100%;
-      height: 100%;
-      border-radius: 100%;
-      border: 3px solid rgba(192, 192, 192, 0.5);
-      border-style: dashed;
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      left: 75px;
-      width: 100%;
-      height: 100%;
-      border-radius: 100%;
-      border: 4px solid rgba(220, 220, 220, 0.5);
-      border-style: dotted;
-    }
+    width: 100%;
+    height: 100%;
+    z-index: -1;
   }
 
-  button {
-    --button-index: 0;
-    --button-left-index: 0;
+  .backgroundVideo {
     position: absolute;
-    top: calc(6% * var(--button-index) * 3 - 5%);
-    left: calc(2.5% * var(--button-left-index) + 11%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
 
-    &:nth-child(3) {
-      --button-index: 1;
-      --button-left-index: 1;
-    }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+  }
 
-    &:nth-child(4) {
-      --button-index: 2;
-      --button-left-index: 2;
-    }
+  .sigil {
+    position: fixed;
+    top: rem(-270px);
+    left: rem(-966px);
+    opacity: 0.5;
+    z-index: -1;
+    animation: rotate 120s linear infinite;
+  }
 
-    &:nth-child(5) {
-      --button-index: 3;
-      --button-left-index: 3;
-    }
+  .sigil2 {
+    position: fixed;
+    top: rem(750px);
+    right: rem(-750px);
+    opacity: 0.5;
+    z-index: -1;
+    animation: rotate 120s linear infinite reverse;
+  }
 
-    &:nth-child(6) {
-      --button-index: 4;
-      --button-left-index: 2;
-    }
-
-    &:nth-child(7) {
-      --button-index: 5;
-      --button-left-index: 1;
-    }
+  .sigil3 {
+    position: fixed;
+    scale: 0.5;
+    top: rem(-75%);
+    right: rem(-820px);
+    opacity: 0.5;
+    z-index: -1;
+    animation: rotate 120s linear infinite;
   }
 
   .logo {
     position: absolute;
-    top: 30%;
-    left: 70%;
+    top: rem(20%);
+    left: rem(70%);
     transform: translateX(-50%);
   }
 
+  .navButton {
+    position: fixed;
+    background-image: url("/src/assets/images/ui/menu/main/navButton.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: rem(100px);
+    width: rem(333px);
+    display: flex;
+    align-items: center;
+    padding-top: 5px;
+
+    &:hover {
+      background-image: url("/src/assets/images/ui/menu/main/navButtonHover.svg");
+    }
+
+    .icon {
+      padding: 0 35px 0 25px;
+    }
+
+    .text {
+      color: #d5b864;
+      font-size: rem(24px);
+      font-family: "Cinzel", sans-serif;
+      font-weight: 600;
+      width: 200px;
+      margin-top: -2px;
+      text-align: center;
+    }
+
+    &:nth-last-of-type(5) {
+      top: rem(150px);
+      left: rem(375px);
+    }
+    &:nth-last-of-type(4) {
+      top: rem(320px);
+      left: rem(445px);
+    }
+    &:nth-last-of-type(3) {
+      top: rem(490px);
+      left: rem(475px);
+    }
+    &:nth-last-of-type(2) {
+      top: rem(660px);
+      left: rem(445px);
+    }
+    &:nth-last-of-type(1) {
+      top: rem(830px);
+      left: rem(375px);
+    }
+  }
+
   .buildNumber {
-    position: absolute;
-    right: 24px;
-    bottom: 24px;
-    color: rgba(213, 184, 100, 0.8);
-    font-size: 14px;
-    letter-spacing: 0.08em;
+    position: fixed;
+    right: rem(24px);
+    bottom: rem(24px);
+    color: #d5b864;
+    font-size: rem(14px);
+    letter-spacing: rem(0.08em);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

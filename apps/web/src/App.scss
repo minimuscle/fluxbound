@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Vend+Sans:ital,wght@0,300..700;1,300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap");
 
 .MainViewport {
   width: 100vw;
@@ -29,7 +30,8 @@
   position: relative;
   overflow: hidden;
   background: hsla(0, 0%, 20%, 1);
-  background: radial-gradient(circle, hsla(0, 0%, 20%, 1) 0%, hsla(0, 0%, 0%, 1) 100%);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("/src/assets/images/ui/menu/main/background.png");
+  // background: radial-gradient(circle, hsla(0, 0%, 20%, 1) 0%, hsla(0, 0%, 0%, 1) 100%);
 
   &__audio {
     position: absolute;
@@ -58,147 +60,5 @@ button {
   font-family: "Vend Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-}
-
-:root {
-  // --cursor-default: url("./assets/images/cursors/Cursor Default.png") 16 16, auto;
-  // --cursor-default-friendly: url("./assets/images/cursors/Cursor Default Friends.png") 16 16, auto;
-  // --cursor-default-enemy: url("./assets/images/cursors/Cursor Default Enemy.png") 16 16, auto;
-  // --cursor-attack: url("./assets/images/cursors/Cursor Attack Green.png") 16 16, auto;
-  // --cursor-attack-friendly: url("./assets/images/cursors/Cursor Attack Friends.png") 16 16, auto;
-  // --cursor-attack-enemy: url("./assets/images/cursors/Cursor Attack Enemy.png") 16 16, auto;
-  // --cursor-move: url("./assets/images/cursors/Cursor Move Up.png") 16 16, auto;
-  // --cursor-target: url("./assets/images/cursors/Cursor Target Move A.png") 16 16, auto;
-  // --cursor-possible: url("./assets/images/cursors/Cursor possible.png") 16 16, auto;
-  // --cursor-impossible: url("./assets/images/cursors/Cursor impossible.png") 16 16, auto;
-  // --cursor-cannot: url("./assets/images/cursors/Cursor Cannot Use.png") 16 16, auto;
-  // --cursor-build: url("./assets/images/cursors/Cursor Build Green.png") 16 16, auto;
-  // --cursor-build-blocked: url("./assets/images/cursors/Cursor Build Red.png") 16 16, auto;
-  // --cursor-chop: url("./assets/images/cursors/Cursor Chop Green.png") 16 16, auto;
-  // --cursor-chop-blocked: url("./assets/images/cursors/Cursor Chop Red.png") 16 16, auto;
-  // --cursor-mine: url("./assets/images/cursors/Cursor Pickaxe Green.png") 16 16, auto;
-  // --cursor-mine-blocked: url("./assets/images/cursors/Cursor Pickaxe Red.png") 16 16, auto;
-  // --cursor-shield: url("./assets/images/cursors/Cursor Shield Green.png") 16 16, auto;
-  // --cursor-shield-blocked: url("./assets/images/cursors/Cursor Shield Red.png") 16 16, auto;
-  // --cursor-magic: url("./assets/images/cursors/Cursor Magic Use Blue.png") 16 16, auto;
-  // --cursor-potion: url("./assets/images/cursors/Cursor Potion Green.png") 16 16, auto;
-  // --cursor-question: url("./assets/images/cursors/Cursor Question Green.png") 16 16, auto;
-  // --cursor-settings: url("./assets/images/cursors/Cursor Settings Green.png") 16 16, auto;
-}
-
-.MainContainer {
-  cursor: var(--cursor-default);
-  --cursor-pointer: var(--cursor-attack-enemy);
-
-  &[data-cursor="default"],
-  &.cursor--default {
-    cursor: var(--cursor-default);
-  }
-
-  &[data-cursor="friendly"],
-  &.cursor--friendly {
-    cursor: var(--cursor-default-friendly);
-  }
-
-  &[data-cursor="enemy"],
-  &.cursor--enemy {
-    cursor: var(--cursor-default-enemy);
-  }
-
-  &[data-cursor="attack"],
-  &.cursor--attack {
-    cursor: var(--cursor-attack);
-  }
-
-  &[data-cursor="attack-friendly"],
-  &.cursor--attack-friendly {
-    cursor: var(--cursor-attack-friendly);
-  }
-
-  &[data-cursor="attack-enemy"],
-  &.cursor--attack-enemy {
-    cursor: var(--cursor-attack-enemy);
-  }
-
-  &[data-cursor="move"],
-  &.cursor--move {
-    cursor: var(--cursor-move);
-  }
-
-  &[data-cursor="target"],
-  &.cursor--target {
-    cursor: var(--cursor-target);
-  }
-
-  &[data-cursor="possible"],
-  &.cursor--possible {
-    cursor: var(--cursor-possible);
-  }
-
-  &[data-cursor="impossible"],
-  &[data-cursor="cannot"],
-  &.cursor--impossible,
-  &.cursor--cannot {
-    cursor: var(--cursor-cannot);
-  }
-
-  &[data-cursor="build"],
-  &.cursor--build {
-    cursor: var(--cursor-build);
-  }
-
-  &[data-cursor="build-blocked"],
-  &.cursor--build-blocked {
-    cursor: var(--cursor-build-blocked);
-  }
-
-  &[data-cursor="chop"],
-  &.cursor--chop {
-    cursor: var(--cursor-chop);
-  }
-
-  &[data-cursor="chop-blocked"],
-  &.cursor--chop-blocked {
-    cursor: var(--cursor-chop-blocked);
-  }
-
-  &[data-cursor="mine"],
-  &.cursor--mine {
-    cursor: var(--cursor-mine);
-  }
-
-  &[data-cursor="mine-blocked"],
-  &.cursor--mine-blocked {
-    cursor: var(--cursor-mine-blocked);
-  }
-
-  &[data-cursor="shield"],
-  &.cursor--shield {
-    cursor: var(--cursor-shield);
-  }
-
-  &[data-cursor="shield-blocked"],
-  &.cursor--shield-blocked {
-    cursor: var(--cursor-shield-blocked);
-  }
-
-  &[data-cursor="magic"],
-  &.cursor--magic {
-    cursor: var(--cursor-magic);
-  }
-
-  &[data-cursor="potion"],
-  &.cursor--potion {
-    cursor: var(--cursor-potion);
-  }
-
-  &[data-cursor="question"],
-  &.cursor--question {
-    cursor: var(--cursor-question);
-  }
-
-  &[data-cursor="settings"],
-  &.cursor--settings {
-    cursor: var(--cursor-settings);
-  }
+  text-decoration: none;
 }
