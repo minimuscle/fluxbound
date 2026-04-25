@@ -4,7 +4,7 @@
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background-image: url("../../../../../assets/images/ui/background.png");
+  background-image: url("../../../../../assets/images/ui/background.jpeg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -15,7 +15,7 @@
   position: absolute;
   height: 100%;
   width: 100%;
-  background-image: url("../../../../../assets/images/ui/table.png");
+  /* background-image: url("../../../../../assets/images/ui/table.png"); */
   background-size: 1550px;
   background-position: center;
   background-repeat: no-repeat;

@@ -38,7 +38,7 @@ export const Card: Card = ({ card, action = "play" }) => {
   /***** RENDER *****/
   return (
     <button disabled={!isActivePlayer} className={classNames("Card", { Card__disband: action === "discard" })} onClick={handleClick}>
-      {!!cardInfo.cost && (
+      {/* {!!cardInfo.cost && (
         <div className="Card__cost">
           {cardInfo.cost}
           <div className="Card__domain">{cardInfo.domain}</div>
@@ -47,7 +47,7 @@ export const Card: Card = ({ card, action = "play" }) => {
       <div className="Card__name">{cardInfo.name}</div>
       <div className="Card__info">{cardInfo.description}</div>
       {"damage" in cardInfo && <div className="Card__damage">{cardInfo.damage}</div>}
-      {"health" in cardInfo && <div className="Card__health">{cardInfo.health}</div>} d
+      {"health" in cardInfo && <div className="Card__health">{cardInfo.health}</div>} */}
     </button>
   );
 };

@@ -11,6 +11,10 @@
   font-weight: 700;
   cursor: var(--cursor-pointer, pointer);
   display: flex;
+  background-image: url("../../assets/images/cards/fire/ember.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   flex-direction: column;
   transition:
     transform 100ms ease-out,
@@ -18,7 +22,8 @@
     margin-left 100ms ease-out;
 
   &:hover {
-    transform: translateY(-50px);
+    transform: translateY(-50px) scale(1.5);
+    z-index: 100;
     margin-right: 10px !important;
     margin-left: 5px;
   }
