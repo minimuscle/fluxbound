@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteRouteImport } from './routes/_app/route'
 import { Route as AppGameRouteRouteImport } from './routes/_app/game/route'
+import { Route as AppSetupIndexRouteImport } from './routes/_app/setup/index'
 import { Route as AppGameIndexRouteImport } from './routes/_app/game/index'
 import { Route as AppHomeIndexRouteImport } from './routes/_app/_home/index'
 import { Route as AppGameLobbyIndexRouteImport } from './routes/_app/game/lobby/index'
@@ -23,6 +24,11 @@ const AppRouteRoute = AppRouteRouteImport.update({
 const AppGameRouteRoute = AppGameRouteRouteImport.update({
   id: '/game',
   path: '/game',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppSetupIndexRoute = AppSetupIndexRouteImport.update({
+  id: '/setup/',
+  path: '/setup/',
   getParentRoute: () => AppRouteRoute,
 } as any)
 const AppGameIndexRoute = AppGameIndexRouteImport.update({
@@ -50,12 +56,14 @@ export interface FileRoutesByFullPath {
   '/': typeof AppHomeIndexRoute
   '/game': typeof AppGameRouteRouteWithChildren
   '/game/': typeof AppGameIndexRoute
+  '/setup/': typeof AppSetupIndexRoute
   '/game/lobby/single': typeof AppGameLobbySingleRoute
   '/game/lobby/': typeof AppGameLobbyIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AppHomeIndexRoute
   '/game': typeof AppGameIndexRoute
+  '/setup': typeof AppSetupIndexRoute
   '/game/lobby/single': typeof AppGameLobbySingleRoute
   '/game/lobby': typeof AppGameLobbyIndexRoute
 }
@@ -65,20 +73,28 @@ export interface FileRoutesById {
   '/_app/game': typeof AppGameRouteRouteWithChildren
   '/_app/_home/': typeof AppHomeIndexRoute
   '/_app/game/': typeof AppGameIndexRoute
+  '/_app/setup/': typeof AppSetupIndexRoute
   '/_app/game/lobby/single': typeof AppGameLobbySingleRoute
   '/_app/game/lobby/': typeof AppGameLobbyIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/game' | '/game/' | '/game/lobby/single' | '/game/lobby/'
+  fullPaths:
+    | '/'
+    | '/game'
+    | '/game/'
+    | '/setup/'
+    | '/game/lobby/single'
+    | '/game/lobby/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/game' | '/game/lobby/single' | '/game/lobby'
+  to: '/' | '/game' | '/setup' | '/game/lobby/single' | '/game/lobby'
   id:
     | '__root__'
     | '/_app'
     | '/_app/game'
     | '/_app/_home/'
     | '/_app/game/'
+    | '/_app/setup/'
     | '/_app/game/lobby/single'
     | '/_app/game/lobby/'
   fileRoutesById: FileRoutesById
@@ -101,6 +117,13 @@ declare module '@tanstack/react-router' {
       path: '/game'
       fullPath: '/game'
       preLoaderRoute: typeof AppGameRouteRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/_app/setup/': {
+      id: '/_app/setup/'
+      path: '/setup'
+      fullPath: '/setup/'
+      preLoaderRoute: typeof AppSetupIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
     '/_app/game/': {
@@ -153,11 +176,13 @@ const AppGameRouteRouteWithChildren = AppGameRouteRoute._addFileChildren(
 interface AppRouteRouteChildren {
   AppGameRouteRoute: typeof AppGameRouteRouteWithChildren
   AppHomeIndexRoute: typeof AppHomeIndexRoute
+  AppSetupIndexRoute: typeof AppSetupIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppGameRouteRoute: AppGameRouteRouteWithChildren,
   AppHomeIndexRoute: AppHomeIndexRoute,
+  AppSetupIndexRoute: AppSetupIndexRoute,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(

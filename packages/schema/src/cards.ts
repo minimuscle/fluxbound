@@ -6,8 +6,8 @@ export namespace Cards {
   export type Domain = "FIRE" | "WATER" | "AIR" | "EARTH" | "LIGHT" | "DARK" | "LIFE" | "DEATH" | "AETHER" | "VOID";
   export type Expansion = "BASE" | "FORGED";
   export type CardType = "CREATURE" | "SPELL" | "PERMANENT" | "WEAPON" | "SHIELD" | "RUNE";
-  export type CardKey = `${Expansion}_${Domain}_${CardType}_${string}`;
-  export type CardId = Tagged<CardKey, "cardId">;
+  export type CardKey = string;
+  export type CardId<TCardKey extends CardKey = CardKey> = Tagged<TCardKey, "cardId"> | TCardKey;
 
   export type TriggerTypes = "onTurnEnd" | "onActivated" | "onAttacked" | "onDeath";
 
@@ -26,6 +26,19 @@ export namespace Cards {
     [TName in Effects.EffectNames]: {
       id: TName;
       args: EffectArgs<TName>;
+    };
+  }[Effects.EffectNames];
+
+  type TriggerArgsWithCardIds<TEffectName extends Effects.EffectNames, TCardId extends CardKey> = EffectArgs<TEffectName> extends {
+    cardId: CardId;
+  }
+    ? Omit<EffectArgs<TEffectName>, "cardId"> & { cardId: CardId<TCardId> }
+    : EffectArgs<TEffectName>;
+
+  export type TriggerWithCardIds<TCardId extends CardKey> = {
+    [TName in Effects.EffectNames]: {
+      id: TName;
+      args: TriggerArgsWithCardIds<TName, TCardId>;
     };
   }[Effects.EffectNames];
 
@@ -56,5 +69,15 @@ export namespace Cards {
 
   export type Card = Creature | Weapon | Others;
 
-  export type CardDefinition = Record<CardKey, Card>;
+  export type CardDefinition = Record<string, Card>;
+  type WithCardIdTriggers<TCard extends Base, TCardId extends CardKey> = Omit<TCard, "triggers"> & {
+    triggers: Partial<Record<TriggerTypes, TriggerWithCardIds<TCardId>[]>>;
+  };
+  export type CardWithCardIds<TCardId extends CardKey> = Card extends infer TCard extends Base
+    ? TCard extends Base
+      ? WithCardIdTriggers<TCard, TCardId>
+      : never
+    : never;
 }
+
+export const defineCardDefinition = <const TCards extends Record<string, Cards.CardWithCardIds<keyof TCards & Cards.CardKey>>>(cards: TCards) => cards;

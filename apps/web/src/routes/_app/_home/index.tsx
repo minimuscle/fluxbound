@@ -8,6 +8,7 @@ import styles from "./-components/home.module.css";
 
 export const Route = createFileRoute("/_app/_home/")({
   component: RouteComponent,
+  beforeLoad: () => {},
 });
 
 function RouteComponent() {
