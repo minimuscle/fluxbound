@@ -1,17 +1,27 @@
-import { useQuery } from "@tanstack/react-query";
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { createRootRouteWithContext, Outlet, redirect } from "@tanstack/react-router";
 import { user } from "api/user";
-import { LoginForm } from "pages/main/login";
 import { audioManager } from "utils/audio";
 import { useGameScale } from "utils/hooks/useGameScale";
+import type { RouterContext } from "utils/types/router";
 import "../App.scss";
 
-const RootLayout = () => {
+export const Route = createRootRouteWithContext<RouterContext>()({
+  component: RootLayout,
+  beforeLoad: async ({ context: { queryClient }, matches, location }) => {
+    await queryClient
+      .fetchQuery({
+        queryKey: ["user"],
+        queryFn: () => user.details.GET(),
+      })
+      .catch(() => {
+        if (location.pathname !== "/login") throw redirect({ to: "/login" });
+      });
+  },
+});
+
+function RootLayout() {
   /***** QUERIES *****/
-  const { data: userData } = useQuery({
-    queryKey: ["user"],
-    queryFn: () => user.details.GET(),
-  });
+
   const scale = useGameScale();
 
   /***** RENDER *****/
@@ -26,11 +36,9 @@ const RootLayout = () => {
         <button className="MainContainer__audio" onClick={() => audioManager.setMusicMuted(!audioManager.musicMuted)}>
           MUTE
         </button>
-        {userData ? <Outlet /> : <LoginForm />}
+        <Outlet />
         {/* <TanStackRouterDevtools /> */}
       </div>
     </div>
   );
-};
-
-export const Route = createRootRoute({ component: RootLayout, beforeLoad: () => {} });
+}

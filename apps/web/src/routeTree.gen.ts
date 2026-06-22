@@ -11,10 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteRouteImport } from './routes/_app/route'
 import { Route as AppGameRouteRouteImport } from './routes/_app/game/route'
+import { Route as AppHomeRouteRouteImport } from './routes/_app/_home/route'
 import { Route as AppSetupIndexRouteImport } from './routes/_app/setup/index'
 import { Route as AppGameIndexRouteImport } from './routes/_app/game/index'
 import { Route as AppHomeIndexRouteImport } from './routes/_app/_home/index'
 import { Route as AppGameLobbyIndexRouteImport } from './routes/_app/game/lobby/index'
+import { Route as AppHomeLoginIndexRouteImport } from './routes/_app/_home/login/index'
 import { Route as AppGameLobbySingleRouteImport } from './routes/_app/game/lobby/single'
 
 const AppRouteRoute = AppRouteRouteImport.update({
@@ -24,6 +26,10 @@ const AppRouteRoute = AppRouteRouteImport.update({
 const AppGameRouteRoute = AppGameRouteRouteImport.update({
   id: '/game',
   path: '/game',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppHomeRouteRoute = AppHomeRouteRouteImport.update({
+  id: '/_home',
   getParentRoute: () => AppRouteRoute,
 } as any)
 const AppSetupIndexRoute = AppSetupIndexRouteImport.update({
@@ -37,14 +43,19 @@ const AppGameIndexRoute = AppGameIndexRouteImport.update({
   getParentRoute: () => AppGameRouteRoute,
 } as any)
 const AppHomeIndexRoute = AppHomeIndexRouteImport.update({
-  id: '/_home/',
+  id: '/',
   path: '/',
-  getParentRoute: () => AppRouteRoute,
+  getParentRoute: () => AppHomeRouteRoute,
 } as any)
 const AppGameLobbyIndexRoute = AppGameLobbyIndexRouteImport.update({
   id: '/lobby/',
   path: '/lobby/',
   getParentRoute: () => AppGameRouteRoute,
+} as any)
+const AppHomeLoginIndexRoute = AppHomeLoginIndexRouteImport.update({
+  id: '/login/',
+  path: '/login/',
+  getParentRoute: () => AppHomeRouteRoute,
 } as any)
 const AppGameLobbySingleRoute = AppGameLobbySingleRouteImport.update({
   id: '/lobby/single',
@@ -58,6 +69,7 @@ export interface FileRoutesByFullPath {
   '/game/': typeof AppGameIndexRoute
   '/setup/': typeof AppSetupIndexRoute
   '/game/lobby/single': typeof AppGameLobbySingleRoute
+  '/login/': typeof AppHomeLoginIndexRoute
   '/game/lobby/': typeof AppGameLobbyIndexRoute
 }
 export interface FileRoutesByTo {
@@ -65,16 +77,19 @@ export interface FileRoutesByTo {
   '/game': typeof AppGameIndexRoute
   '/setup': typeof AppSetupIndexRoute
   '/game/lobby/single': typeof AppGameLobbySingleRoute
+  '/login': typeof AppHomeLoginIndexRoute
   '/game/lobby': typeof AppGameLobbyIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_app': typeof AppRouteRouteWithChildren
+  '/_app/_home': typeof AppHomeRouteRouteWithChildren
   '/_app/game': typeof AppGameRouteRouteWithChildren
   '/_app/_home/': typeof AppHomeIndexRoute
   '/_app/game/': typeof AppGameIndexRoute
   '/_app/setup/': typeof AppSetupIndexRoute
   '/_app/game/lobby/single': typeof AppGameLobbySingleRoute
+  '/_app/_home/login/': typeof AppHomeLoginIndexRoute
   '/_app/game/lobby/': typeof AppGameLobbyIndexRoute
 }
 export interface FileRouteTypes {
@@ -85,17 +100,20 @@ export interface FileRouteTypes {
     | '/game/'
     | '/setup/'
     | '/game/lobby/single'
+    | '/login/'
     | '/game/lobby/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/game' | '/setup' | '/game/lobby/single' | '/game/lobby'
+  to: '/' | '/game' | '/setup' | '/game/lobby/single' | '/login' | '/game/lobby'
   id:
     | '__root__'
     | '/_app'
+    | '/_app/_home'
     | '/_app/game'
     | '/_app/_home/'
     | '/_app/game/'
     | '/_app/setup/'
     | '/_app/game/lobby/single'
+    | '/_app/_home/login/'
     | '/_app/game/lobby/'
   fileRoutesById: FileRoutesById
 }
@@ -119,6 +137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppGameRouteRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/_app/_home': {
+      id: '/_app/_home'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppHomeRouteRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/_app/setup/': {
       id: '/_app/setup/'
       path: '/setup'
@@ -138,7 +163,7 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AppHomeIndexRouteImport
-      parentRoute: typeof AppRouteRoute
+      parentRoute: typeof AppHomeRouteRoute
     }
     '/_app/game/lobby/': {
       id: '/_app/game/lobby/'
@@ -146,6 +171,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/game/lobby/'
       preLoaderRoute: typeof AppGameLobbyIndexRouteImport
       parentRoute: typeof AppGameRouteRoute
+    }
+    '/_app/_home/login/': {
+      id: '/_app/_home/login/'
+      path: '/login'
+      fullPath: '/login/'
+      preLoaderRoute: typeof AppHomeLoginIndexRouteImport
+      parentRoute: typeof AppHomeRouteRoute
     }
     '/_app/game/lobby/single': {
       id: '/_app/game/lobby/single'
@@ -156,6 +188,20 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AppHomeRouteRouteChildren {
+  AppHomeIndexRoute: typeof AppHomeIndexRoute
+  AppHomeLoginIndexRoute: typeof AppHomeLoginIndexRoute
+}
+
+const AppHomeRouteRouteChildren: AppHomeRouteRouteChildren = {
+  AppHomeIndexRoute: AppHomeIndexRoute,
+  AppHomeLoginIndexRoute: AppHomeLoginIndexRoute,
+}
+
+const AppHomeRouteRouteWithChildren = AppHomeRouteRoute._addFileChildren(
+  AppHomeRouteRouteChildren,
+)
 
 interface AppGameRouteRouteChildren {
   AppGameIndexRoute: typeof AppGameIndexRoute
@@ -174,14 +220,14 @@ const AppGameRouteRouteWithChildren = AppGameRouteRoute._addFileChildren(
 )
 
 interface AppRouteRouteChildren {
+  AppHomeRouteRoute: typeof AppHomeRouteRouteWithChildren
   AppGameRouteRoute: typeof AppGameRouteRouteWithChildren
-  AppHomeIndexRoute: typeof AppHomeIndexRoute
   AppSetupIndexRoute: typeof AppSetupIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppHomeRouteRoute: AppHomeRouteRouteWithChildren,
   AppGameRouteRoute: AppGameRouteRouteWithChildren,
-  AppHomeIndexRoute: AppHomeIndexRoute,
   AppSetupIndexRoute: AppSetupIndexRoute,
 }
 

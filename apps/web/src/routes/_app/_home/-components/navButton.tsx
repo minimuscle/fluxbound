@@ -6,20 +6,33 @@ import styles from "./home.module.css";
 /**********************************************************************************************************
  *   TYPE DEFINITIONS
  **********************************************************************************************************/
-type NavButton = React.FC<{
-  to: ToOptions["to"];
-  icon: Icon;
-  children: React.ReactNode;
-}>;
+type NavOptions =
+  | {
+      options: ToOptions;
+      onClick?: never;
+    }
+  | {
+      options?: never;
+      onClick: () => void;
+    };
+type NavButton = React.FC<
+  NavOptions & {
+    icon: Icon;
+    children: React.ReactNode;
+  }
+>;
 
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
-export const NavButton: NavButton = ({ to, icon: Icon, children }) => {
+export const NavButton: NavButton = ({ options, onClick, icon: Icon, children }) => {
+  const Component = onClick ? "button" : Link;
+
+  /***** RENDER *****/
   return (
-    <Link to={to} className={styles.navButton} onMouseEnter={() => audioManager.playSoundEffect("buttonHover")}>
+    <Component {...options} onClick={onClick} className={styles.navButton} onMouseEnter={() => audioManager.playSoundEffect("buttonHover")}>
       <div className={styles.icon}>{<Icon weight="fill" size={48} color="#d5b864" />}</div>
       <div className={styles.text}>{children}</div>
-    </Link>
+    </Component>
   );
 };

@@ -1,4 +1,4 @@
-import { Input, PasswordInput } from "@mantine/core";
+import { Button, Input, PasswordInput } from "@mantine/core";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Form } from "utils/form/form";
 import { useAppForm } from "utils/form/useForm";
@@ -15,8 +15,8 @@ export const LoginForm = () => {
 
   /***** QUERIES *****/
   const { mutateAsync } = useMutation({
-    mutationFn: ({ email, password }: { email: string; password: string }) => {
-      return user.login.POST({ email, password });
+    mutationFn: (params: { email: string; password: string }) => {
+      return user.login.POST(params);
     },
   });
 
@@ -50,7 +50,10 @@ export const LoginForm = () => {
           name="password"
           children={(field) => <PasswordInput value={field.state.value} onChange={(e) => field.handleChange(e.target.value)} placeholder="Password" />}
         />
-        <button type="submit">Login</button>
+
+        <Button type="submit" w={"100%"}>
+          Login
+        </Button>
       </Form>
     </div>
   );

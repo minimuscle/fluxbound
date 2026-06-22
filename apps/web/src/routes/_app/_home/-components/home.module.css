@@ -17,7 +17,7 @@
   }
 
   .backgroundVideo {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -26,7 +26,7 @@
   }
 
   .overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -37,18 +37,17 @@
 
   .sigil {
     position: fixed;
+    scale: 0.65;
     top: rem(-270px);
-    left: rem(-966px);
-    opacity: 0.5;
+    left: rem(-900px);
     z-index: -1;
     animation: rotate 120s linear infinite;
   }
 
   .sigil2 {
     position: fixed;
-    top: rem(750px);
-    right: rem(-750px);
-    opacity: 0.5;
+    top: rem(675px);
+    right: rem(-405px);
     z-index: -1;
     animation: rotate 120s linear infinite reverse;
   }
@@ -58,7 +57,6 @@
     scale: 0.5;
     top: rem(-75%);
     right: rem(-820px);
-    opacity: 0.5;
     z-index: -1;
     animation: rotate 120s linear infinite;
   }
@@ -71,7 +69,6 @@
   }
 
   .navButton {
-    position: fixed;
     background-image: url("/src/assets/images/ui/menu/main/navButton.svg");
     background-size: contain;
     background-repeat: no-repeat;
@@ -79,7 +76,6 @@
     width: rem(333px);
     display: flex;
     align-items: center;
-    padding-top: 5px;
 
     &:hover {
       background-image: url("/src/assets/images/ui/menu/main/navButtonHover.svg");
@@ -98,26 +94,43 @@
       margin-top: -2px;
       text-align: center;
     }
+  }
 
-    &:nth-last-of-type(5) {
-      top: rem(150px);
-      left: rem(375px);
+  .main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    gap: 0;
+  }
+
+  .menu {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-left: rem(475px);
+
+    .menuSpacer {
+      height: 55px;
+      width: fit-content;
+      padding-left: 25px;
+      margin-top: -7px;
+      margin-bottom: -7px;
     }
-    &:nth-last-of-type(4) {
-      top: rem(320px);
-      left: rem(445px);
+
+    .menuHolder,
+    .menuHolderBottom {
+      height: 230px;
+      width: fit-content;
+      padding-left: 35px;
+      margin-bottom: -7px;
     }
-    &:nth-last-of-type(3) {
-      top: rem(490px);
-      left: rem(475px);
-    }
-    &:nth-last-of-type(2) {
-      top: rem(660px);
-      left: rem(445px);
-    }
-    &:nth-last-of-type(1) {
-      top: rem(830px);
-      left: rem(375px);
+
+    .menuHolderBottom {
+      /* //Flip upside down */
+      transform: scaleY(-1);
     }
   }
 

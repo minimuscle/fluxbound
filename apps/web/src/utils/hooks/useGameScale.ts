@@ -8,8 +8,6 @@ export function useGameScale() {
       const scaleX = window.innerWidth / 1920;
       const scaleY = window.innerHeight / 1080;
 
-      console.log("scale", scaleX, scaleY);
-
       // keep aspect ratio
       const newScale = Math.min(scaleX, scaleY);
       setScale(newScale);
