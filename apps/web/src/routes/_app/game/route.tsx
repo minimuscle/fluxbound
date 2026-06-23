@@ -112,7 +112,7 @@ function RouteComponent() {
   return (
     <GameErrorContext value={{ gameError, setGameError }}>
       <WebSocketContext value={context}>
-        <GameContext value={gameState ? { state: gameState, playerId: userData?.id } : null}>
+        <GameContext value={gameState ? { state: gameState, playerId: userData?.data?.id } : null}>
           <Outlet />
         </GameContext>
       </WebSocketContext>

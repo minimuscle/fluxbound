@@ -31,34 +31,76 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 0;
   }
 
   .sigil {
     position: fixed;
-    scale: 0.65;
     top: rem(-270px);
     left: rem(-900px);
-    z-index: -1;
-    animation: rotate 120s linear infinite;
+    z-index: 0;
+    transition: transform 3s ease;
+    transform: translateX(0);
+  }
+
+  .sigilPositionTwo {
+    transform: translateX(-15%);
+  }
+
+  .sigilInitialPositionTwo {
+    animation: Sigil1In 3s ease;
+  }
+
+  .sigilImage {
+    display: block;
+    scale: 0.65;
+    animation: rotate 120s linear 3s infinite;
   }
 
   .sigil2 {
     position: fixed;
     top: rem(675px);
     right: rem(-405px);
-    z-index: -1;
-    animation: rotate 120s linear infinite reverse;
+    z-index: 0;
+    transition: transform 3s ease;
+    transform: translateX(0) translateY(0);
+  }
+
+  .sigil2PositionTwo {
+    transform: translateX(-25%) translateY(25%);
+  }
+
+  .sigil2InitialPositionTwo {
+    animation: Sigil2In 3s ease;
+  }
+
+  .sigil2Image {
+    display: block;
+    animation: rotate 120s linear 3s infinite reverse;
   }
 
   .sigil3 {
     position: fixed;
-    scale: 0.5;
     top: rem(-75%);
     right: rem(-820px);
-    z-index: -1;
-    animation: rotate 120s linear infinite;
+    z-index: 0;
+    transition: transform 3s ease;
+    transform: translateY(0);
+  }
+
+  .sigil3PositionTwo {
+    transform: translateY(-25%);
+  }
+
+  .sigil3InitialPositionTwo {
+    animation: Sigil3In 3s ease;
+  }
+
+  .sigil3Image {
+    display: block;
+    scale: 0.5;
+    animation: rotate 120s linear 3s infinite;
   }
 
   .logo {
@@ -72,6 +114,7 @@
     background-image: url("/src/assets/images/ui/menu/main/navButton.svg");
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: top left;
     height: rem(100px);
     width: rem(333px);
     display: flex;
@@ -79,10 +122,15 @@
 
     &:hover {
       background-image: url("/src/assets/images/ui/menu/main/navButtonHover.svg");
+      background-size: rem(335px);
+      background-position-x: rem(-17px);
+      background-position-y: rem(-14px);
     }
 
     .icon {
-      padding: 0 35px 0 25px;
+      /*      // padding: 0 35px 0 25px;*/
+      padding: rem(5px) rem(40px) rem(5px) rem(25px);
+      margin-top: rem(8px);
     }
 
     .text {
@@ -90,9 +138,10 @@
       font-size: rem(24px);
       font-family: "Cinzel", sans-serif;
       font-weight: 600;
-      width: 200px;
-      margin-top: -2px;
-      text-align: center;
+      width: rem(200px);
+      margin-top: rem(2px);
+      margin-left: rem(10px);
+      text-align: left;
     }
   }
 
@@ -150,5 +199,34 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+/* Animation for sigils to come in */
+
+@keyframes Sigil1In {
+  0% {
+    transform: translateX(-150vw);
+  }
+  100% {
+    transform: translateX(-15%);
+  }
+}
+
+@keyframes Sigil2In {
+  0% {
+    transform: translateX(50%) translateY(50%);
+  }
+  100% {
+    transform: translateX(-25%) translateY(25%);
+  }
+}
+
+@keyframes Sigil3In {
+  0% {
+    transform: translateX(50%) translateY(-50%);
+  }
+  100% {
+    transform: translateX(0) translateY(-25%);
   }
 }
