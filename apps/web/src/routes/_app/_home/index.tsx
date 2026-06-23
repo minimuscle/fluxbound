@@ -1,6 +1,6 @@
 import { GearSixIcon, PlayIcon, SignOutIcon, StackIcon, UsersIcon } from "@phosphor-icons/react";
 import { createFileRoute } from "@tanstack/react-router";
-import Logo from "assets/images/ui/logo.png";
+import Logo from "assets/images/ui/menu/main/logo.svg";
 import MenuHolder from "assets/images/ui/menu/main/menuHolder.svg";
 import MenuSpacer from "assets/images/ui/menu/main/menuSpacer.svg";
 import { NavButton } from "routes/_app/_home/-components/navButton";

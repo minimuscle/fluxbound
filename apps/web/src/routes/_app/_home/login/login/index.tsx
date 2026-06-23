@@ -1,11 +1,14 @@
-import { Button, Input, PasswordInput } from "@mantine/core";
+import { noop } from "@mantine/core";
+import { EnvelopeIcon, LockKeyIcon } from "@phosphor-icons/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getRouteApi } from "@tanstack/react-router";
+import { user } from "api/user";
+import Or from "assets/images/ui/menu/login/or.svg";
+import { audioManager } from "utils/audio";
 import { Form } from "utils/form/form";
 import { useAppForm } from "utils/form/useForm";
 import { z } from "zod";
-import { user } from "../../../api/user";
-import "./login.scss";
+import styles from "./login.module.css";
 
 /**********************************************************************************************************
  *   CONSTS
@@ -48,21 +51,43 @@ export const LoginForm = () => {
 
   /***** RENDER *****/
   return (
-    <div className="LoginForm">
-      <Form form={form}>
+    <div className={styles.container}>
+      <Form form={form} className={styles.form}>
         <form.AppField
           name="email"
-          children={(field) => <Input value={field.state.value} onChange={(e) => field.handleChange(e.target.value)} placeholder="Email" />}
+          children={(field) => (
+            <div className={styles.inputContainer}>
+              <EnvelopeIcon size={28} color="#d5b864" className={styles.inputIcon} />
+              <input value={field.state.value} onChange={(e) => field.handleChange(e.target.value)} placeholder="Email" className={styles.input} />
+            </div>
+          )}
         />
         <form.AppField
           name="password"
-          children={(field) => <PasswordInput value={field.state.value} onChange={(e) => field.handleChange(e.target.value)} placeholder="Password" />}
+          children={(field) => (
+            <div className={styles.inputContainer}>
+              <LockKeyIcon weight="fill" size={28} color="#d5b864" className={styles.inputIcon} />
+              <input
+                type="password"
+                value={field.state.value}
+                onChange={(e) => field.handleChange(e.target.value)}
+                placeholder="Password"
+                className={styles.input}
+              />
+            </div>
+          )}
         />
+        <p className={styles.text}>Forgot Password?</p>
 
-        <Button type="submit" w={"100%"}>
-          Login
-        </Button>
+        <button type="submit" className={styles.button} onMouseEnter={() => audioManager.playSoundEffect("buttonHover")}>
+          Log In
+        </button>
       </Form>
+
+      <img src={Or} alt="" className={styles.or} />
+      <button type="button" onClick={noop} className={styles.buttonSecondary} onMouseEnter={() => audioManager.playSoundEffect("buttonHover")}>
+        Create Account
+      </button>
     </div>
   );
 };

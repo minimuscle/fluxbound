@@ -12,13 +12,12 @@ export const Route = createFileRoute("/_app")({
   component: RouteComponent,
 });
 
-const menuRoutes = new Set(["/", "/game/lobby", "/game/lobby/single"]);
+const menuRoutes = new Set(["/", "/game/lobby", "/game/lobby/single", "/login/", "/signup/"]);
 const positionOneRoutes = new Set(["/", "/login/", "/signup/"]);
 
 function RouteComponent() {
   const pathname = useMatches({ select: (matches) => matches.at(-1)!.pathname });
   const isSigilPositionTwo = !positionOneRoutes.has(pathname);
-  console.log(pathname);
   const isInitialSigilPositionTwo = useRef(isSigilPositionTwo).current;
 
   useEffect(() => {

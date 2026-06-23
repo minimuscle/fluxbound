@@ -40,7 +40,7 @@
     top: rem(-270px);
     left: rem(-900px);
     z-index: 0;
-    transition: transform 3s ease;
+    transition: transform 1s ease-in-out;
     transform: translateX(0);
   }
 
@@ -49,7 +49,7 @@
   }
 
   .sigilInitialPositionTwo {
-    animation: Sigil1In 3s ease;
+    animation: Sigil1In 1s ease-in-out;
   }
 
   .sigilImage {
@@ -63,16 +63,16 @@
     top: rem(675px);
     right: rem(-405px);
     z-index: 0;
-    transition: transform 3s ease;
+    transition: transform 1s ease-in-out;
     transform: translateX(0) translateY(0);
   }
 
   .sigil2PositionTwo {
-    transform: translateX(-25%) translateY(25%);
+    transform: translateX(-35%) translateY(25%);
   }
 
   .sigil2InitialPositionTwo {
-    animation: Sigil2In 3s ease;
+    animation: Sigil2In 1s ease-in-out;
   }
 
   .sigil2Image {
@@ -85,16 +85,16 @@
     top: rem(-75%);
     right: rem(-820px);
     z-index: 0;
-    transition: transform 3s ease;
+    transition: transform 1s ease-in-out;
     transform: translateY(0);
   }
 
   .sigil3PositionTwo {
-    transform: translateY(-25%);
+    transform: translateX(-5%) translateY(-10%);
   }
 
   .sigil3InitialPositionTwo {
-    animation: Sigil3In 3s ease;
+    animation: Sigil3In 1s ease-in-out;
   }
 
   .sigil3Image {
@@ -154,6 +154,11 @@
     gap: 0;
   }
 
+  .menuSpacer,
+  .navButton {
+    animation: MenuItemIn 500ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+
   .menu {
     position: relative;
     display: flex;
@@ -162,24 +167,66 @@
     padding-left: rem(475px);
 
     .menuSpacer {
-      height: 55px;
+      height: rem(55px);
       width: fit-content;
-      padding-left: 25px;
-      margin-top: -7px;
-      margin-bottom: -7px;
+      padding-left: rem(25px);
+      margin-top: rem(-7px);
+      margin-bottom: rem(-7px);
     }
 
     .menuHolder,
     .menuHolderBottom {
-      height: 230px;
+      height: rem(230px);
       width: fit-content;
-      padding-left: 35px;
-      margin-bottom: -7px;
+      padding-left: rem(35px);
+      margin-bottom: rem(-7px);
+    }
+
+    .menuHolder {
+      animation: MenuTopIn 500ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    }
+
+    > :nth-child(3) {
+      animation-name: MenuTopIn;
+    }
+
+    > :nth-child(4),
+    > :nth-child(5) {
+      animation-delay: 290ms;
+    }
+
+    > :nth-child(6),
+    > :nth-child(7) {
+      animation-delay: 380ms;
+    }
+
+    > :nth-child(8),
+    > :nth-child(9) {
+      animation-delay: 470ms;
+    }
+
+    > :nth-child(10),
+    > :nth-child(11) {
+      animation-delay: 560ms;
+    }
+
+    > :nth-child(12) {
+      animation-delay: 650ms;
     }
 
     .menuHolderBottom {
-      /* //Flip upside down */
+      animation: MenuBottomIn 500ms cubic-bezier(0.16, 1, 0.3, 1) 650ms backwards;
+      mask-image: linear-gradient(#000, #000);
+      mask-position: bottom;
+      mask-repeat: no-repeat;
+      mask-size: 100% 100%;
+      -webkit-mask-image: linear-gradient(#000, #000);
+      -webkit-mask-position: bottom;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-size: 100% 100%;
       transform: scaleY(-1);
+      transform-origin: center;
+      margin-top: rem(-5px);
     }
   }
 
@@ -228,5 +275,42 @@
   }
   100% {
     transform: translateX(0) translateY(-25%);
+  }
+}
+
+@keyframes MenuTopIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-100vh);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes MenuItemIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-60%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes MenuBottomIn {
+  0% {
+    opacity: 0;
+    mask-size: 100% 0%;
+    -webkit-mask-size: 100% 0%;
+    transform: scaleY(-1);
+  }
+  100% {
+    opacity: 1;
+    mask-size: 100% 100%;
+    -webkit-mask-size: 100% 100%;
+    transform: scaleY(-1);
   }
 }
