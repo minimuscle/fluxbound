@@ -10,11 +10,6 @@ export const Route = createFileRoute("/_app/game")({
   component: RouteComponent,
 });
 
-const normalizePathname = (pathname: string) => {
-  if (pathname === "/") return pathname;
-  return pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
-};
-
 function RouteComponent() {
   /***** HOOKS *****/
   const [websocketState, setWebsocket] = useState<ReturnType<typeof createTypedWebSocketSender> | null>(null);

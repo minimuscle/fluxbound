@@ -1,38 +1,66 @@
-.container {
+// .container {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   width: 250px;
+//   height: 500px;
+//   border: 1px solid #fefefe;
+
+//   &__selected {
+//     background: hsla(0, 0%, 100%, 0.1);
+//   }
+
+//   &:disabled {
+//     background: hsla(0, 100%, 50%, 0.1);
+//   }
+// }
+
+// .beginButton {
+//   width: 250px;
+//   margin: 0 auto;
+//   height: 50px;
+//   border: 1px solid #fefefe;
+//   background: hsla(0, 0%, 100%, 0.1);
+// }
+
+// .flex {
+//   display: flex;
+//   width: 100%;
+//   gap: 50px;
+// }
+
+// .flexCol {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+// }
+
+.heading {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 250px;
-  height: 500px;
-  border: 1px solid #fefefe;
-
-  &__selected {
-    background: hsla(0, 0%, 100%, 0.1);
-  }
-
-  &:disabled {
-    background: hsla(0, 100%, 50%, 0.1);
-  }
-}
-
-.beginButton {
-  width: 250px;
-  margin: 0 auto;
-  height: 50px;
-  border: 1px solid #fefefe;
-  background: hsla(0, 0%, 100%, 0.1);
-}
-
-.flex {
-  display: flex;
   width: 100%;
-  gap: 50px;
-}
+  height: 100%;
+  gap: 150px;
+  margin-top: 20px;
 
-.flexCol {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  .text {
+    font-size: 48px;
+    font-family: "Cinzel", sans-serif;
+    font-weight: 700;
+    color: #d5b864;
+    margin: 0;
+  }
+
+  &Side2 {
+    transform: rotate(180deg);
+  }
+
+  &Base {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+  }
 }

@@ -1,6 +1,6 @@
 .Card {
-  height: mantine.rem(250px);
-  width: mantine.rem(180px);
+  height: rem(250px);
+  width: rem(180px);
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0px 0px 10px rgb(0, 0, 0);
@@ -89,9 +89,9 @@
   }
 
   &__empty {
-    height: mantine.rem(250px);
-    width: mantine.rem(180px);
-    border-radius: mantine.rem(10px);
+    height: rem(250px);
+    width: rem(180px);
+    border-radius: rem(10px);
     background-color: rgb(114, 88, 123);
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
     background-image: url("../../assets/images/ui/card_back.svg");

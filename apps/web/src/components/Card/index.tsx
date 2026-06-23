@@ -1,7 +1,7 @@
 import { CARD_LIBRARY, type Game } from "@fluxbound/schema";
 import Overlay from "assets/images/cards/fire/blank.svg";
 import Ember from "assets/images/cards/fire/ember.jpeg";
-import FireDomain from "assets/images/domains/fire.webp"
+import FireDomain from "assets/images/domains/fire.webp";
 import classNames from "classnames";
 import { use } from "react";
 import { WebSocketContext } from "routes/_app/game/-components/context";
@@ -45,7 +45,9 @@ export const Card: Card = ({ card, action = "play" }) => {
       <img className="Card__overlay" src={Overlay} alt="" />
       <div className="Card__cost">{cardInfo.cost}</div>
       <div className="Card__name">{cardInfo.name}</div>
-      <div className="Card__domain"><img src={FireDomain} alt={cardInfo.name} /></div>
+      <div className="Card__domain">
+        <img src={FireDomain} alt={cardInfo.name} />
+      </div>
       <div className="Card__type">{cardInfo.type}</div>
       <div className="Card__description">{cardInfo.description}</div>
       {"damage" in cardInfo && <div className="Card__attack">{cardInfo.damage}</div>}

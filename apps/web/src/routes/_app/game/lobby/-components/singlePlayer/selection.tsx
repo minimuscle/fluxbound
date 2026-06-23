@@ -1,9 +1,10 @@
-import classNames from "classnames";
-import { Button } from "components/Button";
+import HeadingBase from "assets/images/ui/menu/singlePlayerOpponent/headingBase.svg";
+import HeadingSide from "assets/images/ui/menu/singlePlayerOpponent/headingSide.svg";
 import { useState } from "react";
 import { WebSocketContext } from "routes/_app/game/-components/context";
 import { useInvariant } from "utils/hooks/useInvariant";
 import styles from "./selection.module.scss";
+
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
@@ -16,8 +17,16 @@ export const SinglePlayerSelection = () => {
 
   /***** RENDER *****/
   return (
-    <div className={styles.flexCol}>
-      <h1>Single Player Game</h1>
+    <>
+      <div className={styles.heading}>
+        <img src={HeadingSide} alt="" className={styles.headingSide} />
+        <h1 className={styles.text}>Select Opponent</h1>
+        <img src={HeadingSide} alt="" className={styles.headingSide2} />
+      </div>
+      <img src={HeadingBase} alt="" className={styles.headingBase} />
+    </>
+    // <div className={styles.flexCol}>
+    /* <h1>Single Player Game</h1>
       <div className={styles.flex}>
         <button onClick={() => setIsSelected(1)} className={classNames(styles.container, { [styles.container__selected]: isSelected === 1 })}>
           Novice
@@ -41,7 +50,7 @@ export const SinglePlayerSelection = () => {
       <br />
       <Button className={styles.beginButton} disabled={!isSelected} onClick={() => ws?.send({ type: "game/startSolo" })}>
         Begin
-      </Button>
-    </div>
+      </Button> */
+    // </div>
   );
 };

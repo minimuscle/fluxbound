@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { BackButton } from "components/Button/back";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import styles from "./-components/main.module.css";
 import { SinglePlayerSelection } from "./-components/singlePlayer/selection";
 
 export const Route = createFileRoute("/_app/game/lobby/single")({
@@ -7,9 +7,13 @@ export const Route = createFileRoute("/_app/game/lobby/single")({
 });
 
 function RouteComponent() {
+  /***** HOOKS *****/
+  const navigate = Route.useNavigate();
+
+  /***** RENDER *****/
   return (
     <div>
-      <BackButton to="/" />
+      <Link to="/" className={styles.backBtn} />
       <SinglePlayerSelection />
     </div>
   );

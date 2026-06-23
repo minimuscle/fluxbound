@@ -10,7 +10,7 @@ import "../App.scss";
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: RootLayout,
-  beforeLoad: async ({ context: { queryClient }, matches, location }) => {
+  beforeLoad: async ({ context: { queryClient }, location }) => {
     const userData = await queryClient.fetchQuery({
       queryKey: ["user"],
       queryFn: user.details.GET,
