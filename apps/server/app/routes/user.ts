@@ -71,4 +71,13 @@ export const user = {
       });
     }),
   },
+  logout: {
+    POST: withAuth(async ({ supabase }) => {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        return ErrorResponse(error.message, 500);
+      }
+      return SuccessResponse("Logout Successful");
+    }),
+  },
 };

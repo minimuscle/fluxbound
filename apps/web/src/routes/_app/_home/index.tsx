@@ -33,8 +33,8 @@ function RouteComponent() {
         Settings
       </NavButton>
       <img src={MenuSpacer} alt="" className={styles.menuSpacer} />
-      <NavButton onClick={close} icon={SignOutIcon}>
-        <p>Quit (Not working)</p>
+      <NavButton options={{ to: "/logout" }} icon={SignOutIcon}>
+        Quit
       </NavButton>
       <img src={MenuHolder} alt="" className={styles.menuHolderBottom} />
     </div>

@@ -41,4 +41,7 @@ export const routes = {
   "/api/user/login": {
     POST: user.login.POST,
   },
+  "/api/user/logout": {
+    POST: user.logout.POST,
+  },
 } satisfies Bun.Serve.Options<GameSocketData>["routes"];

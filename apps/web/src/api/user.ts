@@ -1,12 +1,12 @@
 import { apiFetch } from "./functions";
 
 export const user = {
-  GET: async () => {
-    return await (await apiFetch("/api/user")).json();
+  GET: () => {
+    return apiFetch("/api/user");
   },
   details: {
-    GET: async () => {
-      return await (await apiFetch("/api/user/details")).json();
+    GET: () => {
+      return apiFetch("/api/user/details");
     },
   },
   login: {
@@ -19,5 +19,9 @@ export const user = {
       localStorage.setItem("access_token", data.session.access_token);
       return data;
     },
+  },
+
+  logout: () => {
+    return apiFetch("/api/user/logout", { method: "POST" });
   },
 };

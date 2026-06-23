@@ -15,9 +15,9 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "globals": "^17.3.0",
+    "globals": "^17.7.0",
     "nx": "22.6.1",
     "oxfmt": "^0.41.0",
-    "oxlint": "^1.56.0"
+    "oxlint": "^1.71.0"
   }
 }

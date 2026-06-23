@@ -1,5 +1,6 @@
 import { Button, Input, PasswordInput } from "@mantine/core";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { getRouteApi } from "@tanstack/react-router";
 import { Form } from "utils/form/form";
 import { useAppForm } from "utils/form/useForm";
 import { z } from "zod";
@@ -7,11 +8,17 @@ import { user } from "../../../api/user";
 import "./login.scss";
 
 /**********************************************************************************************************
+ *   CONSTS
+ **********************************************************************************************************/
+const Route = getRouteApi("/_app/_home/login/");
+
+/**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
 export const LoginForm = () => {
   /***** HOOKS *****/
   const queryClient = useQueryClient();
+  const navigate = Route.useNavigate();
 
   /***** QUERIES *****/
   const { mutateAsync } = useMutation({
@@ -32,9 +39,10 @@ export const LoginForm = () => {
       email: "",
       password: "",
     },
-    onSubmit: ({ value }) => {
-      mutateAsync(value);
+    onSubmit: async ({ value }) => {
+      await mutateAsync(value);
       queryClient.invalidateQueries({ queryKey: ["user"] });
+      navigate({ to: "/" });
     },
   });
 

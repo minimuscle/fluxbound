@@ -1,15 +1,16 @@
+import { devtools } from "@tanstack/devtools-vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
-import tsConfigPaths from "vite-tsconfig-paths";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
+    devtools(),
     tanstackRouter({
       target: "react",
       autoCodeSplitting: true,
@@ -19,17 +20,16 @@ export default defineConfig({
         plugins: [["babel-plugin-react-compiler"]],
       },
     }),
-    tsConfigPaths(),
   ],
   css: {
     preprocessorOptions: {
       scss: {
-        api: "modern-compiler",
-        additionalData: `@use "${path.join(process.cwd(), "src/_mantine").replace(/\\/g, "/")}" as mantine;`,
+        additionalData: `@use "${path.join(process.cwd(), "src/mantine").replace(/\\/g, "/")}" as *;`,
       },
     },
   },
   resolve: {
+    tsconfigPaths: true,
     alias: {
       pages: path.resolve(__dirname, "./src/pages"),
       assets: path.resolve(__dirname, "./src/assets"),

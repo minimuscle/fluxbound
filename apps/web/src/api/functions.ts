@@ -1,7 +1,6 @@
 export async function apiFetch(input: RequestInfo, init: RequestInit = {}) {
   const token = localStorage.getItem("access_token");
-
-  return fetch(input, {
+  const response = await fetch(input, {
     ...init,
     headers: {
       "Content-Type": "application/json",
@@ -9,4 +8,21 @@ export async function apiFetch(input: RequestInfo, init: RequestInit = {}) {
       ...init.headers,
     },
   });
+
+  if (response.status !== 200) {
+    return {
+      url: response.url,
+      status: response.status,
+      message: response.statusText,
+    };
+  }
+
+  const json = await response.json();
+
+  return {
+    url: response.url,
+    status: response.status,
+    message: response.statusText,
+    data: json,
+  };
 }

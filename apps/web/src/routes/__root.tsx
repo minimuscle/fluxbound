@@ -1,4 +1,7 @@
+import { TanStackDevtools } from "@tanstack/react-devtools";
+import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
 import { createRootRouteWithContext, Outlet, redirect } from "@tanstack/react-router";
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { user } from "api/user";
 import { audioManager } from "utils/audio";
 import { useGameScale } from "utils/hooks/useGameScale";
@@ -8,14 +11,15 @@ import "../App.scss";
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: RootLayout,
   beforeLoad: async ({ context: { queryClient }, matches, location }) => {
-    await queryClient
-      .fetchQuery({
-        queryKey: ["user"],
-        queryFn: () => user.details.GET(),
-      })
-      .catch(() => {
-        if (location.pathname !== "/login") throw redirect({ to: "/login" });
-      });
+    const userData = await queryClient.fetchQuery({
+      queryKey: ["user"],
+      queryFn: user.details.GET,
+    });
+
+    if (userData.status !== 200 && location.pathname !== "/login") {
+      console.log("redirecting", userData);
+      throw redirect({ to: "/login" });
+    }
   },
 });
 
@@ -37,7 +41,18 @@ function RootLayout() {
           MUTE
         </button>
         <Outlet />
-        {/* <TanStackRouterDevtools /> */}
+        <TanStackDevtools
+          plugins={[
+            {
+              name: "Tanstack Query",
+              render: <ReactQueryDevtoolsPanel />,
+            },
+            {
+              name: "Tanstack Router",
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+          ]}
+        />
       </div>
     </div>
   );
