@@ -45,6 +45,7 @@
   height: 100%;
   gap: 150px;
   margin-top: 20px;
+  animation: fadeIn 300ms ease-in 500ms backwards;
 
   .text {
     font-size: 48px;
@@ -62,6 +63,7 @@
     display: flex;
     justify-content: center;
     margin: 0 auto;
+    animation: fadeIn 300ms ease-in 500ms backwards;
   }
 }
 
@@ -79,6 +81,7 @@
   min-width: 245px;
   min-height: 522px;
   position: relative;
+  animation: fadeIn 300ms ease-in 500ms backwards;
 
   &Locked {
     cursor: default;
@@ -146,6 +149,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 50px;
+  animation: fadeIn 300ms ease-in 500ms backwards;
 
   .button {
     width: 300px;
@@ -162,5 +166,16 @@
     &:hover {
       background-image: url("../../../../../../assets/images/ui/menu/login/buttonPrimary-hover.svg");
     }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-70px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
