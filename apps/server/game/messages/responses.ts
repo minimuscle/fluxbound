@@ -16,6 +16,7 @@ export const game = {
     if (!ws.data.roomId) return void ws.send(GameResponse({ type: "game/error", ok: false, message: "No Room ID", code: "NO_ROOM_ID" }));
     const player1: Game.InitialPlayerState = {
       id: ws.data.userId,
+      name: ws.data.name,
       deck: playerStarterTestDeck as Cards.CardId[],
       hand: [],
       field: [],
@@ -37,6 +38,7 @@ export const game = {
     };
     const player2: Game.InitialPlayerState = {
       id: "AI_0" as Game.PlayerId,
+      name: "Novice AI" as Game.PlayerName,
       deck: enemyStarterTestDeck as Cards.CardId[],
       hand: [],
       field: [],

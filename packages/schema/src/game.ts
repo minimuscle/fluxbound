@@ -5,6 +5,7 @@ export namespace Game {
   export type RoomId = Tagged<string, "roomId">;
   export type PlayerId = Tagged<string, "playerId">;
   export type CardId = Tagged<string, "gameCardId">;
+  export type PlayerName = Tagged<string, "playerName">;
 
   export type GameCard = {
     id: CardId;
@@ -20,6 +21,7 @@ export namespace Game {
 
   export type PlayerState = {
     id: PlayerId;
+    name: PlayerName;
     deck: GameCard[];
     hand: GameCard[];
     field: GameCard[];

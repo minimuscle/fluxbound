@@ -41,7 +41,7 @@ export const Card: Card = ({ card, action = "play" }) => {
   /***** RENDER *****/
   return (
     <button disabled={!isActivePlayer} className={classNames("Card", { Card__disband: action === "discard" })} onClick={handleClick}>
-      {cardInfo.name === "Ember" && <img className="Card__image" src={Ember} alt={cardInfo.name} />}
+      <img className="Card__image" src={Ember} alt={cardInfo.name} />
       <img className="Card__overlay" src={Overlay} alt="" />
       <div className="Card__cost">{cardInfo.cost}</div>
       <div className="Card__name">{cardInfo.name}</div>
