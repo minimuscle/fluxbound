@@ -6,7 +6,6 @@ import { userDetailsStaleTimeMs } from "queries/getUserDetails";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { routeTree } from "./routeTree.gen";
-import { preloadAssets } from "./utils/preloadAssets";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,14 +32,12 @@ declare module "@tanstack/react-router" {
   }
 }
 
-preloadAssets().finally(() => {
-  createRoot(document.getElementById("root")!).render(
-    <StrictMode>
-      <MantineProvider>
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-        </QueryClientProvider>
-      </MantineProvider>
-    </StrictMode>,
-  );
-});
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <MantineProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </MantineProvider>
+  </StrictMode>,
+);

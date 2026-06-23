@@ -64,3 +64,103 @@
     margin: 0 auto;
   }
 }
+
+.flex {
+  display: flex;
+  width: 100%;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding-top: 150px;
+}
+
+.opponentOption {
+  min-width: 245px;
+  min-height: 522px;
+  position: relative;
+
+  &Locked {
+    cursor: default;
+  }
+
+  .optionContent {
+    position: absolute;
+    inset: 0;
+  }
+
+  .image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    width: 245px;
+    height: 522px;
+  }
+
+  .baseImage,
+  .hoverImage {
+    transition: opacity 300ms ease;
+  }
+
+  .hoverImage {
+    z-index: 1;
+    opacity: 0;
+    top: 50%;
+    left: 50%;
+    max-width: none;
+    transform: translate(-50%, -50%);
+    width: 255px;
+    height: 562px;
+  }
+
+  .details {
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 300ms ease,
+      transform 300ms ease;
+  }
+
+  &Hovered {
+    .baseImage {
+      opacity: 0;
+    }
+
+    .hoverImage,
+    .details {
+      opacity: 1;
+    }
+
+    .details {
+      transform: translateY(0);
+    }
+  }
+}
+
+.startButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+
+  .button {
+    width: 300px;
+    height: 50px;
+    background-image: url("../../../../../../assets/images/ui/menu/login/buttonPrimary.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: black;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: "Della Respira", sans-serif;
+
+    &:hover {
+      background-image: url("../../../../../../assets/images/ui/menu/login/buttonPrimary-hover.svg");
+    }
+  }
+}
