@@ -2,8 +2,11 @@ import { use } from "react";
 import { GameContext } from "routes/_app/game/-components/context";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
 import { Hand } from "routes/_app/game/-components/game/hand";
+import { DOMAIN_ICON } from "routes/_app/game/-components/game/images";
 import { PlayerInfoDivider } from "routes/_app/game/-components/game/info/divider";
-import { getDomainIcon } from "routes/_app/game/-components/game/methods";
+import { PlayerInfoResources } from "routes/_app/game/-components/game/info/resources";
+import { PlayerInfoShieldCard } from "routes/_app/game/-components/game/info/shieldCard";
+import { PlayerInfoSwordCard } from "routes/_app/game/-components/game/info/swordCard";
 import { truncate } from "utils/methods/truncate";
 import styles from "./game.module.css";
 
@@ -21,7 +24,7 @@ export const Game = () => {
         <div className={styles.playerInfo}>
           <div className={styles.player}>
             <div className={styles.playerAttunement}>
-              <img src={getDomainIcon(state.you.attunement)} />
+              <img src={DOMAIN_ICON[state.you.attunement]} />
             </div>
             <div className={styles.playerDetails}>
               <div className={styles.playerText}>{truncate(state.you.name, 25)}</div>
@@ -33,7 +36,20 @@ export const Game = () => {
               </div>
             </div>
           </div>
+          <div className={styles.playerShields}>
+            <div className={styles.playerShield}>
+              <PlayerInfoSwordCard field={state.you.field} />
+            </div>
+            <div className={styles.playerShield}>
+              <PlayerInfoShieldCard field={state.you.field} />
+            </div>
+            <div className={styles.playerShield}>
+              <PlayerInfoShieldCard field={state.you.field} />
+            </div>
+          </div>
           <PlayerInfoDivider />
+          <PlayerInfoResources flux={state.you.flux} />
+          <h1 className={styles.heading}>Resources</h1>
           <PlayerInfoDivider />
         </div>
       </div>
@@ -49,7 +65,7 @@ export const Game = () => {
         <div className={styles.enemyInfo}>
           <div className={styles.player}>
             <div className={styles.playerAttunement}>
-              <img src={getDomainIcon(state.opponent.attunement)} />
+              <img src={DOMAIN_ICON[state.opponent.attunement]} />
             </div>
             <div className={styles.playerDetails}>
               <div className={styles.playerText}>{truncate(state.opponent.name, 25)}</div>
@@ -61,7 +77,20 @@ export const Game = () => {
               </div>
             </div>
           </div>
+          <div className={styles.playerShields}>
+            <div className={styles.playerShield}>
+              <PlayerInfoSwordCard field={state.opponent.field} />
+            </div>
+            <div className={styles.playerShield}>
+              <PlayerInfoShieldCard field={state.opponent.field} />
+            </div>
+            <div className={styles.playerShield}>
+              <PlayerInfoShieldCard field={state.opponent.field} />
+            </div>
+          </div>
           <PlayerInfoDivider />
+          <h1 className={styles.heading}>Resources</h1>
+          <PlayerInfoResources flux={state.you.flux} />
           <PlayerInfoDivider />
         </div>
         <button className={styles.nextTurnButton}>

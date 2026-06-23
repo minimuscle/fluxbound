@@ -115,3 +115,22 @@
     height: 100%;
   }
 }
+
+.playerShields {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.playerShield {
+  width: 85px;
+  height: 85px;
+  border: 1px solid #665931;
+  border-radius: 2px;
+  padding: 5px;
+}
+
+.heading {
+  font-size: 16px;
+  font-family: "Cinzel", serif;
+}
