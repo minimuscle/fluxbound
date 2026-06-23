@@ -1,4 +1,5 @@
 import { createFileRoute, Outlet, useMatches } from "@tanstack/react-router";
+import gameMusic from "assets/audio/game_track_1.mp3";
 import menuMusic from "assets/audio/menu.ogg";
 import Movie from "assets/images/ui/menu/main/background_movie.mp4";
 import Sigil from "assets/images/ui/menu/main/sigil.svg";
@@ -22,7 +23,19 @@ function RouteComponent() {
 
   useEffect(() => {
     if (menuRoutes.has(pathname)) {
+      audioManager.setMusicVolume(0.5);
       audioManager.playBackgroundMusic(menuMusic);
+      return;
+    }
+
+    //Play in game music
+    if (pathname === "/game/") {
+      //TODO: add more game music sounds and switch between them.
+      audioManager.stopBackgroundMusic();
+      setTimeout(() => {
+        audioManager.setMusicVolume(0.25);
+        audioManager.playBackgroundMusic(gameMusic);
+      }, 5000);
       return;
     }
 
@@ -35,21 +48,23 @@ function RouteComponent() {
   return (
     <div className={styles.container}>
       <div className={styles.background} />
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        className={styles.backgroundVideo}
-        ref={(videoElement) => {
-          if (videoElement) {
-            videoElement.playbackRate = 1;
-          }
-        }}
-      >
-        <source src={Movie} type="video/mp4" />
-      </video>
+      {menuRoutes.has(pathname) && (
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className={styles.backgroundVideo}
+          ref={(videoElement) => {
+            if (videoElement) {
+              videoElement.playbackRate = 1;
+            }
+          }}
+        >
+          <source src={Movie} type="video/mp4" />
+        </video>
+      )}
       <div className={styles.overlay} />
       <div
         className={classNames(styles.sigil, {

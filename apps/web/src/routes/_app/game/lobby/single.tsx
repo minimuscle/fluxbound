@@ -11,8 +11,6 @@ function RouteComponent() {
   /***** HOOKS *****/
   const [isLocked, toggleLocked] = useState(true);
 
-  console.log("isLocked: ", isLocked);
-
   /***** RENDER *****/
   return (
     <div>

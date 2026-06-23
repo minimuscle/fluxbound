@@ -1,53 +1,26 @@
 import { use } from "react";
 import { GameContext } from "routes/_app/game/-components/context";
-import { CoinToss } from "routes/_app/game/-components/game/coinToss";
-import { YourTurn } from "routes/_app/game/-components/game/yourTurn";
-import { AttunementArea } from "./attunement";
-import { PlayerContext } from "./context";
-import { Field } from "./Field";
-import { Flux } from "./flux";
 import styles from "./game.module.css";
-import { Hand } from "./hand";
 
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
 export const Game = () => {
+  /***** HOOKS *****/
   const { state } = use(GameContext)!;
 
   /***** RENDER *****/
   return (
-    <>
-      {/* <div className={styles.topBar}></div> */}
-      <div className={styles.container}>
-        <div className={styles.table} />
-        <YourTurn />
-        <CoinToss />
-        <PlayerContext value={{ stage: "ENEMY", player: state.opponent }}>
-          <div className={styles.enemySection}>
-            <AttunementArea />
-
-            <div className={styles.middleSection}>
-              <Hand />
-              <Field />
-            </div>
-            <Flux />
-          </div>
-        </PlayerContext>
-        {/* <hr className={styles.divider} /> */}
-        <PlayerContext value={{ stage: "PLAYER", player: state.you }}>
-          <div className={styles.playerSection}>
-            <Flux />
-
-            <div className={styles.middleSection}>
-              <Field />
-              <Hand />
-            </div>
-
-            <AttunementArea />
-          </div>
-        </PlayerContext>
+    <div className={styles.container}>
+      <div className={styles.playerInfo}></div>
+      <div className={styles.gameSection}></div>
+      <div className={styles.rightSection}>
+        <div className={styles.enemyInfo}></div>
+        <button className={styles.nextTurnButton}>
+          <p>{state.turn}</p>
+          <h1>Next Turn</h1>
+        </button>
       </div>
-    </>
+    </div>
   );
 };
