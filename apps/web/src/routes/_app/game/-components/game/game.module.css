@@ -6,4 +6,59 @@
   background-position: center;
   background-repeat: no-repeat;
   z-index: -1;
+  display: flex;
+}
+
+.leftSection,
+.rightSection {
+  width: 400px;
+  height: 100%;
+  margin: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gameSection {
+  width: 100%;
+  height: 100%;
+}
+
+.playerInfo,
+.enemyInfo {
+  width: 300px;
+  border: 1px solid #d9b25b;
+  background-color: #11151c;
+}
+
+.playerInfo {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  padding: 10px;
+  margin-top: auto;
+  margin-bottom: 50px;
+}
+
+.enemyInfo {
+}
+
+.player {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.playerAttunement {
+  width: 75px;
+  height: 75px;
+  border: 1px solid #d9b25b;
+  background-color: #000000;
+  padding: 5px;
+  border-radius: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }

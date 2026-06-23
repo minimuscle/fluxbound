@@ -25,7 +25,7 @@ export namespace Game {
     field: GameCard[];
     health: number;
     healthMax: number;
-    attunement: string;
+    attunement: Cards.Domain;
     flux: Record<Cards.Domain, number>;
   };
 

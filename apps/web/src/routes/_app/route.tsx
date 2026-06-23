@@ -35,7 +35,7 @@ function RouteComponent() {
       setTimeout(() => {
         audioManager.setMusicVolume(0.25);
         audioManager.playBackgroundMusic(gameMusic);
-      }, 5000);
+      }, 2000);
       return;
     }
 
