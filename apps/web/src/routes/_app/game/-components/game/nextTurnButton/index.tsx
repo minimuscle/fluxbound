@@ -23,7 +23,7 @@ export const NextTurnButton = () => {
   /***** RENDER *****/
   return (
     <button className={styles.button} onClick={endTurn} disabled={!isActivePlayer}>
-      <p className={styles.Turn}>Turn {state.turn.at(0)}</p>
+      <p className={styles.Turn}>Turn {state.turn.split("-")[0]}</p>
       <p className={classNames(styles.Text, { [styles.EnemyText]: !isActivePlayer })}>{isActivePlayer ? "Next Turn" : "Opponent's Turn"}</p>
     </button>
   );
