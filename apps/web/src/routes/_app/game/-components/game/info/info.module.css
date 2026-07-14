@@ -92,3 +92,49 @@
     /* background-color: #ffffff; */
   }
 }
+
+.largeRunes {
+  display: grid;
+  grid-template-columns: repeat(4, 58px);
+  justify-content: space-between;
+  gap: 10px;
+
+  .rune {
+    width: 58px;
+    height: 85px;
+    border: 1px solid #665931;
+    border-radius: 2px;
+    padding: 3px;
+
+    .runeContent {
+      width: 100%;
+      height: 100%;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 5px;
+      background-color: rgb(from var(--backgroundColor) calc(r * 0.75) calc(g * 0.75) calc(b * 0.75) / 25%);
+    }
+
+    .runeImage {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+    }
+
+    .runeText {
+      margin: 0;
+      font-family: "Cinzel", serif;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .runeEmpty {
+      background-color: #191f29;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

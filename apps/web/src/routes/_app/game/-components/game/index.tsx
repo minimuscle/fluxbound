@@ -4,6 +4,7 @@ import { DOMAIN_ICON } from "routes/_app/game/-components/game/context/images";
 import { Hand } from "routes/_app/game/-components/game/hand";
 import { PlayerInfoDivider } from "routes/_app/game/-components/game/info/divider";
 import { PlayerInfoResources } from "routes/_app/game/-components/game/info/resources";
+import { PlayerInfoLargeRunes } from "routes/_app/game/-components/game/info/runes";
 import { PlayerInfoShieldCard } from "routes/_app/game/-components/game/info/shieldCard";
 import { PlayerInfoSwordCard } from "routes/_app/game/-components/game/info/swordCard";
 import { NextTurnButton } from "routes/_app/game/-components/game/nextTurnButton";
@@ -52,6 +53,8 @@ export const Game = () => {
           <PlayerInfoResources flux={state.you.flux} />
           <h1 className={styles.heading}>Resources</h1>
           <PlayerInfoDivider />
+          <PlayerInfoLargeRunes field={state.you.field} />
+          <h1 className={styles.heading}>Runes</h1>
         </div>
       </div>
       <div className={styles.gameSection}>
@@ -91,8 +94,10 @@ export const Game = () => {
           </div>
           <PlayerInfoDivider />
           <h1 className={styles.heading}>Resources</h1>
-          <PlayerInfoResources flux={state.you.flux} />
+          <PlayerInfoResources flux={state.opponent.flux} />
           <PlayerInfoDivider />
+          <h1 className={styles.heading}>Runes</h1>
+          <PlayerInfoLargeRunes field={state.opponent.field} />
         </div>
         <NextTurnButton />
       </div>

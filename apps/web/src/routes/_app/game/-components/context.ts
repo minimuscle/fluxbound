@@ -6,8 +6,8 @@ import type { createTypedWebSocketSender } from "utils/functions";
  *   TYPE DEFINITIONS
  **********************************************************************************************************/
 export type WebSocketContext = {
-  websocket: ReturnType<typeof createTypedWebSocketSender> | null;
-  roomId: Game.RoomId | null;
+  websocket: ReturnType<typeof createTypedWebSocketSender>;
+  roomId: Game.RoomId;
 };
 
 export type GameContext = {
