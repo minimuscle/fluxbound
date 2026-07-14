@@ -1,0 +1,52 @@
+.button {
+  width: 250px;
+  height: 100px;
+  border: 1px solid #d9b25b;
+  background-color: #11151c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+
+  &:hover {
+    background-color: hsl(218, 24%, 18%);
+  }
+
+  &:active {
+    width: 245px;
+    height: 95px;
+    margin-right: 2.5px;
+    margin-bottom: 2.5px;
+  }
+
+  &:disabled {
+    border: 1px solid #745f31;
+  }
+
+  .Turn {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    font-family: "Cinzel", serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: rgb(255 255 255 / 50%);
+  }
+
+  .Text {
+    font-size: 32px;
+    margin: 0;
+    padding: 0;
+    font-family: "Cinzel", serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+  .EnemyText {
+    color: rgb(255 255 255 / 20%);
+    font-size: 20px;
+    font-style: italic;
+  }
+}

@@ -267,8 +267,8 @@
 
   .buildNumber {
     position: fixed;
-    right: rem(24px);
-    bottom: rem(24px);
+    right: 5px;
+    bottom: 0px;
     color: #d5b864;
     font-size: rem(14px);
     letter-spacing: rem(0.08em);

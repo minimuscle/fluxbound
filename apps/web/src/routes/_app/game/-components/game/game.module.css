@@ -13,10 +13,14 @@
 .rightSection {
   width: 400px;
   height: 100%;
-  margin: 25px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.rightSection {
+  align-items: flex-end;
 }
 
 .gameSection {

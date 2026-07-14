@@ -1,12 +1,13 @@
-import { use } from "react";
 import { GameContext } from "routes/_app/game/-components/context";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
+import { DOMAIN_ICON } from "routes/_app/game/-components/game/context/images";
 import { Hand } from "routes/_app/game/-components/game/hand";
-import { DOMAIN_ICON } from "routes/_app/game/-components/game/images";
 import { PlayerInfoDivider } from "routes/_app/game/-components/game/info/divider";
 import { PlayerInfoResources } from "routes/_app/game/-components/game/info/resources";
 import { PlayerInfoShieldCard } from "routes/_app/game/-components/game/info/shieldCard";
 import { PlayerInfoSwordCard } from "routes/_app/game/-components/game/info/swordCard";
+import { NextTurnButton } from "routes/_app/game/-components/game/nextTurnButton";
+import { useInvariant } from "utils/hooks/useInvariant";
 import { truncate } from "utils/methods/truncate";
 import styles from "./game.module.css";
 
@@ -15,7 +16,7 @@ import styles from "./game.module.css";
  **********************************************************************************************************/
 export const Game = () => {
   /***** HOOKS *****/
-  const { state } = use(GameContext)!;
+  const { state } = useInvariant(GameContext);
 
   /***** RENDER *****/
   return (
@@ -93,10 +94,7 @@ export const Game = () => {
           <PlayerInfoResources flux={state.you.flux} />
           <PlayerInfoDivider />
         </div>
-        <button className={styles.nextTurnButton}>
-          <p>{state.turn}</p>
-          <h1>Next Turn</h1>
-        </button>
+        <NextTurnButton />
       </div>
     </div>
   );

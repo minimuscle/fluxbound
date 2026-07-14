@@ -1,6 +1,6 @@
 import { CARD_LIBRARY, type Game } from "@fluxbound/schema";
 import { SwordIcon } from "@phosphor-icons/react";
-import { CARD_IMAGE } from "routes/_app/game/-components/game/images";
+import { CARD_IMAGE } from "routes/_app/game/-components/game/context/images";
 import styles from "./info.module.css";
 
 /**********************************************************************************************************
