@@ -167,14 +167,18 @@ export const game = {
     if (!result.ok)
       return void ws.send(GameResponse({ type: "game/error", ...result }));
 
-    if (result.code === "GAME_ENDED" && !!result.winner)
-      return void ws.send(
+    if (result.code === "GAME_ENDED" && !!result.winner) {
+      server.publish(
+        `room:${ws.data.roomId}`,
         GameResponse({
           type: "game/gameEnded",
           state: engine.getPlayerView(),
           winner: result.winner,
         }),
       );
+      ws.close(1000, "Game Ended");
+      return;
+    }
 
     server.publish(
       `player:${ws.data.userId}`,
@@ -182,6 +186,7 @@ export const game = {
     );
 
     if (engine.gameState.activePlayer.includes("AI")) {
+      //TODO: actually have a robust way to check if the AI is playing as this is not a good way
       // Do AI Turn
       const AIResult = engine.playAITurn();
       if (!AIResult.ok)
