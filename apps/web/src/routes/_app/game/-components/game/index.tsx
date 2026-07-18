@@ -1,6 +1,7 @@
 import { GameContext } from "routes/_app/game/-components/context";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
 import { DOMAIN_ICON } from "routes/_app/game/-components/game/context/images";
+import { PlayerInfoField } from "routes/_app/game/-components/game/field";
 import { Hand } from "routes/_app/game/-components/game/hand";
 import { PlayerInfoDivider } from "routes/_app/game/-components/game/info/divider";
 import { PlayerInfoResources } from "routes/_app/game/-components/game/info/resources";
@@ -60,8 +61,10 @@ export const Game = () => {
       <div className={styles.gameSection}>
         <PlayerContext value={{ stage: "ENEMY", player: state.opponent }}>
           <Hand />
+          <PlayerInfoField />
         </PlayerContext>
         <PlayerContext value={{ stage: "PLAYER", player: state.you }}>
+          <PlayerInfoField />
           <Hand />
         </PlayerContext>
       </div>

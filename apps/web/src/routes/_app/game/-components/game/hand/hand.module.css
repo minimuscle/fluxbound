@@ -5,15 +5,15 @@
   justify-content: center;
   flex-wrap: nowrap;
   align-items: end;
-  max-height: max-content;
   transform: translateY(50%);
   transition: transform 160ms ease-out;
+  margin-top: -100px;
   --hand-gap: 5px;
 
   &.enemy {
-    min-height: 50%;
     align-items: start;
-    transform: translateY(-25%);
+    transform: translateY(0);
+    margin-top: -125px;
   }
 
   &:hover:not(.enemy) {

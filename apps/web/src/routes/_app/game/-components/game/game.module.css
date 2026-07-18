@@ -1,7 +1,9 @@
 .container {
   height: 100%;
   width: 100%;
-  background-image: linear-gradient(rgba(0, 0, 16, 0.25), rgba(0, 0, 16, 0.25)), url("../../../../../assets/images/ui/menu/game/background_game.png");
+  background-image:
+    linear-gradient(rgba(0, 0, 16, 0.25), rgba(0, 0, 16, 0.25)),
+    url("../../../../../assets/images/ui/menu/game/background_game.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -44,7 +46,6 @@
   gap: 10px;
   padding: 10px;
   margin-top: auto;
-  margin-bottom: 50px;
 }
 
 .enemyInfo {
