@@ -10,10 +10,24 @@ import { GameResponse } from "utils/responses";
 const gameStatesByRoomId = new Map<string, Game.GameState>();
 
 export const game = {
-  start: (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>) => {},
-  startSolo: async (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>) => {
+  start: (
+    server: Bun.Server<GameSocketData>,
+    ws: Bun.ServerWebSocket<GameSocketData>,
+  ) => {},
+  startSolo: async (
+    server: Bun.Server<GameSocketData>,
+    ws: Bun.ServerWebSocket<GameSocketData>,
+  ) => {
     await lobby.create(ws);
-    if (!ws.data.roomId) return void ws.send(GameResponse({ type: "game/error", ok: false, message: "No Room ID", code: "NO_ROOM_ID" }));
+    if (!ws.data.roomId)
+      return void ws.send(
+        GameResponse({
+          type: "game/error",
+          ok: false,
+          message: "No Room ID",
+          code: "NO_ROOM_ID",
+        }),
+      );
     const player1: Game.InitialPlayerState = {
       id: ws.data.userId,
       name: ws.data.name,
@@ -62,71 +76,158 @@ export const game = {
     const engine = new GameEngine(initialGameState, ws.data.userId);
 
     gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
-    server.publish(`player:${ws.data.userId}`, GameResponse({ type: "game/started", state: engine.getPlayerView() }));
+    server.publish(
+      `player:${ws.data.userId}`,
+      GameResponse({ type: "game/started", state: engine.getPlayerView() }),
+    );
   },
 
-  playCard: (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>, cardId: Game.CardId) => {
+  playCard: (
+    server: Bun.Server<GameSocketData>,
+    ws: Bun.ServerWebSocket<GameSocketData>,
+    cardId: Game.CardId,
+  ) => {
     if (!ws.data.roomId || !gameStatesByRoomId.has(ws.data.roomId)) {
-      return void ws.send(GameResponse({ type: "game/error", ok: false, code: "NO_ROOM_ID", message: "No Room ID" }));
+      return void ws.send(
+        GameResponse({
+          type: "game/error",
+          ok: false,
+          code: "NO_ROOM_ID",
+          message: "No Room ID",
+        }),
+      );
     }
     const initialGameState = gameStatesByRoomId.get(ws.data.roomId)!;
     const engine = new GameEngine(initialGameState, ws.data.userId);
 
     const result = engine.playCard(cardId);
-    if (!result.ok) return void ws.send(GameResponse({ type: "game/error", ...result }));
+    if (!result.ok)
+      return void ws.send(GameResponse({ type: "game/error", ...result }));
 
     gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
-    return void server.publish(`player:${ws.data.userId}`, GameResponse({ type: "game/stateUpdated", state: engine.getPlayerView() }));
+    return void server.publish(
+      `player:${ws.data.userId}`,
+      GameResponse({
+        type: "game/stateUpdated",
+        state: engine.getPlayerView(),
+      }),
+    );
   },
 
-  activateCard: async (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>, cardId: Game.CardId) => {
+  activateCard: async (
+    server: Bun.Server<GameSocketData>,
+    ws: Bun.ServerWebSocket<GameSocketData>,
+    cardId: Game.CardId,
+  ) => {
     if (!ws.data.roomId || !gameStatesByRoomId.has(ws.data.roomId)) {
-      return void ws.send(GameResponse({ type: "game/error", ok: false, code: "NO_ROOM_ID", message: "No Room ID" }));
+      return void ws.send(
+        GameResponse({
+          type: "game/error",
+          ok: false,
+          code: "NO_ROOM_ID",
+          message: "No Room ID",
+        }),
+      );
     }
     const gameState = gameStatesByRoomId.get(ws.data.roomId)!;
     const engine = new GameEngine(gameState, ws.data.userId);
 
     const result = await engine.activateCard(cardId);
-    if (!result.ok) return void ws.send(GameResponse({ type: "game/error", ...result }));
+    if (!result.ok)
+      return void ws.send(GameResponse({ type: "game/error", ...result }));
 
     gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
-    return void server.publish(`player:${ws.data.userId}`, GameResponse({ type: "game/stateUpdated", state: engine.getPlayerView() }));
+    return void server.publish(
+      `player:${ws.data.userId}`,
+      GameResponse({
+        type: "game/stateUpdated",
+        state: engine.getPlayerView(),
+      }),
+    );
   },
 
-  endTurn: async (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>) => {
+  endTurn: async (
+    server: Bun.Server<GameSocketData>,
+    ws: Bun.ServerWebSocket<GameSocketData>,
+  ) => {
     if (!ws.data.roomId || !gameStatesByRoomId.has(ws.data.roomId)) {
-      return void ws.send(GameResponse({ type: "game/error", ok: false, code: "NO_ROOM_ID", message: "No Room ID" }));
+      return void ws.send(
+        GameResponse({
+          type: "game/error",
+          ok: false,
+          code: "NO_ROOM_ID",
+          message: "No Room ID",
+        }),
+      );
     }
     const gameState = gameStatesByRoomId.get(ws.data.roomId)!;
     const engine = new GameEngine(gameState, ws.data.userId);
 
     const result = await engine.endTurn();
-    if (!result.ok) return void ws.send(GameResponse({ type: "game/error", ...result }));
+    if (!result.ok)
+      return void ws.send(GameResponse({ type: "game/error", ...result }));
 
-    server.publish(`player:${ws.data.userId}`, GameResponse({ type: "game/turnEnded", state: engine.getPlayerView() }));
+    if (result.code === "GAME_ENDED" && !!result.winner)
+      return void ws.send(
+        GameResponse({
+          type: "game/gameEnded",
+          state: engine.getPlayerView(),
+          winner: result.winner,
+        }),
+      );
+
+    server.publish(
+      `player:${ws.data.userId}`,
+      GameResponse({ type: "game/turnEnded", state: engine.getPlayerView() }),
+    );
 
     if (engine.gameState.activePlayer.includes("AI")) {
       // Do AI Turn
       const AIResult = engine.playAITurn();
-      if (!AIResult.ok) return void ws.send(GameResponse({ type: "game/error", ...AIResult }));
-      server.publish(`player:${ws.data.userId}`, GameResponse({ type: "game/stateUpdated", state: engine.getPlayerView() }));
+      if (!AIResult.ok)
+        return void ws.send(GameResponse({ type: "game/error", ...AIResult }));
+      server.publish(
+        `player:${ws.data.userId}`,
+        GameResponse({
+          type: "game/stateUpdated",
+          state: engine.getPlayerView(),
+        }),
+      );
     }
 
     gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
     return;
   },
 
-  discardCard: (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>, cardId: Game.CardId) => {
+  discardCard: (
+    server: Bun.Server<GameSocketData>,
+    ws: Bun.ServerWebSocket<GameSocketData>,
+    cardId: Game.CardId,
+  ) => {
     if (!ws.data.roomId || !gameStatesByRoomId.has(ws.data.roomId)) {
-      return void ws.send(GameResponse({ type: "game/error", ok: false, code: "NO_ROOM_ID", message: "No Room ID" }));
+      return void ws.send(
+        GameResponse({
+          type: "game/error",
+          ok: false,
+          code: "NO_ROOM_ID",
+          message: "No Room ID",
+        }),
+      );
     }
     const gameState = gameStatesByRoomId.get(ws.data.roomId)!;
     const engine = new GameEngine(gameState, ws.data.userId);
 
     const result = engine.discardCard(cardId);
-    if (!result.ok) return void ws.send(GameResponse({ type: "game/error", ...result }));
+    if (!result.ok)
+      return void ws.send(GameResponse({ type: "game/error", ...result }));
 
     gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
-    return void server.publish(`player:${ws.data.userId}`, GameResponse({ type: "game/stateUpdated", state: engine.getPlayerView() }));
+    return void server.publish(
+      `player:${ws.data.userId}`,
+      GameResponse({
+        type: "game/stateUpdated",
+        state: engine.getPlayerView(),
+      }),
+    );
   },
 };

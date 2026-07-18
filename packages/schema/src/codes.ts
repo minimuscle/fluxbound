@@ -1,4 +1,4 @@
-export const CODES = [
+export const ERROR_CODES = [
   "CARD_NOT_FOUND",
   "INSUFFICIENT_FLUX",
   "NOT_PLAYERS_TURN",
@@ -7,3 +7,5 @@ export const CODES = [
   "CARD_NOT_ACTIVATABLE",
   "NOT_ENOUGH_FLUX",
 ] as const;
+
+export const SUCCESS_CODES = ["GAME_ENDED"] as const;

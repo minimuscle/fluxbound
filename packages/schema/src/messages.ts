@@ -1,8 +1,10 @@
 import z from "zod";
-import { CODES } from "./codes";
+import { ERROR_CODES, SUCCESS_CODES } from "./codes";
 import type { Game } from "./game";
 
-type ServerGameState = typeof process.env.DEBUG extends "true" ? Game.GameState : Game.GameStateView;
+type ServerGameState = typeof process.env.DEBUG extends "true"
+  ? Game.GameState
+  : Game.GameStateView;
 
 export const clientLobby = z.discriminatedUnion("type", [
   z.object({
@@ -61,9 +63,14 @@ export const serverGame = z.discriminatedUnion("type", [
   }),
   z.object({
     type: z.literal("game/error"),
-    code: z.enum(CODES),
+    code: z.enum(ERROR_CODES),
     message: z.string(),
     ok: z.literal(false),
+  }),
+  z.object({
+    type: z.literal("game/gameEnded"),
+    winner: z.custom<Game.PlayerId>(),
+    state: z.custom<ServerGameState>(),
   }),
 ]);
 
@@ -72,9 +79,11 @@ export type ServerGame = z.infer<typeof serverGame>;
 export type GameResponse =
   | {
       ok: true;
+      code?: (typeof SUCCESS_CODES)[number];
+      winner?: Game.PlayerId;
     }
   | {
       ok: false;
-      code: (typeof CODES)[number];
+      code: (typeof ERROR_CODES)[number];
       message: string;
     };

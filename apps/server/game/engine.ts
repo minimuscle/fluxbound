@@ -57,7 +57,11 @@ export class GameEngine {
     const newPlayerState = getPlayer(newState, this.playerId);
 
     if (player.hand.length === newPlayerState.hand.length)
-      return { ok: false, code: "CARD_NOT_FOUND", message: "The card you are trying to discard does not exist" };
+      return {
+        ok: false,
+        code: "CARD_NOT_FOUND",
+        message: "The card you are trying to discard does not exist",
+      };
     this.state = newState;
     return { ok: true };
   }
@@ -69,8 +73,18 @@ export class GameEngine {
 
     const player = getPlayer(this.state, this.playerId);
     const card = player.field.find(({ id }) => id === cardId);
-    if (!card) return { ok: false, code: "CARD_NOT_FOUND", message: "The card you are trying to activate does not exist" };
-    if (card.activations === 0) return { ok: false, code: "CARD_NOT_ACTIVATABLE", message: "The card you are trying to activate is not activable" };
+    if (!card)
+      return {
+        ok: false,
+        code: "CARD_NOT_FOUND",
+        message: "The card you are trying to activate does not exist",
+      };
+    if (card.activations === 0)
+      return {
+        ok: false,
+        code: "CARD_NOT_ACTIVATABLE",
+        message: "The card you are trying to activate is not activable",
+      };
 
     this.state = await activateCard(this.state, card.id);
 
@@ -84,7 +98,19 @@ export class GameEngine {
 
     //Check if the player has too many cards (10) in hand
     const player = getPlayer(this.state, this.playerId);
-    if (player.hand.length >= 7) return { ok: false, code: "TOO_MANY_CARDS_IN_HAND", message: "You have too many cards in your hand" };
+    if (player.hand.length >= 7)
+      return {
+        ok: false,
+        code: "TOO_MANY_CARDS_IN_HAND",
+        message: "You have too many cards in your hand",
+      };
+
+    // Check if opponent is out of cards to draw
+    const opponent = getOpponent(this.state, this.playerId);
+    if (opponent.deck.length === 0)
+      return { ok: true, code: "GAME_ENDED", winner: player.id }; //TODO: need to create a game save code and save the data to be reviewed
+
+    // Run the end turn action
     this.state = await endTurn(this.state);
 
     return { ok: true };
