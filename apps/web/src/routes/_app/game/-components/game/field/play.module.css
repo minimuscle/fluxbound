@@ -74,6 +74,6 @@
   }
 }
 .isActivatable {
-  box-shadow: 0 0 20px #6aff00;
+  box-shadow: 0 0 10px 4px #d9b25b;
   cursor: var(--cursor-pointer, pointer);
 }

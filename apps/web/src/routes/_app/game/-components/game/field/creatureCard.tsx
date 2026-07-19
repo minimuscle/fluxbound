@@ -21,7 +21,7 @@ type CreatureCard = React.FC<{
  **********************************************************************************************************/
 export const CreatureCard: CreatureCard = ({ cardId }) => {
   /***** HOOKS *****/
-  const { player } = useInvariant(PlayerContext);
+  const { player, stage } = useInvariant(PlayerContext);
   const { websocket: ws } = useInvariant(WebSocketContext);
   const gameCardData = player.field.find((card) => card.id === cardId);
   if (!gameCardData) return null;
@@ -34,7 +34,7 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
   return (
     <div
       className={classNames(styles.creatureCard, {
-        [styles.isActivatable]: isActivatable,
+        [styles.isActivatable]: isActivatable && stage === "PLAYER",
       })}
       style={
         {
@@ -42,7 +42,9 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
         } as React.CSSProperties
       }
       onClick={() =>
-        isActivatable && ws?.send({ type: "game/activate-card", cardId })
+        isActivatable &&
+        stage === "PLAYER" &&
+        ws?.send({ type: "game/activate-card", cardId })
       }
     >
       <img src={CARD_IMAGE[gameCardData.cardId]} />
