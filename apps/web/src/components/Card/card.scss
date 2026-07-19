@@ -9,7 +9,7 @@
   cursor: var(--cursor-pointer, pointer);
   display: flex;
   flex-direction: column;
-  // transform: translateY(-575px) scale(3);
+  transform: translateY(0px);
   transition:
     transform 100ms ease-out,
     margin-right 100ms ease-out,

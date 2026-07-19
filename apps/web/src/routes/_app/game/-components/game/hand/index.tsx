@@ -32,20 +32,29 @@ export const Hand = () => {
           return <Card key={index} card={card} />;
         });
       }
-      return Array.from({ length: player.handCount }).map((_, id) => <EmptyCard key={id} />);
+      return Array.from({ length: player.handCount }).map((_, id) => (
+        <EmptyCard key={id} />
+      ));
     }
     return player.hand.map((card, index) => {
       return <Card key={index} card={card} />;
     });
   };
 
+  //TODO: handle when a new card is drawn, which should be added into the hand. New cards that appear should slide in from the left of the screen
+
   /***** RENDER *****/
   if (gameError === "TOO_MANY_CARDS_IN_HAND" && stage === "PLAYER")
     return (
       <ClickAwayListener onClickAway={() => setGameError(null)}>
         <div>
-          <div className={styles.modal}>Too many cards, select one to discard</div>
-          <div className={styles.container} style={{ "--dynamic-gap": `${gap}px` } as CSSProperties}>
+          <div className={styles.modal}>
+            Too many cards, select one to discard
+          </div>
+          <div
+            className={styles.container}
+            style={{ "--dynamic-gap": `${gap}px` } as CSSProperties}
+          >
             {player.hand.map((card, index) => {
               return <Card key={index} card={card} action="discard" />;
             })}
@@ -54,7 +63,12 @@ export const Hand = () => {
       </ClickAwayListener>
     );
   return (
-    <div className={classNames(styles.container, { [styles.enemy]: stage === "ENEMY" })} style={{ "--dynamic-gap": `${gap}px` } as CSSProperties}>
+    <div
+      className={classNames(styles.container, {
+        [styles.enemy]: stage === "ENEMY",
+      })}
+      style={{ "--dynamic-gap": `${gap}px` } as CSSProperties}
+    >
       {renderCards()}
     </div>
   );

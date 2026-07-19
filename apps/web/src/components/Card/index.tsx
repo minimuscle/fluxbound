@@ -40,8 +40,6 @@ export const Card: Card = ({ card, action = "play" }) => {
     }
   };
 
-  console.log(cardInfo, card);
-
   /***** RENDER *****/
   return (
     <button
