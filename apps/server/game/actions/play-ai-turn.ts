@@ -7,7 +7,9 @@ import { playACard } from "./play-card";
 /**********************************************************************************************************
  *   FUNCTION START
  **********************************************************************************************************/
-export const playAITurn = (state: Game.GameState): Game.GameState => {
+export const playAITurn = async (
+  state: Game.GameState,
+): Promise<Game.GameState> => {
   // Play all runes
   const player = getPlayer(state, state.activePlayer);
   player.hand.forEach((card) => {
@@ -37,6 +39,6 @@ export const playAITurn = (state: Game.GameState): Game.GameState => {
     }
   });
 
-  const finalState = endTurn(state);
+  const finalState = await endTurn(state);
   return finalState;
 };

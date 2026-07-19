@@ -2,6 +2,7 @@ import { type Game, type GameResponse } from "@fluxbound/schema";
 import { endTurn } from "game/actions/end-turn";
 import { playAITurn } from "game/actions/play-ai-turn";
 import { playACard } from "game/actions/play-card";
+import { checkEndGame } from "game/helpers/check-end-game";
 import { getOpponent } from "game/helpers/get-opponent";
 import { getPlayer } from "game/helpers/get-player";
 import { canPlayCard } from "game/rules/can-play-card";
@@ -41,9 +42,13 @@ export class GameEngine {
   }
 
   // Play the turn for the AI
-  public playAITurn(): GameResponse {
+  public async playAITurn(): Promise<GameResponse> {
     console.log("playing AI turn");
-    this.state = playAITurn(this.state);
+    this.state = await playAITurn(this.state);
+    const endGameCheck = checkEndGame(this.state);
+    if (endGameCheck.ended) {
+      return { ok: true, code: "GAME_ENDED", winner: endGameCheck.winner }; //TODO: need to create a game save code and save the data to be reviewed
+    }
     return { ok: true };
   }
 
@@ -105,13 +110,14 @@ export class GameEngine {
         message: "You have too many cards in your hand",
       };
 
-    // Check if opponent is out of cards to draw
-    const opponent = getOpponent(this.state, this.playerId);
-    if (opponent.deck.length === 0)
-      return { ok: true, code: "GAME_ENDED", winner: player.id }; //TODO: need to create a game save code and save the data to be reviewed
-
     // Run the end turn action
     this.state = await endTurn(this.state);
+
+    //Check end game
+    const endGameCheck = checkEndGame(this.state);
+    if (endGameCheck.ended) {
+      return { ok: true, code: "GAME_ENDED", winner: endGameCheck.winner }; //TODO: need to create a game save code and save the data to be reviewed
+    }
 
     return { ok: true };
   }

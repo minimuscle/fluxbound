@@ -4,7 +4,11 @@ import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { user } from "api/user";
 import { useEffect, useRef, useState } from "react";
 import { createTypedWebSocketSender } from "utils/functions";
-import { GameContext, GameErrorContext, WebSocketContext } from "./-components/context";
+import {
+  GameContext,
+  GameErrorContext,
+  WebSocketContext,
+} from "./-components/context";
 
 export const Route = createFileRoute("/_app/game")({
   component: RouteComponent,
@@ -12,9 +16,13 @@ export const Route = createFileRoute("/_app/game")({
 
 function RouteComponent() {
   /***** HOOKS *****/
-  const [websocketState, setWebsocket] = useState<ReturnType<typeof createTypedWebSocketSender> | null>(null);
+  const [websocketState, setWebsocket] = useState<ReturnType<
+    typeof createTypedWebSocketSender
+  > | null>(null);
   const [gameState, setGameState] = useState<Game.GameStateView | null>(null);
-  const [gameError, setGameError] = useState<(typeof CODES)[number] | null>(null);
+  const [gameError, setGameError] = useState<(typeof CODES)[number] | null>(
+    null,
+  );
   const [roomId, setRoomId] = useState<Game.RoomId | null>(null);
   const isIntentionalClose = useRef(false);
   const navigate = Route.useNavigate();
@@ -55,6 +63,14 @@ function RouteComponent() {
           return navigate({ to: "/game", replace: true });
         case "game/stateUpdated":
           console.log("state updated", parsed.state);
+          setGameError(null);
+          setGameState(parsed.state);
+          break;
+        case "game/gameEnded":
+          console.log(
+            "Game Ended, Winner:",
+            parsed.winner === userData?.data?.id ? "You" : "Opponent",
+          );
           setGameError(null);
           setGameState(parsed.state);
           break;
@@ -107,7 +123,13 @@ function RouteComponent() {
   return (
     <GameErrorContext value={{ gameError, setGameError }}>
       <WebSocketContext value={context}>
-        <GameContext value={gameState ? { state: gameState, playerId: userData?.data?.id } : null}>
+        <GameContext
+          value={
+            gameState
+              ? { state: gameState, playerId: userData?.data?.id }
+              : null
+          }
+        >
           <Outlet />
         </GameContext>
       </WebSocketContext>
