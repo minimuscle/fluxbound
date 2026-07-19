@@ -21,6 +21,8 @@ export function message(
       return game.start(server, ws);
     case "game/startSolo":
       return game.startSolo(server, ws);
+    case "game/start-turn":
+      return game.startTurn(server, ws);
     case "game/play-card":
       return game.playCard(server, ws, parsed.cardId);
     case "game/activate-card":

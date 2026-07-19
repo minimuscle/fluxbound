@@ -1,6 +1,7 @@
 import { GameContext } from "routes/_app/game/-components/context";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
 import { DOMAIN_ICON } from "routes/_app/game/-components/game/context/images";
+import { EndGameOverlay } from "routes/_app/game/-components/game/endGameOverlay";
 import { PlayerInfoField } from "routes/_app/game/-components/game/field";
 import { Hand } from "routes/_app/game/-components/game/hand";
 import { PlayerInfoCardDeck } from "routes/_app/game/-components/game/info/cards";
@@ -25,6 +26,7 @@ export const Game = () => {
   /***** RENDER *****/
   return (
     <div className={styles.container}>
+      <EndGameOverlay />
       <div className={styles.leftSection}>
         <PlayerContext value={{ stage: "PLAYER", player: state.you }}>
           <div className={styles.playerInfo}>

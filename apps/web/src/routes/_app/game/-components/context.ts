@@ -13,6 +13,7 @@ export type WebSocketContext = {
 export type GameContext = {
   state: Game.GameStateView;
   playerId: Game.PlayerId;
+  ended: false | Game.PlayerId;
 };
 
 export type GameErrorContext = {

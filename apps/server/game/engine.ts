@@ -3,6 +3,7 @@ import { endTurn } from "game/actions/end-turn";
 import { playAITurn } from "game/actions/play-ai-turn";
 import { playACard } from "game/actions/play-card";
 import { checkEndGame } from "game/helpers/check-end-game";
+import { drawCard } from "game/helpers/draw-card";
 import { getOpponent } from "game/helpers/get-opponent";
 import { getPlayer } from "game/helpers/get-player";
 import { canPlayCard } from "game/rules/can-play-card";
@@ -41,11 +42,25 @@ export class GameEngine {
     return { ok: true };
   }
 
+  public startTurn(): GameResponse {
+    const turnValidation = isPlayersTurn(this.state, this.playerId);
+    if (!turnValidation.ok) return turnValidation;
+
+    const player = getPlayer(this.state, this.playerId);
+    const playerDeck = drawCard(player.deck);
+
+    player.deck = playerDeck.deck;
+    player.hand = [...player.hand, ...playerDeck.hand];
+
+    return { ok: true };
+  }
+
   // Play the turn for the AI
   public async playAITurn(): Promise<GameResponse> {
     console.log("playing AI turn");
     this.state = await playAITurn(this.state);
     const endGameCheck = checkEndGame(this.state);
+    console.log("ai checking engame", endGameCheck);
     if (endGameCheck.ended) {
       return { ok: true, code: "GAME_ENDED", winner: endGameCheck.winner }; //TODO: need to create a game save code and save the data to be reviewed
     }

@@ -1,6 +1,5 @@
 import { CARD_LIBRARY, type Game } from "@fluxbound/schema";
 import { calculateDamage } from "game/helpers/calculate-damage";
-import { drawCard } from "game/helpers/draw-card";
 import { getOpponent } from "game/helpers/get-opponent";
 import { getPlayer } from "game/helpers/get-player";
 import { runCardTrigger } from "game/helpers/run-card-trigger";
@@ -13,7 +12,12 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
   const player = getPlayer(state, state.activePlayer);
   const nextPlayerField = player.field.map((card) => {
     const cardData = CARD_LIBRARY[card.cardId];
-    if (card.activations === undefined || !cardData || !("activations" in cardData)) return card;
+    if (
+      card.activations === undefined ||
+      !cardData ||
+      !("activations" in cardData)
+    )
+      return card;
 
     return {
       ...card,
@@ -29,18 +33,19 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
 
   // Draw a card from the deck for the other player
   const opponent = getOpponent(nextState);
-  const nextOpponentDeckandHand = drawCard(opponent.deck, 1);
+
   const nextStateHealth = calculateDamage(nextState);
   const nextOpponentHealth = getOpponent(nextStateHealth).health;
 
   // Trigger any cards in play with the onTurnEnd trigger
-  player.field.forEach(async (card) => await runCardTrigger({ state, cardId: card.id }, "onTurnEnd"));
+  player.field.forEach(
+    async (card) =>
+      await runCardTrigger({ state, cardId: card.id }, "onTurnEnd"),
+  );
 
   const nextTurnState = setPlayerState(nextState, opponent.id, {
     ...opponent,
     health: nextOpponentHealth,
-    deck: nextOpponentDeckandHand.deck,
-    hand: [...opponent.hand, ...nextOpponentDeckandHand.hand],
   });
 
   // End the turn
@@ -54,7 +59,10 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
   }
   return {
     ...nextTurnState,
-    activePlayer: state.player1.id === state.activePlayer ? state.player2.id : state.player1.id,
+    activePlayer:
+      state.player1.id === state.activePlayer
+        ? state.player2.id
+        : state.player1.id,
     turn: turn.join("-") as Game.GameState["turn"],
   };
 };

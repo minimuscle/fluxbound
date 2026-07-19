@@ -82,6 +82,37 @@ export const game = {
     );
   },
 
+  startTurn: (
+    server: Bun.Server<GameSocketData>,
+    ws: Bun.ServerWebSocket<GameSocketData>,
+  ) => {
+    if (!ws.data.roomId || !gameStatesByRoomId.has(ws.data.roomId)) {
+      return void ws.send(
+        GameResponse({
+          type: "game/error",
+          ok: false,
+          code: "NO_ROOM_ID",
+          message: "No Room ID",
+        }),
+      );
+    }
+    const gameState = gameStatesByRoomId.get(ws.data.roomId)!;
+    const engine = new GameEngine(gameState, ws.data.userId);
+
+    const result = engine.startTurn();
+    if (!result.ok)
+      return void ws.send(GameResponse({ type: "game/error", ...result }));
+
+    gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
+    return void server.publish(
+      `player:${ws.data.userId}`,
+      GameResponse({
+        type: "game/stateUpdated",
+        state: engine.getPlayerView(),
+      }),
+    );
+  },
+
   playCard: (
     server: Bun.Server<GameSocketData>,
     ws: Bun.ServerWebSocket<GameSocketData>,
@@ -189,8 +220,23 @@ export const game = {
       //TODO: actually have a robust way to check if the AI is playing as this is not a good way
       // Do AI Turn
       const AIResult = await engine.playAITurn();
-      if (!AIResult.ok)
+      if (!AIResult.ok) {
         return void ws.send(GameResponse({ type: "game/error", ...AIResult }));
+      }
+
+      if (AIResult.code === "GAME_ENDED" && !!AIResult.winner) {
+        server.publish(
+          `room:${ws.data.roomId}`,
+          GameResponse({
+            type: "game/gameEnded",
+            state: engine.getPlayerView(),
+            winner: AIResult.winner,
+          }),
+        );
+        closeRoomConnections(ws.data.roomId, 1000, "Game Ended");
+        return;
+      }
+
       server.publish(
         `player:${ws.data.userId}`,
         GameResponse({

@@ -52,6 +52,9 @@ export const clientGame = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("game/end-turn"),
   }),
+  z.object({
+    type: z.literal("game/start-turn"),
+  }),
 ]);
 
 export type ClientGame = z.infer<typeof clientGame>;

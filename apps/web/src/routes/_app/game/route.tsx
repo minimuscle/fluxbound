@@ -28,6 +28,8 @@ function RouteComponent() {
   const [gameError, setGameError] = useState<
     (typeof ERROR_CODES)[number] | null
   >(null);
+  const [ended, setEnded] = useState<false | Game.PlayerId>(false);
+
   const [roomId, setRoomId] = useState<Game.RoomId | null>(null);
   const isIntentionalClose = useRef(false);
   const navigate = Route.useNavigate();
@@ -51,8 +53,8 @@ function RouteComponent() {
 
     const websocket = new WebSocket(websocketUrl);
 
-    // eslint-disable-next-line
-    setWebsocket(createTypedWebSocketSender(websocket));
+    const typedWebsocket = createTypedWebSocketSender(websocket);
+    setWebsocket(typedWebsocket);
     websocket.onmessage = (event) => {
       const parsed = JSON.parse(event.data) as ServerGame | ServerLobby;
 
@@ -66,6 +68,13 @@ function RouteComponent() {
           setGameError(null);
           setGameState(parsed.state);
           return navigate({ to: "/game", replace: true });
+        case "game/turnEnded":
+          console.log("turn ended", parsed.state);
+          setGameError(null);
+          setGameState(parsed.state);
+          typedWebsocket.send({ type: "game/start-turn" });
+          break;
+        // oxlint-disable-next-line no-fallthrough
         case "game/stateUpdated":
           console.log("state updated", parsed.state);
           setGameError(null);
@@ -76,6 +85,7 @@ function RouteComponent() {
             "Game Ended, Winner:",
             parsed.winner === userData?.data?.id ? "You" : "Opponent",
           );
+          setEnded(parsed.winner);
           setGameError(null);
           setGameState(parsed.state);
           break;
@@ -131,7 +141,7 @@ function RouteComponent() {
         <GameContext
           value={
             gameState
-              ? { state: gameState, playerId: userData?.data?.id }
+              ? { state: gameState, playerId: userData?.data?.id, ended }
               : null
           }
         >
