@@ -219,6 +219,7 @@ export const game = {
     if (engine.gameState.activePlayer.includes("AI")) {
       //TODO: actually have a robust way to check if the AI is playing as this is not a good way
       // Do AI Turn
+      engine.startTurn();
       const AIResult = await engine.playAITurn();
       if (!AIResult.ok) {
         return void ws.send(GameResponse({ type: "game/error", ...AIResult }));

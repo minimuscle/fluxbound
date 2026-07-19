@@ -1,17 +1,19 @@
 import type { Cards, Game } from "@fluxbound/schema";
-import { drawCard } from "game/helpers/draw-card";
 
 /**********************************************************************************************************
  *   FUNCTION START
  **********************************************************************************************************/
-export function createInitialState(player1: Game.InitialPlayerState, player2: Game.InitialPlayerState): Game.GameState {
+export function createInitialState(
+  player1: Game.InitialPlayerState,
+  player2: Game.InitialPlayerState,
+): Game.GameState {
   const player1Deck = assignCardIds(player1.deck, player1.id);
   const player2Deck = assignCardIds(player2.deck, player2.id);
   const shuffledPlayer1Deck = shuffleDeck(player1Deck);
   const shuffledPlayer2Deck = shuffleDeck(player2Deck);
 
-  const initialPlayer1Hand = drawCard(shuffledPlayer1Deck, 6);
-  const initialPlayer2Hand = drawCard(shuffledPlayer2Deck, 6);
+  const initialPlayer1Hand = drawInitialHand(shuffledPlayer1Deck, 6);
+  const initialPlayer2Hand = drawInitialHand(shuffledPlayer2Deck, 6);
 
   const turn = "1-1";
   const activePlayer = player1.id; //Math.random() < 0.5 ? player1.id : player2.id; // TEMP
@@ -30,7 +32,10 @@ export function createInitialState(player1: Game.InitialPlayerState, player2: Ga
 }
 
 // Assigns each card a unique ID for this game
-function assignCardIds(deck: Cards.CardId[], playerId: Game.PlayerId): Game.GameCard[] {
+function assignCardIds(
+  deck: Cards.CardId[],
+  playerId: Game.PlayerId,
+): Game.GameCard[] {
   return deck.map((cardId, index) => ({
     id: `${playerId}-${index}` as Game.CardId,
     cardId,
@@ -56,4 +61,14 @@ function shuffleDeck(deck: Game.GameCard[]): Game.GameCard[] {
   }
 
   return nextDeck;
+}
+
+function drawInitialHand(
+  deck: Game.GameCard[],
+  numberOfCards: number,
+): Pick<Game.PlayerState, "deck" | "hand"> {
+  return {
+    hand: deck.slice(0, numberOfCards),
+    deck: deck.slice(numberOfCards),
+  };
 }

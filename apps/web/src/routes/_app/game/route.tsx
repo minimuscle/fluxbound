@@ -7,7 +7,7 @@ import type {
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { user } from "api/user";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createTypedWebSocketSender } from "utils/functions";
 import {
   GameContext,
@@ -29,9 +29,11 @@ function RouteComponent() {
     (typeof ERROR_CODES)[number] | null
   >(null);
   const [ended, setEnded] = useState<false | Game.PlayerId>(false);
+  const [connectionVersion, setConnectionVersion] = useState(0);
 
   const [roomId, setRoomId] = useState<Game.RoomId | null>(null);
   const isIntentionalClose = useRef(false);
+  const shouldStartSoloOnConnect = useRef(false);
   const navigate = Route.useNavigate();
 
   const { data: userData } = useQuery({
@@ -55,6 +57,11 @@ function RouteComponent() {
 
     const typedWebsocket = createTypedWebSocketSender(websocket);
     setWebsocket(typedWebsocket);
+    websocket.onopen = () => {
+      if (!shouldStartSoloOnConnect.current) return;
+      shouldStartSoloOnConnect.current = false;
+      typedWebsocket.send({ type: "game/startSolo" });
+    };
     websocket.onmessage = (event) => {
       const parsed = JSON.parse(event.data) as ServerGame | ServerLobby;
 
@@ -127,11 +134,24 @@ function RouteComponent() {
       websocket.close();
       setWebsocket(null);
     };
-  }, [navigate]);
+  }, [connectionVersion, navigate]);
+
+  const restartSinglePlayer = useCallback(() => {
+    shouldStartSoloOnConnect.current = true;
+    isIntentionalClose.current = true;
+    websocketState?.close();
+    setWebsocket(null);
+    setGameError(null);
+    setGameState(null);
+    setEnded(false);
+    setRoomId(null);
+    setConnectionVersion((version) => version + 1);
+  }, [websocketState]);
 
   const context: WebSocketContext = {
     websocket: websocketState,
     roomId: roomId,
+    restartSinglePlayer,
   };
 
   /***** RENDER *****/

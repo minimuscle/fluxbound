@@ -8,6 +8,7 @@ import type { createTypedWebSocketSender } from "utils/functions";
 export type WebSocketContext = {
   websocket: ReturnType<typeof createTypedWebSocketSender>;
   roomId: Game.RoomId;
+  restartSinglePlayer: () => void;
 };
 
 export type GameContext = {
