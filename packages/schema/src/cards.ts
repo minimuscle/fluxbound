@@ -93,7 +93,12 @@ export namespace Cards {
   };
 
   export type Others = Base & {
-    type: "SPELL" | "PERMANENT" | "WEAPON" | "SHIELD" | "RUNE";
+    type:
+      | (Omit<CardType, "CREATURE" | "WEAPON"> & "SPELL")
+      | "PERMANENT"
+      | "WEAPON"
+      | "SHIELD"
+      | "RUNE";
   };
 
   export type Card = Creature | Weapon | Others;

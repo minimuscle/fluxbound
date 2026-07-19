@@ -1,4 +1,4 @@
-import { CARD_LIBRARY, type Cards } from "@fluxbound/schema";
+import { type CardLibraryKey, type Cards } from "@fluxbound/schema";
 import Aether from "assets/images/domains/aether.webp";
 import Air from "assets/images/domains/air.webp";
 import Dark from "assets/images/domains/dark.webp";
@@ -11,7 +11,13 @@ import Void from "assets/images/domains/void.webp";
 import Water from "assets/images/domains/water.webp";
 
 /** Card Imports */
+import CinderRat from "assets/images/cards/fire/cinder_rat.png";
 import Ember from "assets/images/cards/fire/ember.jpeg";
+import Fireball from "assets/images/cards/fire/fireball.png";
+import RubyElemental from "assets/images/cards/fire/ruby_elemental.png";
+import Rune from "assets/images/cards/fire/rune.png";
+import WallOfFire from "assets/images/cards/fire/wall_of_fire.png";
+import Wildfire from "assets/images/cards/fire/wildfire.png";
 
 export const DOMAIN_ICON: Record<Cards.Domain, string> = {
   FIRE: Fire,
@@ -26,15 +32,35 @@ export const DOMAIN_ICON: Record<Cards.Domain, string> = {
   VOID: Void,
 };
 
-export const CARD_IMAGE: Record<keyof typeof CARD_LIBRARY, string> = {
-  "0f0": Ember,
-  "0f1": Ember,
+const CARD_IMAGE_ENTRIES = {
+  "0f0": Rune,
+  "0f1": CinderRat,
   "0f2": Ember,
   "0f3": Ember,
   "0f4": Ember,
   "0f5": Ember,
   "0f6": Ember,
   "0f7": Ember,
-  "0f8": Ember,
-  "0fe": Ember,
-};
+  "0f8": RubyElemental,
+  "0f9": Fireball,
+  "0fa": Wildfire,
+  "0fb": Ember,
+  "0fc": Ember,
+  "0fd": Ember,
+  "0fe": WallOfFire,
+  "0ff": Ember,
+  "0fg": Ember,
+  "0fh": Ember,
+  "0w0": Water,
+  "0w1": Water,
+  "0w2": Water,
+  "0w3": Water,
+  "0w4": Water,
+  "0w5": Water,
+  "0w6": Water,
+  "0w7": Water,
+  "0w8": Water,
+  "0w9": Water,
+} satisfies Record<CardLibraryKey, string>;
+
+export const CARD_IMAGE: Record<Cards.CardId, string> = CARD_IMAGE_ENTRIES;

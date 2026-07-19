@@ -1,4 +1,4 @@
-import type { CODES, Game } from "@fluxbound/schema";
+import type { ERROR_CODES, Game } from "@fluxbound/schema";
 import React, { createContext } from "react";
 import type { createTypedWebSocketSender } from "utils/functions";
 
@@ -16,8 +16,10 @@ export type GameContext = {
 };
 
 export type GameErrorContext = {
-  gameError: (typeof CODES)[number] | null;
-  setGameError: React.Dispatch<React.SetStateAction<(typeof CODES)[number] | null>>;
+  gameError: (typeof ERROR_CODES)[number] | null;
+  setGameError: React.Dispatch<
+    React.SetStateAction<(typeof ERROR_CODES)[number] | null>
+  >;
 };
 
 /**********************************************************************************************************

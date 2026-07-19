@@ -24,6 +24,7 @@ export const FIRE_CARDS = defineCardDefinition({
     price: 60,
     damage: 2,
     health: 1,
+    activations: 0,
     triggers: {},
   },
   "0f2": {
@@ -35,6 +36,7 @@ export const FIRE_CARDS = defineCardDefinition({
     price: 100,
     damage: 7,
     health: 1,
+    activations: 0,
     triggers: {
       onDeath: [
         {
@@ -55,6 +57,7 @@ export const FIRE_CARDS = defineCardDefinition({
     price: 100,
     damage: 0,
     health: 4,
+    activations: 1,
     triggers: {
       onActivated: [
         {
@@ -75,6 +78,7 @@ export const FIRE_CARDS = defineCardDefinition({
     price: 50,
     damage: 3,
     health: 4,
+    activations: 0,
     triggers: {
       onActivated: [
         {
@@ -102,6 +106,7 @@ export const FIRE_CARDS = defineCardDefinition({
     price: 75,
     damage: 4,
     health: 2,
+    activations: 1,
     triggers: {
       onActivated: [
         {
@@ -135,6 +140,7 @@ export const FIRE_CARDS = defineCardDefinition({
     price: 90,
     damage: 5,
     health: 1,
+    activations: 1,
     triggers: {
       onActivated: [
         {
@@ -162,6 +168,7 @@ export const FIRE_CARDS = defineCardDefinition({
     price: 50,
     damage: 0,
     health: 2,
+    activations: 1,
     triggers: {
       onActivated: [
         {
@@ -189,27 +196,73 @@ export const FIRE_CARDS = defineCardDefinition({
     price: 100,
     damage: 11,
     health: 5,
+    activations: 0,
     triggers: {},
   },
 
   /***** SPELLS - 5 *****/
-  // "0f9": {
-  //   domain: "FIRE",
-  //   type: "SPELL",
-  //   name: "Fireball",
-  //   description: "1F - Deal +1/-1 to target",
-  //   cost: 3,
-  //   price: 50,
-
-  // },
+  "0f9": {
+    domain: "FIRE",
+    type: "SPELL",
+    name: "Fireball",
+    description: "1F - Deal +1/-1 to target",
+    cost: 3,
+    price: 50,
+    triggers: {},
+  },
+  "0fa": {
+    domain: "FIRE",
+    type: "SPELL",
+    name: "Wildfire",
+    description: "1F - Deal +1/-1 to target",
+    cost: 7,
+    price: 50,
+    triggers: {},
+  },
+  "0fb": {
+    domain: "FIRE",
+    type: "SPELL",
+    name: "Molten Rage",
+    description: "1F - Deal +1/-1 to target",
+    cost: 5,
+    price: 50,
+    triggers: {},
+  },
+  "0fc": {
+    domain: "FIRE",
+    type: "SPELL",
+    name: "Flash Ignition",
+    description: "1F - Deal +1/-1 to target",
+    cost: 3,
+    price: 50,
+    triggers: {},
+  },
+  "0fd": {
+    domain: "FIRE",
+    type: "SPELL",
+    name: "Burn",
+    description: "1F - Deal +1/-1 to target",
+    cost: 1,
+    price: 50,
+    triggers: {},
+  },
 
   /***** SHIELD - 1 *****/
   "0fe": {
     domain: "FIRE",
     type: "SHIELD",
+    name: "Wall of Fire",
+    description: "Attacking enemeis take 1 damage",
+    cost: 5,
+    price: 60,
+    triggers: {},
+  },
+  "0ff": {
+    domain: "FIRE",
+    type: "SHIELD",
     name: "Heat Shield",
     description: "Reduces enemies attacks by 1",
-    cost: 5,
+    cost: 3,
     price: 60,
     triggers: {
       onAttacked: [
@@ -223,14 +276,25 @@ export const FIRE_CARDS = defineCardDefinition({
     },
   },
 
-  /***** WEAPON - 1 *****/
-  // BASE_FIRE_WEAPON_FLAMING_SWORD: {
-  //   element: "FIRE",
-  //   type: "WEAPON",
-  //   name: "Flaming Sword",
-  //   description: "Its a sword, on fire",
-  //   cost: 6,
-  //   effect: "ATTACK",
-  //   damage: 3,
-  // },
+  /***** WEAPON - 2 *****/
+  "0fg": {
+    domain: "FIRE",
+    type: "WEAPON",
+    name: "Flametongue Blade",
+    description: "+1 damage for every 10F in the users pool",
+    cost: 4,
+    damage: 4,
+    price: 60,
+    triggers: {},
+  },
+  "0fh": {
+    domain: "FIRE",
+    type: "WEAPON",
+    name: "Infernal Cleaner",
+    description: "Heavy - Deal 1 damage to the wielder",
+    cost: 4,
+    damage: 5,
+    price: 60,
+    triggers: {},
+  },
 });

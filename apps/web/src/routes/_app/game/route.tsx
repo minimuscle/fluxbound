@@ -1,4 +1,9 @@
-import type { CODES, Game, ServerGame, ServerLobby } from "@fluxbound/schema";
+import type {
+  ERROR_CODES,
+  Game,
+  ServerGame,
+  ServerLobby,
+} from "@fluxbound/schema";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { user } from "api/user";
@@ -20,9 +25,9 @@ function RouteComponent() {
     typeof createTypedWebSocketSender
   > | null>(null);
   const [gameState, setGameState] = useState<Game.GameStateView | null>(null);
-  const [gameError, setGameError] = useState<(typeof CODES)[number] | null>(
-    null,
-  );
+  const [gameError, setGameError] = useState<
+    (typeof ERROR_CODES)[number] | null
+  >(null);
   const [roomId, setRoomId] = useState<Game.RoomId | null>(null);
   const isIntentionalClose = useRef(false);
   const navigate = Route.useNavigate();
