@@ -81,12 +81,12 @@
       rotateY(180deg);
   }
   30% {
-    transform: translate3d(calc(-365px), calc(-50vh + 149px), 0) scale(1.5)
-      rotateY(0deg);
+    transform: translate3d(var(--entering-center-x), calc(-50vh + 149px), 0)
+      scale(1.5) rotateY(0deg);
   }
   60% {
-    transform: translate3d(calc(-365px), calc(-50vh + 149px), 0) scale(1.5)
-      rotateY(0deg);
+    transform: translate3d(var(--entering-center-x), calc(-50vh + 149px), 0)
+      scale(1.5) rotateY(0deg);
   }
   100% {
     transform: translate3d(0, 0, 0) scale(1) rotateY(0deg);

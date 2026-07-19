@@ -1,7 +1,7 @@
 import { CARD_LIBRARY, type Game } from "@fluxbound/schema";
 import Overlay from "assets/images/cards/fire/blank.svg";
 import classNames from "classnames";
-import { use } from "react";
+import { use, type AnimationEventHandler, type CSSProperties } from "react";
 import { WebSocketContext } from "routes/_app/game/-components/context";
 import {
   CARD_IMAGE,
@@ -17,12 +17,20 @@ type Card = React.FC<{
   card: Game.GameCard;
   action?: "play" | "discard";
   className?: string;
+  onAnimationEnd?: AnimationEventHandler<HTMLButtonElement>;
+  style?: CSSProperties;
 }>;
 
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
-export const Card: Card = ({ card, action = "play", className }) => {
+export const Card: Card = ({
+  card,
+  action = "play",
+  className,
+  onAnimationEnd,
+  style,
+}) => {
   const cardInfo = CARD_LIBRARY[card.cardId];
 
   /***** HOOKS *****/
@@ -49,6 +57,8 @@ export const Card: Card = ({ card, action = "play", className }) => {
         Card__disband: action === "discard",
       })}
       onClick={handleClick}
+      onAnimationEnd={onAnimationEnd}
+      style={style}
     >
       <img
         className="Card__image"

@@ -18,6 +18,10 @@ import RubyElemental from "assets/images/cards/fire/ruby_elemental.png";
 import Rune from "assets/images/cards/fire/rune.png";
 import WallOfFire from "assets/images/cards/fire/wall_of_fire.png";
 import Wildfire from "assets/images/cards/fire/wildfire.png";
+import CoralGuardian from "assets/images/cards/water/coral_guardian.png";
+import FreezeRay from "assets/images/cards/water/freeze_ray.png";
+import TidalWave from "assets/images/cards/water/tidal_wave.png";
+import WaterRune from "assets/images/cards/water/water_rune.png";
 
 export const DOMAIN_ICON: Record<Cards.Domain, string> = {
   FIRE: Fire,
@@ -51,15 +55,15 @@ const CARD_IMAGE_ENTRIES = {
   "0ff": Ember,
   "0fg": Ember,
   "0fh": Ember,
-  "0w0": Water,
+  "0w0": WaterRune,
   "0w1": Water,
-  "0w2": Water,
+  "0w2": CoralGuardian,
   "0w3": Water,
   "0w4": Water,
   "0w5": Water,
   "0w6": Water,
-  "0w7": Water,
-  "0w8": Water,
+  "0w7": TidalWave,
+  "0w8": FreezeRay,
   "0w9": Water,
 } satisfies Record<CardLibraryKey, string>;
 
