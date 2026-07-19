@@ -16,12 +16,13 @@ import "./card.scss";
 type Card = React.FC<{
   card: Game.GameCard;
   action?: "play" | "discard";
+  className?: string;
 }>;
 
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
-export const Card: Card = ({ card, action = "play" }) => {
+export const Card: Card = ({ card, action = "play", className }) => {
   const cardInfo = CARD_LIBRARY[card.cardId];
 
   /***** HOOKS *****/
@@ -44,7 +45,9 @@ export const Card: Card = ({ card, action = "play" }) => {
   return (
     <button
       disabled={!isActivePlayer}
-      className={classNames("Card", { Card__disband: action === "discard" })}
+      className={classNames("Card", className, {
+        Card__disband: action === "discard",
+      })}
       onClick={handleClick}
     >
       <img

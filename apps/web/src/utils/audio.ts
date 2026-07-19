@@ -1,5 +1,7 @@
 export class AudioManager {
   private backgroundMusic: HTMLAudioElement | null = null;
+  private backgroundMusicSources: readonly string[] = [];
+  private backgroundMusicIndex: number = 0;
   private musicVolume: number = 0.5;
   private soundVolume: number = 1;
   private mutedMusic: boolean = false;
@@ -10,14 +12,32 @@ export class AudioManager {
     buttonHover: "/src/assets/audio/buttonHover.ogg",
   } as const;
 
-  public playBackgroundMusic(source: string) {
-    if (this.backgroundMusic?.src.includes(source)) return;
+  public playBackgroundMusic(sourceOrSources: string | readonly string[]) {
+    const sources = typeof sourceOrSources === "string" ? [sourceOrSources] : sourceOrSources;
+    const firstSource = sources[0];
+    if (!firstSource) return;
+
+    if (this.hasSameBackgroundMusicSources(sources)) return;
 
     this.stopBackgroundMusic();
+    this.backgroundMusicSources = sources;
+    this.backgroundMusicIndex = 0;
+    this.playBackgroundMusicAtIndex(0);
+  }
+
+  private playBackgroundMusicAtIndex(index: number) {
+    const source = this.backgroundMusicSources[index];
+    if (!source) return;
 
     const audio = new Audio(source);
-    audio.loop = true;
+    audio.loop = this.backgroundMusicSources.length === 1;
     audio.volume = this.mutedMusic ? 0 : this.musicVolume;
+    audio.addEventListener("ended", () => {
+      if (this.backgroundMusic !== audio) return;
+
+      this.backgroundMusicIndex = (index + 1) % this.backgroundMusicSources.length;
+      this.playBackgroundMusicAtIndex(this.backgroundMusicIndex);
+    });
     audio.play().catch(() => {
       console.log("autoplay blocked");
       // autoplay blocked until user interaction
@@ -26,10 +46,16 @@ export class AudioManager {
     this.backgroundMusic = audio;
   }
 
+  private hasSameBackgroundMusicSources(sources: readonly string[]) {
+    return sources.length === this.backgroundMusicSources.length && sources.every((source, index) => source === this.backgroundMusicSources[index]);
+  }
+
   public stopBackgroundMusic() {
     if (!this.backgroundMusic) return;
     const audio = this.backgroundMusic;
     this.backgroundMusic = null;
+    this.backgroundMusicSources = [];
+    this.backgroundMusicIndex = 0;
 
     const startVolume = audio.volume;
     const fadeDurationMs = 2000;

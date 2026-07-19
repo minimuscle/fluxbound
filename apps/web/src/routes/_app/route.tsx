@@ -1,5 +1,7 @@
 import { createFileRoute, Outlet, useMatches } from "@tanstack/react-router";
-import gameMusic from "assets/audio/game_track_1.mp3";
+import gameMusic1 from "assets/audio/game_track_1.mp3";
+import gameMusic2 from "assets/audio/game_track_2.mp3";
+import gameMusic3 from "assets/audio/game_track_3.mp3";
 import menuMusic from "assets/audio/menu.ogg";
 import Movie from "assets/images/ui/menu/main/background_movie.mp4";
 import Sigil from "assets/images/ui/menu/main/sigil.svg";
@@ -13,11 +15,20 @@ export const Route = createFileRoute("/_app")({
   component: RouteComponent,
 });
 
-const menuRoutes = new Set(["/", "/game/lobby", "/game/lobby/single", "/login/", "/signup/"]);
+const menuRoutes = new Set([
+  "/",
+  "/game/lobby",
+  "/game/lobby/single",
+  "/login/",
+  "/signup/",
+]);
 const positionOneRoutes = new Set(["/", "/login/", "/signup/"]);
+const gameMusicTracks: readonly string[] = [gameMusic1, gameMusic2, gameMusic3];
 
 function RouteComponent() {
-  const pathname = useMatches({ select: (matches) => matches.at(-1)!.pathname });
+  const pathname = useMatches({
+    select: (matches) => matches.at(-1)!.pathname,
+  });
   const isSigilPositionTwo = !positionOneRoutes.has(pathname);
   const isInitialSigilPositionTwo = useRef(isSigilPositionTwo).current;
 
@@ -34,7 +45,7 @@ function RouteComponent() {
       audioManager.stopBackgroundMusic();
       setTimeout(() => {
         audioManager.setMusicVolume(0.25);
-        audioManager.playBackgroundMusic(gameMusic);
+        audioManager.playBackgroundMusic(gameMusicTracks);
       }, 2000);
       return;
     }
