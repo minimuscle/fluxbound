@@ -3,20 +3,45 @@ import type { z } from "zod";
 import type { Effects } from "./effects";
 
 export namespace Cards {
-  export type Domain = "FIRE" | "WATER" | "AIR" | "EARTH" | "LIGHT" | "DARK" | "LIFE" | "DEATH" | "AETHER" | "VOID";
+  export type Domain =
+    | "FIRE"
+    | "WATER"
+    | "AIR"
+    | "EARTH"
+    | "LIGHT"
+    | "DARK"
+    | "LIFE"
+    | "DEATH"
+    | "AETHER"
+    | "VOID";
   export type Expansion = "BASE" | "FORGED";
-  export type CardType = "CREATURE" | "SPELL" | "PERMANENT" | "WEAPON" | "SHIELD" | "RUNE";
+  export type CardType =
+    | "CREATURE"
+    | "SPELL"
+    | "PERMANENT"
+    | "WEAPON"
+    | "SHIELD"
+    | "RUNE";
   export type CardKey = string;
-  export type CardId<TCardKey extends CardKey = CardKey> = Tagged<TCardKey, "cardId"> | TCardKey;
+  export type CardId<TCardKey extends CardKey = CardKey> =
+    | Tagged<TCardKey, "cardId">
+    | TCardKey;
 
-  export type TriggerTypes = "onTurnEnd" | "onActivated" | "onAttacked" | "onDeath";
+  export type TriggerTypes =
+    | "onTurnEnd"
+    | "onActivated"
+    | "onAttacked"
+    | "onDeath";
 
-  type SplitTriggerEffectIds<TName extends Effects.EffectNames> = TName extends `${infer TGroup}.${infer TName}` ? [TGroup, TName] : never;
+  type SplitTriggerEffectIds<TName extends Effects.EffectNames> =
+    TName extends `${infer TGroup}.${infer TName}` ? [TGroup, TName] : never;
   type EffectArgs<TEffectName extends Effects.EffectNames> =
     SplitTriggerEffectIds<TEffectName> extends [infer TGroup, infer TName]
       ? TGroup extends Effects.EffectGroups
         ? TName extends keyof Effects.Effect[TGroup]
-          ? Effects.Effect[TGroup][TName] extends { args: infer TArguments extends z.ZodTypeAny }
+          ? Effects.Effect[TGroup][TName] extends {
+              args: infer TArguments extends z.ZodTypeAny;
+            }
             ? z.infer<TArguments>
             : never
           : never
@@ -29,11 +54,15 @@ export namespace Cards {
     };
   }[Effects.EffectNames];
 
-  type TriggerArgsWithCardIds<TEffectName extends Effects.EffectNames, TCardId extends CardKey> = EffectArgs<TEffectName> extends {
-    cardId: CardId;
-  }
-    ? Omit<EffectArgs<TEffectName>, "cardId"> & { cardId: CardId<TCardId> }
-    : EffectArgs<TEffectName>;
+  type TriggerArgsWithCardIds<
+    TEffectName extends Effects.EffectNames,
+    TCardId extends CardKey,
+  > =
+    EffectArgs<TEffectName> extends {
+      cardId: CardId;
+    }
+      ? Omit<EffectArgs<TEffectName>, "cardId"> & { cardId: CardId<TCardId> }
+      : EffectArgs<TEffectName>;
 
   export type TriggerWithCardIds<TCardId extends CardKey> = {
     [TName in Effects.EffectNames]: {
@@ -64,20 +93,31 @@ export namespace Cards {
   };
 
   export type Others = Base & {
-    type: Omit<CardType, "CREATURE" | "WEAPON">;
+    type: "SPELL" | "PERMANENT" | "WEAPON" | "SHIELD" | "RUNE";
   };
 
   export type Card = Creature | Weapon | Others;
 
   export type CardDefinition = Record<string, Card>;
-  type WithCardIdTriggers<TCard extends Base, TCardId extends CardKey> = Omit<TCard, "triggers"> & {
+  type WithCardIdTriggers<TCard extends Base, TCardId extends CardKey> = Omit<
+    TCard,
+    "triggers"
+  > & {
     triggers: Partial<Record<TriggerTypes, TriggerWithCardIds<TCardId>[]>>;
   };
-  export type CardWithCardIds<TCardId extends CardKey> = Card extends infer TCard extends Base
-    ? TCard extends Base
-      ? WithCardIdTriggers<TCard, TCardId>
-      : never
-    : never;
+  export type CardWithCardIds<TCardId extends CardKey> =
+    Card extends infer TCard extends Base
+      ? TCard extends Base
+        ? WithCardIdTriggers<TCard, TCardId>
+        : never
+      : never;
 }
 
-export const defineCardDefinition = <const TCards extends Record<string, Cards.CardWithCardIds<keyof TCards & Cards.CardKey>>>(cards: TCards) => cards;
+export const defineCardDefinition = <
+  const TCards extends Record<
+    string,
+    Cards.CardWithCardIds<keyof TCards & Cards.CardKey>
+  >,
+>(
+  cards: TCards,
+) => cards;

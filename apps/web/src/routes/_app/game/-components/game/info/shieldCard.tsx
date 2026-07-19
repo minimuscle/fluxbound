@@ -1,20 +1,22 @@
-import { CARD_LIBRARY, type Game } from "@fluxbound/schema";
+import { CARD_LIBRARY } from "@fluxbound/schema";
 import { ShieldCheckeredIcon } from "@phosphor-icons/react";
 import { CARD_IMAGE } from "routes/_app/game/-components/game/context/images";
 import styles from "./info.module.css";
-
-/**********************************************************************************************************
- *   TYPE DEFINITIONS
- **********************************************************************************************************/
-type PlayerInfoShieldCard = React.FC<{
-  field: Game.PlayerState["field"];
-}>;
+import { PlayerContext } from "routes/_app/game/-components/game/context";
+import { useInvariant } from "utils/hooks/useInvariant";
 
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
-export const PlayerInfoShieldCard: PlayerInfoShieldCard = ({ field }) => {
-  const shieldCard = field.find(({ cardId }) => CARD_LIBRARY[cardId as keyof typeof CARD_LIBRARY].type === "SHIELD");
+export const PlayerInfoShieldCard = () => {
+  const {
+    player: { field },
+  } = useInvariant(PlayerContext);
+
+  const shieldCard = field.find(
+    ({ cardId }) =>
+      CARD_LIBRARY[cardId as keyof typeof CARD_LIBRARY].type === "SHIELD",
+  );
   if (!shieldCard)
     return (
       <div className={styles.shield}>

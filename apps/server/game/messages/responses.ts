@@ -2,7 +2,7 @@ import type { Cards, Game } from "@fluxbound/schema";
 import type { GameSocketData } from "app/routes";
 import { createInitialState } from "game/actions/create-initial-state";
 import { GameEngine } from "game/engine";
-import { lobby } from "game/messages/lobby";
+import { closeRoomConnections, lobby } from "game/messages/lobby";
 import { enemyStarterTestDeck } from "game/testData/enemyDeck";
 import { playerStarterTestDeck } from "game/testData/playerDeck";
 import { GameResponse } from "utils/responses";
@@ -176,7 +176,7 @@ export const game = {
           winner: result.winner,
         }),
       );
-      ws.close(1000, "Game Ended");
+      closeRoomConnections(ws.data.roomId, 1000, "Game Ended");
       return;
     }
 

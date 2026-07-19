@@ -1,20 +1,22 @@
-import { CARD_LIBRARY, type Game } from "@fluxbound/schema";
+import { CARD_LIBRARY } from "@fluxbound/schema";
 import { SwordIcon } from "@phosphor-icons/react";
 import { CARD_IMAGE } from "routes/_app/game/-components/game/context/images";
 import styles from "./info.module.css";
-
-/**********************************************************************************************************
- *   TYPE DEFINITIONS
- **********************************************************************************************************/
-type PlayerInfoSwordCard = React.FC<{
-  field: Game.PlayerState["field"];
-}>;
+import { PlayerContext } from "routes/_app/game/-components/game/context";
+import { useInvariant } from "utils/hooks/useInvariant";
 
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
-export const PlayerInfoSwordCard: PlayerInfoSwordCard = ({ field }) => {
-  const shieldCard = field.find(({ cardId }) => CARD_LIBRARY[cardId as keyof typeof CARD_LIBRARY].type === "WEAPON");
+export const PlayerInfoSwordCard = () => {
+  const {
+    player: { field },
+  } = useInvariant(PlayerContext);
+
+  const shieldCard = field.find(
+    ({ cardId }) =>
+      CARD_LIBRARY[cardId as keyof typeof CARD_LIBRARY].type === "WEAPON",
+  );
   if (!shieldCard)
     return (
       <div className={styles.shield}>

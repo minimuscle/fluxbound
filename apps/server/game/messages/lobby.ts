@@ -9,6 +9,19 @@ type Players = {
 };
 
 export const rooms = new Map<Game.RoomId, Players>();
+const connectionsByRoomId = new Map<Game.RoomId, Set<Bun.ServerWebSocket<GameSocketData>>>();
+
+export const closeRoomConnections = (
+  roomId: Game.RoomId,
+  code: number,
+  reason: string,
+) => {
+  const connections = connectionsByRoomId.get(roomId);
+  if (!connections) return;
+
+  connectionsByRoomId.delete(roomId);
+  for (const connection of connections) connection.close(code, reason);
+};
 
 export const lobby = {
   create: (ws: Bun.ServerWebSocket<GameSocketData>) => {
@@ -27,6 +40,7 @@ export const lobby = {
     ws.subscribe(`player:${ws.data.userId}`);
 
     ws.data.roomId = roomId;
+    connectionsByRoomId.set(roomId, new Set([ws]));
 
     ws.send(GameResponse({ type: "lobby/created", roomId }));
   },
@@ -44,6 +58,7 @@ export const lobby = {
     ws.subscribe(`player:${ws.data.userId}`);
 
     ws.data.roomId = roomId;
+    connectionsByRoomId.get(roomId)?.add(ws);
 
     server.publish(channel, JSON.stringify({ type: "lobby/player-joined" }));
   },

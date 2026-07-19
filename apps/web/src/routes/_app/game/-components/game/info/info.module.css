@@ -96,7 +96,7 @@
 .largeRunes {
   display: grid;
   grid-template-columns: repeat(4, 58px);
-  justify-content: space-between;
+  justify-content: center;
   gap: 10px;
 
   .rune {
@@ -115,7 +115,10 @@
       justify-content: center;
       flex-direction: column;
       padding: 5px;
-      background-color: rgb(from var(--backgroundColor) calc(r * 0.75) calc(g * 0.75) calc(b * 0.75) / 25%);
+      background-color: rgb(
+        from var(--backgroundColor) calc(r * 0.75) calc(g * 0.75)
+          calc(b * 0.75) / 25%
+      );
     }
 
     .runeImage {
@@ -137,4 +140,80 @@
       height: 100%;
     }
   }
+}
+
+.permanents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+
+  .permanent {
+    width: 44px;
+    height: 44px;
+    border: 1px solid #665931;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+
+    .permanentEmpty {
+      background-color: #191f29;
+      width: 100%;
+      height: 100%;
+      border-radius: 100%;
+    }
+  }
+}
+
+.playerDeck {
+  position: absolute;
+  left: -25px;
+  bottom: 12px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  img:nth-child(2) {
+    top: 8px;
+    z-index: 2;
+  }
+  img:nth-child(3) {
+    top: 4px;
+    z-index: 3;
+  }
+  img:nth-child(4) {
+    top: 0px;
+    z-index: 4;
+  }
+
+  p {
+    z-index: 5;
+    font-size: 30px;
+    font-family: "Yrsa", serif;
+    font-weight: bold;
+    background-color: rgb(25 31 41 / 75%);
+    border-radius: 100%;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.enemyDeck {
+  top: 0px;
+  left: unset;
+  right: -25px;
 }
