@@ -8,7 +8,7 @@ import { audioManager } from "utils/audio";
 import { Form } from "utils/form/form";
 import { useAppForm } from "utils/form/useForm";
 import { z } from "zod";
-import styles from "./login.module.css";
+import styles from "./-components/login.module.css";
 
 /**********************************************************************************************************
  *   CONSTS
@@ -49,6 +49,8 @@ export const LoginForm = () => {
     },
   });
 
+  console.log("login url: ", import.meta.env.VITE_BASE_URL);
+
   /***** RENDER *****/
   return (
     <div className={styles.container}>
@@ -57,8 +59,17 @@ export const LoginForm = () => {
           name="email"
           children={(field) => (
             <div className={styles.inputContainer}>
-              <EnvelopeIcon size={28} color="#d5b864" className={styles.inputIcon} />
-              <input value={field.state.value} onChange={(e) => field.handleChange(e.target.value)} placeholder="Email" className={styles.input} />
+              <EnvelopeIcon
+                size={28}
+                color="#d5b864"
+                className={styles.inputIcon}
+              />
+              <input
+                value={field.state.value}
+                onChange={(e) => field.handleChange(e.target.value)}
+                placeholder="Email"
+                className={styles.input}
+              />
             </div>
           )}
         />
@@ -66,7 +77,12 @@ export const LoginForm = () => {
           name="password"
           children={(field) => (
             <div className={styles.inputContainer}>
-              <LockKeyIcon weight="fill" size={28} color="#d5b864" className={styles.inputIcon} />
+              <LockKeyIcon
+                weight="fill"
+                size={28}
+                color="#d5b864"
+                className={styles.inputIcon}
+              />
               <input
                 type="password"
                 value={field.state.value}
@@ -79,13 +95,22 @@ export const LoginForm = () => {
         />
         <p className={styles.text}>Forgot Password?</p>
 
-        <button type="submit" className={styles.button} onMouseEnter={() => audioManager.playSoundEffect("buttonHover")}>
+        <button
+          type="submit"
+          className={styles.button}
+          onMouseEnter={() => audioManager.playSoundEffect("buttonHover")}
+        >
           Log In
         </button>
       </Form>
 
       <img src={Or} alt="" className={styles.or} />
-      <button type="button" onClick={noop} className={styles.buttonSecondary} onMouseEnter={() => audioManager.playSoundEffect("buttonHover")}>
+      <button
+        type="button"
+        onClick={noop}
+        className={styles.buttonSecondary}
+        onMouseEnter={() => audioManager.playSoundEffect("buttonHover")}
+      >
         Create Account
       </button>
     </div>
