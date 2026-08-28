@@ -4,7 +4,8 @@
   "type": "module",
   "module": "index.ts",
   "scripts": {
-    "dev": "bun --watch index.ts"
+    "dev": "bun --watch index.ts",
+    "start": "bun index.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.2",

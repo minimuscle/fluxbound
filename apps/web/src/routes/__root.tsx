@@ -1,6 +1,11 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
+import { FormDevtoolsPanel } from "@tanstack/react-form-devtools";
 import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
-import { createRootRouteWithContext, Outlet, redirect } from "@tanstack/react-router";
+import {
+  createRootRouteWithContext,
+  Outlet,
+  redirect,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { user } from "api/user";
 import { audioManager } from "utils/audio";
@@ -30,30 +35,39 @@ function RootLayout() {
 
   /***** RENDER *****/
   return (
-    <div className="MainViewport">
-      <div
-        className="MainContainer"
-        style={{
-          transform: `translate(-50%, -50%) scale(${scale})`,
-        }}
-      >
-        <button className="MainContainer__audio" onClick={() => audioManager.setMusicMuted(!audioManager.musicMuted)}>
-          MUTE
-        </button>
-        <Outlet />
-        <TanStackDevtools
-          plugins={[
-            {
-              name: "Tanstack Query",
-              render: <ReactQueryDevtoolsPanel />,
-            },
-            {
-              name: "Tanstack Router",
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
+    <>
+      <div className="MainViewport">
+        <div
+          className="MainContainer"
+          style={{
+            transform: `translate(-50%, -50%) scale(${scale})`,
+          }}
+        >
+          <button
+            className="MainContainer__audio"
+            onClick={() => audioManager.setMusicMuted(!audioManager.musicMuted)}
+          >
+            MUTE
+          </button>
+          <Outlet />
+        </div>
       </div>
-    </div>
+      <TanStackDevtools
+        plugins={[
+          {
+            name: "Tanstack Query",
+            render: <ReactQueryDevtoolsPanel />,
+          },
+          {
+            name: "Tanstack Router",
+            render: <TanStackRouterDevtoolsPanel />,
+          },
+          {
+            name: "Tanstack Form",
+            render: <FormDevtoolsPanel />,
+          },
+        ]}
+      />
+    </>
   );
 }
