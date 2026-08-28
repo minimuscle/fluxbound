@@ -50,7 +50,10 @@ function RouteComponent() {
       return;
     }
 
-    const websocketUrl = new URL("ws://localhost:3000/game");
+    const websocketUrl = new URL(
+      `${import.meta.env.VITE_BASE_URL.includes("localhost") ? "ws" : "wss"}://${import.meta.env.VITE_BASE_URL}/game`,
+    );
+
     websocketUrl.searchParams.set("access_token", accessToken);
 
     const websocket = new WebSocket(websocketUrl);
