@@ -16,4 +16,4 @@ const server = Bun.serve<GameSocketData>({
   },
 });
 
-console.log(`Listening on http://localhost:${server.port}/`);
+console.log(`Listening on http://${server.url}:${server.port}/`);

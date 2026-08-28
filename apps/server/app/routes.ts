@@ -1,6 +1,7 @@
 import type { Game } from "@fluxbound/schema";
 import { createClient } from "@supabase/supabase-js";
 import type { Server } from "bun";
+import { corsPreflight, withCors } from "../utils/cors";
 import { user } from "./routes/user";
 
 export type GameSocketData = { userId: Game.PlayerId; name: Game.PlayerName; roomId?: Game.RoomId };
@@ -42,18 +43,23 @@ export const routes = {
 
   /***** PRIVATE ROUTES *****/
   "/api/user": {
-    GET: user.GET,
+    GET: withCors(user.GET),
+    OPTIONS: corsPreflight,
   },
   "/api/user/details": {
-    GET: user.details.GET,
+    GET: withCors(user.details.GET),
+    OPTIONS: corsPreflight,
   },
   "/api/user/signup": {
-    POST: user.signup.POST,
+    POST: withCors(user.signup.POST),
+    OPTIONS: corsPreflight,
   },
   "/api/user/login": {
-    POST: user.login.POST,
+    POST: withCors(user.login.POST),
+    OPTIONS: corsPreflight,
   },
   "/api/user/logout": {
-    POST: user.logout.POST,
+    POST: withCors(user.logout.POST),
+    OPTIONS: corsPreflight,
   },
 } satisfies Bun.Serve.Options<GameSocketData>["routes"];

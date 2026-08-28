@@ -2,7 +2,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { user } from "api/user";
 import Background from "assets/images/ui/menu/login/backgroundForm.svg";
 import Logo from "assets/images/ui/menu/login/logoWithBottom.svg";
-import { LoginForm } from "routes/_app/_home/login/login";
+import { LoginForm } from "routes/_app/_home/login/-components/form";
 import styles from "./-components/login.module.css";
 
 export const Route = createFileRoute("/_app/_home/login/")({

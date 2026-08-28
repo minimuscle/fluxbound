@@ -53,7 +53,7 @@ export default defineConfig(({ mode }) => {
     server: {
       proxy: {
         "/api": {
-          target: `${env.PROD ? "http" : "https"}://${env.VITE_BASE_URL}`,
+          target: `${env.VITE_BASE_URL.includes("localhost") ? "http" : "https"}://${env.VITE_BASE_URL}`,
           changeOrigin: true,
         },
       },

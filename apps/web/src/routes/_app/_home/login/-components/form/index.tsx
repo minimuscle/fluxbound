@@ -8,7 +8,7 @@ import { audioManager } from "utils/audio";
 import { Form } from "utils/form/form";
 import { useAppForm } from "utils/form/useForm";
 import { z } from "zod";
-import styles from "./-components/login.module.css";
+import styles from "./login.module.css";
 
 /**********************************************************************************************************
  *   CONSTS
