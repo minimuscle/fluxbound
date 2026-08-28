@@ -11,11 +11,10 @@ export const user = {
   },
   login: {
     POST: async ({ email, password }: { email: string; password: string }) => {
-      const login = await fetch("/api/user/login", {
+      const { data } = await apiFetch("/api/user/login", {
         method: "POST",
         body: JSON.stringify({ email, password }),
       });
-      const data = await login.json();
       localStorage.setItem("access_token", data.session.access_token);
       return data;
     },
