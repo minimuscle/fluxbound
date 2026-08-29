@@ -4,20 +4,23 @@ import type { GameEngine } from "game/engine";
 import { rooms } from "game/messages/lobby";
 import { GameResponse } from "utils/responses";
 
-export const updateGameState = (
+export const publishGameStarted = (
   server: Bun.Server<GameSocketData>,
   engine: GameEngine,
   roomId: Game.RoomId,
 ) => {
-  const { player1, player2 } = rooms.get(roomId)!;
-  const players = [player1.id, player2!.id];
+  const room = rooms.get(roomId);
+  if (!room || !room.player2) return;
 
-  players.forEach((playerId) => {
+  const { player1, player2 } = room;
+  const players = [player1, player2];
+
+  players.forEach(({ id }) => {
     server.publish(
-      `player:${playerId}`,
+      `player:${id}`,
       GameResponse({
-        type: "game/stateUpdated",
-        state: engine.getPlayerView(playerId),
+        type: "game/started",
+        state: engine.getPlayerView(id),
       }),
     );
   });

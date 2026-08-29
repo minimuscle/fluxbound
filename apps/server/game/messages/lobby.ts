@@ -2,13 +2,13 @@ import type { Game } from "@fluxbound/schema";
 import { GameResponse } from "utils/responses";
 import type { GameSocketData } from "../../app/routes";
 
-type Players = {
-  room: `room:${Game.RoomId}`;
+export type RoomMap = {
+  roomId: Game.RoomId;
   player1: Pick<Game.PlayerState, "id" | "name">;
   player2?: Pick<Game.PlayerState, "id" | "name">;
 };
 
-export const rooms = new Map<Game.RoomId, Players>();
+export const rooms = new Map<Game.RoomId, RoomMap>();
 const connectionsByRoomId = new Map<
   Game.RoomId,
   Set<Bun.ServerWebSocket<GameSocketData>>
@@ -36,13 +36,12 @@ export const lobby = {
 
     // Set the room up
     rooms.set(roomId, {
-      room: `room:${roomId}`,
+      roomId: roomId,
       player1: { id: ws.data.userId, name: ws.data.name },
     });
 
     // Subscribe to the room
-    const channel = rooms.get(roomId)!.room;
-    ws.subscribe(channel);
+    ws.subscribe(`room:${roomId}`);
     ws.subscribe(`player:${ws.data.userId}`);
 
     ws.data.roomId = roomId;
@@ -76,17 +75,14 @@ export const lobby = {
     });
 
     // Subscribe to the room
-    const channel = rooms.get(roomId)!.room;
-    ws.subscribe(channel);
+    ws.subscribe(`room:${roomId}`);
     ws.subscribe(`player:${ws.data.userId}`);
 
     ws.data.roomId = roomId;
     connectionsByRoomId.get(roomId)?.add(ws);
 
-    console.log(ws.data, rooms.get(roomId)!.player1);
-
     server.publish(
-      channel,
+      `room:${roomId}`,
       GameResponse({
         type: "lobby/player-joined",
         player1: rooms.get(roomId)!.player1,

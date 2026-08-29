@@ -1,7 +1,12 @@
-import type { ClientGame, ClientLobby } from "@fluxbound/schema";
+import type { ClientGame, ClientLobby, Game } from "@fluxbound/schema";
+import type { GameEngine } from "game/engine";
+import { startGame } from "game/messages/responses/start-game";
+import { startGameSingleplayer } from "game/messages/responses/start-game-singleplayer";
 import type { GameSocketData } from "../../app/routes";
 import { lobby } from "./lobby";
 import { game } from "./responses";
+
+export const enginesByRoomId = new Map<Game.RoomId, GameEngine>();
 
 export function message(
   server: Bun.Server<GameSocketData>,
@@ -18,9 +23,9 @@ export function message(
     case "lobby/join":
       return lobby.join(server, ws, parsed.roomId);
     case "game/start":
-      return game.start(server, ws);
+      return startGame(server, ws);
     case "game/startSolo":
-      return game.startSolo(server, ws);
+      return startGameSingleplayer(server, ws, 0); // TODO: implement level selection when it's implemented
     case "game/start-turn":
       return game.startTurn(server, ws);
     case "game/play-card":
