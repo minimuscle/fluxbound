@@ -4,12 +4,15 @@ import type { GameSocketData } from "../../app/routes";
 
 type Players = {
   room: `room:${Game.RoomId}`;
-  player1: Game.PlayerId;
-  player2?: Game.PlayerId;
+  player1: Pick<Game.PlayerState, "id" | "name">;
+  player2?: Pick<Game.PlayerState, "id" | "name">;
 };
 
 export const rooms = new Map<Game.RoomId, Players>();
-const connectionsByRoomId = new Map<Game.RoomId, Set<Bun.ServerWebSocket<GameSocketData>>>();
+const connectionsByRoomId = new Map<
+  Game.RoomId,
+  Set<Bun.ServerWebSocket<GameSocketData>>
+>();
 
 export const closeRoomConnections = (
   roomId: Game.RoomId,
@@ -26,12 +29,15 @@ export const closeRoomConnections = (
 export const lobby = {
   create: (ws: Bun.ServerWebSocket<GameSocketData>) => {
     // Generate RoomId
-    const roomId = Math.random().toString(36).slice(2, 7).toUpperCase() as Game.RoomId;
+    const roomId = Math.random()
+      .toString(36)
+      .slice(2, 7)
+      .toUpperCase() as Game.RoomId;
 
     // Set the room up
     rooms.set(roomId, {
       room: `room:${roomId}`,
-      player1: ws.data.userId,
+      player1: { id: ws.data.userId, name: ws.data.name },
     });
 
     // Subscribe to the room
@@ -42,15 +48,32 @@ export const lobby = {
     ws.data.roomId = roomId;
     connectionsByRoomId.set(roomId, new Set([ws]));
 
-    ws.send(GameResponse({ type: "lobby/created", roomId }));
+    ws.send(
+      GameResponse({
+        type: "lobby/created",
+        roomId,
+        player1: { id: ws.data.userId, name: ws.data.name },
+      }),
+    );
   },
-  join: (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>, roomId: Game.RoomId) => {
+  join: (
+    server: Bun.Server<GameSocketData>,
+    ws: Bun.ServerWebSocket<GameSocketData>,
+    roomId: Game.RoomId,
+  ) => {
     // Check if room exists and is not full
-    if (!rooms.has(roomId)) ws.send(GameResponse({ type: "lobby/error", error: "Room does not exist" }));
-    if (rooms.get(roomId)?.player2) ws.send(GameResponse({ type: "lobby/error", error: "Room is full" }));
+    if (!rooms.has(roomId))
+      ws.send(
+        GameResponse({ type: "lobby/error", error: "Room does not exist" }),
+      );
+    if (rooms.get(roomId)?.player2)
+      ws.send(GameResponse({ type: "lobby/error", error: "Room is full" }));
 
     // Join the room
-    rooms.set(roomId, { ...rooms.get(roomId)!, player2: ws.data.userId });
+    rooms.set(roomId, {
+      ...rooms.get(roomId)!,
+      player2: { id: ws.data.userId, name: ws.data.name },
+    });
 
     // Subscribe to the room
     const channel = rooms.get(roomId)!.room;
@@ -60,6 +83,15 @@ export const lobby = {
     ws.data.roomId = roomId;
     connectionsByRoomId.get(roomId)?.add(ws);
 
-    server.publish(channel, JSON.stringify({ type: "lobby/player-joined" }));
+    console.log(ws.data, rooms.get(roomId)!.player1);
+
+    server.publish(
+      channel,
+      GameResponse({
+        type: "lobby/player-joined",
+        player1: rooms.get(roomId)!.player1,
+        player2: { id: ws.data.userId, name: ws.data.name },
+      }),
+    );
   },
 };

@@ -1,4 +1,10 @@
-import { GearSixIcon, PlayIcon, SignOutIcon, StackIcon, UsersIcon } from "@phosphor-icons/react";
+import {
+  GearSixIcon,
+  PlayIcon,
+  SignOutIcon,
+  StackIcon,
+  UsersIcon,
+} from "@phosphor-icons/react";
 import { createFileRoute } from "@tanstack/react-router";
 import Logo from "assets/images/ui/menu/main/logo.svg";
 import MenuHolder from "assets/images/ui/menu/main/menuHolder.svg";
@@ -20,7 +26,7 @@ function RouteComponent() {
         New Game
       </NavButton>
       <img src={MenuSpacer} alt="" className={styles.menuSpacer} />
-      <NavButton options={{ to: "/game/lobby/single" }} icon={UsersIcon}>
+      <NavButton options={{ to: "/game/lobby" }} icon={UsersIcon}>
         Multiplayer
       </NavButton>
       <img src={MenuSpacer} alt="" className={styles.menuSpacer} />

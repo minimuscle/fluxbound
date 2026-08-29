@@ -135,9 +135,9 @@ export class GameEngine {
   }
 
   // Get the player view of the game state hiding opponents private information
-  public getPlayerView(): Game.GameStateView {
-    const player = getPlayer(this.state, this.playerId);
-    const opponent = getOpponent(this.state, this.playerId);
+  public getPlayerView(playerId: Game.PlayerId): Game.GameStateView {
+    const player = getPlayer(this.state, playerId);
+    const opponent = getOpponent(this.state, playerId);
 
     const debugFields = {
       deck: opponent.deck,

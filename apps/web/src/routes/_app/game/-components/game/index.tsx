@@ -23,6 +23,8 @@ export const Game = () => {
   /***** HOOKS *****/
   const { state } = useInvariant(GameContext);
 
+  console.log(state);
+
   /***** RENDER *****/
   return (
     <div className={styles.container}>

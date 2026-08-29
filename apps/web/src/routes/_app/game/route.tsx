@@ -30,6 +30,10 @@ function RouteComponent() {
   >(null);
   const [ended, setEnded] = useState<false | Game.PlayerId>(false);
   const [connectionVersion, setConnectionVersion] = useState(0);
+  const [lobby, setLobby] = useState<{
+    player1: { name: Game.PlayerName; id: Game.PlayerId };
+    player2?: { name: Game.PlayerName; id: Game.PlayerId };
+  } | null>(null);
 
   const [roomId, setRoomId] = useState<Game.RoomId | null>(null);
   const isIntentionalClose = useRef(false);
@@ -71,8 +75,10 @@ function RouteComponent() {
       switch (parsed.type) {
         case "lobby/created":
           // case "lobby/joined":
+          console.log("parsed ", parsed);
           setGameError(null);
           setRoomId(parsed.roomId);
+          setLobby({ player1: parsed.player1 });
           break;
         case "game/started":
           setGameError(null);

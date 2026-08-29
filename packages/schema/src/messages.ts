@@ -22,9 +22,21 @@ export const serverLobby = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("lobby/created"),
     roomId: z.custom<Game.RoomId>(z.coerce.string().parse),
+    player1: z.object({
+      id: z.custom<Game.PlayerId>(),
+      name: z.custom<Game.PlayerName>(),
+    }),
   }),
   z.object({
     type: z.literal("lobby/player-joined"),
+    player1: z.object({
+      id: z.custom<Game.PlayerId>(),
+      name: z.custom<Game.PlayerName>(),
+    }),
+    player2: z.object({
+      id: z.custom<Game.PlayerId>(),
+      name: z.custom<Game.PlayerName>(),
+    }),
   }),
   z.object({
     type: z.literal("lobby/error"),

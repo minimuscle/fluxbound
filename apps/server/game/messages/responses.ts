@@ -2,18 +2,89 @@ import type { Cards, Game } from "@fluxbound/schema";
 import type { GameSocketData } from "app/routes";
 import { createInitialState } from "game/actions/create-initial-state";
 import { GameEngine } from "game/engine";
-import { closeRoomConnections, lobby } from "game/messages/lobby";
-import { enemyStarterTestDeck } from "game/testData/enemyDeck";
+import { closeRoomConnections, lobby, rooms } from "game/messages/lobby";
+import { updateGameState } from "game/messages/update-game-state";
 import { playerStarterTestDeck } from "game/testData/playerDeck";
 import { GameResponse } from "utils/responses";
 
 const gameStatesByRoomId = new Map<string, Game.GameState>();
 
 export const game = {
-  start: (
+  start: async (
     server: Bun.Server<GameSocketData>,
     ws: Bun.ServerWebSocket<GameSocketData>,
-  ) => {},
+  ) => {
+    if (!ws.data.roomId)
+      return void ws.send(
+        GameResponse({
+          type: "game/error",
+          ok: false,
+          message: "No Room ID",
+          code: "NO_ROOM_ID",
+        }),
+      );
+    const room = rooms.get(ws.data.roomId);
+
+    const player1: Game.InitialPlayerState = {
+      id: room!.player1.id,
+      name: room!.player1.name,
+      deck: playerStarterTestDeck as Cards.CardId[],
+      hand: [],
+      field: [],
+      health: 100,
+      healthMax: 100,
+      attunement: "FIRE",
+      flux: {
+        FIRE: 0,
+        WATER: 0,
+        EARTH: 0,
+        AIR: 0,
+        LIGHT: 0,
+        DARK: 0,
+        LIFE: 0,
+        DEATH: 0,
+        AETHER: 0,
+        VOID: 0,
+      },
+    };
+    const player2: Game.InitialPlayerState = {
+      id: room!.player2!.id,
+      name: room!.player2!.name,
+      deck: playerStarterTestDeck as Cards.CardId[],
+      hand: [],
+      field: [],
+      health: 100,
+      healthMax: 100,
+      attunement: "FIRE",
+      flux: {
+        FIRE: 0,
+        WATER: 0,
+        EARTH: 0,
+        AIR: 0,
+        LIGHT: 0,
+        DARK: 0,
+        LIFE: 0,
+        DEATH: 0,
+        AETHER: 0,
+        VOID: 0,
+      },
+    };
+    const initialGameState = createInitialState(player1, player2);
+    const engine = new GameEngine(initialGameState, ws.data.userId);
+
+    gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
+    const players = [player1.id, player2!.id];
+
+    players.forEach((playerId) => {
+      server.publish(
+        `player:${playerId}`,
+        GameResponse({
+          type: "game/started",
+          state: engine.getPlayerView(playerId),
+        }),
+      );
+    });
+  },
   startSolo: async (
     server: Bun.Server<GameSocketData>,
     ws: Bun.ServerWebSocket<GameSocketData>,
@@ -53,7 +124,7 @@ export const game = {
     const player2: Game.InitialPlayerState = {
       id: "AI_0" as Game.PlayerId,
       name: "Novice AI" as Game.PlayerName,
-      deck: enemyStarterTestDeck as Cards.CardId[],
+      deck: playerStarterTestDeck as Cards.CardId[],
       hand: [],
       field: [],
       health: 100,
@@ -76,10 +147,7 @@ export const game = {
     const engine = new GameEngine(initialGameState, ws.data.userId);
 
     gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
-    server.publish(
-      `player:${ws.data.userId}`,
-      GameResponse({ type: "game/started", state: engine.getPlayerView() }),
-    );
+    updateGameState(server, engine, ws.data.roomId);
   },
 
   startTurn: (
@@ -104,13 +172,7 @@ export const game = {
       return void ws.send(GameResponse({ type: "game/error", ...result }));
 
     gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
-    return void server.publish(
-      `player:${ws.data.userId}`,
-      GameResponse({
-        type: "game/stateUpdated",
-        state: engine.getPlayerView(),
-      }),
-    );
+    return void updateGameState(server, engine, ws.data.roomId);
   },
 
   playCard: (
@@ -136,13 +198,7 @@ export const game = {
       return void ws.send(GameResponse({ type: "game/error", ...result }));
 
     gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
-    return void server.publish(
-      `player:${ws.data.userId}`,
-      GameResponse({
-        type: "game/stateUpdated",
-        state: engine.getPlayerView(),
-      }),
-    );
+    return void updateGameState(server, engine, ws.data.roomId);
   },
 
   activateCard: async (
@@ -168,13 +224,7 @@ export const game = {
       return void ws.send(GameResponse({ type: "game/error", ...result }));
 
     gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
-    return void server.publish(
-      `player:${ws.data.userId}`,
-      GameResponse({
-        type: "game/stateUpdated",
-        state: engine.getPlayerView(),
-      }),
-    );
+    return void updateGameState(server, engine, ws.data.roomId);
   },
 
   endTurn: async (
@@ -203,7 +253,7 @@ export const game = {
         `room:${ws.data.roomId}`,
         GameResponse({
           type: "game/gameEnded",
-          state: engine.getPlayerView(),
+          state: engine.getPlayerView(ws.data.userId),
           winner: result.winner,
         }),
       );
@@ -211,10 +261,18 @@ export const game = {
       return;
     }
 
-    server.publish(
-      `player:${ws.data.userId}`,
-      GameResponse({ type: "game/turnEnded", state: engine.getPlayerView() }),
-    );
+    const { player1, player2 } = rooms.get(ws.data.roomId)!;
+    const players = [player1.id, player2!.id];
+
+    players.forEach((playerId) => {
+      server.publish(
+        `player:${playerId}`,
+        GameResponse({
+          type: "game/turnEnded",
+          state: engine.getPlayerView(playerId),
+        }),
+      );
+    });
 
     if (engine.gameState.activePlayer.includes("AI")) {
       //TODO: actually have a robust way to check if the AI is playing as this is not a good way
@@ -226,25 +284,12 @@ export const game = {
       }
 
       if (AIResult.code === "GAME_ENDED" && !!AIResult.winner) {
-        server.publish(
-          `room:${ws.data.roomId}`,
-          GameResponse({
-            type: "game/gameEnded",
-            state: engine.getPlayerView(),
-            winner: AIResult.winner,
-          }),
-        );
+        updateGameState(server, engine, ws.data.roomId);
         closeRoomConnections(ws.data.roomId, 1000, "Game Ended");
         return;
       }
 
-      server.publish(
-        `player:${ws.data.userId}`,
-        GameResponse({
-          type: "game/stateUpdated",
-          state: engine.getPlayerView(),
-        }),
-      );
+      updateGameState(server, engine, ws.data.roomId);
     }
 
     gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
@@ -274,12 +319,6 @@ export const game = {
       return void ws.send(GameResponse({ type: "game/error", ...result }));
 
     gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
-    return void server.publish(
-      `player:${ws.data.userId}`,
-      GameResponse({
-        type: "game/stateUpdated",
-        state: engine.getPlayerView(),
-      }),
-    );
+    return void updateGameState(server, engine, ws.data.roomId);
   },
 };
