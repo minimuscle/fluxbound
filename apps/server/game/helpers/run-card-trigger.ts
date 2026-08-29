@@ -29,7 +29,7 @@ export const runCardTrigger = (
       effects,
       effectGroup,
       effectName as keyof Effects.Effect[typeof effectGroup] & string,
-      { state, cardId, target, playerId },
+      { state: newState, cardId, target, playerId },
       trigger.args,
     );
   }

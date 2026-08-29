@@ -27,6 +27,9 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
 
   const nextState = setPlayerState(state, player.id, {
     field: nextPlayerField,
+    flux: {
+      ...player.flux,
+    },
   });
 
   // Do any damage from other spell affects
@@ -38,13 +41,16 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
   const nextOpponentHealth = getOpponent(nextStateHealth).health;
 
   // Trigger any cards in play with the onTurnEnd trigger
-  player.field.forEach(
-    async (card) =>
-      await runCardTrigger({ state, cardId: card.id }, "onTurnEnd"),
+  const triggeredState = player.field.reduce(
+    (currentState, card) =>
+      runCardTrigger({ state: currentState, cardId: card.id }, "onTurnEnd"),
+    nextState,
   );
 
-  const nextTurnState = setPlayerState(nextState, opponent.id, {
-    ...opponent,
+  // Plus 1 flux for the players attunement
+  getPlayer(triggeredState, player.id).flux[player.attunement] += 1;
+
+  const nextTurnState = setPlayerState(triggeredState, opponent.id, {
     health: nextOpponentHealth,
   });
 
