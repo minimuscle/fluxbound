@@ -1,6 +1,6 @@
 import { z } from "zod";
 import type { Cards } from "./cards";
-import type { CONDITIONS } from "./conditions";
+import { CONDITIONS } from "./conditions";
 import type { Game } from "./game";
 
 export const defineEffect = <
@@ -75,7 +75,7 @@ export const EFFECTS = {
           z.union([
             z.object({ cost: fluxCostSchema }),
             z.object({
-              conditionType: z.custom<(typeof CONDITIONS)[number]>(),
+              conditionType: z.custom<(typeof CONDITIONS)[number]>().optional(),
             }),
           ]),
         ),
@@ -111,6 +111,12 @@ export const EFFECTS = {
           modififer: z.enum(["lessThan", "greaterThan", "equalTo"]),
           value: z.number(),
         }),
+      }),
+    }),
+    conditions: defineEffect({
+      args: z.object({
+        conditions: z.array(z.enum(CONDITIONS)),
+        chance: z.number().min(0).max(1).optional(),
       }),
     }),
   },

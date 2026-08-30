@@ -52,6 +52,7 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
       ws?.send({ type: "game/activate-card", cardId });
     }
   };
+  console.log("card conditions: ", gameCardData.conditions);
 
   /***** RENDER *****/
   if (!cardData) return null;
@@ -60,6 +61,9 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
       className={classNames(styles.creatureCard, {
         [styles.isActivatable]: isActivatable && stage === "PLAYER",
         [styles.isTarget]: spellTargets?.includes("creature"),
+
+        /***** CONDITIONS *****/
+        [styles.burning]: gameCardData.conditions?.includes("burning"),
       })}
       style={
         {

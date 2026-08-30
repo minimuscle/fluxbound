@@ -33,20 +33,24 @@ export const modify: Effects.EffectHandler["target"]["modify"] = (
   if (target) {
     // The card is targeting a card in play
     const opponent = getOpponent(state, state.activePlayer);
-    const targetCard =
-      player.field.find((card) => card.id === target) ??
-      opponent.field.find((card) => card.id === target);
+    const playerTargetIndex = player.field.findIndex(
+      (card) => card.id === target,
+    );
+    const targetField =
+      playerTargetIndex === -1 ? opponent.field : player.field;
+    const targetIndex =
+      playerTargetIndex === -1
+        ? opponent.field.findIndex((card) => card.id === target)
+        : playerTargetIndex;
+    const targetCard = targetField[targetIndex];
     if (!targetCard) return state;
 
     for (const { stat, amount } of stats) {
       targetCard[stat] = (targetCard[stat] ?? 0) + amount;
     }
 
-    if (targetCard.health && targetCard.health <= 0) {
-      const field = player.field.includes(targetCard)
-        ? player.field
-        : opponent.field;
-      field.filter(({ id }) => id !== targetCard.id);
+    if (targetCard.health !== undefined && targetCard.health <= 0) {
+      targetField.splice(targetIndex, 1);
     }
   }
 

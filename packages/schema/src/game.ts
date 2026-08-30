@@ -19,6 +19,7 @@ export namespace Game {
     health: number;
     maxHealth: number;
     activations: number;
+    conditions: Cards.Conditions[];
   }>;
 
   export type PlayerState = {

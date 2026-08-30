@@ -3,8 +3,6 @@
   display: grid;
   grid-template-columns: repeat(8, 150px);
   grid-template-rows: repeat(3, 75px);
-  /* background-color: rgba(65, 65, 65, 0.326);
-  border: 1px solid red; */
   min-height: 400px;
   margin-top: 30px;
   margin-bottom: -30px;
@@ -92,4 +90,8 @@
     border: 10px solid rgba(253, 0, 0);
     z-index: 10;
   }
+}
+
+.burning {
+  background-color: red;
 }

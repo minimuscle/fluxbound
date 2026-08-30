@@ -32,6 +32,7 @@ export function playACard(
       damage: (gameCard as Cards.Creature).damage,
       health: (gameCard as Cards.Creature).health,
       activations: 0,
+      conditions: (gameCard as Cards.Creature).conditions,
     };
 
     player.field.push(creatureCard);

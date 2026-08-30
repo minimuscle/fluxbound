@@ -291,10 +291,32 @@ export const FIRE_CARDS = defineCardDefinition({
     domain: "FIRE",
     type: "SHIELD",
     name: "Wall of Fire",
-    description: "Attacking enemeis take 1 damage",
+    description:
+      "Attacking enemies take 1 damage and have 50% chance of being burned",
     cost: 5,
     price: 60,
-    triggers: {},
+    triggers: {
+      onAttacked: [
+        {
+          id: "target.modify",
+          args: {
+            stats: [
+              {
+                stat: "health",
+                amount: -1,
+              },
+            ],
+          },
+        },
+        {
+          id: "target.conditions",
+          args: {
+            conditions: ["burning"],
+            chance: 0.5,
+          },
+        },
+      ],
+    },
   },
   "0ff": {
     domain: "FIRE",

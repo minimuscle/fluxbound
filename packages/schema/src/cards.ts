@@ -1,5 +1,6 @@
 import type { Tagged } from "type-fest";
 import type { z } from "zod";
+import type { CONDITIONS } from "./conditions";
 import type { Effects } from "./effects";
 
 export namespace Cards {
@@ -41,6 +42,8 @@ export namespace Cards {
     | "all"
     | "selfCreatures"
     | "opponentCreatures";
+
+  export type Conditions = (typeof CONDITIONS)[number];
 
   type SplitTriggerEffectIds<TName extends Effects.EffectNames> =
     TName extends `${infer TGroup}.${infer TName}` ? [TGroup, TName] : never;
@@ -94,6 +97,7 @@ export namespace Cards {
     damage: number;
     health: number;
     activations: number;
+    conditions: Conditions[];
   };
 
   export type Weapon = Base & {
