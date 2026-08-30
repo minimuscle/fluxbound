@@ -66,6 +66,9 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
         [styles.burning]: gameCardData.conditions?.some(
           ({ id }) => id === "burning",
         ),
+        [styles.frozen]: gameCardData.conditions?.some(
+          ({ id }) => id === "frozen",
+        ),
       })}
       style={
         {

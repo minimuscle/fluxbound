@@ -10,8 +10,15 @@ export const calculateDamage = (state: Game.GameState): Game.GameState => {
   const player = getPlayer(state, state.activePlayer);
   const opponent = getOpponent(state, state.activePlayer);
 
-  // Get a list of cards in a players field that have the damage property
-  const damageCards = player.field.filter((card) => card.damage !== undefined);
+  // Get a list of cards in a players field that have the damage property and not conditions that prevent attacking
+  const damageCards = player.field
+    .filter((card) => card.damage !== undefined)
+    .filter(
+      ({ conditions }) =>
+        !conditions?.some(({ id }) =>
+          ["frozen", "paralyzed", "sleeping", "stunned"].includes(id),
+        ),
+    );
 
   // Check if the opponent has a shield
   const opponentShield = opponent.field.find(

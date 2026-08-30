@@ -119,7 +119,19 @@ export const WATER_CARDS = defineCardDefinition({
     activations: 0,
     cost: 1,
     price: 10,
-    triggers: {},
+    targets: ["creature"],
+    triggers: {
+      onActivated: [
+        {
+          id: "target.conditions",
+          args: {
+            conditions: ["frozen"],
+            chance: 1,
+            length: 3,
+          },
+        },
+      ],
+    },
   },
   "0w9": {
     domain: "WATER",
