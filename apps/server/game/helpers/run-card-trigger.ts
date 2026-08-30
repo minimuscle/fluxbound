@@ -11,15 +11,10 @@ import { getPlayer } from "./get-player";
  *   FUNCTION START
  **********************************************************************************************************/
 export const runCardTrigger = (
-  context: {
-    state: Game.GameState;
-    cardId: Game.CardId;
-    target?: Game.CardId;
-    playerId?: Game.PlayerId;
-  },
+  context: Effects.EffectContext,
   triggerType: Cards.TriggerTypes,
 ): Game.GameState => {
-  const { state, cardId, target, playerId } = context;
+  const { state, cardId, target, playerId, targetPlayerId } = context;
   const player = getPlayer(state, playerId ?? state.activePlayer);
   const card =
     player.field.find((card) => card.id === cardId) ??
@@ -42,7 +37,13 @@ export const runCardTrigger = (
       effects,
       effectGroup,
       effectName as keyof Effects.Effect[typeof effectGroup] & string,
-      { state: newState, cardId, target, playerId },
+      {
+        state: newState,
+        cardId,
+        target,
+        playerId,
+        targetPlayerId,
+      } as Effects.EffectContext,
       trigger.args,
     );
   }
@@ -56,12 +57,7 @@ function runEffect<
   effects: Effects.EffectHandler,
   effectGroup: TGroup,
   effectName: TName,
-  context: {
-    state: Game.GameState;
-    cardId: Game.CardId;
-    target?: Game.CardId;
-    playerId?: Game.PlayerId;
-  },
+  context: Effects.EffectContext,
   args: Effects.EffectArgumentsByParts<TGroup, TName>,
 ): Game.GameState {
   return effects[effectGroup][effectName](context, args);

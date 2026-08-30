@@ -19,7 +19,10 @@ export namespace Game {
     health: number;
     maxHealth: number;
     activations: number;
-    conditions: Cards.Conditions[];
+    conditions: Array<{
+      id: Cards.Conditions;
+      length: number; // Number of rounds the condition lasts
+    }>;
   }>;
 
   export type PlayerState = {

@@ -143,7 +143,16 @@ export const game = {
       }
 
       if (AIResult.code === "GAME_ENDED" && !!AIResult.winner) {
-        updateGameState(server, engine, ws.data.roomId);
+        players.forEach((playerId) => {
+          server.publish(
+            `player:${playerId}`,
+            GameResponse({
+              type: "game/gameEnded",
+              state: engine.getPlayerView(playerId),
+              winner: AIResult.winner!,
+            }),
+          );
+        });
         closeRoomConnections(ws.data.roomId, 1000, "Game Ended");
         return;
       }

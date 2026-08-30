@@ -32,7 +32,11 @@ export function playACard(
       damage: (gameCard as Cards.Creature).damage,
       health: (gameCard as Cards.Creature).health,
       activations: 0,
-      conditions: (gameCard as Cards.Creature).conditions,
+      conditions:
+        (gameCard as Cards.Creature).conditions?.map((condition) => ({
+          id: condition,
+          length: 999,
+        })) ?? [],
     };
 
     player.field.push(creatureCard);
@@ -48,7 +52,7 @@ export function playACard(
         {
           state,
           cardId,
-          playerId: targetId === "self" ? player.id : opponent.id,
+          targetPlayerId: targetId === "self" ? player.id : opponent.id,
         },
         "onActivated",
       );

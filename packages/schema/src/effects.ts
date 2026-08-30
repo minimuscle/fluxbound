@@ -19,15 +19,19 @@ export namespace Effects {
     [TGroup in EffectGroups]: `${TGroup}.${keyof Effect[TGroup] & string}`;
   }[keyof Effect];
 
+  export type EffectContext = {
+    state: Game.GameState;
+    cardId: Game.CardId;
+    playerId?: Game.PlayerId;
+  } & (
+    | { target?: Game.CardId; targetPlayerId?: never }
+    | { target?: never; targetPlayerId?: Game.PlayerId }
+  );
+
   export type EffectHandler = {
     [TGroup in EffectGroups]: {
       [TName in keyof Effect[TGroup] & string]: (
-        context: {
-          state: Game.GameState;
-          cardId: Game.CardId;
-          target?: Game.CardId;
-          playerId?: Game.PlayerId;
-        },
+        context: EffectContext,
         args: Effect[TGroup][TName] extends {
           args: infer TArgs extends z.ZodTypeAny;
         }
@@ -117,6 +121,7 @@ export const EFFECTS = {
       args: z.object({
         conditions: z.array(z.enum(CONDITIONS)),
         chance: z.number().min(0).max(1).optional(),
+        length: z.number().min(1),
       }),
     }),
   },

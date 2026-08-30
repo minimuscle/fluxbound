@@ -1,9 +1,9 @@
 import { GameContext } from "routes/_app/game/-components/context";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
-import { DOMAIN_ICON } from "routes/_app/game/-components/game/context/images";
 import { EndGameOverlay } from "routes/_app/game/-components/game/endGameOverlay";
 import { PlayerInfoField } from "routes/_app/game/-components/game/field";
 import { Hand } from "routes/_app/game/-components/game/hand";
+import { PlayerInfoAttunement } from "routes/_app/game/-components/game/info/attunement";
 import { PlayerInfoCardDeck } from "routes/_app/game/-components/game/info/cards";
 import { PlayerInfoDivider } from "routes/_app/game/-components/game/info/divider";
 import { PlayerInfoPermanents } from "routes/_app/game/-components/game/info/permanents";
@@ -13,7 +13,6 @@ import { PlayerInfoShieldCard } from "routes/_app/game/-components/game/info/shi
 import { PlayerInfoSwordCard } from "routes/_app/game/-components/game/info/swordCard";
 import { NextTurnButton } from "routes/_app/game/-components/game/nextTurnButton";
 import { useInvariant } from "utils/hooks/useInvariant";
-import { truncate } from "utils/methods/truncate";
 import styles from "./game.module.css";
 
 /**********************************************************************************************************
@@ -23,8 +22,6 @@ export const Game = () => {
   /***** HOOKS *****/
   const { state } = useInvariant(GameContext);
 
-  console.log(state);
-
   /***** RENDER *****/
   return (
     <div className={styles.container}>
@@ -32,27 +29,7 @@ export const Game = () => {
       <div className={styles.leftSection}>
         <PlayerContext value={{ stage: "PLAYER", player: state.you }}>
           <div className={styles.playerInfo}>
-            <div className={styles.player}>
-              <div className={styles.playerAttunement}>
-                <img src={DOMAIN_ICON[state.you.attunement]} />
-              </div>
-              <div className={styles.playerDetails}>
-                <div className={styles.playerText}>
-                  {truncate(state.you.name, 25)}
-                </div>
-                <div className={styles.playerHealth}>
-                  <div
-                    className={styles.playerHealthBar}
-                    style={{
-                      width: `${(state.you.health / state.you.healthMax) * 100}%`,
-                    }}
-                  />
-                  <p>
-                    {state.you.health}/{state.you.healthMax}
-                  </p>
-                </div>
-              </div>
-            </div>
+            <PlayerInfoAttunement />
             <div className={styles.playerShields}>
               <div className={styles.playerShield}>
                 <PlayerInfoSwordCard />
@@ -90,27 +67,7 @@ export const Game = () => {
       <div className={styles.rightSection}>
         <PlayerContext value={{ stage: "ENEMY", player: state.opponent }}>
           <div className={styles.enemyInfo}>
-            <div className={styles.player}>
-              <div className={styles.playerAttunement}>
-                <img src={DOMAIN_ICON[state.opponent.attunement]} />
-              </div>
-              <div className={styles.playerDetails}>
-                <div className={styles.playerText}>
-                  {truncate(state.opponent.name, 25)}
-                </div>
-                <div className={styles.playerHealth}>
-                  <div
-                    className={styles.playerHealthBar}
-                    style={{
-                      width: `${(state.opponent.health / state.opponent.healthMax) * 100}%`,
-                    }}
-                  />
-                  <p>
-                    {state.opponent.health}/{state.opponent.healthMax}
-                  </p>
-                </div>
-              </div>
-            </div>
+            <PlayerInfoAttunement />
             <div className={styles.playerShields}>
               <div className={styles.playerShield}>
                 <PlayerInfoSwordCard />

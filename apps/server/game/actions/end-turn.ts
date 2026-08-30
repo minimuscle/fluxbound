@@ -1,4 +1,5 @@
 import { CARD_LIBRARY, type Game } from "@fluxbound/schema";
+import { conditionResolve } from "game/actions/condition-resolve";
 import { calculateDamage } from "game/helpers/calculate-damage";
 import { getOpponent } from "game/helpers/get-opponent";
 import { getPlayer } from "game/helpers/get-player";
@@ -47,10 +48,16 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
     nextState,
   );
 
-  // Plus 1 flux for the players attunement
-  getPlayer(triggeredState, player.id).flux[player.attunement] += 1;
+  // Resolve any condition effects.
+  const resolvedState = player.field.reduce(
+    (currentState, card) => conditionResolve(currentState, card.id),
+    triggeredState,
+  );
 
-  const nextTurnState = setPlayerState(triggeredState, opponent.id, {
+  // Plus 1 flux for the players attunement
+  getPlayer(resolvedState, player.id).flux[player.attunement] += 1;
+
+  const nextTurnState = setPlayerState(resolvedState, opponent.id, {
     health: nextOpponentHealth,
   });
 

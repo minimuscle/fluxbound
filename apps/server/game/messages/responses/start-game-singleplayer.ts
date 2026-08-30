@@ -75,6 +75,7 @@ export const startGameSingleplayer = async (
 
   const player2: Game.InitialPlayerState = {
     ...basePlayerStats,
+    // deck: enemyStarterTestDeck,
     id: `AI_${level}` as Game.PlayerId,
     name: lookupAIName[level] as Game.PlayerName,
     health: level === 0 ? 50 : 100,

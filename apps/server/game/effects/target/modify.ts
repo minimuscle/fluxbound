@@ -6,12 +6,11 @@ import { getPlayer } from "game/helpers/get-player";
  *   FUNCTION START
  **********************************************************************************************************/
 export const modify: Effects.EffectHandler["target"]["modify"] = (
-  { state, cardId, target, playerId },
+  { state, cardId, target, playerId, targetPlayerId },
   args,
 ): Game.GameState => {
   const { stats } = args; // TODO: add guard for target type here
-
-  const player = getPlayer(state, state.activePlayer);
+  const player = getPlayer(state, playerId ?? state.activePlayer);
   const foundCard =
     player.field.find((card) => card.id === cardId) ??
     player.hand.find(
@@ -21,9 +20,9 @@ export const modify: Effects.EffectHandler["target"]["modify"] = (
 
   if (!foundCard) return state;
 
-  if (playerId) {
+  if (targetPlayerId) {
     // The card is targeting the player, not a card in play
-    const targetPlayer = getPlayer(state, playerId);
+    const targetPlayer = getPlayer(state, targetPlayerId);
     for (const { stat, amount } of stats) {
       targetPlayer.health =
         stat === "health" ? targetPlayer.health + amount : targetPlayer.health; //TODO: player can only take health damage, so fix this

@@ -63,7 +63,9 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
         [styles.isTarget]: spellTargets?.includes("creature"),
 
         /***** CONDITIONS *****/
-        [styles.burning]: gameCardData.conditions?.includes("burning"),
+        [styles.burning]: gameCardData.conditions?.some(
+          ({ id }) => id === "burning",
+        ),
       })}
       style={
         {

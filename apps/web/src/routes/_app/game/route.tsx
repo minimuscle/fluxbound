@@ -80,8 +80,6 @@ function RouteComponent() {
 
       switch (parsed.type) {
         case "lobby/created":
-          // case "lobby/joined":
-          console.log("parsed ", parsed);
           setGameError(null);
           setRoomId(parsed.roomId);
           setLobby({ player1: parsed.player1 });
@@ -91,22 +89,15 @@ function RouteComponent() {
           setGameState(parsed.state);
           return navigate({ to: "/game", replace: true });
         case "game/turnEnded":
-          console.log("turn ended", parsed.state);
           setGameError(null);
           setGameState(parsed.state);
           typedWebsocket.send({ type: "game/start-turn" });
           break;
-        // oxlint-disable-next-line no-fallthrough
         case "game/stateUpdated":
-          console.log("state updated", parsed.state);
           setGameError(null);
           setGameState(parsed.state);
           break;
         case "game/gameEnded":
-          console.log(
-            "Game Ended, Winner:",
-            parsed.winner === userData?.data?.id ? "You" : "Opponent",
-          );
           setEnded(parsed.winner);
           setGameError(null);
           setGameState(parsed.state);
