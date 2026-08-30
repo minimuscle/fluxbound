@@ -233,19 +233,39 @@ export const FIRE_CARDS = defineCardDefinition({
     domain: "FIRE",
     type: "SPELL",
     name: "Wildfire",
-    description: "1F - Deal +1/-1 to target",
+    description: "3 damage to all enemy creatures",
     cost: 7,
     price: 50,
-    triggers: {},
+    targets: ["opponentCreatures"],
+    triggers: {
+      onActivated: [
+        {
+          id: "target.modify",
+          args: {
+            stats: [{ stat: "health", amount: -3 }],
+          },
+        },
+      ],
+    },
   },
   "0fb": {
     domain: "FIRE",
     type: "SPELL",
     name: "Molten Rage",
-    description: "1F - Deal +1/-1 to target",
+    description: "+5/0 to the target creature",
     cost: 5,
     price: 50,
-    triggers: {},
+    targets: ["creature"],
+    triggers: {
+      onActivated: [
+        {
+          id: "target.modify",
+          args: {
+            stats: [{ stat: "damage", amount: 5 }],
+          },
+        },
+      ],
+    },
   },
   "0fc": {
     domain: "FIRE",

@@ -7,6 +7,8 @@ export namespace Game {
   export type CardId = Tagged<string, "gameCardId">;
   export type PlayerName = Tagged<string, "playerName">;
 
+  export type Target = Array<CardId | Omit<Cards.Targets, "creature">>;
+
   export type GameCard = {
     id: CardId;
     cardId: Cards.CardId; // The non-unique id of the card to match to the library
@@ -31,7 +33,10 @@ export namespace Game {
     flux: Record<Cards.Domain, number>;
   };
 
-  export type InitialPlayerState = Omit<PlayerState, "deck" | "hand" | "field"> & {
+  export type InitialPlayerState = Omit<
+    PlayerState,
+    "deck" | "hand" | "field"
+  > & {
     deck: Cards.CardId[];
     hand: never[];
     field: never[];

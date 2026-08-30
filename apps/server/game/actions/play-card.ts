@@ -9,7 +9,7 @@ import { runCardTrigger } from "game/helpers/run-card-trigger";
 export function playACard(
   state: Game.GameState,
   cardId: Game.CardId,
-  target?: Array<Game.CardId | "self" | "opponent">,
+  target?: Game.Target,
 ): Game.GameState {
   const player = getPlayer(state, state.activePlayer);
   const opponent = getOpponent(state, state.activePlayer);
@@ -41,7 +41,7 @@ export function playACard(
     player.field.push(playedCard);
   }
 
-  target?.forEach((targetId) => {
+  target?.forEach(async (targetId) => {
     if (targetId === "self" || targetId === "opponent") {
       runCardTrigger(
         {
@@ -53,7 +53,55 @@ export function playACard(
       );
       return;
     }
-    runCardTrigger({ state, cardId, target: targetId }, "onActivated");
+    if (targetId === "all") {
+      player.field.forEach(async (card) => {
+        const isCreature = CARD_LIBRARY[card.cardId]?.type === "CREATURE";
+        if (isCreature) {
+          await runCardTrigger(
+            { state, cardId, target: card.id },
+            "onActivated",
+          );
+        }
+      });
+      opponent.field.forEach(async (card) => {
+        const isCreature = CARD_LIBRARY[card.cardId]?.type === "CREATURE";
+        if (isCreature) {
+          await runCardTrigger(
+            { state, cardId, target: card.id },
+            "onActivated",
+          );
+        }
+      });
+      return;
+    }
+    if (targetId === "opponentCreatures") {
+      opponent.field.forEach(async (card) => {
+        const isCreature = CARD_LIBRARY[card.cardId]?.type === "CREATURE";
+        if (isCreature) {
+          await runCardTrigger(
+            { state, cardId, target: card.id },
+            "onActivated",
+          );
+        }
+      });
+      return;
+    }
+    if (targetId === "selfCreatures") {
+      player.field.forEach(async (card) => {
+        const isCreature = CARD_LIBRARY[card.cardId]?.type === "CREATURE";
+        if (isCreature) {
+          await runCardTrigger(
+            { state, cardId, target: card.id },
+            "onActivated",
+          );
+        }
+      });
+      return;
+    }
+    await runCardTrigger(
+      { state, cardId, target: targetId as Game.CardId },
+      "onActivated",
+    );
   });
 
   if (gameCard.type === "SPELL") {

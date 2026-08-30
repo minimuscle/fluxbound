@@ -52,6 +52,19 @@ export const Card: Card = ({
       ws?.send({ type: "game/discard-card", cardId: card.id });
     }
     if (action === "play" && cardInfo.type === "SPELL" && !!spellContext) {
+      if (
+        (cardInfo as Cards.Spell).targets.includes("selfCreatures") ||
+        (cardInfo as Cards.Spell).targets.includes("opponentCreatures")
+      ) {
+        ws?.send({
+          type: "game/play-card",
+          cardId: card.id,
+          target: (cardInfo as Cards.Spell).targets as Pick<
+            Cards.Targets,
+            "selfCreatures" | "opponentCreatures"
+          >[],
+        });
+      }
       spellContext.setSpellTargets((cardInfo as Cards.Spell).targets);
       spellContext.setSpellCardId(card.id);
     }

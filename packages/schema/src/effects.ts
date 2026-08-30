@@ -104,5 +104,14 @@ export const EFFECTS = {
         stats: z.array(statModificationSchema),
       }),
     }),
+    destroy: defineEffect({
+      args: z.object({
+        condition: z.object({
+          field: z.enum(["damage", "health"]),
+          modififer: z.enum(["lessThan", "greaterThan", "equalTo"]),
+          value: z.number(),
+        }),
+      }),
+    }),
   },
 } as const;

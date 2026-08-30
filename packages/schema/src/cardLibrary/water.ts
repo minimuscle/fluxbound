@@ -91,11 +91,25 @@ export const WATER_CARDS = defineCardDefinition({
     domain: "WATER",
     type: "SPELL",
     name: "Tidal Wave",
-    description: "",
+    description: "Destroy any non-water create with less than 3hp",
     activations: 0,
     cost: 5,
     price: 10,
-    triggers: {},
+    targets: ["selfCreatures", "opponentCreatures"],
+    triggers: {
+      onActivated: [
+        {
+          id: "target.destroy",
+          args: {
+            condition: {
+              field: "health",
+              modififer: "lessThan",
+              value: 3,
+            },
+          },
+        },
+      ],
+    },
   },
   "0w8": {
     domain: "WATER",

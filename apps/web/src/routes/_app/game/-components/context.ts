@@ -1,4 +1,4 @@
-import type { ERROR_CODES, Game } from "@fluxbound/schema";
+import type { Cards, ERROR_CODES, Game } from "@fluxbound/schema";
 import React, { createContext } from "react";
 import type { createTypedWebSocketSender } from "utils/functions";
 
@@ -26,12 +26,12 @@ export type GameErrorContext = {
 
 export type SpellContext = {
   cardId?: Game.CardId | null;
-  setSpellCardId: React.Dispatch<React.SetStateAction<Game.CardId | null>>;
-  spellTargets: Array<"self" | "creature" | "opponent" | "permanent"> | null;
+  setSpellCardId: React.Dispatch<
+    React.SetStateAction<Game.CardId | null | undefined>
+  >;
+  spellTargets: Array<Cards.Targets> | null;
   setSpellTargets: React.Dispatch<
-    React.SetStateAction<Array<
-      "self" | "creature" | "opponent" | "permanent"
-    > | null>
+    React.SetStateAction<Array<Cards.Targets> | null>
   >;
 };
 

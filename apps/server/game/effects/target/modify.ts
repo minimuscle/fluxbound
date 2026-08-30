@@ -42,11 +42,11 @@ export const modify: Effects.EffectHandler["target"]["modify"] = (
       targetCard[stat] = (targetCard[stat] ?? 0) + amount;
     }
 
-    if (targetCard.health && targetCard.health < 0) {
+    if (targetCard.health && targetCard.health <= 0) {
       const field = player.field.includes(targetCard)
         ? player.field
         : opponent.field;
-      field.splice(field.indexOf(targetCard), 1);
+      field.filter(({ id }) => id !== targetCard.id);
     }
   }
 

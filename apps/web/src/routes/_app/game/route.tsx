@@ -37,7 +37,9 @@ function RouteComponent() {
   } | null>(null);
   const [spellTargets, setSpellTargets] =
     useState<SpellContext["spellTargets"]>(null);
-  const [spellCardId, setSpellCardId] = useState<SpellContext["cardId"]>(null);
+  const [spellCardId, setSpellCardId] = useState<SpellContext["cardId"] | null>(
+    null,
+  );
 
   const [roomId, setRoomId] = useState<Game.RoomId | null>(null);
   const isIntentionalClose = useRef(false);

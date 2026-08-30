@@ -29,10 +29,7 @@ export class GameEngine {
   }
 
   // Play a card into the field or run its trigger
-  public playCard(
-    cardId: Game.CardId,
-    target?: Array<Game.CardId | "self" | "opponent">,
-  ): GameResponse {
+  public playCard(cardId: Game.CardId, target?: Game.Target): GameResponse {
     const turnValidation = isPlayersTurn(this.state, this.playerId);
     if (!turnValidation.ok) return turnValidation;
 

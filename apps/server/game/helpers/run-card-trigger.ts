@@ -27,7 +27,6 @@ export const runCardTrigger = (
       (card) =>
         card.id === cardId && CARD_LIBRARY[card.cardId]?.type === "SPELL",
     );
-  console.log("card", card);
   if (!card) return state;
 
   const triggers = CARD_LIBRARY[card.cardId]?.triggers?.[triggerType];
@@ -39,7 +38,6 @@ export const runCardTrigger = (
       Effects.EffectGroups,
       string,
     ];
-    console.log("running effect here:");
     newState = runEffect(
       effects,
       effectGroup,

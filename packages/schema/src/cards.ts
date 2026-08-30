@@ -33,6 +33,15 @@ export namespace Cards {
     | "onAttacked"
     | "onDeath";
 
+  export type Targets =
+    | "self"
+    | "creature"
+    | "opponent"
+    | "permanent"
+    | "all"
+    | "selfCreatures"
+    | "opponentCreatures";
+
   type SplitTriggerEffectIds<TName extends Effects.EffectNames> =
     TName extends `${infer TGroup}.${infer TName}` ? [TGroup, TName] : never;
   type EffectArgs<TEffectName extends Effects.EffectNames> =
@@ -94,7 +103,7 @@ export namespace Cards {
 
   export type Spell = Base & {
     type: "SPELL";
-    targets: Array<"self" | "creature" | "opponent" | "permanent">;
+    targets: Targets[];
   };
 
   export type Others = Base & {
