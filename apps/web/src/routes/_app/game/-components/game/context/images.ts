@@ -14,6 +14,7 @@ import Water from "assets/images/domains/water.webp";
 import CinderRat from "assets/images/cards/fire/cinder_rat.png";
 import Ember from "assets/images/cards/fire/ember.jpeg";
 import Fireball from "assets/images/cards/fire/fireball.png";
+import MoltenRage from "assets/images/cards/fire/molten_rage.png";
 import RubyElemental from "assets/images/cards/fire/ruby_elemental.png";
 import Rune from "assets/images/cards/fire/rune.png";
 import WallOfFire from "assets/images/cards/fire/wall_of_fire.png";
@@ -48,7 +49,7 @@ const CARD_IMAGE_ENTRIES = {
   "0f8": RubyElemental,
   "0f9": Fireball,
   "0fa": Wildfire,
-  "0fb": Ember,
+  "0fb": MoltenRage,
   "0fc": Ember,
   "0fd": Ember,
   "0fe": WallOfFire,
