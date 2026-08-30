@@ -1,9 +1,9 @@
 import { CARD_LIBRARY } from "@fluxbound/schema";
 import { ShieldCheckeredIcon } from "@phosphor-icons/react";
-import { CARD_IMAGE } from "routes/_app/game/-components/game/context/images";
-import styles from "./info.module.css";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
+import { CARD_IMAGE } from "routes/_app/game/-components/game/context/images";
 import { useInvariant } from "utils/hooks/useInvariant";
+import styles from "./info.module.css";
 
 /**********************************************************************************************************
  *   COMPONENT START
@@ -24,5 +24,7 @@ export const PlayerInfoShieldCard = () => {
       </div>
     );
 
-  return <img src={CARD_IMAGE[shieldCard.cardId]} />;
+  return (
+    <img src={CARD_IMAGE[shieldCard.cardId]} className={styles.infoCard} />
+  );
 };

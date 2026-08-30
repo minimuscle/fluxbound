@@ -92,16 +92,21 @@ export namespace Cards {
     damage: number;
   };
 
+  export type Spell = Base & {
+    type: "SPELL";
+    targets: Array<"self" | "creature" | "opponent" | "permanent">;
+  };
+
   export type Others = Base & {
     type:
-      | (Omit<CardType, "CREATURE" | "WEAPON"> & "SPELL")
+      | Omit<CardType, "CREATURE" | "WEAPON" | "SPELL">
       | "PERMANENT"
       | "WEAPON"
       | "SHIELD"
       | "RUNE";
   };
 
-  export type Card = Creature | Weapon | Others;
+  export type Card = Creature | Weapon | Spell | Others;
 
   export type CardDefinition = Record<string, Card>;
   type WithCardIdTriggers<TCard extends Base, TCardId extends CardKey> = Omit<

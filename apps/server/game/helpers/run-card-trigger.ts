@@ -1,4 +1,9 @@
-import { CARD_LIBRARY, type Cards, type Effects, type Game } from "@fluxbound/schema";
+import {
+  CARD_LIBRARY,
+  type Cards,
+  type Effects,
+  type Game,
+} from "@fluxbound/schema";
 import { effects } from "game/effects";
 import { getPlayer } from "./get-player";
 
@@ -16,7 +21,13 @@ export const runCardTrigger = (
 ): Game.GameState => {
   const { state, cardId, target, playerId } = context;
   const player = getPlayer(state, playerId ?? state.activePlayer);
-  const card = player.field.find((card) => card.id === cardId);
+  const card =
+    player.field.find((card) => card.id === cardId) ??
+    player.hand.find(
+      (card) =>
+        card.id === cardId && CARD_LIBRARY[card.cardId]?.type === "SPELL",
+    );
+  console.log("card", card);
   if (!card) return state;
 
   const triggers = CARD_LIBRARY[card.cardId]?.triggers?.[triggerType];
@@ -24,7 +35,11 @@ export const runCardTrigger = (
 
   let newState = state;
   for (const trigger of triggers) {
-    const [effectGroup, effectName] = trigger.id.split(".") as [Effects.EffectGroups, string];
+    const [effectGroup, effectName] = trigger.id.split(".") as [
+      Effects.EffectGroups,
+      string,
+    ];
+    console.log("running effect here:");
     newState = runEffect(
       effects,
       effectGroup,
@@ -36,7 +51,10 @@ export const runCardTrigger = (
   return newState;
 };
 
-function runEffect<TGroup extends Effects.EffectGroups, TName extends keyof Effects.Effect[TGroup] & string>(
+function runEffect<
+  TGroup extends Effects.EffectGroups,
+  TName extends keyof Effects.Effect[TGroup] & string,
+>(
   effects: Effects.EffectHandler,
   effectGroup: TGroup,
   effectName: TName,

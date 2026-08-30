@@ -174,10 +174,7 @@ export const FIRE_CARDS = defineCardDefinition({
         {
           id: "stats.modify",
           args: {
-            stats: [
-              { stat: "damage", amount: 2 },
-              { stat: "health", amount: 2 },
-            ],
+            stats: [{ stat: "damage", amount: 2 }],
             cost: {
               domain: "FIRE",
               amount: 1,
@@ -205,10 +202,20 @@ export const FIRE_CARDS = defineCardDefinition({
     domain: "FIRE",
     type: "SPELL",
     name: "Fireball",
-    description: "1F - Deal +1/-1 to target",
+    description: "1F - Deal 3x3 damage to target",
     cost: 3,
     price: 50,
-    triggers: {},
+    targets: ["creature", "opponent"],
+    triggers: {
+      onActivated: [
+        {
+          id: "target.modify",
+          args: {
+            stats: [{ stat: "health", amount: -3 }],
+          },
+        },
+      ],
+    },
   },
   "0fa": {
     domain: "FIRE",

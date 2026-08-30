@@ -3,7 +3,10 @@ import type { Cards } from "./cards";
 import type { CONDITIONS } from "./conditions";
 import type { Game } from "./game";
 
-export const defineEffect = <TArgumentSchema extends z.ZodTypeAny, TMetadata extends Record<string, unknown>>(
+export const defineEffect = <
+  TArgumentSchema extends z.ZodTypeAny,
+  TMetadata extends Record<string, unknown>,
+>(
   config: {
     args: TArgumentSchema;
   } & TMetadata,
@@ -25,19 +28,29 @@ export namespace Effects {
           target?: Game.CardId;
           playerId?: Game.PlayerId;
         },
-        args: Effect[TGroup][TName] extends { args: infer TArgs extends z.ZodTypeAny } ? z.infer<TArgs> : never,
+        args: Effect[TGroup][TName] extends {
+          args: infer TArgs extends z.ZodTypeAny;
+        }
+          ? z.infer<TArgs>
+          : never,
       ) => Game.GameState;
     };
   };
 
-  export type EffectArgumentsByParts<TGroup extends EffectGroups, TName extends keyof Effect[TGroup] & string> = Effect[TGroup][TName] extends {
+  export type EffectArgumentsByParts<
+    TGroup extends EffectGroups,
+    TName extends keyof Effect[TGroup] & string,
+  > = Effect[TGroup][TName] extends {
     args: infer TArgs extends z.ZodTypeAny;
   }
     ? z.infer<TArgs>
     : never;
 }
 
-const statModificationSchema = z.object({ stat: z.enum(["health", "damage"]), amount: z.number() });
+const statModificationSchema = z.object({
+  stat: z.enum(["health", "damage"]),
+  amount: z.number(),
+});
 const fluxCostSchema = z.object({
   domain: z.custom<Cards.Domain>(),
   amount: z.number(),
@@ -58,7 +71,14 @@ export const EFFECTS = {
         .object({
           stats: z.array(statModificationSchema),
         })
-        .and(z.union([z.object({ cost: fluxCostSchema }), z.object({ conditionType: z.custom<(typeof CONDITIONS)[number]>() })])),
+        .and(
+          z.union([
+            z.object({ cost: fluxCostSchema }),
+            z.object({
+              conditionType: z.custom<(typeof CONDITIONS)[number]>(),
+            }),
+          ]),
+        ),
     },
     reduceDamage: defineEffect({
       args: z.object({
@@ -75,6 +95,13 @@ export const EFFECTS = {
     swap: defineEffect({
       args: z.object({
         cardId: z.custom<Cards.CardId>(),
+      }),
+    }),
+  },
+  target: {
+    modify: defineEffect({
+      args: z.object({
+        stats: z.array(statModificationSchema),
       }),
     }),
   },

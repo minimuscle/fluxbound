@@ -1,8 +1,11 @@
-import { CARD_LIBRARY, type Game } from "@fluxbound/schema";
+import { CARD_LIBRARY, type Cards, type Game } from "@fluxbound/schema";
 import Overlay from "assets/images/cards/fire/blank.svg";
 import classNames from "classnames";
 import { use, type AnimationEventHandler, type CSSProperties } from "react";
-import { WebSocketContext } from "routes/_app/game/-components/context";
+import {
+  SpellContext,
+  WebSocketContext,
+} from "routes/_app/game/-components/context";
 import {
   CARD_IMAGE,
   DOMAIN_ICON,
@@ -37,15 +40,20 @@ export const Card: Card = ({
   const isActivePlayer = useIsActivePlayer();
 
   const context = use(WebSocketContext);
+  const spellContext = use(SpellContext);
   const ws = context?.websocket;
 
   /***** FUNCTIONS *****/
   const handleClick = () => {
-    if (action === "play") {
+    if (action === "play" && cardInfo.type !== "SPELL") {
       ws?.send({ type: "game/play-card", cardId: card.id });
     }
     if (action === "discard") {
       ws?.send({ type: "game/discard-card", cardId: card.id });
+    }
+    if (action === "play" && cardInfo.type === "SPELL" && !!spellContext) {
+      spellContext.setSpellTargets((cardInfo as Cards.Spell).targets);
+      spellContext.setSpellCardId(card.id);
     }
   };
 

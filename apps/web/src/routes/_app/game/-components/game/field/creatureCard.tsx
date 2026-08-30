@@ -5,7 +5,7 @@ import type React from "react";
 import { DOMAIN_BACKGROUND_COLOR } from "routes/_app/game/-components/game/context/color";
 import { CARD_IMAGE } from "routes/_app/game/-components/game/context/images";
 import { useInvariant } from "utils/hooks/useInvariant";
-import { WebSocketContext } from "../../context";
+import { SpellContext, WebSocketContext } from "../../context";
 import { PlayerContext } from "../context";
 import styles from "./play.module.css";
 
@@ -23,11 +23,35 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
   /***** HOOKS *****/
   const { player, stage } = useInvariant(PlayerContext);
   const { websocket: ws } = useInvariant(WebSocketContext);
+  const {
+    spellTargets,
+    cardId: spellCardId,
+    setSpellTargets,
+    setSpellCardId,
+  } = useInvariant(SpellContext);
+
   const gameCardData = player.field.find((card) => card.id === cardId);
   if (!gameCardData) return null;
 
   const cardData = CARD_LIBRARY[gameCardData.cardId] as Cards.Creature;
   const isActivatable = (gameCardData.activations ?? cardData.activations) > 0;
+
+  /***** FUNCTIONS *****/
+  const handleClick = () => {
+    if (spellTargets?.includes("creature") && !!spellCardId) {
+      ws?.send({
+        type: "game/play-card",
+        cardId: spellCardId,
+        target: [cardId],
+      });
+      setSpellTargets(null);
+      setSpellCardId(null);
+      return;
+    }
+    if (isActivatable && stage === "PLAYER") {
+      ws?.send({ type: "game/activate-card", cardId });
+    }
+  };
 
   /***** RENDER *****/
   if (!cardData) return null;
@@ -35,17 +59,14 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
     <div
       className={classNames(styles.creatureCard, {
         [styles.isActivatable]: isActivatable && stage === "PLAYER",
+        [styles.isTarget]: spellTargets?.includes("creature"),
       })}
       style={
         {
           "--background-color": DOMAIN_BACKGROUND_COLOR[cardData.domain],
         } as React.CSSProperties
       }
-      onClick={() =>
-        isActivatable &&
-        stage === "PLAYER" &&
-        ws?.send({ type: "game/activate-card", cardId })
-      }
+      onClick={handleClick}
     >
       <img src={CARD_IMAGE[gameCardData.cardId]} />
       <p className={styles.name}>{cardData.name}</p>

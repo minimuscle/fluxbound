@@ -24,9 +24,21 @@ export type GameErrorContext = {
   >;
 };
 
+export type SpellContext = {
+  cardId?: Game.CardId | null;
+  setSpellCardId: React.Dispatch<React.SetStateAction<Game.CardId | null>>;
+  spellTargets: Array<"self" | "creature" | "opponent" | "permanent"> | null;
+  setSpellTargets: React.Dispatch<
+    React.SetStateAction<Array<
+      "self" | "creature" | "opponent" | "permanent"
+    > | null>
+  >;
+};
+
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
 export const WebSocketContext = createContext<WebSocketContext | null>(null);
 export const GameContext = createContext<GameContext | null>(null);
 export const GameErrorContext = createContext<GameErrorContext | null>(null);
+export const SpellContext = createContext<SpellContext | null>(null);

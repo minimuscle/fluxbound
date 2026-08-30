@@ -37,6 +37,7 @@ export const game = {
     server: Bun.Server<GameSocketData>,
     ws: Bun.ServerWebSocket<GameSocketData>,
     cardId: Game.CardId,
+    target?: Array<Game.CardId | "self" | "opponent">,
   ) => {
     if (!ws.data.roomId || !gameStatesByRoomId.has(ws.data.roomId)) {
       return void ws.send(
@@ -51,7 +52,7 @@ export const game = {
     const initialGameState = gameStatesByRoomId.get(ws.data.roomId)!;
     const engine = new GameEngine(initialGameState, ws.data.userId);
 
-    const result = engine.playCard(cardId);
+    const result = engine.playCard(cardId, target);
     if (!result.ok)
       return void ws.send(GameResponse({ type: "game/error", ...result }));
 

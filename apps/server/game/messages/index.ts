@@ -29,7 +29,7 @@ export function message(
     case "game/start-turn":
       return game.startTurn(server, ws);
     case "game/play-card":
-      return game.playCard(server, ws, parsed.cardId);
+      return game.playCard(server, ws, parsed.cardId, parsed.target);
     case "game/activate-card":
       return game.activateCard(server, ws, parsed.cardId);
     case "game/end-turn":

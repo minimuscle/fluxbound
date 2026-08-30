@@ -12,6 +12,7 @@ import { createTypedWebSocketSender } from "utils/functions";
 import {
   GameContext,
   GameErrorContext,
+  SpellContext,
   WebSocketContext,
 } from "./-components/context";
 
@@ -34,6 +35,9 @@ function RouteComponent() {
     player1: { name: Game.PlayerName; id: Game.PlayerId };
     player2?: { name: Game.PlayerName; id: Game.PlayerId };
   } | null>(null);
+  const [spellTargets, setSpellTargets] =
+    useState<SpellContext["spellTargets"]>(null);
+  const [spellCardId, setSpellCardId] = useState<SpellContext["cardId"]>(null);
 
   const [roomId, setRoomId] = useState<Game.RoomId | null>(null);
   const isIntentionalClose = useRef(false);
@@ -174,7 +178,16 @@ function RouteComponent() {
               : null
           }
         >
-          <Outlet />
+          <SpellContext
+            value={{
+              spellTargets,
+              setSpellTargets,
+              cardId: spellCardId,
+              setSpellCardId,
+            }}
+          >
+            <Outlet />
+          </SpellContext>
         </GameContext>
       </WebSocketContext>
     </GameErrorContext>
