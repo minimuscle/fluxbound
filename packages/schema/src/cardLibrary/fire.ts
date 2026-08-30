@@ -214,6 +214,18 @@ export const FIRE_CARDS = defineCardDefinition({
             stats: [{ stat: "health", amount: -3 }],
           },
         },
+        {
+          id: "target.modify",
+          args: {
+            stats: [{ stat: "health", amount: -3 }],
+          },
+        },
+        {
+          id: "target.modify",
+          args: {
+            stats: [{ stat: "health", amount: -3 }],
+          },
+        },
       ],
     },
   },
