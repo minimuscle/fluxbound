@@ -1,0 +1,17 @@
+.backbutton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url("/src/assets/images/ui/menu/singlePlayerOpponent/backBtn.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 133px;
+    height: 65px;
+    view-transition-name: lobby-back-button;
+    animation: fadeIn 500ms ease-in-out both;
+
+    &:hover {
+        background-image: url("/src/assets/images/ui/menu/singlePlayerOpponent/backBtn-hover.svg");
+    }
+}

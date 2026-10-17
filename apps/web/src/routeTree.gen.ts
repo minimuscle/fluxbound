@@ -13,6 +13,7 @@ import { Route as AppRouteRouteImport } from './routes/_app/route'
 import { Route as AppGameRouteRouteImport } from './routes/_app/game/route'
 import { Route as AppSetupIndexRouteImport } from './routes/_app/setup/index'
 import { Route as AppGameIndexRouteImport } from './routes/_app/game/index'
+import { Route as AppCardsIndexRouteImport } from './routes/_app/cards/index'
 import { Route as AppHomeIndexRouteImport } from './routes/_app/_home/index'
 import { Route as AppHomeLogoutRouteImport } from './routes/_app/_home/logout'
 import { Route as AppGameLobbyIndexRouteImport } from './routes/_app/game/lobby/index'
@@ -37,6 +38,11 @@ const AppGameIndexRoute = AppGameIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AppGameRouteRoute,
+} as any)
+const AppCardsIndexRoute = AppCardsIndexRouteImport.update({
+  id: '/cards/',
+  path: '/cards/',
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const AppHomeIndexRoute = AppHomeIndexRouteImport.update({
   id: '/_home/',
@@ -68,6 +74,7 @@ export interface FileRoutesByFullPath {
   '/': typeof AppHomeIndexRoute
   '/game': typeof AppGameRouteRouteWithChildren
   '/logout': typeof AppHomeLogoutRoute
+  '/cards/': typeof AppCardsIndexRoute
   '/game/': typeof AppGameIndexRoute
   '/setup/': typeof AppSetupIndexRoute
   '/game/lobby/single': typeof AppGameLobbySingleRoute
@@ -77,6 +84,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/logout': typeof AppHomeLogoutRoute
   '/': typeof AppHomeIndexRoute
+  '/cards': typeof AppCardsIndexRoute
   '/game': typeof AppGameIndexRoute
   '/setup': typeof AppSetupIndexRoute
   '/game/lobby/single': typeof AppGameLobbySingleRoute
@@ -89,6 +97,7 @@ export interface FileRoutesById {
   '/_app/game': typeof AppGameRouteRouteWithChildren
   '/_app/_home/logout': typeof AppHomeLogoutRoute
   '/_app/_home/': typeof AppHomeIndexRoute
+  '/_app/cards/': typeof AppCardsIndexRoute
   '/_app/game/': typeof AppGameIndexRoute
   '/_app/setup/': typeof AppSetupIndexRoute
   '/_app/game/lobby/single': typeof AppGameLobbySingleRoute
@@ -101,6 +110,7 @@ export interface FileRouteTypes {
     | '/'
     | '/game'
     | '/logout'
+    | '/cards/'
     | '/game/'
     | '/setup/'
     | '/game/lobby/single'
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
   to:
     | '/logout'
     | '/'
+    | '/cards'
     | '/game'
     | '/setup'
     | '/game/lobby/single'
@@ -121,6 +132,7 @@ export interface FileRouteTypes {
     | '/_app/game'
     | '/_app/_home/logout'
     | '/_app/_home/'
+    | '/_app/cards/'
     | '/_app/game/'
     | '/_app/setup/'
     | '/_app/game/lobby/single'
@@ -161,6 +173,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/game/'
       preLoaderRoute: typeof AppGameIndexRouteImport
       parentRoute: typeof AppGameRouteRoute
+    }
+    '/_app/cards/': {
+      id: '/_app/cards/'
+      path: '/cards'
+      fullPath: '/cards/'
+      preLoaderRoute: typeof AppCardsIndexRouteImport
+      parentRoute: typeof AppRouteRoute
     }
     '/_app/_home/': {
       id: '/_app/_home/'
@@ -220,6 +239,7 @@ interface AppRouteRouteChildren {
   AppGameRouteRoute: typeof AppGameRouteRouteWithChildren
   AppHomeLogoutRoute: typeof AppHomeLogoutRoute
   AppHomeIndexRoute: typeof AppHomeIndexRoute
+  AppCardsIndexRoute: typeof AppCardsIndexRoute
   AppSetupIndexRoute: typeof AppSetupIndexRoute
   AppHomeLoginIndexRoute: typeof AppHomeLoginIndexRoute
 }
@@ -228,6 +248,7 @@ const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppGameRouteRoute: AppGameRouteRouteWithChildren,
   AppHomeLogoutRoute: AppHomeLogoutRoute,
   AppHomeIndexRoute: AppHomeIndexRoute,
+  AppCardsIndexRoute: AppCardsIndexRoute,
   AppSetupIndexRoute: AppSetupIndexRoute,
   AppHomeLoginIndexRoute: AppHomeLoginIndexRoute,
 }

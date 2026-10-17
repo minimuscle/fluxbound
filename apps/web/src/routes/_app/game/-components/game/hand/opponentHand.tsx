@@ -1,7 +1,7 @@
 import type { Game } from "@fluxbound/schema";
 import classNames from "classnames";
-import { Card } from "components/Card";
-import { EmptyCard } from "components/Card/empty";
+import { Card } from "components/GameCard";
+import { EmptyCard } from "components/GameCard/empty";
 import type { CSSProperties } from "react";
 import styles from "./hand.module.css";
 

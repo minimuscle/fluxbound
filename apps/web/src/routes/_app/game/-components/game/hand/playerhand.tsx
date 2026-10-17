@@ -1,12 +1,7 @@
 import type { Game } from "@fluxbound/schema";
 import classNames from "classnames";
-import { Card } from "components/Card";
-import {
-  useLayoutEffect,
-  useRef,
-  useState,
-  type CSSProperties,
-} from "react";
+import { Card } from "components/GameCard";
+import { useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import styles from "./hand.module.css";
 
 /**********************************************************************************************************
@@ -79,10 +74,7 @@ export const PlayerHand: PlayerHand = ({ player }) => {
 
   /***** HOOKS *****/
   return (
-    <div
-      className={styles.container}
-      style={containerStyle}
-    >
+    <div className={styles.container} style={containerStyle}>
       {player.hand.map((card, index) => {
         const cardCenter = index * cardStep + cardWidth / 2;
         const enteringCardStyle: EnteringCardStyle = {

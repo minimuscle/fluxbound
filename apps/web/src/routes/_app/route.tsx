@@ -21,6 +21,10 @@ const menuRoutes = new Set([
   "/game/lobby/single",
   "/login/",
   "/signup/",
+  "/cards/",
+  "/cards/bazaar/",
+  "/cards/astralForge/",
+  "/cards/archives/",
 ]);
 const positionOneRoutes = new Set(["/", "/login/", "/signup/"]);
 const gameMusicTracks: readonly string[] = [gameMusic1, gameMusic2, gameMusic3];

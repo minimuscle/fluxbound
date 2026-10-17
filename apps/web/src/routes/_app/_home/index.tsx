@@ -30,7 +30,7 @@ function RouteComponent() {
         Multiplayer
       </NavButton>
       <img src={MenuSpacer} alt="" className={styles.menuSpacer} />
-      <NavButton options={{ to: "/game/lobby/single" }} icon={StackIcon}>
+      <NavButton options={{ to: "/cards" }} icon={StackIcon}>
         Cards
       </NavButton>
       <img src={MenuSpacer} alt="" className={styles.menuSpacer} />
