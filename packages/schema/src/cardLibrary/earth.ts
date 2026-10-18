@@ -1,7 +1,6 @@
 import { defineCardDefinition } from "../cards";
 
 export const EARTH_CARDS = defineCardDefinition({
-  /***** RUNES - 1 *****/
   "0e0": {
     domain: "EARTH",
     type: "RUNE",
@@ -11,8 +10,6 @@ export const EARTH_CARDS = defineCardDefinition({
     price: 10,
     triggers: {},
   },
-
-  /***** CREATURES - 14 *****/
   "0e1": {
     domain: "EARTH",
     type: "CREATURE",
@@ -29,35 +26,12 @@ export const EARTH_CARDS = defineCardDefinition({
     domain: "EARTH",
     type: "CREATURE",
     name: "Stoneback Turtle",
-    description: "1E - Burrow - Target creature cannot be targeted but its attack is halved",
+    description:
+      "1E - Burrow - Target creature cannot be targeted but its attack is halved",
     cost: 4,
     price: 10,
     damage: 4,
     health: 4,
-    activations: 1,
-    triggers: {},
-  },
-  "0e3": {
-    domain: "EARTH",
-    type: "CREATURE",
-    name: "Rootkeeper Elder",
-    description: "1E - Rootbind - Target creature cannot attack until the end of the turn",
-    cost: 4,
-    price: 10,
-    damage: 2,
-    health: 4,
-    activations: 1,
-    triggers: {},
-  },
-  "0e4": {
-    domain: "EARTH",
-    type: "CREATURE",
-    name: "Treant",
-    description: "1L - Regrowth - add +0/6",
-    cost: 5,
-    price: 10,
-    damage: 2,
-    health: 3,
     activations: 1,
     triggers: {},
   },
@@ -80,8 +54,8 @@ export const EARTH_CARDS = defineCardDefinition({
     description: "",
     cost: 10,
     price: 10,
-    damage: 5,
-    health: 12,
+    damage: 8,
+    health: 10,
     activations: 0,
     triggers: {},
   },
@@ -89,7 +63,8 @@ export const EARTH_CARDS = defineCardDefinition({
     domain: "EARTH",
     type: "CREATURE",
     name: "Pebblejaw Wombat",
-    description: "1 Earth Flux, once while this is in play: If another allied creature has at least 6 maximum HP, this gains +2 maximum and current HP.",
+    description:
+      "1 Earth Flux, once while this is in play: If another allied creature has at least 6 maximum HP, this gains +2 maximum and current HP.",
     cost: 2,
     price: 10,
     damage: 2,
@@ -101,7 +76,8 @@ export const EARTH_CARDS = defineCardDefinition({
     domain: "EARTH",
     type: "CREATURE",
     name: "Cairnback Armadillo",
-    description: "The first time this survives damage from an enemy attack each turn, it gains +1 maximum and current HP.",
+    description:
+      "The first time this survives damage from an enemy attack each turn, it gains +1 maximum and current HP.",
     cost: 4,
     price: 10,
     damage: 2,
@@ -113,7 +89,8 @@ export const EARTH_CARDS = defineCardDefinition({
     domain: "EARTH",
     type: "CREATURE",
     name: "Flintroot Mole",
-    description: "1 Earth Flux, once per your turn: Another allied creature gains +2 maximum and current HP; this permanently loses 1 attack, to a minimum of 0. Requires at least 1 attack.",
+    description:
+      "1 Earth Flux, once per your turn: Another allied creature gains +2 maximum and current HP; this permanently loses 1 attack, to a minimum of 0. Requires at least 1 attack.",
     cost: 4,
     price: 10,
     damage: 3,
@@ -125,7 +102,8 @@ export const EARTH_CARDS = defineCardDefinition({
     domain: "EARTH",
     type: "CREATURE",
     name: "Geodeback Ibex",
-    description: "At the end of your turn, if this has full HP, gain 1 Earth Flux.",
+    description:
+      "At the end of your turn, if this has full HP, gain 1 Earth Flux.",
     cost: 5,
     price: 10,
     damage: 3,
@@ -133,23 +111,12 @@ export const EARTH_CARDS = defineCardDefinition({
     activations: 0,
     triggers: {},
   },
-  "0ej": {
-    domain: "EARTH",
-    type: "CREATURE",
-    name: "Faultline Bison",
-    description: "At the end of your turn, this gains +1 attack permanently, up to +3 from this ability.",
-    cost: 7,
-    price: 10,
-    damage: 3,
-    health: 8,
-    activations: 0,
-    triggers: {},
-  },
   "0ek": {
     domain: "EARTH",
     type: "CREATURE",
     name: "Basalt Burrower",
-    description: "Its maximum and current HP are increased by 1 for each other allied Earth creature, up to +4. When the number changes, adjust both by the change in this bonus; damage already taken is retained.",
+    description:
+      "Its maximum and current HP are increased by 1 for each other allied Earth creature, up to +4. When the number changes, adjust both by the change in this bonus; damage already taken is retained.",
     cost: 8,
     price: 10,
     damage: 5,
@@ -157,23 +124,12 @@ export const EARTH_CARDS = defineCardDefinition({
     activations: 0,
     triggers: {},
   },
-  "0er": {
-    domain: "EARTH",
-    type: "CREATURE",
-    name: "Coppervein Sentinel",
-    description: "1 Earth Flux, once per your turn: Reduce damage dealt to another allied creature by 1 per instance until the start of your next turn.",
-    cost: 5,
-    price: 10,
-    damage: 3,
-    health: 7,
-    activations: 1,
-    triggers: {},
-  },
   "0et": {
     domain: "EARTH",
     type: "CREATURE",
     name: "Claybound Surveyor",
-    description: "1 Earth Flux, once per your turn: This gains +1 maximum and current HP, up to +3 maximum HP from this ability.",
+    description:
+      "1 Earth Flux, once per your turn: This gains +1 maximum and current HP, up to +3 maximum HP from this ability.",
     cost: 2,
     price: 10,
     damage: 1,
@@ -181,8 +137,6 @@ export const EARTH_CARDS = defineCardDefinition({
     activations: 1,
     triggers: {},
   },
-
-  /***** SPELLS - 10 *****/
   "0e7": {
     domain: "EARTH",
     type: "SPELL",
@@ -242,7 +196,8 @@ export const EARTH_CARDS = defineCardDefinition({
     domain: "EARTH",
     type: "SPELL",
     name: "Set in Stone",
-    description: "Choose an allied creature. It permanently loses 2 attack, to a minimum of 0, and gains +5 maximum and current HP.",
+    description:
+      "Choose an allied creature. It permanently loses 2 attack, to a minimum of 0, and gains +5 maximum and current HP.",
     cost: 2,
     price: 10,
     activations: 0,
@@ -253,7 +208,8 @@ export const EARTH_CARDS = defineCardDefinition({
     domain: "EARTH",
     type: "SPELL",
     name: "Loadbearing Bond",
-    description: "Move up to 3 maximum and current HP from one allied creature to another. The donor must retain at least 1 maximum and current HP.",
+    description:
+      "Move up to 3 maximum and current HP from one allied creature to another. The donor must retain at least 1 maximum and current HP.",
     cost: 2,
     price: 10,
     activations: 0,
@@ -264,7 +220,8 @@ export const EARTH_CARDS = defineCardDefinition({
     domain: "EARTH",
     type: "SPELL",
     name: "Patient Pressure",
-    description: "Deal 2 damage to an enemy creature, plus 1 for each allied creature with at least 6 current HP, up to 5 total damage.",
+    description:
+      "Deal 2 damage to an enemy creature, plus 1 for each allied creature with at least 6 current HP, up to 5 total damage.",
     cost: 4,
     price: 10,
     activations: 0,
@@ -275,7 +232,8 @@ export const EARTH_CARDS = defineCardDefinition({
     domain: "EARTH",
     type: "SPELL",
     name: "Reinforced Footing",
-    description: "An allied creature gains +2 maximum and current HP. Until the start of your next turn, reduce damage dealt to it by 1 per instance.",
+    description:
+      "An allied creature gains +2 maximum and current HP. Until the start of your next turn, reduce damage dealt to it by 1 per instance.",
     cost: 3,
     price: 10,
     activations: 0,
@@ -286,15 +244,14 @@ export const EARTH_CARDS = defineCardDefinition({
     domain: "EARTH",
     type: "SPELL",
     name: "Seismic Appraisal",
-    description: "Choose an enemy creature. Deal damage equal to the number of your Earth creatures with at least 4 current HP, up to 4. Draw a card.",
+    description:
+      "Choose an enemy creature. Deal damage equal to the number of your Earth creatures with at least 4 current HP, up to 4. Draw a card.",
     cost: 3,
     price: 10,
     activations: 0,
     targets: [],
     triggers: {},
   },
-
-  /***** SHIELDS - 2 *****/
   "0ec": {
     domain: "EARTH",
     type: "SHIELD",
@@ -308,38 +265,18 @@ export const EARTH_CARDS = defineCardDefinition({
     domain: "EARTH",
     type: "SHIELD",
     name: "Layered Bulwark",
-    description: "Reduce each attack against you by 1. After this survives to the start of three of your turns, reduce each attack by 2 instead.",
+    description:
+      "Reduce each attack against you by 1. After this survives to the start of three of your turns, reduce each attack by 2 instead.",
     cost: 5,
     price: 10,
-    triggers: {},
-  },
-
-  /***** WEAPONS - 3 *****/
-  "0ed": {
-    domain: "EARTH",
-    type: "WEAPON",
-    name: "Stonecleaver",
-    description: "",
-    cost: 4,
-    price: 10,
-    damage: 3,
-    triggers: {},
-  },
-  "0ee": {
-    domain: "EARTH",
-    type: "WEAPON",
-    name: "Obsidian Maul",
-    description: "1 extra damage for every 10E in the pool",
-    cost: 6,
-    price: 10,
-    damage: 4,
     triggers: {},
   },
   "0eq": {
     domain: "EARTH",
     type: "WEAPON",
     name: "Quarry Tooth",
-    description: "Before this attacks on your turn, if you control a creature with at least 8 current HP, it gains +2 attack until the end of the turn.",
+    description:
+      "Before this attacks on your turn, if you control a creature with at least 8 current HP, it gains +2 attack until the end of the turn.",
     cost: 5,
     price: 10,
     damage: 3,

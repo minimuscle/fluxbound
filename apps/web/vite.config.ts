@@ -43,6 +43,7 @@ export default defineConfig(({ mode }) => {
         components: path.resolve(__dirname, "./src/components"),
         utils: path.resolve(__dirname, "./src/utils"),
         api: path.resolve(__dirname, "./src/api"),
+        mutations: path.resolve(__dirname, "./src/mutations"),
         routes: path.resolve(__dirname, "./src/routes"),
         queries: path.resolve(__dirname, "./src/queries"),
       },

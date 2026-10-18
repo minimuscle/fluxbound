@@ -8,7 +8,7 @@ if (!frontendUrl) {
 
 const corsHeaders = {
   "Access-Control-Allow-Headers": "Authorization, Content-Type",
-  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, OPTIONS",
   "Access-Control-Allow-Origin": frontendUrl,
   Vary: "Origin",
 };

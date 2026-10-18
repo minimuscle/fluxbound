@@ -1,7 +1,6 @@
 import { defineCardDefinition } from "../cards";
 
 export const LIFE_CARDS = defineCardDefinition({
-  /***** RUNES - 1 *****/
   "0l0": {
     domain: "LIFE",
     type: "RUNE",
@@ -11,8 +10,6 @@ export const LIFE_CARDS = defineCardDefinition({
     price: 10,
     triggers: {},
   },
-
-  /***** CREATURES - 16 *****/
   "0l1": {
     domain: "LIFE",
     type: "CREATURE",
@@ -49,18 +46,6 @@ export const LIFE_CARDS = defineCardDefinition({
     activations: 0,
     triggers: {},
   },
-  "0l4": {
-    domain: "LIFE",
-    type: "CREATURE",
-    name: "Thronmother",
-    description: "1L - Overgrow - Gain +2/+2 this turn",
-    cost: 2,
-    price: 10,
-    damage: 1,
-    health: 1,
-    activations: 1,
-    triggers: {},
-  },
   "0l5": {
     domain: "LIFE",
     type: "CREATURE",
@@ -85,23 +70,12 @@ export const LIFE_CARDS = defineCardDefinition({
     activations: 0,
     triggers: {},
   },
-  "0lc": {
-    domain: "LIFE",
-    type: "CREATURE",
-    name: "Pollenpouch Possum",
-    description: "At the end of your turn, if you control at least two other creatures, restore 2 HP to this.",
-    cost: 3,
-    price: 10,
-    damage: 2,
-    health: 4,
-    activations: 0,
-    triggers: {},
-  },
   "0ld": {
     domain: "LIFE",
     type: "CREATURE",
     name: "Budcrowned Capybara",
-    description: "1 Life Flux, once per your turn: Another allied Life creature gains +1 maximum and current HP.",
+    description:
+      "1 Life Flux, once per your turn: Another allied Life creature gains +1 maximum and current HP.",
     cost: 4,
     price: 10,
     damage: 2,
@@ -113,7 +87,8 @@ export const LIFE_CARDS = defineCardDefinition({
     domain: "LIFE",
     type: "CREATURE",
     name: "Grafttail Newt",
-    description: "1 Life Flux, once per your turn: Move 1 maximum and current HP from this to another allied creature. This must retain at least 1 current HP.",
+    description:
+      "1 Life Flux, once per your turn: Move 1 maximum and current HP from this to another allied creature. This must retain at least 1 current HP.",
     cost: 3,
     price: 10,
     damage: 1,
@@ -125,22 +100,11 @@ export const LIFE_CARDS = defineCardDefinition({
     domain: "LIFE",
     type: "CREATURE",
     name: "Orchardback Tapir",
-    description: "At the end of your turn, if you control at least three creatures, restore 2 HP to yourself.",
+    description:
+      "At the end of your turn, if you control at least three creatures, restore 2 HP to yourself.",
     cost: 5,
     price: 10,
     damage: 3,
-    health: 6,
-    activations: 0,
-    triggers: {},
-  },
-  "0lg": {
-    domain: "LIFE",
-    type: "CREATURE",
-    name: "Meadowloom Okapi",
-    description: "At the end of your turn, before attacks, if every allied creature is at full HP, this gains +3 attack for that turn.",
-    cost: 6,
-    price: 10,
-    damage: 4,
     health: 6,
     activations: 0,
     triggers: {},
@@ -149,7 +113,8 @@ export const LIFE_CARDS = defineCardDefinition({
     domain: "LIFE",
     type: "CREATURE",
     name: "Crownroot Elk",
-    description: "2 Life Flux, once per your turn: Each other allied creature with 2 or less attack gains +1 maximum and current HP.",
+    description:
+      "2 Life Flux, once per your turn: Each other allied creature with 2 or less attack gains +1 maximum and current HP.",
     cost: 8,
     price: 10,
     damage: 5,
@@ -157,35 +122,12 @@ export const LIFE_CARDS = defineCardDefinition({
     activations: 1,
     triggers: {},
   },
-  "0lo": {
-    domain: "LIFE",
-    type: "CREATURE",
-    name: "Seedvault Keeper",
-    description: "1 Life Flux, once per your turn: Another allied creature with 2 or less attack gains +2 maximum and current HP.",
-    cost: 3,
-    price: 10,
-    damage: 2,
-    health: 4,
-    activations: 1,
-    triggers: {},
-  },
-  "0lp": {
-    domain: "LIFE",
-    type: "CREATURE",
-    name: "Thicket Choir",
-    description: "At the end of your turn, before attacks, if you restored HP to at least two different allied creatures this turn, this gains +3 attack for that turn.",
-    cost: 6,
-    price: 10,
-    damage: 3,
-    health: 6,
-    activations: 0,
-    triggers: {},
-  },
   "0lq": {
     domain: "LIFE",
     type: "CREATURE",
     name: "Mosscradle Warden",
-    description: "The first time another allied creature with 2 or less attack survives damage from an enemy attack each turn, restore 1 HP to it.",
+    description:
+      "The first time another allied creature with 2 or less attack survives damage from an enemy attack each turn, restore 1 HP to it.",
     cost: 4,
     price: 10,
     damage: 2,
@@ -193,20 +135,6 @@ export const LIFE_CARDS = defineCardDefinition({
     activations: 0,
     triggers: {},
   },
-  "0lt": {
-    domain: "LIFE",
-    type: "CREATURE",
-    name: "Briarbell Matriarch",
-    description: "At the end of your turn, restore 1 HP to each of up to three other allied creatures of your choice.",
-    cost: 8,
-    price: 10,
-    damage: 4,
-    health: 7,
-    activations: 0,
-    triggers: {},
-  },
-
-  /***** SPELLS - 8 *****/
   "0l7": {
     domain: "LIFE",
     type: "SPELL",
@@ -233,7 +161,8 @@ export const LIFE_CARDS = defineCardDefinition({
     domain: "LIFE",
     type: "SPELL",
     name: "New Shoots",
-    description: "Choose an allied creature with 2 or less attack. It gains +3 maximum and current HP. Draw a card.",
+    description:
+      "Choose an allied creature with 2 or less attack. It gains +3 maximum and current HP. Draw a card.",
     cost: 3,
     price: 10,
     activations: 0,
@@ -244,7 +173,8 @@ export const LIFE_CARDS = defineCardDefinition({
     domain: "LIFE",
     type: "SPELL",
     name: "Graft Exchange",
-    description: "Move up to 2 attack permanently from one allied creature to another. Restore 2 HP to each of them.",
+    description:
+      "Move up to 2 attack permanently from one allied creature to another. Restore 2 HP to each of them.",
     cost: 2,
     price: 10,
     activations: 0,
@@ -255,7 +185,8 @@ export const LIFE_CARDS = defineCardDefinition({
     domain: "LIFE",
     type: "SPELL",
     name: "Sheltered Growth",
-    description: "Up to three allied creatures with 2 or less attack each gain +2 maximum and current HP.",
+    description:
+      "Up to three allied creatures with 2 or less attack each gain +2 maximum and current HP.",
     cost: 4,
     price: 10,
     activations: 0,
@@ -266,7 +197,8 @@ export const LIFE_CARDS = defineCardDefinition({
     domain: "LIFE",
     type: "SPELL",
     name: "Second Spring",
-    description: "Restore 2 HP to each allied creature. Gain 1 Life Flux for each creature restored from below full to full HP, up to 3 Flux.",
+    description:
+      "Restore 2 HP to each allied creature. Gain 1 Life Flux for each creature restored from below full to full HP, up to 3 Flux.",
     cost: 3,
     price: 10,
     activations: 0,
@@ -277,7 +209,8 @@ export const LIFE_CARDS = defineCardDefinition({
     domain: "LIFE",
     type: "SPELL",
     name: "Tender Transplant",
-    description: "Choose an allied creature with 3 or less current HP. It gains +2 maximum and current HP. If its current attack is 2 or less, gain 1 Life Flux.",
+    description:
+      "Choose an allied creature with 3 or less current HP. It gains +2 maximum and current HP. If its current attack is 2 or less, gain 1 Life Flux.",
     cost: 2,
     price: 10,
     activations: 0,
@@ -288,15 +221,14 @@ export const LIFE_CARDS = defineCardDefinition({
     domain: "LIFE",
     type: "SPELL",
     name: "Harvest Circle",
-    description: "Restore 2 HP to yourself for each allied creature at full HP, up to 10 HP.",
+    description:
+      "Restore 2 HP to yourself for each allied creature at full HP, up to 10 HP.",
     cost: 3,
     price: 10,
     activations: 0,
     targets: [],
     triggers: {},
   },
-
-  /***** SHIELDS - 2 *****/
   "0l9": {
     domain: "LIFE",
     type: "SHIELD",
@@ -310,38 +242,18 @@ export const LIFE_CARDS = defineCardDefinition({
     domain: "LIFE",
     type: "SHIELD",
     name: "Living Canopy",
-    description: "Reduce each attack against you by 1, or by 2 while you control at least three creatures at full HP.",
+    description:
+      "Reduce each attack against you by 1, or by 2 while you control at least three creatures at full HP.",
     cost: 5,
     price: 10,
-    triggers: {},
-  },
-
-  /***** WEAPONS - 3 *****/
-  "0la": {
-    domain: "LIFE",
-    type: "WEAPON",
-    name: "Vinewhip",
-    description: "Restores 5hp on hit",
-    cost: 3,
-    price: 10,
-    damage: 2,
-    triggers: {},
-  },
-  "0lb": {
-    domain: "LIFE",
-    type: "WEAPON",
-    name: "Petal Blade",
-    description: "",
-    cost: 3,
-    price: 10,
-    damage: 4,
     triggers: {},
   },
   "0ln": {
     domain: "LIFE",
     type: "WEAPON",
     name: "Pruning Crescent",
-    description: "The first time this damages the opponent on your turn, one allied creature of your choice with 2 or less attack gains +1 maximum and current HP.",
+    description:
+      "The first time this damages the opponent on your turn, one allied creature of your choice with 2 or less attack gains +1 maximum and current HP.",
     cost: 4,
     price: 10,
     damage: 3,

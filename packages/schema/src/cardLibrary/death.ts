@@ -1,7 +1,6 @@
 import { defineCardDefinition } from "../cards";
 
 export const DEATH_CARDS = defineCardDefinition({
-  /***** RUNES - 1 *****/
   "0d0": {
     domain: "DEATH",
     type: "RUNE",
@@ -11,13 +10,12 @@ export const DEATH_CARDS = defineCardDefinition({
     price: 10,
     triggers: {},
   },
-
-  /***** CREATURES - 16 *****/
   "0d1": {
     domain: "DEATH",
     type: "CREATURE",
     name: "Boneburrow Shrew",
-    description: "The first time another allied creature dies on your turn, this gains +1 attack permanently.",
+    description:
+      "The first time another allied creature dies on your turn, this gains +1 attack permanently.",
     cost: 1,
     price: 10,
     damage: 1,
@@ -29,7 +27,8 @@ export const DEATH_CARDS = defineCardDefinition({
     domain: "DEATH",
     type: "CREATURE",
     name: "Wakekeeper Beetle",
-    description: "The first time an allied creature dies each turn, gain 1 Death Flux.",
+    description:
+      "The first time an allied creature dies each turn, gain 1 Death Flux.",
     cost: 3,
     price: 10,
     damage: 1,
@@ -41,7 +40,8 @@ export const DEATH_CARDS = defineCardDefinition({
     domain: "DEATH",
     type: "CREATURE",
     name: "Shroudtail Opossum",
-    description: "When this dies, an allied creature of your choice gains +2 maximum and current HP.",
+    description:
+      "When this dies, an allied creature of your choice gains +2 maximum and current HP.",
     cost: 2,
     price: 10,
     damage: 2,
@@ -53,7 +53,8 @@ export const DEATH_CARDS = defineCardDefinition({
     domain: "DEATH",
     type: "CREATURE",
     name: "Marrow Lanternfish",
-    description: "1 Death Flux, once per your turn: Destroy another allied creature with 2 or less current HP. If destroyed, draw a card.",
+    description:
+      "1 Death Flux, once per your turn: Destroy another allied creature with 2 or less current HP. If destroyed, draw a card.",
     cost: 4,
     price: 10,
     damage: 2,
@@ -61,23 +62,12 @@ export const DEATH_CARDS = defineCardDefinition({
     activations: 1,
     triggers: {},
   },
-  "0d5": {
-    domain: "DEATH",
-    type: "CREATURE",
-    name: "Gravewax Slug",
-    description: "When another allied creature dies, restore 1 HP to this, up to twice per turn.",
-    cost: 4,
-    price: 10,
-    damage: 3,
-    health: 5,
-    activations: 0,
-    triggers: {},
-  },
   "0d6": {
     domain: "DEATH",
     type: "CREATURE",
     name: "Pallbearer Heron",
-    description: "At the end of your turn, before attacks, this gains +1 attack for each allied creature that died this turn, up to +3, until the end of that turn.",
+    description:
+      "At the end of your turn, before attacks, this gains +1 attack for each allied creature that died this turn, up to +3, until the end of that turn.",
     cost: 5,
     price: 10,
     damage: 3,
@@ -85,27 +75,15 @@ export const DEATH_CARDS = defineCardDefinition({
     activations: 0,
     triggers: {},
   },
-  "0d7": {
-    domain: "DEATH",
-    type: "CREATURE",
-    name: "Ossuary Aardvark",
-    description: "2 Death Flux, once per your turn: Destroy another allied creature. If destroyed, deal damage equal to that creature's current attack, up to 5, to an enemy creature.",
-    cost: 6,
-    price: 10,
-    damage: 4,
-    health: 6,
-    activations: 1,
-    triggers: {},
-  },
   "0d8": {
     domain: "DEATH",
     type: "CREATURE",
-    name: "Mourningback Behemoth",
-    description: "When this dies, each other allied creature gains +1 attack permanently.",
-    cost: 9,
+    name: "Garnet Elemental",
+    description: "",
+    cost: 10,
     price: 10,
-    damage: 6,
-    health: 8,
+    damage: 11,
+    health: 5,
     activations: 0,
     triggers: {},
   },
@@ -125,7 +103,8 @@ export const DEATH_CARDS = defineCardDefinition({
     domain: "DEATH",
     type: "CREATURE",
     name: "Ashen Usher",
-    description: "1 Death Flux, once per your turn: If an allied creature died this turn, draw a card.",
+    description:
+      "1 Death Flux, once per your turn: If an allied creature died this turn, draw a card.",
     cost: 3,
     price: 10,
     damage: 2,
@@ -133,47 +112,12 @@ export const DEATH_CARDS = defineCardDefinition({
     activations: 1,
     triggers: {},
   },
-  "0di": {
-    domain: "DEATH",
-    type: "CREATURE",
-    name: "Ribcage Mason",
-    description: "1 Death Flux, once per your turn: This loses 2 HP and another allied creature gains +2 maximum and current HP. Requires at least 3 current HP.",
-    cost: 4,
-    price: 10,
-    damage: 2,
-    health: 6,
-    activations: 1,
-    triggers: {},
-  },
-  "0dj": {
-    domain: "DEATH",
-    type: "CREATURE",
-    name: "Lastbreath Cantor",
-    description: "When this dies, another allied creature of your choice gains +2 attack until the end of the current turn.",
-    cost: 3,
-    price: 10,
-    damage: 3,
-    health: 2,
-    activations: 0,
-    triggers: {},
-  },
-  "0dk": {
-    domain: "DEATH",
-    type: "CREATURE",
-    name: "Sepulchre Stalker",
-    description: "At the end of your turn, if at least two allied creatures died this turn, this gains +3 maximum and current HP. This can trigger only once while this is in play.",
-    cost: 5,
-    price: 10,
-    damage: 4,
-    health: 4,
-    activations: 0,
-    triggers: {},
-  },
   "0dl": {
     domain: "DEATH",
     type: "CREATURE",
     name: "Waxbone Familiar",
-    description: "When this dies, look at the top two cards of your deck. Put one on top and the other on the bottom.",
+    description:
+      "When this dies, look at the top two cards of your deck. Put one on top and the other on the bottom.",
     cost: 2,
     price: 10,
     damage: 1,
@@ -181,23 +125,12 @@ export const DEATH_CARDS = defineCardDefinition({
     activations: 0,
     triggers: {},
   },
-  "0dm": {
-    domain: "DEATH",
-    type: "CREATURE",
-    name: "Dirge Collector",
-    description: "At the end of your turn, if an allied creature died this turn, restore 3 HP to yourself.",
-    cost: 6,
-    price: 10,
-    damage: 3,
-    health: 6,
-    activations: 0,
-    triggers: {},
-  },
   "0dn": {
     domain: "DEATH",
     type: "CREATURE",
     name: "Gravemarch Regent",
-    description: "The first time another allied creature dies each turn, this gains +1 maximum and current HP.",
+    description:
+      "The first time another allied creature dies each turn, this gains +1 maximum and current HP.",
     cost: 8,
     price: 10,
     damage: 5,
@@ -205,13 +138,12 @@ export const DEATH_CARDS = defineCardDefinition({
     activations: 0,
     triggers: {},
   },
-
-  /***** SPELLS - 9 *****/
   "0d9": {
     domain: "DEATH",
     type: "SPELL",
     name: "Final Bequest",
-    description: "Destroy an allied creature. If destroyed, another allied creature gains attack equal to its current attack, up to +4, permanently.",
+    description:
+      "Destroy an allied creature. If destroyed, another allied creature gains attack equal to its current attack, up to +4, permanently.",
     cost: 2,
     price: 10,
     activations: 0,
@@ -222,7 +154,8 @@ export const DEATH_CARDS = defineCardDefinition({
     domain: "DEATH",
     type: "SPELL",
     name: "Measured Passing",
-    description: "Destroy an allied creature. If destroyed, restore HP to yourself equal to its current HP, up to 8, and draw a card.",
+    description:
+      "Destroy an allied creature. If destroyed, restore HP to yourself equal to its current HP, up to 8, and draw a card.",
     cost: 2,
     price: 10,
     activations: 0,
@@ -233,7 +166,8 @@ export const DEATH_CARDS = defineCardDefinition({
     domain: "DEATH",
     type: "SPELL",
     name: "Toll of the Fallen",
-    description: "Deal 2 damage to an enemy creature, plus 1 for each allied creature that died this turn, up to 6 total damage.",
+    description:
+      "Deal 2 damage to an enemy creature, plus 1 for each allied creature that died this turn, up to 6 total damage.",
     cost: 3,
     price: 10,
     activations: 0,
@@ -244,7 +178,8 @@ export const DEATH_CARDS = defineCardDefinition({
     domain: "DEATH",
     type: "SPELL",
     name: "Borrowed Hours",
-    description: "An allied creature gains +4 attack permanently. Destroy it at the start of your next turn.",
+    description:
+      "An allied creature gains +4 attack permanently. Destroy it at the start of your next turn.",
     cost: 2,
     price: 10,
     activations: 0,
@@ -255,7 +190,8 @@ export const DEATH_CARDS = defineCardDefinition({
     domain: "DEATH",
     type: "SPELL",
     name: "Quiet Harvest",
-    description: "For each allied creature that died this turn, gain 1 Death Flux and restore 1 HP to yourself, up to three creatures.",
+    description:
+      "For each allied creature that died this turn, gain 1 Death Flux and restore 1 HP to yourself, up to three creatures.",
     cost: 1,
     price: 10,
     activations: 0,
@@ -266,7 +202,8 @@ export const DEATH_CARDS = defineCardDefinition({
     domain: "DEATH",
     type: "SPELL",
     name: "Funeral Dividend",
-    description: "Destroy an allied creature. If destroyed, gain Death Flux equal to its printed Cost, up to 4.",
+    description:
+      "Destroy an allied creature. If destroyed, gain Death Flux equal to its printed Cost, up to 4.",
     cost: 1,
     price: 10,
     activations: 0,
@@ -277,7 +214,8 @@ export const DEATH_CARDS = defineCardDefinition({
     domain: "DEATH",
     type: "SPELL",
     name: "Dimming Vigil",
-    description: "Choose an allied creature. Until the start of your next turn, when it dies, draw two cards.",
+    description:
+      "Choose an allied creature. Until the start of your next turn, when it dies, draw two cards.",
     cost: 2,
     price: 10,
     activations: 0,
@@ -288,7 +226,8 @@ export const DEATH_CARDS = defineCardDefinition({
     domain: "DEATH",
     type: "SPELL",
     name: "Passing Strength",
-    description: "Destroy an allied creature. If destroyed, each other allied creature gains +1 attack until the end of your turn.",
+    description:
+      "Destroy an allied creature. If destroyed, each other allied creature gains +1 attack until the end of your turn.",
     cost: 3,
     price: 10,
     activations: 0,
@@ -299,20 +238,20 @@ export const DEATH_CARDS = defineCardDefinition({
     domain: "DEATH",
     type: "SPELL",
     name: "Unfinished Eulogy",
-    description: "Choose an allied creature. Destroy it at the start of your next turn. When it is destroyed by this effect, gain 3 Death Flux and draw a card.",
+    description:
+      "Choose an allied creature. Destroy it at the start of your next turn. When it is destroyed by this effect, gain 3 Death Flux and draw a card.",
     cost: 1,
     price: 10,
     activations: 0,
     targets: [],
     triggers: {},
   },
-
-  /***** SHIELDS - 2 *****/
   "0de": {
     domain: "DEATH",
     type: "SHIELD",
     name: "Gravesoil Shroud",
-    description: "Reduce each attack against you by 1. If an allied creature died earlier in the current turn, reduce each attack by 2 instead.",
+    description:
+      "Reduce each attack against you by 1. If an allied creature died earlier in the current turn, reduce each attack by 2 instead.",
     cost: 5,
     price: 10,
     triggers: {},
@@ -321,31 +260,21 @@ export const DEATH_CARDS = defineCardDefinition({
     domain: "DEATH",
     type: "SHIELD",
     name: "Wakebound Rampart",
-    description: "Reduce each attack against you by 1. The first time an allied creature dies each turn, the next damage dealt to yourself that turn is reduced by 3 in addition to this shield's normal reduction.",
+    description:
+      "Reduce each attack against you by 1. The first time an allied creature dies each turn, the next damage dealt to yourself that turn is reduced by 3 in addition to this shield's normal reduction.",
     cost: 5,
     price: 10,
     triggers: {},
   },
-
-  /***** WEAPONS - 2 *****/
   "0df": {
     domain: "DEATH",
     type: "WEAPON",
     name: "Epitaph Hook",
-    description: "Before this attacks on your turn, it gains +1 attack for each allied creature that died this turn, up to +3, until the end of the turn.",
+    description:
+      "Before this attacks on your turn, it gains +1 attack for each allied creature that died this turn, up to +3, until the end of the turn.",
     cost: 5,
     price: 10,
     damage: 3,
-    triggers: {},
-  },
-  "0dt": {
-    domain: "DEATH",
-    type: "WEAPON",
-    name: "Gravewright's Crook",
-    description: "1 Death Flux, once per your turn: Destroy an allied creature. If destroyed, this gains +3 attack until the end of your turn.",
-    cost: 4,
-    price: 10,
-    damage: 2,
     triggers: {},
   },
 });

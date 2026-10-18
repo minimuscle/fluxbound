@@ -23,4 +23,19 @@ export const user = {
   logout: () => {
     return apiFetch("/api/user/logout", { method: "POST" });
   },
+
+  // Deck Control.
+  getDeck: () => {
+    return apiFetch("/api/user/deck");
+  },
+  saveDeck: async (deck: string) => {
+    const response = await apiFetch("/api/user/deck", {
+      method: "PUT",
+      body: JSON.stringify({ deck }),
+    });
+    if (response.status !== 200) {
+      throw new Error(response.message || "Failed to save deck");
+    }
+    return response;
+  },
 };

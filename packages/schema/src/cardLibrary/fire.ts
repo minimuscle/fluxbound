@@ -1,7 +1,6 @@
 import { defineCardDefinition } from "../cards";
 
 export const FIRE_CARDS = defineCardDefinition({
-  /***** RUNES - 1 *****/
   "0f0": {
     domain: "FIRE",
     type: "RUNE",
@@ -21,8 +20,6 @@ export const FIRE_CARDS = defineCardDefinition({
       ],
     },
   },
-
-  /***** CREATURES - 15 *****/
   "0f1": {
     domain: "FIRE",
     type: "CREATURE",
@@ -155,40 +152,6 @@ export const FIRE_CARDS = defineCardDefinition({
       ],
     },
   },
-  "0f6": {
-    domain: "FIRE",
-    type: "CREATURE",
-    name: "Lavablood Golem",
-    description: "1E - Moltern Core - +2/+2",
-    cost: 5,
-    price: 90,
-    damage: 5,
-    health: 1,
-    activations: 1,
-    triggers: {
-      onActivated: [
-        {
-          id: "stats.modify",
-          args: {
-            stats: [
-              {
-                stat: "damage",
-                amount: 2,
-              },
-              {
-                stat: "health",
-                amount: 2,
-              },
-            ],
-            cost: {
-              domain: "EARTH",
-              amount: 1,
-            },
-          },
-        },
-      ],
-    },
-  },
   "0f7": {
     domain: "FIRE",
     type: "CREATURE",
@@ -257,19 +220,6 @@ export const FIRE_CARDS = defineCardDefinition({
     activations: 0,
     triggers: {},
   },
-  "0fk": {
-    domain: "FIRE",
-    type: "CREATURE",
-    name: "Furnace Mantis",
-    description:
-      "1 Fire Flux, once per your turn: This loses 1 HP and another allied creature gains +2 attack until the end of your turn.",
-    cost: 4,
-    price: 10,
-    damage: 3,
-    health: 4,
-    activations: 1,
-    triggers: {},
-  },
   "0fl": {
     domain: "FIRE",
     type: "CREATURE",
@@ -283,47 +233,6 @@ export const FIRE_CARDS = defineCardDefinition({
     activations: 1,
     triggers: {},
   },
-  "0fm": {
-    domain: "FIRE",
-    type: "CREATURE",
-    name: "Pyrebelly Aurochs",
-    description:
-      "At the end of your turn, before attacks, you may spend 2 Fire Flux. If spent, this gains +3 attack until the end of that turn.",
-    cost: 7,
-    price: 10,
-    damage: 5,
-    health: 6,
-    activations: 0,
-    triggers: {},
-  },
-  "0fn": {
-    domain: "FIRE",
-    type: "CREATURE",
-    name: "Calderspine Wyrm",
-    description:
-      "At the end of your turn, before attacks, if you played a Fire spell this turn, deal 1 damage to every enemy creature.",
-    cost: 9,
-    price: 10,
-    damage: 6,
-    health: 7,
-    activations: 0,
-    triggers: {},
-  },
-  "0fu": {
-    domain: "FIRE",
-    type: "CREATURE",
-    name: "Scoria Bellringer",
-    description:
-      "2 Fire Flux, once per your turn: Deal 1 damage to each other creature. For each allied creature that survives this damage, restore 1 HP to yourself, up to 4 HP.",
-    cost: 6,
-    price: 10,
-    damage: 4,
-    health: 6,
-    activations: 1,
-    triggers: {},
-  },
-
-  /***** SPELLS - 9 *****/
   "0f9": {
     domain: "FIRE",
     type: "SPELL",
@@ -484,8 +393,6 @@ export const FIRE_CARDS = defineCardDefinition({
     targets: [],
     triggers: {},
   },
-
-  /***** SHIELDS - 3 *****/
   "0fe": {
     domain: "FIRE",
     type: "SHIELD",
@@ -535,18 +442,6 @@ export const FIRE_CARDS = defineCardDefinition({
       ],
     },
   },
-  "0fs": {
-    domain: "FIRE",
-    type: "SHIELD",
-    name: "Cinderwake Screen",
-    description:
-      "Reduce each attack against you by 1. The first time an enemy attack deals damage to you each turn, gain 1 Fire Flux.",
-    cost: 4,
-    price: 10,
-    triggers: {},
-  },
-
-  /***** WEAPONS - 3 *****/
   "0fg": {
     domain: "FIRE",
     type: "WEAPON",
@@ -555,27 +450,6 @@ export const FIRE_CARDS = defineCardDefinition({
     cost: 4,
     price: 60,
     damage: 4,
-    triggers: {},
-  },
-  "0fh": {
-    domain: "FIRE",
-    type: "WEAPON",
-    name: "Infernal Cleaver",
-    description: "Heavy - Deal 1 damage to the wielder",
-    cost: 4,
-    price: 60,
-    damage: 5,
-    triggers: {},
-  },
-  "0ft": {
-    domain: "FIRE",
-    type: "WEAPON",
-    name: "Bellows Fang",
-    description:
-      "Before this attacks on your turn, if you spent at least 4 Fire Flux on cards or abilities this turn, it gains +2 attack until the end of the turn.",
-    cost: 5,
-    price: 10,
-    damage: 3,
     triggers: {},
   },
 });

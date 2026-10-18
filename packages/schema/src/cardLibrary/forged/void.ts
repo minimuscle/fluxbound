@@ -1,0 +1,260 @@
+import { defineCardDefinition } from "../../cards";
+
+export const FORGED_VOID_CARDS = defineCardDefinition({
+  "1v0": {
+    "domain": "VOID",
+    "type": "RUNE",
+    "name": "Tempered Void Rune",
+    "description": "Gain 2 Void Flux per turn.",
+    "cost": 0,
+    "price": 10,
+    "triggers": {}
+  },
+  "1v1": {
+    "domain": "VOID",
+    "type": "CREATURE",
+    "name": "Starless Mite",
+    "description": "1 Void Flux, once while this is in play: This gains +1 attack permanently.",
+    "cost": 1,
+    "price": 10,
+    "damage": 1,
+    "health": 5,
+    "activations": 1,
+    "triggers": {}
+  },
+  "1v2": {
+    "domain": "VOID",
+    "type": "CREATURE",
+    "name": "Riftcarapace Isopod",
+    "description": "At the end of your turn, before attacks, if your Void Flux pool is empty, this gains +2 attack for that turn.",
+    "cost": 3,
+    "price": 10,
+    "damage": 3,
+    "health": 4,
+    "activations": 0,
+    "triggers": {}
+  },
+  "1v3": {
+    "domain": "VOID",
+    "type": "CREATURE",
+    "name": "Nullpocket Bilby",
+    "description": "1 Void Flux, once per your turn: Spend up to 2 additional Void Flux. This gains +1 attack for each additional Flux spent until the end of your turn.",
+    "cost": 3,
+    "price": 10,
+    "damage": 2,
+    "health": 4,
+    "activations": 1,
+    "triggers": {}
+  },
+  "1v8": {
+    "domain": "VOID",
+    "type": "CREATURE",
+    "name": "Ascendant Obsidian Elemental",
+    "description": "",
+    "cost": 10,
+    "price": 10,
+    "damage": 12,
+    "health": 6,
+    "activations": 1,
+    "triggers": {}
+  },
+  "1vg": {
+    "domain": "VOID",
+    "type": "CREATURE",
+    "name": "Zeroheart Ticker",
+    "description": "At the end of your turn, if your Void Flux pool is empty, this gains +1 maximum and current HP. This can trigger only once while this is in play.",
+    "cost": 1,
+    "price": 10,
+    "damage": 3,
+    "health": 1,
+    "activations": 0,
+    "triggers": {}
+  },
+  "1vh": {
+    "domain": "VOID",
+    "type": "CREATURE",
+    "name": "Starless Drifter",
+    "description": "While your Void Flux pool is empty, this has +1 attack.",
+    "cost": 3,
+    "price": 10,
+    "damage": 2,
+    "health": 5,
+    "activations": 0,
+    "triggers": {}
+  },
+  "1vi": {
+    "domain": "VOID",
+    "type": "CREATURE",
+    "name": "Graveglass Hermit",
+    "description": "1 Void Flux, once per your turn: Spend 1 additional stored Flux of another domain to restore 3 HP to this.",
+    "cost": 4,
+    "price": 10,
+    "damage": 2,
+    "health": 7,
+    "activations": 1,
+    "triggers": {}
+  },
+  "1vj": {
+    "domain": "VOID",
+    "type": "CREATURE",
+    "name": "Hollowstar Compass",
+    "description": "At the end of your turn, if the opponent has more total stored Flux than you, gain 1 Void Flux.",
+    "cost": 4,
+    "price": 10,
+    "damage": 3,
+    "health": 6,
+    "activations": 0,
+    "triggers": {}
+  },
+  "1vm": {
+    "domain": "VOID",
+    "type": "CREATURE",
+    "name": "Eclipsed Orbit",
+    "description": "The first damage dealt to this each turn is reduced by 2 while your Void Flux pool is empty.",
+    "cost": 6,
+    "price": 10,
+    "damage": 4,
+    "health": 8,
+    "activations": 0,
+    "triggers": {}
+  },
+  "1vn": {
+    "domain": "VOID",
+    "type": "CREATURE",
+    "name": "Warden of Nothing",
+    "description": "At the end of your turn, if your Void Flux pool is empty, restore 4 HP to yourself.",
+    "cost": 8,
+    "price": 10,
+    "damage": 5,
+    "health": 9,
+    "activations": 0,
+    "triggers": {}
+  },
+  "1v9": {
+    "domain": "VOID",
+    "type": "SPELL",
+    "name": "Empty the World",
+    "description": "Spend all your remaining Void Flux, up to 5. An allied creature gains that much attack until the end of your turn. Restore 1 HP to yourself.",
+    "cost": 1,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1va": {
+    "domain": "VOID",
+    "type": "SPELL",
+    "name": "Reservoir Ruin",
+    "description": "Choose a domain in which the opponent has at least 5 stored Flux. They lose 3 Flux of that domain.",
+    "cost": 2,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1vb": {
+    "domain": "VOID",
+    "type": "SPELL",
+    "name": "Perfect Absence",
+    "description": "Each player loses up to 2 stored Flux from a domain of their own choice. Draw a card.",
+    "cost": 1,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1vc": {
+    "domain": "VOID",
+    "type": "SPELL",
+    "name": "Hunger Beyond",
+    "description": "Deal 3 damage to an enemy creature. If your Void Flux pool is now empty, deal 5 damage instead.",
+    "cost": 2,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1vd": {
+    "domain": "VOID",
+    "type": "SPELL",
+    "name": "Riftstep Sanctuary",
+    "description": "Choose an allied creature. Until the start of your next turn, the first damage that would kill it leaves it at 1 HP instead. Then spend all your remaining Void Flux.",
+    "cost": 1,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1vo": {
+    "domain": "VOID",
+    "type": "SPELL",
+    "name": "Grasp of Nothing",
+    "description": "Spend up to 2 additional Void Flux. Deal 1 damage to an enemy creature, plus 2 per additional Void Flux spent.",
+    "cost": 1,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1vp": {
+    "domain": "VOID",
+    "type": "SPELL",
+    "name": "Collapsing Reserve",
+    "description": "Choose a domain. If the opponent has at least 8 stored Flux in that domain, they lose 4 Flux of that domain. Otherwise, they lose up to 1.",
+    "cost": 2,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1vq": {
+    "domain": "VOID",
+    "type": "SPELL",
+    "name": "Absolute Zero Hour",
+    "description": "An allied creature gains +2 attack until the end of your turn. If your Void Flux pool is empty after paying this spell's cost, it also gains +2 maximum and current HP permanently.",
+    "cost": 1,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1vr": {
+    "domain": "VOID",
+    "type": "SPELL",
+    "name": "The Final Measure",
+    "description": "If the opponent has at least 5 more total stored Flux than you, draw two cards. Otherwise, draw one card.",
+    "cost": 2,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1ve": {
+    "domain": "VOID",
+    "type": "SHIELD",
+    "name": "Nullglass Shell",
+    "description": "Reduce each attack against you by 1, or by 2 while your Void Flux pool is empty.",
+    "cost": 4,
+    "price": 10,
+    "triggers": {}
+  },
+  "1vs": {
+    "domain": "VOID",
+    "type": "SHIELD",
+    "name": "Event Horizon Shell",
+    "description": "Reduce each attack against you by 1. At the start of your turn, if your Void Flux pool is empty, the next damage dealt to yourself is reduced by 3 in addition to this shield's normal reduction; this bonus does not stack.",
+    "cost": 4,
+    "price": 10,
+    "triggers": {}
+  },
+  "1vf": {
+    "domain": "VOID",
+    "type": "WEAPON",
+    "name": "Null Horizon",
+    "description": "Before this attacks on your turn, if your Void Flux pool is empty, it gains +2 attack until the end of the turn.",
+    "cost": 5,
+    "price": 10,
+    "damage": 4,
+    "triggers": {}
+  }
+});

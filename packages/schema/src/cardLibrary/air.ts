@@ -1,7 +1,6 @@
 import { defineCardDefinition } from "../cards";
 
 export const AIR_CARDS = defineCardDefinition({
-  /***** RUNES - 1 *****/
   "0a0": {
     domain: "AIR",
     type: "RUNE",
@@ -11,8 +10,6 @@ export const AIR_CARDS = defineCardDefinition({
     price: 10,
     triggers: {},
   },
-
-  /***** CREATURES - 14 *****/
   "0a1": {
     domain: "AIR",
     type: "CREATURE",
@@ -49,27 +46,15 @@ export const AIR_CARDS = defineCardDefinition({
     activations: 1,
     triggers: {},
   },
-  "0a4": {
-    domain: "AIR",
-    type: "CREATURE",
-    name: "Sky Serpent",
-    description: "2A - Surge - Doubles damage for 1 round",
-    cost: 4,
-    price: 10,
-    damage: 3,
-    health: 4,
-    activations: 1,
-    triggers: {},
-  },
   "0a5": {
     domain: "AIR",
     type: "CREATURE",
     name: "Diamond Elemental",
-    description: "2A - Surge - doubles damage for 1 round",
+    description: "",
     cost: 10,
     price: 10,
-    damage: 5,
-    health: 8,
+    damage: 10,
+    health: 6,
     activations: 1,
     triggers: {},
   },
@@ -77,7 +62,8 @@ export const AIR_CARDS = defineCardDefinition({
     domain: "AIR",
     type: "CREATURE",
     name: "Whistlecrest Gecko",
-    description: "At the end of your turn, before attacks, if you played at least two non-Rune cards this turn, this gains +2 attack until the end of that turn.",
+    description:
+      "At the end of your turn, before attacks, if you played at least two non-Rune cards this turn, this gains +2 attack until the end of that turn.",
     cost: 2,
     price: 10,
     damage: 1,
@@ -89,7 +75,8 @@ export const AIR_CARDS = defineCardDefinition({
     domain: "AIR",
     type: "CREATURE",
     name: "Kitefin Glider",
-    description: "At the end of your turn, before attacks, if you activated another allied creature's ability this turn, this gains +1 attack until the end of that turn.",
+    description:
+      "At the end of your turn, before attacks, if you activated another allied creature's ability this turn, this gains +1 attack until the end of that turn.",
     cost: 3,
     price: 10,
     damage: 2,
@@ -101,7 +88,8 @@ export const AIR_CARDS = defineCardDefinition({
     domain: "AIR",
     type: "CREATURE",
     name: "Gustpocket Jerboa",
-    description: "At the end of your turn, if you played at least two non-Rune cards this turn, gain 1 Air Flux.",
+    description:
+      "At the end of your turn, if you played at least two non-Rune cards this turn, gain 1 Air Flux.",
     cost: 3,
     price: 10,
     damage: 3,
@@ -113,7 +101,8 @@ export const AIR_CARDS = defineCardDefinition({
     domain: "AIR",
     type: "CREATURE",
     name: "Chimewing Cicada",
-    description: "1 Air Flux, once per your turn: The next non-Rune card you play this turn costs 1 less Flux of its own domain, to a minimum of 1.",
+    description:
+      "1 Air Flux, once per your turn: The next non-Rune card you play this turn costs 1 less Flux of its own domain, to a minimum of 1.",
     cost: 4,
     price: 10,
     damage: 2,
@@ -125,7 +114,8 @@ export const AIR_CARDS = defineCardDefinition({
     domain: "AIR",
     type: "CREATURE",
     name: "Ribboncloud Manta",
-    description: "1 Air Flux, once per your turn: Give up to two other allied creatures +1 attack until the end of your turn.",
+    description:
+      "1 Air Flux, once per your turn: Give up to two other allied creatures +1 attack until the end of your turn.",
     cost: 5,
     price: 10,
     damage: 4,
@@ -137,7 +127,8 @@ export const AIR_CARDS = defineCardDefinition({
     domain: "AIR",
     type: "CREATURE",
     name: "Jetstream Antelope",
-    description: "At the end of your turn, before attacks, if you played at least three non-Rune cards this turn, this gains +3 attack for that turn.",
+    description:
+      "At the end of your turn, before attacks, if you played at least three non-Rune cards this turn, this gains +3 attack for that turn.",
     cost: 8,
     price: 10,
     damage: 5,
@@ -145,44 +136,6 @@ export const AIR_CARDS = defineCardDefinition({
     activations: 0,
     triggers: {},
   },
-  "0aq": {
-    domain: "AIR",
-    type: "CREATURE",
-    name: "Vapourwheel Dervish",
-    description: "2 Air Flux, once per your turn: If you activated another allied creature's ability this turn, draw a card.",
-    cost: 4,
-    price: 10,
-    damage: 2,
-    health: 4,
-    activations: 1,
-    triggers: {},
-  },
-  "0ar": {
-    domain: "AIR",
-    type: "CREATURE",
-    name: "Airstep Courier",
-    description: "At the end of your turn, before attacks, if you played a creature costing 2 or less Flux this turn, this gains +2 attack until the end of that turn.",
-    cost: 3,
-    price: 10,
-    damage: 2,
-    health: 3,
-    activations: 0,
-    triggers: {},
-  },
-  "0at": {
-    domain: "AIR",
-    type: "CREATURE",
-    name: "Stormglass Harrier",
-    description: "2 Air Flux, once per your turn: Deal 1 damage to an enemy creature for each non-Rune card you played this turn, up to 3 damage.",
-    cost: 6,
-    price: 10,
-    damage: 4,
-    health: 5,
-    activations: 1,
-    triggers: {},
-  },
-
-  /***** SPELLS - 10 *****/
   "0a6": {
     domain: "AIR",
     type: "SPELL",
@@ -242,7 +195,8 @@ export const AIR_CARDS = defineCardDefinition({
     domain: "AIR",
     type: "SPELL",
     name: "Catch the Updraft",
-    description: "An allied creature gains +2 attack until the end of your turn. If you already played another non-Rune card this turn, draw a card.",
+    description:
+      "An allied creature gains +2 attack until the end of your turn. If you already played another non-Rune card this turn, draw a card.",
     cost: 2,
     price: 10,
     activations: 0,
@@ -253,7 +207,8 @@ export const AIR_CARDS = defineCardDefinition({
     domain: "AIR",
     type: "SPELL",
     name: "Crosswind Step",
-    description: "Swap the current attack of two allied creatures until the start of your next turn.",
+    description:
+      "Swap the current attack of two allied creatures until the start of your next turn.",
     cost: 1,
     price: 10,
     activations: 0,
@@ -264,7 +219,8 @@ export const AIR_CARDS = defineCardDefinition({
     domain: "AIR",
     type: "SPELL",
     name: "Slipstream Relay",
-    description: "The next creature you play this turn costs 2 less Flux of its own domain, to a minimum of 1. That creature gains +1 attack until the end of the turn.",
+    description:
+      "The next creature you play this turn costs 2 less Flux of its own domain, to a minimum of 1. That creature gains +1 attack until the end of the turn.",
     cost: 2,
     price: 10,
     activations: 0,
@@ -275,7 +231,8 @@ export const AIR_CARDS = defineCardDefinition({
     domain: "AIR",
     type: "SPELL",
     name: "Perfect Timing",
-    description: "Deal 2 damage to an enemy creature. If this is your third non-Rune card played this turn, deal 5 damage instead.",
+    description:
+      "Deal 2 damage to an enemy creature. If this is your third non-Rune card played this turn, deal 5 damage instead.",
     cost: 3,
     price: 10,
     activations: 0,
@@ -286,15 +243,14 @@ export const AIR_CARDS = defineCardDefinition({
     domain: "AIR",
     type: "SPELL",
     name: "Gathering Tempo",
-    description: "Each allied Air creature gains +1 attack until the end of your turn. If this is your third non-Rune card played this turn, they gain +2 instead.",
+    description:
+      "Each allied Air creature gains +1 attack until the end of your turn. If this is your third non-Rune card played this turn, they gain +2 instead.",
     cost: 3,
     price: 10,
     activations: 0,
     targets: [],
     triggers: {},
   },
-
-  /***** SHIELDS - 2 *****/
   "0ab": {
     domain: "AIR",
     type: "SHIELD",
@@ -308,38 +264,18 @@ export const AIR_CARDS = defineCardDefinition({
     domain: "AIR",
     type: "SHIELD",
     name: "Crossbreeze Veil",
-    description: "Reduce the first enemy attack against you each turn by 3, and all other attacks against you that turn by 1.",
+    description:
+      "Reduce the first enemy attack against you each turn by 3, and all other attacks against you that turn by 1.",
     cost: 4,
     price: 10,
-    triggers: {},
-  },
-
-  /***** WEAPONS - 3 *****/
-  "0ac": {
-    domain: "AIR",
-    type: "WEAPON",
-    name: "Zephyr Blade",
-    description: "Gains +1 damage while above 10A flux",
-    cost: 4,
-    price: 10,
-    damage: 4,
-    triggers: {},
-  },
-  "0ad": {
-    domain: "AIR",
-    type: "WEAPON",
-    name: "Tempest Spear",
-    description: "Successful attacks have 25% chance to deal a lightning bolt randomly to an enemy",
-    cost: 6,
-    price: 10,
-    damage: 3,
     triggers: {},
   },
   "0ap": {
     domain: "AIR",
     type: "WEAPON",
     name: "Cadence Needle",
-    description: "Before this attacks on your turn, it gains +1 attack for each spell you played this turn, up to +3, until the end of the turn.",
+    description:
+      "Before this attacks on your turn, it gains +1 attack for each spell you played this turn, up to +3, until the end of the turn.",
     cost: 5,
     price: 10,
     damage: 2,

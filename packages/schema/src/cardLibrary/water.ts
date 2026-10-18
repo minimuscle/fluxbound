@@ -1,7 +1,6 @@
 import { defineCardDefinition } from "../cards";
 
 export const WATER_CARDS = defineCardDefinition({
-  /***** RUNES - 1 *****/
   "0w0": {
     domain: "WATER",
     type: "RUNE",
@@ -21,8 +20,6 @@ export const WATER_CARDS = defineCardDefinition({
       ],
     },
   },
-
-  /***** CREATURES - 13 *****/
   "0w1": {
     domain: "WATER",
     type: "CREATURE",
@@ -68,18 +65,6 @@ export const WATER_CARDS = defineCardDefinition({
     price: 10,
     damage: 2,
     health: 4,
-    activations: 0,
-    triggers: {},
-  },
-  "0w5": {
-    domain: "WATER",
-    type: "CREATURE",
-    name: "Stormscale Ray",
-    description: "1 Air - Surge - +2 damage this turn",
-    cost: 5,
-    price: 10,
-    damage: 4,
-    health: 3,
     activations: 0,
     triggers: {},
   },
@@ -134,19 +119,6 @@ export const WATER_CARDS = defineCardDefinition({
     activations: 1,
     triggers: {},
   },
-  "0wj": {
-    domain: "WATER",
-    type: "CREATURE",
-    name: "Lockwater Crayfish",
-    description:
-      "At the end of your turn, if you have at least 4 Water Flux, restore 2 HP to this.",
-    cost: 5,
-    price: 10,
-    damage: 3,
-    health: 5,
-    activations: 0,
-    triggers: {},
-  },
   "0wk": {
     domain: "WATER",
     type: "CREATURE",
@@ -158,19 +130,6 @@ export const WATER_CARDS = defineCardDefinition({
     damage: 3,
     health: 6,
     activations: 0,
-    triggers: {},
-  },
-  "0wl": {
-    domain: "WATER",
-    type: "CREATURE",
-    name: "Undertow Narwhal",
-    description:
-      "2 Water Flux, once per your turn: Choose another allied creature. Swap its current attack with this creature's current attack permanently.",
-    cost: 8,
-    price: 10,
-    damage: 6,
-    health: 7,
-    activations: 1,
     triggers: {},
   },
   "0ws": {
@@ -186,8 +145,6 @@ export const WATER_CARDS = defineCardDefinition({
     activations: 1,
     triggers: {},
   },
-
-  /***** SPELLS - 10 *****/
   "0w7": {
     domain: "WATER",
     type: "SPELL",
@@ -326,24 +283,12 @@ export const WATER_CARDS = defineCardDefinition({
     targets: [],
     triggers: {},
   },
-
-  /***** SHIELDS - 3 *****/
   "0wc": {
     domain: "WATER",
     type: "SHIELD",
     name: "Ice Wall",
     description: "Reduces damage by 2",
     cost: 5,
-    price: 10,
-    triggers: {},
-  },
-  "0wd": {
-    domain: "WATER",
-    type: "SHIELD",
-    name: "Sub-zero water",
-    description:
-      "Reduces damage by 1, attacking creatures may freeze 25% chance",
-    cost: 6,
     price: 10,
     triggers: {},
   },
@@ -355,28 +300,6 @@ export const WATER_CARDS = defineCardDefinition({
       "Reduce each attack against you by 1. The first attack dealing exactly 1 damage to you each turn also restores 1 HP to one allied creature of your choice.",
     cost: 4,
     price: 10,
-    triggers: {},
-  },
-
-  /***** WEAPONS - 3 *****/
-  "0we": {
-    domain: "WATER",
-    type: "WEAPON",
-    name: "Pufferfish Trident",
-    description: "Applies 2 poison for each attack",
-    cost: 6,
-    price: 10,
-    damage: 4,
-    triggers: {},
-  },
-  "0wf": {
-    domain: "WATER",
-    type: "WEAPON",
-    name: "Ice Lance",
-    description: "",
-    cost: 4,
-    price: 10,
-    damage: 3,
     triggers: {},
   },
   "0wr": {

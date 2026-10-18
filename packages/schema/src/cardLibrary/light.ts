@@ -1,7 +1,6 @@
 import { defineCardDefinition } from "../cards";
 
 export const LIGHT_CARDS = defineCardDefinition({
-  /***** RUNES - 1 *****/
   "0li0": {
     domain: "LIGHT",
     type: "RUNE",
@@ -9,20 +8,6 @@ export const LIGHT_CARDS = defineCardDefinition({
     description: "Plus 1 Light Flux per turn.",
     cost: 0,
     price: 10,
-    triggers: {},
-  },
-
-  /***** CREATURES - 16 *****/
-  "0li1": {
-    domain: "LIGHT",
-    type: "CREATURE",
-    name: "Dawnspot Dormouse",
-    description: "When this dies, look at the top card of your deck. You may put it on the bottom.",
-    cost: 1,
-    price: 10,
-    damage: 1,
-    health: 3,
-    activations: 0,
     triggers: {},
   },
   "0li2": {
@@ -37,23 +22,12 @@ export const LIGHT_CARDS = defineCardDefinition({
     activations: 0,
     triggers: {},
   },
-  "0li3": {
-    domain: "LIGHT",
-    type: "CREATURE",
-    name: "Halocrest Lark",
-    description: "At the end of your turn, if this has full HP, look at the top card of your deck. You may put it on the bottom.",
-    cost: 4,
-    price: 10,
-    damage: 2,
-    health: 4,
-    activations: 0,
-    triggers: {},
-  },
   "0li4": {
     domain: "LIGHT",
     type: "CREATURE",
     name: "Lanternsnout Coati",
-    description: "1 Light Flux, once per your turn: The next damage dealt to another allied creature before the start of your next turn is reduced by 3.",
+    description:
+      "1 Light Flux, once per your turn: The next damage dealt to another allied creature before the start of your next turn is reduced by 3.",
     cost: 4,
     price: 10,
     damage: 2,
@@ -65,7 +39,8 @@ export const LIGHT_CARDS = defineCardDefinition({
     domain: "LIGHT",
     type: "CREATURE",
     name: "Sunglass Stag",
-    description: "1 Light Flux, once per your turn: The next damage dealt to yourself before the start of your next turn is reduced by 4.",
+    description:
+      "1 Light Flux, once per your turn: The next damage dealt to yourself before the start of your next turn is reduced by 4.",
     cost: 5,
     price: 10,
     damage: 3,
@@ -73,39 +48,15 @@ export const LIGHT_CARDS = defineCardDefinition({
     activations: 1,
     triggers: {},
   },
-  "0li6": {
-    domain: "LIGHT",
-    type: "CREATURE",
-    name: "Mirrorplume Crane",
-    description: "At the end of your turn, if you drew a card outside your normal turn draw this turn, restore 2 HP to yourself.",
-    cost: 5,
-    price: 10,
-    damage: 3,
-    health: 6,
-    activations: 0,
-    triggers: {},
-  },
-  "0li7": {
-    domain: "LIGHT",
-    type: "CREATURE",
-    name: "Beaconhide Rhino",
-    description: "1 Light Flux, once per your turn: Remove poison and any attack-preventing effect from another allied creature.",
-    cost: 7,
-    price: 10,
-    damage: 4,
-    health: 7,
-    activations: 1,
-    triggers: {},
-  },
   "0li8": {
     domain: "LIGHT",
     type: "CREATURE",
-    name: "Daybreak Whale",
-    description: "At the end of your turn, look at the top card of your deck. You may put it on the bottom. If you leave it on top, restore 3 HP to yourself.",
-    cost: 9,
+    name: "Citrine Elemental",
+    description: "",
+    cost: 10,
     price: 10,
-    damage: 6,
-    health: 8,
+    damage: 9,
+    health: 7,
     activations: 0,
     triggers: {},
   },
@@ -125,7 +76,8 @@ export const LIGHT_CARDS = defineCardDefinition({
     domain: "LIGHT",
     type: "CREATURE",
     name: "Aurora Scribe",
-    description: "1 Light Flux, once per your turn: Look at the top two cards of your deck and return them in either order.",
+    description:
+      "1 Light Flux, once per your turn: Look at the top two cards of your deck and return them in either order.",
     cost: 3,
     price: 10,
     damage: 1,
@@ -137,7 +89,8 @@ export const LIGHT_CARDS = defineCardDefinition({
     domain: "LIGHT",
     type: "CREATURE",
     name: "Glasswing Herald",
-    description: "1 Light Flux, once per your turn: Look at the top card of your deck and return it to the top. If it is a creature, this gains +2 maximum and current HP, up to +4 maximum HP from this ability.",
+    description:
+      "1 Light Flux, once per your turn: Look at the top card of your deck and return it to the top. If it is a creature, this gains +2 maximum and current HP, up to +4 maximum HP from this ability.",
     cost: 4,
     price: 10,
     damage: 2,
@@ -145,23 +98,12 @@ export const LIGHT_CARDS = defineCardDefinition({
     activations: 1,
     triggers: {},
   },
-  "0lij": {
-    domain: "LIGHT",
-    type: "CREATURE",
-    name: "Dawnward Pilgrim",
-    description: "The first time damage from an enemy attack against this is reduced by an allied spell or ability each turn, restore 1 HP to yourself.",
-    cost: 4,
-    price: 10,
-    damage: 2,
-    health: 5,
-    activations: 0,
-    triggers: {},
-  },
   "0lik": {
     domain: "LIGHT",
     type: "CREATURE",
     name: "Opaline Witness",
-    description: "1 Light Flux, once per your turn: Choose another allied creature below full HP. The next damage dealt to it before the start of your next turn is reduced by 4.",
+    description:
+      "1 Light Flux, once per your turn: Choose another allied creature below full HP. The next damage dealt to it before the start of your next turn is reduced by 4.",
     cost: 5,
     price: 10,
     damage: 3,
@@ -169,23 +111,12 @@ export const LIGHT_CARDS = defineCardDefinition({
     activations: 1,
     triggers: {},
   },
-  "0lil": {
-    domain: "LIGHT",
-    type: "CREATURE",
-    name: "Heliograph Artisan",
-    description: "At the end of your turn, before attacks, if you looked at any cards in your deck this turn, this gains +1 attack until the end of that turn.",
-    cost: 4,
-    price: 10,
-    damage: 3,
-    health: 4,
-    activations: 0,
-    triggers: {},
-  },
   "0lim": {
     domain: "LIGHT",
     type: "CREATURE",
     name: "Lucent Bailiff",
-    description: "2 Light Flux, once per your turn: Deal 3 damage to an enemy creature with at least 5 current attack.",
+    description:
+      "2 Light Flux, once per your turn: Deal 3 damage to an enemy creature with at least 5 current attack.",
     cost: 6,
     price: 10,
     damage: 4,
@@ -197,7 +128,8 @@ export const LIGHT_CARDS = defineCardDefinition({
     domain: "LIGHT",
     type: "CREATURE",
     name: "Crown of Day",
-    description: "At the end of your turn, before attacks, if you have at least 80 HP, this gains +3 attack for that turn.",
+    description:
+      "At the end of your turn, before attacks, if you have at least 80 HP, this gains +3 attack for that turn.",
     cost: 9,
     price: 10,
     damage: 5,
@@ -205,13 +137,12 @@ export const LIGHT_CARDS = defineCardDefinition({
     activations: 0,
     triggers: {},
   },
-
-  /***** SPELLS - 9 *****/
   "0li9": {
     domain: "LIGHT",
     type: "SPELL",
     name: "Guiding Glimmer",
-    description: "Look at the top two cards of your deck. Put one on the bottom and the other on top. Draw a card.",
+    description:
+      "Look at the top two cards of your deck. Put one on the bottom and the other on top. Draw a card.",
     cost: 1,
     price: 10,
     activations: 0,
@@ -222,7 +153,8 @@ export const LIGHT_CARDS = defineCardDefinition({
     domain: "LIGHT",
     type: "SPELL",
     name: "Clear Horizon",
-    description: "Remove poison and attack-preventing effects from an allied creature. The next damage dealt to it before the start of your next turn is reduced by 2.",
+    description:
+      "Remove poison and attack-preventing effects from an allied creature. The next damage dealt to it before the start of your next turn is reduced by 2.",
     cost: 2,
     price: 10,
     activations: 0,
@@ -233,7 +165,8 @@ export const LIGHT_CARDS = defineCardDefinition({
     domain: "LIGHT",
     type: "SPELL",
     name: "Prismatic Reversal",
-    description: "An allied creature whose current HP exceeds its attack gains +3 attack until the end of your turn.",
+    description:
+      "An allied creature whose current HP exceeds its attack gains +3 attack until the end of your turn.",
     cost: 2,
     price: 10,
     activations: 0,
@@ -244,7 +177,8 @@ export const LIGHT_CARDS = defineCardDefinition({
     domain: "LIGHT",
     type: "SPELL",
     name: "Honest Measure",
-    description: "Deal 3 damage to an enemy creature, or 6 if its current attack is at least 6.",
+    description:
+      "Deal 3 damage to an enemy creature, or 6 if its current attack is at least 6.",
     cost: 3,
     price: 10,
     activations: 0,
@@ -255,7 +189,8 @@ export const LIGHT_CARDS = defineCardDefinition({
     domain: "LIGHT",
     type: "SPELL",
     name: "Watchful Dawn",
-    description: "Look at the top three cards of your deck and return them in any order. The next damage dealt to yourself before the start of your next turn is reduced by 5.",
+    description:
+      "Look at the top three cards of your deck and return them in any order. The next damage dealt to yourself before the start of your next turn is reduced by 5.",
     cost: 3,
     price: 10,
     activations: 0,
@@ -266,7 +201,8 @@ export const LIGHT_CARDS = defineCardDefinition({
     domain: "LIGHT",
     type: "SPELL",
     name: "Ray of Certainty",
-    description: "Look at the top card of your deck and return it to the top or bottom. Then deal 2 damage to an enemy creature.",
+    description:
+      "Look at the top card of your deck and return it to the top or bottom. Then deal 2 damage to an enemy creature.",
     cost: 2,
     price: 10,
     activations: 0,
@@ -277,7 +213,8 @@ export const LIGHT_CARDS = defineCardDefinition({
     domain: "LIGHT",
     type: "SPELL",
     name: "Morning Safeguard",
-    description: "The next damage dealt to each allied creature before the start of your next turn is reduced by 2.",
+    description:
+      "The next damage dealt to each allied creature before the start of your next turn is reduced by 2.",
     cost: 4,
     price: 10,
     activations: 0,
@@ -288,7 +225,8 @@ export const LIGHT_CARDS = defineCardDefinition({
     domain: "LIGHT",
     type: "SPELL",
     name: "Read the Gleam",
-    description: "Look at the top card of your deck. You may spend 1 additional Light Flux to draw it; otherwise return it to the top or bottom.",
+    description:
+      "Look at the top card of your deck. You may spend 1 additional Light Flux to draw it; otherwise return it to the top or bottom.",
     cost: 1,
     price: 10,
     activations: 0,
@@ -299,20 +237,20 @@ export const LIGHT_CARDS = defineCardDefinition({
     domain: "LIGHT",
     type: "SPELL",
     name: "Luminous Resolve",
-    description: "Choose an allied creature. Until the start of your next turn, whenever damage dealt to it is reduced by an allied spell or ability, it gains +1 attack permanently, up to +3 from this spell.",
+    description:
+      "Choose an allied creature. Until the start of your next turn, whenever damage dealt to it is reduced by an allied spell or ability, it gains +1 attack permanently, up to +3 from this spell.",
     cost: 3,
     price: 10,
     activations: 0,
     targets: [],
     triggers: {},
   },
-
-  /***** SHIELDS - 2 *****/
   "0lie": {
     domain: "LIGHT",
     type: "SHIELD",
     name: "Firstlight Aegis",
-    description: "Reduce each attack against you by 1. At the start of your turn, if you have full HP, the next damage dealt to yourself is reduced by 3 in addition to this shield's normal reduction; this bonus does not stack.",
+    description:
+      "Reduce each attack against you by 1. At the start of your turn, if you have full HP, the next damage dealt to yourself is reduced by 3 in addition to this shield's normal reduction; this bonus does not stack.",
     cost: 5,
     price: 10,
     triggers: {},
@@ -321,29 +259,19 @@ export const LIGHT_CARDS = defineCardDefinition({
     domain: "LIGHT",
     type: "SHIELD",
     name: "Dawnglass Ward",
-    description: "Attacks with 1 or less current attack deal no damage to you. Reduce all other attacks against you by 1.",
+    description:
+      "Attacks with 1 or less current attack deal no damage to you. Reduce all other attacks against you by 1.",
     cost: 4,
     price: 10,
     triggers: {},
   },
-
-  /***** WEAPONS - 2 *****/
   "0lif": {
     domain: "LIGHT",
     type: "WEAPON",
     name: "Horizon Needle",
-    description: "Before this attacks on your turn, if you looked at any cards in your deck this turn, it gains +2 attack until the end of the turn.",
+    description:
+      "Before this attacks on your turn, if you looked at any cards in your deck this turn, it gains +2 attack until the end of the turn.",
     cost: 5,
-    price: 10,
-    damage: 3,
-    triggers: {},
-  },
-  "0lit": {
-    domain: "LIGHT",
-    type: "WEAPON",
-    name: "Surveyor of Dawn",
-    description: "The first time this damages the opponent on your turn, look at the top card of your deck. You may put it on the bottom.",
-    cost: 4,
     price: 10,
     damage: 3,
     triggers: {},

@@ -1,0 +1,260 @@
+import { defineCardDefinition } from "../../cards";
+
+export const FORGED_LIGHT_CARDS = defineCardDefinition({
+  "1li0": {
+    "domain": "LIGHT",
+    "type": "RUNE",
+    "name": "Tempered Light Rune",
+    "description": "Gain 2 Light Flux per turn.",
+    "cost": 0,
+    "price": 10,
+    "triggers": {}
+  },
+  "1li2": {
+    "domain": "LIGHT",
+    "type": "CREATURE",
+    "name": "Dawnglass Tortoise",
+    "description": "The first damage dealt to this each turn is reduced by 2.",
+    "cost": 3,
+    "price": 10,
+    "damage": 2,
+    "health": 6,
+    "activations": 0,
+    "triggers": {}
+  },
+  "1li4": {
+    "domain": "LIGHT",
+    "type": "CREATURE",
+    "name": "Beaconmask Coati",
+    "description": "1 Light Flux, once per your turn: The next damage dealt to another allied creature before the start of your next turn is reduced by 3.",
+    "cost": 3,
+    "price": 10,
+    "damage": 2,
+    "health": 5,
+    "activations": 1,
+    "triggers": {}
+  },
+  "1li5": {
+    "domain": "LIGHT",
+    "type": "CREATURE",
+    "name": "Solarcrest Stag",
+    "description": "1 Light Flux, once per your turn: The next damage dealt to yourself before the start of your next turn is reduced by 4.",
+    "cost": 5,
+    "price": 10,
+    "damage": 4,
+    "health": 5,
+    "activations": 1,
+    "triggers": {}
+  },
+  "1li8": {
+    "domain": "LIGHT",
+    "type": "CREATURE",
+    "name": "Ascendant Citrine Elemental",
+    "description": "",
+    "cost": 10,
+    "price": 10,
+    "damage": 9,
+    "health": 9,
+    "activations": 0,
+    "triggers": {}
+  },
+  "1lig": {
+    "domain": "LIGHT",
+    "type": "CREATURE",
+    "name": "Sunward Sentry",
+    "description": "The first damage dealt to this each turn is reduced by 1.",
+    "cost": 1,
+    "price": 10,
+    "damage": 2,
+    "health": 3,
+    "activations": 0,
+    "triggers": {}
+  },
+  "1lih": {
+    "domain": "LIGHT",
+    "type": "CREATURE",
+    "name": "Aurora Chronicler",
+    "description": "1 Light Flux, once per your turn: Look at the top two cards of your deck and return them in either order.",
+    "cost": 3,
+    "price": 10,
+    "damage": 1,
+    "health": 7,
+    "activations": 1,
+    "triggers": {}
+  },
+  "1lii": {
+    "domain": "LIGHT",
+    "type": "CREATURE",
+    "name": "Twilight Herald",
+    "description": "1 Light Flux, once per your turn: Look at the top card of your deck and return it to the top. If it is a creature, this gains +2 maximum and current HP, up to +4 maximum HP from this ability.",
+    "cost": 4,
+    "price": 10,
+    "damage": 2,
+    "health": 6,
+    "activations": 1,
+    "triggers": {}
+  },
+  "1lik": {
+    "domain": "LIGHT",
+    "type": "CREATURE",
+    "name": "Prismatic Witness",
+    "description": "1 Light Flux, once per your turn: Choose another allied creature below full HP. The next damage dealt to it before the start of your next turn is reduced by 4.",
+    "cost": 5,
+    "price": 10,
+    "damage": 3,
+    "health": 7,
+    "activations": 1,
+    "triggers": {}
+  },
+  "1lim": {
+    "domain": "LIGHT",
+    "type": "CREATURE",
+    "name": "Radiant Arbiter",
+    "description": "2 Light Flux, once per your turn: Deal 3 damage to an enemy creature with at least 5 current attack.",
+    "cost": 6,
+    "price": 10,
+    "damage": 5,
+    "health": 6,
+    "activations": 1,
+    "triggers": {}
+  },
+  "1lin": {
+    "domain": "LIGHT",
+    "type": "CREATURE",
+    "name": "Crown of the Zenith",
+    "description": "At the end of your turn, before attacks, if you have at least 80 HP, this gains +3 attack for that turn.",
+    "cost": 9,
+    "price": 10,
+    "damage": 5,
+    "health": 10,
+    "activations": 0,
+    "triggers": {}
+  },
+  "1li9": {
+    "domain": "LIGHT",
+    "type": "SPELL",
+    "name": "Guiding Star",
+    "description": "Look at the top two cards of your deck. Put one on the bottom and the other on top. Draw a card. Restore 1 HP to yourself.",
+    "cost": 1,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1lia": {
+    "domain": "LIGHT",
+    "type": "SPELL",
+    "name": "Unclouded Horizon",
+    "description": "Remove poison and attack-preventing effects from an allied creature. The next damage dealt to it before the start of your next turn is reduced by 2.",
+    "cost": 1,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1lib": {
+    "domain": "LIGHT",
+    "type": "SPELL",
+    "name": "Mirrorbright Reversal",
+    "description": "An allied creature whose current HP exceeds its attack gains +3 attack until the end of your turn.",
+    "cost": 1,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1lic": {
+    "domain": "LIGHT",
+    "type": "SPELL",
+    "name": "Radiant Verdict",
+    "description": "Deal 3 damage to an enemy creature, or 6 if its current attack is at least 6.",
+    "cost": 2,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1lid": {
+    "domain": "LIGHT",
+    "type": "SPELL",
+    "name": "Vigil of Dawn",
+    "description": "Look at the top three cards of your deck and return them in any order. The next damage dealt to yourself before the start of your next turn is reduced by 5.",
+    "cost": 2,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1lio": {
+    "domain": "LIGHT",
+    "type": "SPELL",
+    "name": "Certain Sunrise",
+    "description": "Look at the top card of your deck and return it to the top or bottom. Then deal 2 damage to an enemy creature.",
+    "cost": 1,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1lip": {
+    "domain": "LIGHT",
+    "type": "SPELL",
+    "name": "Daybreak Sanctuary",
+    "description": "The next damage dealt to each allied creature before the start of your next turn is reduced by 2.",
+    "cost": 3,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1liq": {
+    "domain": "LIGHT",
+    "type": "SPELL",
+    "name": "Read the Radiance",
+    "description": "Look at the top card of your deck. You may spend 1 additional Light Flux to draw it; otherwise return it to the top or bottom. Restore 1 HP to yourself.",
+    "cost": 1,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1lir": {
+    "domain": "LIGHT",
+    "type": "SPELL",
+    "name": "Unbroken Radiance",
+    "description": "Choose an allied creature. Until the start of your next turn, whenever damage dealt to it is reduced by an allied spell or ability, it gains +1 attack permanently, up to +3 from this spell.",
+    "cost": 2,
+    "price": 10,
+    "activations": 0,
+    "targets": [],
+    "triggers": {}
+  },
+  "1lie": {
+    "domain": "LIGHT",
+    "type": "SHIELD",
+    "name": "Zenith Aegis",
+    "description": "Reduce each attack against you by 1. At the start of your turn, if you have full HP, the next damage dealt to yourself is reduced by 3 in addition to this shield's normal reduction; this bonus does not stack.",
+    "cost": 4,
+    "price": 10,
+    "triggers": {}
+  },
+  "1lis": {
+    "domain": "LIGHT",
+    "type": "SHIELD",
+    "name": "Dawnglass Bastion",
+    "description": "Attacks with 1 or less current attack deal no damage to you. Reduce all other attacks against you by 1.",
+    "cost": 3,
+    "price": 10,
+    "triggers": {}
+  },
+  "1lif": {
+    "domain": "LIGHT",
+    "type": "WEAPON",
+    "name": "Zenith Needle",
+    "description": "Before this attacks on your turn, if you looked at any cards in your deck this turn, it gains +2 attack until the end of the turn.",
+    "cost": 5,
+    "price": 10,
+    "damage": 4,
+    "triggers": {}
+  }
+});

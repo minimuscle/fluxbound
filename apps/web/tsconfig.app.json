@@ -29,6 +29,7 @@
       "utils/*": ["./src/utils/*"],
       "assets/*": ["./src/assets/*"],
       "api/*": ["./src/api/*"],
+      "mutations/*": ["./src/mutations/*"],
       "routes/*": ["./src/routes/*"],
       "queries/*": ["./src/queries/*"]
     }
