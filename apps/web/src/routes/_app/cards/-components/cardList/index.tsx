@@ -1,4 +1,4 @@
-import { BASE_CARDS, CARD_LIBRARY } from "@fluxbound/schema";
+import { BASE_CARDS, CARD_LIBRARY, type Cards } from "@fluxbound/schema";
 import type { Dispatch, SetStateAction } from "react";
 import { CARD_IMAGE } from "routes/_app/game/-components/game/context/images";
 import { typedEntries } from "utils/functions/typedObject";
@@ -10,7 +10,7 @@ import styles from "./cardList.module.scss";
 export const CardList = ({
   setDeck,
 }: {
-  setDeck: Dispatch<SetStateAction<string[]>>;
+  setDeck: Dispatch<SetStateAction<Cards.CardId[]>>;
 }) => {
   /***** HOOKS *****/
   const cards = typedEntries(BASE_CARDS);

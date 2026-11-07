@@ -19,12 +19,16 @@ export const PlayerInfoShieldCard = () => {
   );
   if (!shieldCard)
     return (
-      <div className={styles.shield}>
-        <ShieldCheckeredIcon weight="fill" size={53} color="#FFFFFF20" />
+      <div className={styles.playerShield}>
+        <div className={styles.shield}>
+          <ShieldCheckeredIcon weight="fill" size={53} color="#FFFFFF20" />
+        </div>
       </div>
     );
 
   return (
-    <img src={CARD_IMAGE[shieldCard.cardId]} className={styles.infoCard} />
+    <div className={styles.playerShield}>
+      <img src={CARD_IMAGE[shieldCard.cardId]} className={styles.infoCard} />
+    </div>
   );
 };

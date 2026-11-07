@@ -10,6 +10,7 @@ import { PlayerInfoPermanents } from "routes/_app/game/-components/game/info/per
 import { PlayerInfoResources } from "routes/_app/game/-components/game/info/resources";
 import { PlayerInfoLargeRunes } from "routes/_app/game/-components/game/info/runes";
 import { PlayerInfoShieldCard } from "routes/_app/game/-components/game/info/shieldCard";
+import { PlayerShields } from "routes/_app/game/-components/game/info/shields";
 import { PlayerInfoSwordCard } from "routes/_app/game/-components/game/info/swordCard";
 import { NextTurnButton } from "routes/_app/game/-components/game/nextTurnButton";
 import { useInvariant } from "utils/hooks/useInvariant";
@@ -30,17 +31,11 @@ export const Game = () => {
         <PlayerContext value={{ stage: "PLAYER", player: state.you }}>
           <div className={styles.playerInfo}>
             <PlayerInfoAttunement />
-            <div className={styles.playerShields}>
-              <div className={styles.playerShield}>
-                <PlayerInfoSwordCard />
-              </div>
-              <div className={styles.playerShield}>
-                <PlayerInfoShieldCard />
-              </div>
-              <div className={styles.playerShield}>
-                <PlayerInfoShieldCard />
-              </div>
-            </div>
+            <PlayerShields>
+              <PlayerInfoSwordCard />
+              <PlayerInfoSwordCard />
+              <PlayerInfoShieldCard />
+            </PlayerShields>
             <PlayerInfoDivider />
             <PlayerInfoResources />
             <h1 className={styles.heading}>Resources</h1>
@@ -68,17 +63,11 @@ export const Game = () => {
         <PlayerContext value={{ stage: "ENEMY", player: state.opponent }}>
           <div className={styles.enemyInfo}>
             <PlayerInfoAttunement />
-            <div className={styles.playerShields}>
-              <div className={styles.playerShield}>
-                <PlayerInfoSwordCard />
-              </div>
-              <div className={styles.playerShield}>
-                <PlayerInfoShieldCard />
-              </div>
-              <div className={styles.playerShield}>
-                <PlayerInfoShieldCard />
-              </div>
-            </div>
+            <PlayerShields>
+              <PlayerInfoSwordCard />
+              <PlayerInfoSwordCard />
+              <PlayerInfoShieldCard />
+            </PlayerShields>
             <PlayerInfoDivider />
             <h1 className={styles.heading}>Resources</h1>
             <PlayerInfoResources />

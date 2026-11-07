@@ -1,9 +1,9 @@
 import { CARD_LIBRARY } from "@fluxbound/schema";
 import { SwordIcon } from "@phosphor-icons/react";
-import { CARD_IMAGE } from "routes/_app/game/-components/game/context/images";
-import styles from "./info.module.css";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
+import { CARD_IMAGE } from "routes/_app/game/-components/game/context/images";
 import { useInvariant } from "utils/hooks/useInvariant";
+import styles from "./info.module.css";
 
 /**********************************************************************************************************
  *   COMPONENT START
@@ -19,10 +19,16 @@ export const PlayerInfoSwordCard = () => {
   );
   if (!shieldCard)
     return (
-      <div className={styles.shield}>
-        <SwordIcon weight="fill" size={53} color="#FFFFFF20" />
+      <div className={styles.playerShield}>
+        <div className={styles.shield}>
+          <SwordIcon weight="fill" size={53} color="#FFFFFF20" />
+        </div>
       </div>
     );
 
-  return <img src={CARD_IMAGE[shieldCard.cardId]} />;
+  return (
+    <div className={styles.playerShield}>
+      <img src={CARD_IMAGE[shieldCard.cardId]} />
+    </div>
+  );
 };
