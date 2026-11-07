@@ -1,4 +1,4 @@
-import { type Game, type GameResponse } from "@fluxbound/schema";
+import { CARD_LIBRARY, getCardTriggers, type Game, type GameResponse } from "@fluxbound/schema";
 import { drawCard } from "game/actions/draw-card";
 import { endTurn } from "game/actions/end-turn";
 import { playAITurn } from "game/actions/play-ai-turn";
@@ -96,7 +96,8 @@ export class GameEngine {
         code: "CARD_NOT_FOUND",
         message: "The card you are trying to activate does not exist",
       };
-    if (card.activations === 0)
+    const definition = CARD_LIBRARY[card.cardId];
+    if (!definition || !getCardTriggers(definition).includes("onActivated") || (card.activations ?? 0) <= 0)
       return {
         ok: false,
         code: "CARD_NOT_ACTIVATABLE",

@@ -11,7 +11,7 @@ import { LIGHT_CARDS } from "./light";
 import { VOID_CARDS } from "./void";
 import { WATER_CARDS } from "./water";
 
-export { FORGED_CARDS };
+export * from "./forged";
 
 export const BASE_CARDS = {
   ...FIRE_CARDS,
@@ -26,4 +26,6 @@ export const BASE_CARDS = {
   ...AETHER_CARDS,
 } as const satisfies Record<Cards.CardId, Cards.Card>;
 
-export const CARD_LIBRARY = { ...BASE_CARDS, ...FORGED_CARDS };
+export const CARD_LIBRARY: typeof BASE_CARDS & typeof FORGED_CARDS & Record<Cards.CardId, Cards.Card> = { ...BASE_CARDS, ...FORGED_CARDS };
+
+export { FIRE_CARDS, WATER_CARDS, EARTH_CARDS, AIR_CARDS, LIFE_CARDS, DEATH_CARDS, LIGHT_CARDS, DARK_CARDS, VOID_CARDS, AETHER_CARDS };

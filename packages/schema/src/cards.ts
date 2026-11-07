@@ -1,87 +1,28 @@
 import type { Tagged } from "type-fest";
-import type { z } from "zod";
 import type { CONDITIONS } from "./conditions";
-import type { Effects } from "./effects";
 
 export namespace Cards {
-  export type Domain =
-    | "FIRE"
-    | "WATER"
-    | "AIR"
-    | "EARTH"
-    | "LIGHT"
-    | "DARK"
-    | "LIFE"
-    | "DEATH"
-    | "AETHER"
-    | "VOID";
+  export type Domain = "FIRE" | "WATER" | "AIR" | "EARTH" | "LIGHT" | "DARK" | "LIFE" | "DEATH" | "AETHER" | "VOID";
   export type Expansion = "BASE" | "FORGED";
-  export type CardType =
-    | "CREATURE"
-    | "SPELL"
-    | "PERMANENT"
-    | "WEAPON"
-    | "SHIELD"
-    | "RUNE";
+  export type CardType = "CREATURE" | "SPELL" | "PERMANENT" | "WEAPON" | "SHIELD" | "RUNE";
   export type CardKey = string;
-  export type CardId<TCardKey extends CardKey = CardKey> =
-    | Tagged<TCardKey, "cardId">
-    | TCardKey;
+  export type CardId<TCardKey extends CardKey = CardKey> = Tagged<TCardKey, "cardId"> | TCardKey;
 
-  export type TriggerTypes =
-    | "onTurnEnd"
-    | "onActivated"
-    | "onAttacked"
-    | "onDeath";
-
-  export type Targets =
-    | "self"
-    | "creature"
-    | "opponent"
-    | "permanent"
-    | "all"
-    | "selfCreatures"
-    | "opponentCreatures";
+  export type Targets = "self" | "creature" | "opponent" | "permanent" | "all" | "selfCreatures" | "opponentCreatures";
 
   export type Conditions = (typeof CONDITIONS)[number];
 
-  type SplitTriggerEffectIds<TName extends Effects.EffectNames> =
-    TName extends `${infer TGroup}.${infer TName}` ? [TGroup, TName] : never;
-  type EffectArgs<TEffectName extends Effects.EffectNames> =
-    SplitTriggerEffectIds<TEffectName> extends [infer TGroup, infer TName]
-      ? TGroup extends Effects.EffectGroups
-        ? TName extends keyof Effects.Effect[TGroup]
-          ? Effects.Effect[TGroup][TName] extends {
-              args: infer TArguments extends z.ZodTypeAny;
-            }
-            ? z.infer<TArguments>
-            : never
-          : never
-        : never
-      : never;
-  export type Trigger = {
-    [TName in Effects.EffectNames]: {
-      id: TName;
-      args: EffectArgs<TName>;
-    };
-  }[Effects.EffectNames];
-
-  type TriggerArgsWithCardIds<
-    TEffectName extends Effects.EffectNames,
-    TCardId extends CardKey,
-  > =
-    EffectArgs<TEffectName> extends {
-      cardId: CardId;
-    }
-      ? Omit<EffectArgs<TEffectName>, "cardId"> & { cardId: CardId<TCardId> }
-      : EffectArgs<TEffectName>;
-
-  export type TriggerWithCardIds<TCardId extends CardKey> = {
-    [TName in Effects.EffectNames]: {
-      id: TName;
-      args: TriggerArgsWithCardIds<TName, TCardId>;
-    };
-  }[Effects.EffectNames];
+  export type Trigger =
+    | "onActivated"
+    | "onPlayed"
+    | "onStartTurn"
+    | "onEndTurn"
+    | "onDeath"
+    | "onCreatureDeath"
+    | "onBeforeAttack"
+    | "onBeforeDamage"
+    | "onDamaged"
+    | "onStateChanged";
 
   type Base = {
     domain: Domain;
@@ -89,58 +30,45 @@ export namespace Cards {
     description: string;
     cost: number;
     price: number;
-    triggers: Partial<Record<TriggerTypes, Trigger[]>>;
   };
 
-  export type Creature = Base & {
-    type: "CREATURE";
-    damage: number;
-    health: number;
-    activations: number;
-    conditions: Conditions[];
+  type Triggered = {
+    triggers?: readonly Trigger[];
+    activations?: number;
+    targets?: Targets[];
   };
 
-  export type Weapon = Base & {
-    type: "WEAPON";
-    damage: number;
-  };
+  export type Creature = Base &
+    Triggered & {
+      type: "CREATURE";
+      damage: number;
+      health: number;
+      conditions?: Conditions[];
+    };
+
+  export type Weapon = Base &
+    Triggered & {
+      type: "WEAPON";
+      damage: number;
+    };
 
   export type Spell = Base & {
     type: "SPELL";
+    triggers?: never;
+    activations?: never;
     targets: Targets[];
   };
 
-  export type Others = Base & {
-    type:
-      | Omit<CardType, "CREATURE" | "WEAPON" | "SPELL">
-      | "PERMANENT"
-      | "WEAPON"
-      | "SHIELD"
-      | "RUNE";
-  };
+  export type Others = Base &
+    Triggered & {
+      type: Exclude<CardType, "CREATURE" | "WEAPON" | "SPELL">;
+    };
 
   export type Card = Creature | Weapon | Spell | Others;
 
   export type CardDefinition = Record<string, Card>;
-  type WithCardIdTriggers<TCard extends Base, TCardId extends CardKey> = Omit<
-    TCard,
-    "triggers"
-  > & {
-    triggers: Partial<Record<TriggerTypes, TriggerWithCardIds<TCardId>[]>>;
-  };
-  export type CardWithCardIds<TCardId extends CardKey> =
-    Card extends infer TCard extends Base
-      ? TCard extends Base
-        ? WithCardIdTriggers<TCard, TCardId>
-        : never
-      : never;
 }
 
-export const defineCardDefinition = <
-  const TCards extends Record<
-    string,
-    Cards.CardWithCardIds<keyof TCards & Cards.CardKey>
-  >,
->(
-  cards: TCards,
-) => cards;
+export const defineCardDefinition = <const TCards extends Cards.CardDefinition>(cards: TCards) => cards;
+
+export const getCardTriggers = (card: Cards.Card): readonly Cards.Trigger[] => (card.type === "SPELL" ? ["onActivated"] : (card.triggers ?? []));

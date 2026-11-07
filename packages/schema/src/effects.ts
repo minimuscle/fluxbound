@@ -1,128 +1,27 @@
-import { z } from "zod";
 import type { Cards } from "./cards";
-import { CONDITIONS } from "./conditions";
 import type { Game } from "./game";
 
-export const defineEffect = <
-  TArgumentSchema extends z.ZodTypeAny,
-  TMetadata extends Record<string, unknown>,
->(
-  config: {
-    args: TArgumentSchema;
-  } & TMetadata,
-) => config;
+export type EffectContext = {
+  state: Game.GameState;
+  card: Game.GameCard;
+  player: Game.PlayerState;
+  opponent: Game.PlayerState;
+  target?: Game.Target;
+};
 
-export namespace Effects {
-  export type Effect = typeof EFFECTS;
-  export type EffectGroups = keyof Effect;
-  export type EffectNames = {
-    [TGroup in EffectGroups]: `${TGroup}.${keyof Effect[TGroup] & string}`;
-  }[keyof Effect];
+export type CardEffect = (context: EffectContext) => void;
+export type CardEffects = Partial<Record<Cards.Trigger, CardEffect>>;
 
-  export type EffectContext = {
-    state: Game.GameState;
-    cardId: Game.CardId;
-    playerId?: Game.PlayerId;
-  } & (
-    | { target?: Game.CardId; targetPlayerId?: never }
-    | { target?: never; targetPlayerId?: Game.PlayerId }
-  );
-
-  export type EffectHandler = {
-    [TGroup in EffectGroups]: {
-      [TName in keyof Effect[TGroup] & string]: (
-        context: EffectContext,
-        args: Effect[TGroup][TName] extends {
-          args: infer TArgs extends z.ZodTypeAny;
-        }
-          ? z.infer<TArgs>
-          : never,
-      ) => Game.GameState;
-    };
-  };
-
-  export type EffectArgumentsByParts<
-    TGroup extends EffectGroups,
-    TName extends keyof Effect[TGroup] & string,
-  > = Effect[TGroup][TName] extends {
-    args: infer TArgs extends z.ZodTypeAny;
-  }
-    ? z.infer<TArgs>
+type CardTriggers<TCard extends Cards.Card> = TCard extends Cards.Spell
+  ? "onActivated"
+  : TCard extends {
+        triggers: readonly (infer TTrigger extends Cards.Trigger)[];
+      }
+    ? TTrigger
     : never;
-}
 
-const statModificationSchema = z.object({
-  stat: z.enum(["health", "damage"]),
-  amount: z.number(),
-});
-const fluxCostSchema = z.object({
-  domain: z.custom<Cards.Domain>(),
-  amount: z.number(),
-});
-
-export const EFFECTS = {
-  flux: {
-    generate: defineEffect({
-      args: z.object({
-        domain: z.custom<Cards.Domain>(),
-        amount: z.number(),
-      }),
-    }),
-  },
-  stats: {
-    modify: {
-      args: z
-        .object({
-          stats: z.array(statModificationSchema),
-        })
-        .and(
-          z.union([
-            z.object({ cost: fluxCostSchema }),
-            z.object({
-              conditionType: z.custom<(typeof CONDITIONS)[number]>().optional(),
-            }),
-          ]),
-        ),
-    },
-    reduceDamage: defineEffect({
-      args: z.object({
-        amount: z.number(),
-      }),
-    }),
-  },
-  creature: {
-    create: defineEffect({
-      args: z.object({
-        cardId: z.custom<Cards.CardId>(),
-      }),
-    }),
-    swap: defineEffect({
-      args: z.object({
-        cardId: z.custom<Cards.CardId>(),
-      }),
-    }),
-  },
-  target: {
-    modify: defineEffect({
-      args: z.object({
-        stats: z.array(statModificationSchema),
-      }),
-    }),
-    destroy: defineEffect({
-      args: z.object({
-        condition: z.object({
-          field: z.enum(["damage", "health"]),
-          modififer: z.enum(["lessThan", "greaterThan", "equalTo"]),
-          value: z.number(),
-        }),
-      }),
-    }),
-    conditions: defineEffect({
-      args: z.object({
-        conditions: z.array(z.enum(CONDITIONS)),
-        chance: z.number().min(0).max(1).optional(),
-        length: z.number().min(1),
-      }),
-    }),
-  },
-} as const;
+// Every card and every declared trigger must have an entry.
+export type CardEffectRegistry<TCards extends Cards.CardDefinition> = {
+  [TId in keyof TCards]: Record<CardTriggers<TCards[TId]>, CardEffect> &
+    Partial<Record<Exclude<Cards.Trigger, CardTriggers<TCards[TId]>>, never>>;
+};

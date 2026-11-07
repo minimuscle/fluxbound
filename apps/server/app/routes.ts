@@ -1,11 +1,12 @@
 import type { Game } from "@fluxbound/schema";
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { deck } from "app/routes/deck";
 import type { Server } from "bun";
 import { corsPreflight, withCors } from "../utils/cors";
 import { user } from "./routes/user";
 
 export type GameSocketData = {
+  supabase: SupabaseClient;
   userId: Game.PlayerId;
   name: Game.PlayerName;
   roomId?: Game.RoomId;
@@ -57,6 +58,7 @@ export const routes = {
 
       const upgraded = server.upgrade(request, {
         data: {
+          supabase,
           userId: data.user.id as Game.PlayerId,
           name: playerName as Game.PlayerName,
         },

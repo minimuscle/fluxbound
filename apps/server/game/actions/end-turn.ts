@@ -3,8 +3,8 @@ import { conditionResolve } from "game/actions/condition-resolve";
 import { calculateDamage } from "game/helpers/calculate-damage";
 import { getOpponent } from "game/helpers/get-opponent";
 import { getPlayer } from "game/helpers/get-player";
-import { runCardTrigger } from "game/helpers/run-card-trigger";
 import { setPlayerState } from "game/helpers/set-player-state";
+import { resolveTriggers } from "game/rules/resolve-triggers";
 
 /**********************************************************************************************************
  *   FUNCTION START
@@ -13,12 +13,7 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
   const player = getPlayer(state, state.activePlayer);
   const nextPlayerField = player.field.map((card) => {
     const cardData = CARD_LIBRARY[card.cardId];
-    if (
-      card.activations === undefined ||
-      !cardData ||
-      !("activations" in cardData)
-    )
-      return card;
+    if (card.activations === undefined || !cardData || !("activations" in cardData)) return card;
 
     return {
       ...card,
@@ -26,12 +21,15 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
     };
   });
 
-  const nextState = setPlayerState(state, player.id, {
-    field: nextPlayerField,
-    flux: {
-      ...player.flux,
-    },
-  });
+  const nextState = resolveTriggers(
+    setPlayerState(state, player.id, {
+      field: nextPlayerField,
+      flux: {
+        ...player.flux,
+      },
+    }),
+    "onEndTurn",
+  );
 
   // Do any damage from other spell affects
 
@@ -41,18 +39,8 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
   const nextStateHealth = calculateDamage(nextState);
   const nextOpponentHealth = getOpponent(nextStateHealth).health;
 
-  // Trigger any cards in play with the onTurnEnd trigger
-  const triggeredState = player.field.reduce(
-    (currentState, card) =>
-      runCardTrigger({ state: currentState, cardId: card.id }, "onTurnEnd"),
-    nextState,
-  );
-
   // Resolve any condition effects.
-  const resolvedState = player.field.reduce(
-    (currentState, card) => conditionResolve(currentState, card.id),
-    triggeredState,
-  );
+  const resolvedState = player.field.reduce((currentState, card) => conditionResolve(currentState, card.id), nextState);
 
   // Plus 1 flux for the players attunement
   getPlayer(resolvedState, player.id).flux[player.attunement] += 1;
@@ -72,10 +60,7 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
   }
   return {
     ...nextTurnState,
-    activePlayer:
-      state.player1.id === state.activePlayer
-        ? state.player2.id
-        : state.player1.id,
+    activePlayer: state.player1.id === state.activePlayer ? state.player2.id : state.player1.id,
     turn: turn.join("-") as Game.GameState["turn"],
   };
 };

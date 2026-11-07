@@ -8,6 +8,7 @@ import { lobby, rooms } from "game/messages/lobby";
 import { gameStatesByRoomId } from "game/messages/responses";
 import { checkForRoom } from "game/messages/utils/checkForRoom";
 import { playerStarterTestDeck } from "game/testData/playerDeck";
+import { GameResponse } from "utils/responses";
 
 /**********************************************************************************************************
  *   TYPE DEFINITIONS
@@ -34,6 +35,37 @@ export const startGameSingleplayer = async (
   ws: Bun.ServerWebSocket<GameSocketData>,
   level: Level,
 ) => {
+  const { supabase } = ws.data;
+  const { data: user, error: userError } = await supabase
+    .from("users")
+    .select("active_deck")
+    .eq("id", ws.data.userId)
+    .maybeSingle<{ active_deck: string | null }>();
+  if (userError || user?.active_deck == null) {
+    ws.send(
+      GameResponse({
+        type: "lobby/error",
+        error: userError?.message ?? "No active deck found",
+      }),
+    );
+    return;
+  }
+
+  const { data: activeDeck, error: deckError } = await supabase
+    .from("decks")
+    .select("deck")
+    .eq("id", user.active_deck)
+    .maybeSingle<{ deck: string }>();
+  if (deckError || !activeDeck) {
+    ws.send(
+      GameResponse({
+        type: "lobby/error",
+        error: deckError?.message ?? "Deck not found",
+      }),
+    );
+    return;
+  }
+
   await lobby.create(ws);
   const room = checkForRoom(ws, "singleplayer");
   if (!room) return;
@@ -47,7 +79,7 @@ export const startGameSingleplayer = async (
   });
 
   const basePlayerStats = {
-    deck: playerStarterTestDeck,
+    deck: activeDeck.deck.split(" "),
     hand: [],
     field: [],
     health: 100,
@@ -75,7 +107,7 @@ export const startGameSingleplayer = async (
 
   const player2: Game.InitialPlayerState = {
     ...basePlayerStats,
-    // deck: enemyStarterTestDeck,
+    deck: playerStarterTestDeck,
     id: `AI_${level}` as Game.PlayerId,
     name: lookupAIName[level] as Game.PlayerName,
     health: level === 0 ? 50 : 100,

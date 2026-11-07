@@ -26,6 +26,7 @@ function RouteComponent() {
     typeof createTypedWebSocketSender
   > | null>(null);
   const [gameState, setGameState] = useState<Game.GameStateView | null>(null);
+  const [lobbyError, setLobbyError] = useState<string | null>(null);
   const [gameError, setGameError] = useState<
     (typeof ERROR_CODES)[number] | null
   >(null);
@@ -79,12 +80,17 @@ function RouteComponent() {
       const parsed = JSON.parse(event.data) as ServerGame | ServerLobby;
 
       switch (parsed.type) {
+        case "lobby/error":
+          setLobbyError(parsed.error);
+          break;
         case "lobby/created":
+          setLobbyError(null);
           setGameError(null);
           setRoomId(parsed.roomId);
           setLobby({ player1: parsed.player1 });
           break;
         case "game/started":
+          setLobbyError(null);
           setGameError(null);
           setGameState(parsed.state);
           return navigate({ to: "/game", replace: true });
@@ -148,6 +154,7 @@ function RouteComponent() {
     websocketState?.close();
     setWebsocket(null);
     setGameError(null);
+    setLobbyError(null);
     setGameState(null);
     setEnded(false);
     setRoomId(null);
@@ -179,6 +186,7 @@ function RouteComponent() {
               setSpellCardId,
             }}
           >
+            {lobbyError && <div role="alert">{lobbyError}</div>}
             <Outlet />
           </SpellContext>
         </GameContext>

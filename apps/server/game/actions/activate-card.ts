@@ -1,6 +1,6 @@
-import type { Game } from "@fluxbound/schema";
+import { CARD_LIBRARY, getCardTriggers, type Game } from "@fluxbound/schema";
 import { getPlayer } from "game/helpers/get-player";
-import { runCardTrigger } from "game/helpers/run-card-trigger";
+import { resolveCardEffect } from "game/rules/resolve-triggers";
 
 /**********************************************************************************************************
  *   FUNCTION START
@@ -10,7 +10,9 @@ export const activateCard = async (state: Game.GameState, cardId: Game.CardId): 
 
   const card = player.field.find((card) => card.id === cardId);
   if (!card) return state;
+  const definition = CARD_LIBRARY[card.cardId];
+  if (!definition || !getCardTriggers(definition).includes("onActivated") || (card.activations ?? 0) <= 0) return state;
 
-  card.activations = (card.activations ?? 1) - 1;
-  return runCardTrigger({ state, cardId }, "onActivated");
+  card.activations = (card.activations ?? 0) - 1;
+  return resolveCardEffect(state, card, "onActivated");
 };

@@ -1,4 +1,4 @@
-import { CARD_LIBRARY, type Cards, type Game } from "@fluxbound/schema";
+import { CARD_LIBRARY, getCardTriggers, type Game } from "@fluxbound/schema";
 import { HeartIcon, SwordIcon } from "@phosphor-icons/react";
 import classNames from "classnames";
 import type React from "react";
@@ -23,18 +23,14 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
   /***** HOOKS *****/
   const { player, stage } = useInvariant(PlayerContext);
   const { websocket: ws } = useInvariant(WebSocketContext);
-  const {
-    spellTargets,
-    cardId: spellCardId,
-    setSpellTargets,
-    setSpellCardId,
-  } = useInvariant(SpellContext);
+  const { spellTargets, cardId: spellCardId, setSpellTargets, setSpellCardId } = useInvariant(SpellContext);
 
   const gameCardData = player.field.find((card) => card.id === cardId);
   if (!gameCardData) return null;
 
-  const cardData = CARD_LIBRARY[gameCardData.cardId] as Cards.Creature;
-  const isActivatable = (gameCardData.activations ?? cardData.activations) > 0;
+  const cardData = CARD_LIBRARY[gameCardData.cardId];
+  if (!cardData || cardData.type !== "CREATURE") return null;
+  const isActivatable = getCardTriggers(cardData).includes("onActivated") && (gameCardData.activations ?? cardData.activations ?? 0) > 0;
 
   /***** FUNCTIONS *****/
   const handleClick = () => {
@@ -63,12 +59,8 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
         [styles.isTarget]: spellTargets?.includes("creature"),
 
         /***** CONDITIONS *****/
-        [styles.burning]: gameCardData.conditions?.some(
-          ({ id }) => id === "burning",
-        ),
-        [styles.frozen]: gameCardData.conditions?.some(
-          ({ id }) => id === "frozen",
-        ),
+        [styles.burning]: gameCardData.conditions?.some(({ id }) => id === "burning"),
+        [styles.frozen]: gameCardData.conditions?.some(({ id }) => id === "frozen"),
       })}
       style={
         {
