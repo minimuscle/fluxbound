@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, FORGED_VOID_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const FORGED_VOID_EFFECTS = {
   // Tempered Void Rune
   "1v0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "VOID", quantity: 2 });
+    },
   },
   // Starless Mite
   "1v1": {

@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, FORGED_FIRE_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const FORGED_FIRE_EFFECTS = {
   // Tempered Fire Rune
   "1f0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "FIRE", quantity: 2 });
+    },
   },
   // Sootfang Fox
   "1f1": {},

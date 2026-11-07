@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, FORGED_LIGHT_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const FORGED_LIGHT_EFFECTS = {
   // Tempered Light Rune
   "1li0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "LIGHT", quantity: 2 });
+    },
   },
   // Dawnglass Tortoise
   "1li2": {

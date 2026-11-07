@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, FORGED_AIR_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const FORGED_AIR_EFFECTS = {
   // Tempered Air Rune
   "1a0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "AIR", quantity: 2 });
+    },
   },
   // Thundercrest Finch
   "1a1": {},

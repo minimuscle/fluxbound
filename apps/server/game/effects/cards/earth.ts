@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, EARTH_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const EARTH_EFFECTS = {
   // Earth Rune
   "0e0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "EARTH", quantity: 1 });
+    },
   },
   // Mossling
   "0e1": {},

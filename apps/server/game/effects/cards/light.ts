@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, LIGHT_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const LIGHT_EFFECTS = {
   // Light Rune
   "0li0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "LIGHT", quantity: 1 });
+    },
   },
   // Prismback Tortoise
   "0li2": {

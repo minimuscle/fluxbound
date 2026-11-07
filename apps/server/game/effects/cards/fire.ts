@@ -4,8 +4,8 @@ import { generateFlux } from "game/effects/generateFlux";
 export const FIRE_EFFECTS = {
   // Fire Rune
   "0f0": {
-    onEndTurn: ({ state, player }) => {
-      generateFlux({ state, player: player.id, domain: "FIRE", quantity: 1 });
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "FIRE", quantity: 1 });
     },
   },
   // Cinder Rat

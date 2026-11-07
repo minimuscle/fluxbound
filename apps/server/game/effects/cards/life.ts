@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, LIFE_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const LIFE_EFFECTS = {
   // Life Rune
   "0l0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "LIFE", quantity: 1 });
+    },
   },
   // Honeypot Ant
   "0l1": {

@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, FORGED_LIFE_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const FORGED_LIFE_EFFECTS = {
   // Tempered Life Rune
   "1l0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "LIFE", quantity: 2 });
+    },
   },
   // Amberhive Tender
   "1l1": {

@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, FORGED_WATER_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const FORGED_WATER_EFFECTS = {
   // Tempered Water Rune
   "1w0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "WATER", quantity: 2 });
+    },
   },
   // Riversong Sprite
   "1w1": {},

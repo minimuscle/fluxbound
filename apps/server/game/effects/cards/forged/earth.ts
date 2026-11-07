@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, FORGED_EARTH_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const FORGED_EARTH_EFFECTS = {
   // Tempered Earth Rune
   "1e0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "EARTH", quantity: 2 });
+    },
   },
   // Granitebud
   "1e1": {},

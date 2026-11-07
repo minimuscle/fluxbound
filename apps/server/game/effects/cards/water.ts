@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, WATER_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const WATER_EFFECTS = {
   // Water Run
   "0w0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "WATER", quantity: 1 });
+    },
   },
   // River Sprite
   "0w1": {},

@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, FORGED_DARK_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const FORGED_DARK_EFFECTS = {
   // Tempered Dark Rune
   "1da0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "DARK", quantity: 2 });
+    },
   },
   // Gloamspine Tenrec
   "1da1": {

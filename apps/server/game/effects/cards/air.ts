@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, AIR_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const AIR_EFFECTS = {
   // Air Rune
   "0a0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "AIR", quantity: 1 });
+    },
   },
   // Gale Finch
   "0a1": {},

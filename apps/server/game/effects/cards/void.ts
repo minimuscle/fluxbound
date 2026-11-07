@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, VOID_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const VOID_EFFECTS = {
   // Void Rune
   "0v0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "VOID", quantity: 1 });
+    },
   },
   // Nullgrain Mite
   "0v1": {

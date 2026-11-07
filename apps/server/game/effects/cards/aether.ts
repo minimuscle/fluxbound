@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, AETHER_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const AETHER_EFFECTS = {
   // Aether Rune
   "0ae0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "AETHER", quantity: 1 });
+    },
   },
   // Threadfin Axolotl
   "0ae1": {

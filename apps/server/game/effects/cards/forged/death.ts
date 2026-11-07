@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, FORGED_DEATH_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const FORGED_DEATH_EFFECTS = {
   // Tempered Death Rune
   "1d0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "DEATH", quantity: 2 });
+    },
   },
   // Ossuary Shrew
   "1d1": {

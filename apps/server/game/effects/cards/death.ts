@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, DEATH_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const DEATH_EFFECTS = {
   // Death Rune
   "0d0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "DEATH", quantity: 1 });
+    },
   },
   // Boneburrow Shrew
   "0d1": {

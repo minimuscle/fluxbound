@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, DARK_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const DARK_EFFECTS = {
   // Dark Rune
   "0da0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "DARK", quantity: 1 });
+    },
   },
   // Duskpocket Tenrec
   "0da1": {

@@ -1,9 +1,12 @@
 import type { CardEffectRegistry, FORGED_AETHER_CARDS } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/generateFlux";
 
 export const FORGED_AETHER_EFFECTS = {
   // Tempered Aether Rune
   "1ae0": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player }) => {
+      generateFlux({ player, domain: "AETHER", quantity: 2 });
+    },
   },
   // Prismgill Axolotl
   "1ae1": {
