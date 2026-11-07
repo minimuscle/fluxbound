@@ -1,5 +1,6 @@
 import { type GameSocketData, routes } from "./app/routes";
 import { message as wsMessage } from "./game/messages";
+import { GameResponse } from "./utils/responses";
 
 const server = Bun.serve<GameSocketData>({
   routes,
@@ -10,8 +11,22 @@ const server = Bun.serve<GameSocketData>({
     close(ws, code) {
       console.log("WebSocket closed", code, ws.data.userId);
     },
-    message(ws, message): void | Promise<void> {
-      return wsMessage(server, ws, message);
+    async message(ws, message): Promise<void> {
+      try {
+        await wsMessage(server, ws, message);
+      } catch (error) {
+        console.error("Failed to handle WebSocket message", error);
+        try {
+          ws.send(GameResponse({
+            type: "game/error",
+            ok: false,
+            code: "SERVER_ERROR",
+            message: "An unexpected server error occurred. Please try again.",
+          }));
+        } catch (sendError) {
+          console.error("Failed to send server error", sendError);
+        }
+      }
     },
   },
 });

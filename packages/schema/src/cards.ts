@@ -1,14 +1,38 @@
-import type { Tagged } from "type-fest";
+import type { CARD_LIBRARY } from "./cardLibrary";
 import type { CONDITIONS } from "./conditions";
 
 export namespace Cards {
-  export type Domain = "FIRE" | "WATER" | "AIR" | "EARTH" | "LIGHT" | "DARK" | "LIFE" | "DEATH" | "AETHER" | "VOID";
+  export type Domain =
+    | "FIRE"
+    | "WATER"
+    | "AIR"
+    | "EARTH"
+    | "LIGHT"
+    | "DARK"
+    | "LIFE"
+    | "DEATH"
+    | "AETHER"
+    | "VOID";
   export type Expansion = "BASE" | "FORGED";
-  export type CardType = "CREATURE" | "SPELL" | "PERMANENT" | "WEAPON" | "SHIELD" | "RUNE";
+  export type CardType =
+    | "CREATURE"
+    | "SPELL"
+    | "PERMANENT"
+    | "WEAPON"
+    | "SHIELD"
+    | "RUNE";
   export type CardKey = string;
-  export type CardId<TCardKey extends CardKey = CardKey> = Tagged<TCardKey, "cardId"> | TCardKey;
 
-  export type Targets = "self" | "creature" | "opponent" | "permanent" | "all" | "selfCreatures" | "opponentCreatures";
+  export type CardId = keyof typeof CARD_LIBRARY;
+
+  export type Targets =
+    | "self"
+    | "creature"
+    | "opponent"
+    | "permanent"
+    | "all"
+    | "selfCreatures"
+    | "opponentCreatures";
 
   export type Conditions = (typeof CONDITIONS)[number];
 
@@ -69,6 +93,9 @@ export namespace Cards {
   export type CardDefinition = Record<string, Card>;
 }
 
-export const defineCardDefinition = <const TCards extends Cards.CardDefinition>(cards: TCards) => cards;
+export const defineCardDefinition = <const TCards extends Cards.CardDefinition>(
+  cards: TCards,
+) => cards;
 
-export const getCardTriggers = (card: Cards.Card): readonly Cards.Trigger[] => (card.type === "SPELL" ? ["onActivated"] : (card.triggers ?? []));
+export const getCardTriggers = (card: Cards.Card): readonly Cards.Trigger[] =>
+  card.type === "SPELL" ? ["onActivated"] : (card.triggers ?? []);

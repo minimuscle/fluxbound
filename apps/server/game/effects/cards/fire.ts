@@ -1,4 +1,5 @@
 import type { CardEffectRegistry, FIRE_CARDS } from "@fluxbound/schema";
+import { createCreature } from "game/effects/createCreature";
 import { generateFlux } from "game/effects/generateFlux";
 
 export const FIRE_EFFECTS = {
@@ -12,7 +13,9 @@ export const FIRE_EFFECTS = {
   "0f1": {},
   // Phoenix
   "0f2": {
-    onDeath: () => {},
+    onDeath: ({ player }) => {
+      createCreature({ player, cardId: "0f3" });
+    },
   },
   // Ash
   "0f3": {

@@ -96,7 +96,8 @@ export const FIRE_CARDS = defineCardDefinition({
     type: "CREATURE",
     triggers: ["onEndTurn"],
     name: "Kilnback Skink",
-    description: "At the end of your turn, before attacks, if this has less than its starting HP, it gains +1 attack until the end of that turn.",
+    description:
+      "At the end of your turn, before attacks, if this has less than its starting HP, it gains +1 attack until the end of that turn.",
     cost: 2,
     price: 10,
     damage: 2,
@@ -107,7 +108,8 @@ export const FIRE_CARDS = defineCardDefinition({
     type: "CREATURE",
     triggers: ["onDamaged"],
     name: "Coalcoil Pangolin",
-    description: "The first time this survives damage from an enemy attack each turn, gain 1 Fire Flux.",
+    description:
+      "The first time this survives damage from an enemy attack each turn, gain 1 Fire Flux.",
     cost: 4,
     price: 10,
     damage: 2,
@@ -119,7 +121,8 @@ export const FIRE_CARDS = defineCardDefinition({
     triggers: ["onActivated"],
     activations: 1,
     name: "Glassmane Jackal",
-    description: "1 Fire Flux, once per your turn: If you control another Fire creature, deal 2 damage to an enemy creature.",
+    description:
+      "1 Fire Flux, once per your turn: If you control another Fire creature, deal 2 damage to an enemy creature.",
     cost: 4,
     price: 10,
     damage: 3,
@@ -174,7 +177,8 @@ export const FIRE_CARDS = defineCardDefinition({
     domain: "FIRE",
     type: "SPELL",
     name: "Banked Embers",
-    description: "Choose an allied creature. It gains +1 attack permanently; at the start of your next turn, gain 2 Fire Flux.",
+    description:
+      "Choose an allied creature. It gains +1 attack permanently; at the start of your next turn, gain 2 Fire Flux.",
     cost: 2,
     price: 10,
     targets: [],
@@ -183,7 +187,8 @@ export const FIRE_CARDS = defineCardDefinition({
     domain: "FIRE",
     type: "SPELL",
     name: "Flashover Pact",
-    description: "Deal 3 damage to yourself. Deal 5 damage to an enemy creature.",
+    description:
+      "Deal 3 damage to yourself. Deal 5 damage to an enemy creature.",
     cost: 3,
     price: 10,
     targets: [],
@@ -192,7 +197,8 @@ export const FIRE_CARDS = defineCardDefinition({
     domain: "FIRE",
     type: "SPELL",
     name: "Heat Exchange",
-    description: "Deal 2 damage to an allied creature. If it survives, deal 4 damage to an enemy creature.",
+    description:
+      "Deal 2 damage to an allied creature. If it survives, deal 4 damage to an enemy creature.",
     cost: 2,
     price: 10,
     targets: [],
@@ -201,7 +207,8 @@ export const FIRE_CARDS = defineCardDefinition({
     domain: "FIRE",
     type: "SPELL",
     name: "Last Spark",
-    description: "Deal 3 damage to an enemy creature. If you have no Fire Flux remaining after paying this spell's cost, deal 5 damage instead.",
+    description:
+      "Deal 3 damage to an enemy creature. If you have no Fire Flux remaining after paying this spell's cost, deal 5 damage instead.",
     cost: 3,
     price: 10,
     targets: [],
