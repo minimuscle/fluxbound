@@ -1,5 +1,5 @@
-import type { CardEffectRegistry, AETHER_CARDS } from "@fluxbound/schema";
-import { generateFlux } from "game/effects/generateFlux";
+import type { AETHER_CARDS, CardEffectRegistry } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/effects/flux/generate";
 
 export const AETHER_EFFECTS = {
   // Aether Rune

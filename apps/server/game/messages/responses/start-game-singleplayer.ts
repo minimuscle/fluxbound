@@ -24,17 +24,13 @@ const lookupAIName: Record<Level, string> = {
   "2": "Adept",
   "3": "Master",
   "4": "Grandmaster",
-  "5": "The Old Ones", // TODO: these should have actual names
+  "5": "The Old Ones",
 };
 
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
-export const startGameSingleplayer = async (
-  server: Bun.Server<GameSocketData>,
-  ws: Bun.ServerWebSocket<GameSocketData>,
-  level: Level,
-) => {
+export const startGameSingleplayer = async (server: Bun.Server<GameSocketData>, ws: Bun.ServerWebSocket<GameSocketData>, level: Level) => {
   const { supabase } = ws.data;
   const { data: user, error: userError } = await supabase
     .from("users")
@@ -51,11 +47,7 @@ export const startGameSingleplayer = async (
     return;
   }
 
-  const { data: activeDeck, error: deckError } = await supabase
-    .from("decks")
-    .select("deck")
-    .eq("id", user.active_deck)
-    .maybeSingle<{ deck: string }>();
+  const { data: activeDeck, error: deckError } = await supabase.from("decks").select("deck").eq("id", user.active_deck).maybeSingle<{ deck: string }>();
   if (deckError || !activeDeck) {
     ws.send(
       GameResponse({
@@ -79,7 +71,8 @@ export const startGameSingleplayer = async (
   });
 
   const basePlayerStats = {
-    deck: activeDeck.deck.split(" "),
+    // deck: activeDeck.deck.split(" "),
+    deck: playerStarterTestDeck,
     hand: [],
     field: [],
     health: 100,

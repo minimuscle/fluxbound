@@ -1,5 +1,5 @@
 import type { CardEffectRegistry, FORGED_LIFE_CARDS } from "@fluxbound/schema";
-import { generateFlux } from "game/effects/generateFlux";
+import { generateFlux } from "game/effects/effects/flux/generate";
 
 export const FORGED_LIFE_EFFECTS = {
   // Tempered Life Rune

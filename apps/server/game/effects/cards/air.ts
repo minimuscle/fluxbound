@@ -1,5 +1,5 @@
-import type { CardEffectRegistry, AIR_CARDS } from "@fluxbound/schema";
-import { generateFlux } from "game/effects/generateFlux";
+import type { AIR_CARDS, CardEffectRegistry } from "@fluxbound/schema";
+import { generateFlux } from "game/effects/effects/flux/generate";
 
 export const AIR_EFFECTS = {
   // Air Rune

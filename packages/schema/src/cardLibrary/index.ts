@@ -24,8 +24,8 @@ export const BASE_CARDS = {
   ...DARK_CARDS,
   ...VOID_CARDS,
   ...AETHER_CARDS,
-} as const satisfies Record<Cards.CardId, Cards.Card>;
+} as const satisfies Cards.CardDefinition;
 
-export const CARD_LIBRARY: typeof BASE_CARDS & typeof FORGED_CARDS & Record<Cards.CardId, Cards.Card> = { ...BASE_CARDS, ...FORGED_CARDS };
+export const CARD_LIBRARY = { ...BASE_CARDS, ...FORGED_CARDS };
 
-export { FIRE_CARDS, WATER_CARDS, EARTH_CARDS, AIR_CARDS, LIFE_CARDS, DEATH_CARDS, LIGHT_CARDS, DARK_CARDS, VOID_CARDS, AETHER_CARDS };
+export { AETHER_CARDS, AIR_CARDS, DARK_CARDS, DEATH_CARDS, EARTH_CARDS, FIRE_CARDS, LIFE_CARDS, LIGHT_CARDS, VOID_CARDS, WATER_CARDS };

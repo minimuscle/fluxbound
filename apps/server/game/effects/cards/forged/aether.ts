@@ -1,5 +1,8 @@
-import type { CardEffectRegistry, FORGED_AETHER_CARDS } from "@fluxbound/schema";
-import { generateFlux } from "game/effects/generateFlux";
+import type {
+  CardEffectRegistry,
+  FORGED_AETHER_CARDS,
+} from "@fluxbound/schema";
+import { generateFlux } from "game/effects/effects/flux/generate";
 
 export const FORGED_AETHER_EFFECTS = {
   // Tempered Aether Rune

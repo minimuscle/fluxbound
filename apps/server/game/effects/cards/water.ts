@@ -1,5 +1,5 @@
 import type { CardEffectRegistry, WATER_CARDS } from "@fluxbound/schema";
-import { generateFlux } from "game/effects/generateFlux";
+import { generateFlux } from "game/effects/effects/flux/generate";
 
 export const WATER_EFFECTS = {
   // Water Run

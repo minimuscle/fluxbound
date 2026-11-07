@@ -1,5 +1,5 @@
 import type { CardEffectRegistry, EARTH_CARDS } from "@fluxbound/schema";
-import { generateFlux } from "game/effects/generateFlux";
+import { generateFlux } from "game/effects/effects/flux/generate";
 
 export const EARTH_EFFECTS = {
   // Earth Rune

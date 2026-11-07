@@ -1,5 +1,5 @@
 import type { CardEffectRegistry, FORGED_DEATH_CARDS } from "@fluxbound/schema";
-import { generateFlux } from "game/effects/generateFlux";
+import { generateFlux } from "game/effects/effects/flux/generate";
 
 export const FORGED_DEATH_EFFECTS = {
   // Tempered Death Rune

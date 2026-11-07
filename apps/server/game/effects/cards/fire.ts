@@ -1,6 +1,7 @@
 import type { CardEffectRegistry, FIRE_CARDS } from "@fluxbound/schema";
-import { createCreature } from "game/effects/createCreature";
-import { generateFlux } from "game/effects/generateFlux";
+import { createCreature } from "game/effects/effects/creature/create";
+import { destroyCreature } from "game/effects/effects/creature/destroy";
+import { generateFlux } from "game/effects/effects/flux/generate";
 
 export const FIRE_EFFECTS = {
   // Fire Rune
@@ -19,7 +20,10 @@ export const FIRE_EFFECTS = {
   },
   // Ash
   "0f3": {
-    onActivated: () => {},
+    onActivated: ({ player, card }) => {
+      destroyCreature({ player, gameCardId: card.id });
+      createCreature({ player, cardId: "0f2" });
+    },
   },
   // Blazehorn Ram
   "0f4": {

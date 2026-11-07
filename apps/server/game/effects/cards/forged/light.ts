@@ -1,5 +1,5 @@
 import type { CardEffectRegistry, FORGED_LIGHT_CARDS } from "@fluxbound/schema";
-import { generateFlux } from "game/effects/generateFlux";
+import { generateFlux } from "game/effects/effects/flux/generate";
 
 export const FORGED_LIGHT_EFFECTS = {
   // Tempered Light Rune

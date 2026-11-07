@@ -1,5 +1,5 @@
 import type { CardEffectRegistry, FORGED_EARTH_CARDS } from "@fluxbound/schema";
-import { generateFlux } from "game/effects/generateFlux";
+import { generateFlux } from "game/effects/effects/flux/generate";
 
 export const FORGED_EARTH_EFFECTS = {
   // Tempered Earth Rune
