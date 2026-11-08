@@ -3,7 +3,7 @@ import { type Game } from "@fluxbound/schema";
 /**********************************************************************************************************
  *   TYPE DEFINITIONS
  **********************************************************************************************************/
-type DestroyCreatureProps = {
+type DestroyCardProps = {
   player: Game.PlayerState;
   gameCardId: Game.GameCard["id"];
 };
@@ -11,7 +11,7 @@ type DestroyCreatureProps = {
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
-export const destroyCreature = ({ player, gameCardId }: DestroyCreatureProps) => {
+export const destroyCard = ({ player, gameCardId }: DestroyCardProps) => {
   const selectedCardIndex = player.field.findIndex((fieldCard) => fieldCard.id === gameCardId);
 
   if (selectedCardIndex === -1) throw new Error("No Card found to destroy");

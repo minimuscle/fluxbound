@@ -240,4 +240,12 @@ export const FIRE_CARDS = defineCardDefinition({
     price: 60,
     damage: 4,
   },
+  "0fh": {
+    domain: "FIRE",
+    type: "PERMANENT",
+    name: "IGNORE",
+    description: "does nothing",
+    cost: 3,
+    price: 10,
+  },
 });

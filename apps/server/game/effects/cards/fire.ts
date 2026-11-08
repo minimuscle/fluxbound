@@ -3,7 +3,7 @@ import { applyCondition } from "game/effects/effects/condition/apply";
 import { removeCondition } from "game/effects/effects/condition/remove";
 import { attackCreature } from "game/effects/effects/creature/attack";
 import { createCreature } from "game/effects/effects/creature/create";
-import { destroyCreature } from "game/effects/effects/creature/destroy";
+import { destroyCard } from "game/effects/effects/creature/destroy";
 import { generateFlux } from "game/effects/effects/flux/generate";
 import { attackPlayer } from "game/effects/effects/player/attack";
 import { updateStats } from "game/effects/effects/stats/update";
@@ -26,7 +26,7 @@ export const FIRE_EFFECTS = {
   // Ash
   "0f3": {
     onActivated: ({ player, card }) => {
-      destroyCreature({ player, gameCardId: card.id });
+      destroyCard({ player, gameCardId: card.id });
       createCreature({ player, cardId: "0f2" });
     },
   },
@@ -42,7 +42,7 @@ export const FIRE_EFFECTS = {
         },
       });
       if ((card.health ?? 1) <= 0) {
-        destroyCreature({ player, gameCardId: card.id });
+        destroyCard({ player, gameCardId: card.id });
       }
     },
   },
@@ -189,9 +189,21 @@ export const FIRE_EFFECTS = {
     },
   },
   // Flash Ignition
-  // Skipped: Needs permanent targeting and a permanent destruction effect.
   "0fc": {
-    onPlayed: () => {},
+    onPlayed: ({ player, opponent, target }) => {
+      target?.forEach((cardTarget) => {
+        if (typeof cardTarget !== "string" || cardTarget === "opponent") return;
+        for (const owner of [player, opponent]) {
+          const permanent = owner.field.find(
+            (candidate) => candidate.id === cardTarget && ["PERMANENT", "WEAPON", "SHIELD", "RUNE"].includes(CARD_LIBRARY[candidate.cardId].type),
+          );
+          if (permanent) {
+            destroyCard({ player: owner, gameCardId: permanent.id });
+            break;
+          }
+        }
+      });
+    },
   },
   // Burn
   // Skipped: The existing burning condition deals 1 damage per turn, rather than 2.
