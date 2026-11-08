@@ -121,4 +121,4 @@ export const getCardActivationCost = (card: Cards.Card): Cards.FluxCost | undefi
   card.type === "SPELL" ? { domain: card.domain, amount: card.cost } : card.activationCost;
 
 export const getCardTriggers = (card: Cards.Card): readonly Cards.Trigger[] =>
-  card.type === "SPELL" ? ["onActivated"] : (card.triggers ?? []);
+  card.type === "SPELL" ? ["onPlayed"] : (card.triggers ?? []);

@@ -44,35 +44,35 @@ export const FORGED_LIFE_EFFECTS = {
   },
   // Heartwell
   "1l7": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Everblossom Field
   "1l8": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Verdant Awakening
   "1li": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Living Graft
   "1lj": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Briar Sanctuary
   "1lk": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Endless Spring
   "1ll": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Rootheart Transplant
   "1lr": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Golden Harvest
   "1ls": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Briarheart Shield
   "1l9": {

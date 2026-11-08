@@ -48,39 +48,39 @@ export const FORGED_DEATH_EFFECTS = {
   },
   // Sovereign Bequest
   "1d9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Merciful Passing
   "1da": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Ossuary Toll
   "1db": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Stolen Tomorrow
   "1dc": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Silent Reaping
   "1dd": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Ossuary Dividend
   "1do": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Candlelit Vigil
   "1dp": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Legacy of Strength
   "1dq": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Lasting Eulogy
   "1dr": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Graveward Shroud
   "1de": {

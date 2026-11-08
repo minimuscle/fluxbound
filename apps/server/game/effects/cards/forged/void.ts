@@ -50,39 +50,39 @@ export const FORGED_VOID_EFFECTS = {
   },
   // Empty the World
   "1v9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Reservoir Ruin
   "1va": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Perfect Absence
   "1vb": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Hunger Beyond
   "1vc": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Riftstep Sanctuary
   "1vd": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Grasp of Nothing
   "1vo": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Collapsing Reserve
   "1vp": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Absolute Zero Hour
   "1vq": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // The Final Measure
   "1vr": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Nullglass Shell
   "1ve": {

@@ -44,43 +44,43 @@ export const WATER_EFFECTS = {
   },
   // Tidal Wave
   "0w7": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Freeze Ray
   "0w8": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Healing Rain
   "0w9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Whirlpool
   "0wa": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Frostbite Spear
   "0wb": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Shared Current
   "0wm": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Saltwater Bargain
   "0wn": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Pressure Equalisation
   "0wo": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Receding Tide
   "0wp": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Stillwater Reflection
   "0wt": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Ice Wall
   "0wc": {

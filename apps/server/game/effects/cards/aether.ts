@@ -48,35 +48,35 @@ export const AETHER_EFFECTS = {
   },
   // Colourshift
   "0ae9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Shared Pattern
   "0aea": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Convergent Thought
   "0aeb": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Borrowed Colour
   "0aed": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Braided Reserves
   "0aeo": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Unlikely Kinship
   "0aep": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Spectrum Balance
   "0aeq": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Common Thread
   "0aer": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Woven Horizon
   "0aee": {

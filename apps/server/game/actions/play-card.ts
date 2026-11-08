@@ -24,7 +24,8 @@ export function playACard(state: Game.GameState, cardId: Game.CardId, target?: G
     const creatureCard = {
       ...playedCard,
       damage: gameCard.damage,
-      health: gameCard.health,
+      health: gameCard.health - 1,
+      maxHealth: gameCard.health,
       activations: 0,
       conditions:
         gameCard.conditions?.map((condition) => ({
@@ -49,5 +50,5 @@ export function playACard(state: Game.GameState, cardId: Game.CardId, target?: G
   player.flux[gameCard.domain] -= gameCard.cost;
 
   const source = player.field.find(({ id }) => id === cardId) ?? playedCard;
-  return resolveCardEffect(state, source, gameCard.type === "SPELL" ? "onActivated" : "onPlayed", target);
+  return resolveCardEffect(state, source, "onPlayed", target);
 }

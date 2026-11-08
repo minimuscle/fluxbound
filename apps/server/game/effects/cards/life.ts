@@ -44,35 +44,35 @@ export const LIFE_EFFECTS = {
   },
   // Heal
   "0l7": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Blossoming Field
   "0l8": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // New Shoots
   "0li": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Graft Exchange
   "0lj": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Sheltered Growth
   "0lk": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Second Spring
   "0ll": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Tender Transplant
   "0lr": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Harvest Circle
   "0ls": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Thorn Shield
   "0l9": {

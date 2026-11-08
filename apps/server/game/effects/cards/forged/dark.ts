@@ -50,39 +50,39 @@ export const FORGED_DARK_EFFECTS = {
   },
   // Shattered Resolve
   "1da9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Absolute Hush
   "1daa": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Veiled Passage
   "1dab": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Banquet of Doubt
   "1dac": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Deepening Shadow
   "1dad": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Broken Boast
   "1dao": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Stolen Terror
   "1dap": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Gathering Night
   "1daq": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Silent Inquisition
   "1dar": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Silenceweave Screen
   "1dae": {

@@ -46,43 +46,43 @@ export const FORGED_AIR_EFFECTS = {
   },
   // Forked Lightning
   "1a6": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Sovereign Cyclone
   "1a7": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Stormwell Charge
   "1a8": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Skyward Grace
   "1a9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Rolling Thunder
   "1aa": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Ride the Skybreak
   "1ak": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Crosswind Dance
   "1al": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Jetstream Relay
   "1am": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Thunderous Timing
   "1an": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Storm Crescendo
   "1as": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Tempest Barrier
   "1ab": {

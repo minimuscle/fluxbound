@@ -1,10 +1,7 @@
 import type { Game } from "@fluxbound/schema";
 import { getPlayer } from "game/helpers/get-player";
 
-export const conditionResolve = (
-  state: Game.GameState,
-  cardId: Game.CardId,
-): Game.GameState => {
+export const conditionResolve = (state: Game.GameState, cardId: Game.CardId): Game.GameState => {
   const player = getPlayer(state, state.activePlayer);
   const card = player.field.find(({ id }) => id === cardId);
   if (!card) return state;
@@ -23,9 +20,7 @@ export const conditionResolve = (
     }
     condition.length--;
     if (condition.length <= 0) {
-      card.conditions = card.conditions?.filter(
-        (condition) => condition.id !== condition.id,
-      );
+      card.conditions = card.conditions?.filter((condition) => condition.id !== condition.id);
     }
   }
   return state;

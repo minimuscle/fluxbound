@@ -48,39 +48,39 @@ export const DEATH_EFFECTS = {
   },
   // Final Bequest
   "0d9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Measured Passing
   "0da": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Toll of the Fallen
   "0db": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Borrowed Hours
   "0dc": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Quiet Harvest
   "0dd": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Funeral Dividend
   "0do": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Dimming Vigil
   "0dp": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Passing Strength
   "0dq": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Unfinished Eulogy
   "0dr": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Gravesoil Shroud
   "0de": {

@@ -50,39 +50,39 @@ export const DARK_EFFECTS = {
   },
   // Stolen Nerve
   "0da9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Smothered Intent
   "0daa": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Unlit Path
   "0dab": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Feast on Doubt
   "0dac": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Long Shadow
   "0dad": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Muted Boast
   "0dao": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Borrowed Dread
   "0dap": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Crowded Shadows
   "0daq": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Quiet Interrogation
   "0dar": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Hushcloth Screen
   "0dae": {

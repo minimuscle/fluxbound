@@ -50,39 +50,39 @@ export const VOID_EFFECTS = {
   },
   // Empty the Vessel
   "0v9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Resource Collapse
   "0va": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Balanced Absence
   "0vb": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Hunger Between
   "0vc": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Narrow Escape
   "0vd": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Scant Remains
   "0vo": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Vanishing Reserve
   "0vp": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Zero Hour
   "0vq": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // The Last Measure
   "0vr": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Vacuum Shell
   "0ve": {

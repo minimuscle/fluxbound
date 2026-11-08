@@ -13,7 +13,7 @@ export type CardEffect = (context: EffectContext) => void;
 export type CardEffects = Partial<Record<Cards.Trigger, CardEffect>>;
 
 type CardTriggers<TCard extends Cards.Card> = TCard extends Cards.Spell
-  ? "onActivated"
+  ? "onPlayed"
   : TCard extends {
         triggers: readonly (infer TTrigger extends Cards.Trigger)[];
       }

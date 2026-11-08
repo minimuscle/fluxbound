@@ -48,39 +48,39 @@ export const FORGED_LIGHT_EFFECTS = {
   },
   // Guiding Star
   "1li9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Unclouded Horizon
   "1lia": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Mirrorbright Reversal
   "1lib": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Radiant Verdict
   "1lic": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Vigil of Dawn
   "1lid": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Certain Sunrise
   "1lio": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Daybreak Sanctuary
   "1lip": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Read the Radiance
   "1liq": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Unbroken Radiance
   "1lir": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Zenith Aegis
   "1lie": {

@@ -44,43 +44,43 @@ export const FORGED_WATER_EFFECTS = {
   },
   // Undertow Surge
   "1w7": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Deepfreeze Ray
   "1w8": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Silver Rain
   "1w9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Spiral Current
   "1wa": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Glacial Javelin
   "1wb": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Kindred Current
   "1wm": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Brineheart Bargain
   "1wn": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Crushing Equilibrium
   "1wo": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Returning Undertow
   "1wp": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Mirrorlake Reflection
   "1wt": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Glacier Wall
   "1wc": {

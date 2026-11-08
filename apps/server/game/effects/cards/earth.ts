@@ -46,43 +46,43 @@ export const EARTH_EFFECTS = {
   },
   // Rockfall
   "0e7": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Entangle
   "0e8": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Tremor
   "0e9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Fortify
   "0ea": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Quicksand
   "0eb": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Set in Stone
   "0el": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Loadbearing Bond
   "0em": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Patient Pressure
   "0en": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Reinforced Footing
   "0eo": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Seismic Appraisal
   "0es": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Granite Wall
   "0ec": {

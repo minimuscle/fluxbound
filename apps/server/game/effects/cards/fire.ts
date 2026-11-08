@@ -1,5 +1,6 @@
 import type { CardEffectRegistry, FIRE_CARDS } from "@fluxbound/schema";
 import { applyCondition } from "game/effects/effects/condition/apply";
+import { removeCondition } from "game/effects/effects/condition/remove";
 import { createCreature } from "game/effects/effects/creature/create";
 import { destroyCreature } from "game/effects/effects/creature/destroy";
 import { generateFlux } from "game/effects/effects/flux/generate";
@@ -91,15 +92,35 @@ export const FIRE_EFFECTS = {
   // Kilnback Skink
   "0fi": {
     onEndTurn: ({ player, card }) => {
-      if (card.health < card.maxHealth) {
-        // TODO: handle card health and maxHealth and damage being possibly undefined for all creatures. By this point they will be defined if its a creature which we will know
+      console.log(card);
+      if ((card.health ?? 0) < (card.maxHealth ?? 0) && !card.conditions?.some((condition) => condition.id === "enhanced")) {
         updateStats({
           player,
           gameCardId: card.id,
           statOptions: {
-            damage: (card.damage ?? 0) + 1,
+            damage: (card.damage ?? 0) + 2,
           },
         });
+        applyCondition({
+          player,
+          gameCardId: card.id,
+          condition: {
+            id: "enhanced",
+            length: 999,
+          },
+        });
+      }
+
+      // Remove bonus at end of condition
+      if ((card.health ?? 0) >= (card.maxHealth ?? 0) && card.conditions?.some((condition) => condition.id === "enhanced")) {
+        updateStats({
+          player,
+          gameCardId: card.id,
+          statOptions: {
+            damage: Math.max((card.damage ?? 0) - 2, 0),
+          },
+        });
+        removeCondition({ player, gameCardId: card.id, conditionId: "enhanced" });
       }
     },
   },
@@ -113,39 +134,39 @@ export const FIRE_EFFECTS = {
   },
   // Fireball
   "0f9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Wildfire
   "0fa": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Molten Rage
   "0fb": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Flash Ignition
   "0fc": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Burn
   "0fd": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Banked Embers
   "0fo": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Flashover Pact
   "0fp": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Heat Exchange
   "0fq": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Last Spark
   "0fr": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Wall of Fire
   "0fe": {

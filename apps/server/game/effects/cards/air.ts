@@ -46,43 +46,43 @@ export const AIR_EFFECTS = {
   },
   // Lightning Bolt
   "0a6": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Cyclone
   "0a7": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Static Charge
   "0a8": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Flight
   "0a9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Thunderstorm
   "0aa": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Catch the Updraft
   "0ak": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Crosswind Step
   "0al": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Slipstream Relay
   "0am": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Perfect Timing
   "0an": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Gathering Tempo
   "0as": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Wind Brrier
   "0ab": {

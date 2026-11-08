@@ -51,35 +51,35 @@ export const FORGED_AETHER_EFFECTS = {
   },
   // Prismshift
   "1ae9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Harmonic Pattern
   "1aea": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Confluence of Thought
   "1aeb": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Borrowed Horizon
   "1aed": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Braided Firmament
   "1aeo": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Impossible Kinship
   "1aep": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Perfect Spectrum
   "1aeq": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Unbroken Thread
   "1aer": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Worldwoven Horizon
   "1aee": {

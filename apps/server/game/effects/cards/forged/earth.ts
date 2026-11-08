@@ -46,43 +46,43 @@ export const FORGED_EARTH_EFFECTS = {
   },
   // Meteorfall
   "1e7": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Rootbound Snare
   "1e8": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Faultline Pulse
   "1e9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Adamant Resolve
   "1ea": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Hungry Ground
   "1eb": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Cast in Adamant
   "1el": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Bedrock Covenant
   "1em": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Mountain Pressure
   "1en": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Unshakable Footing
   "1eo": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Deepfault Appraisal
   "1es": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Adamant Wall
   "1ec": {

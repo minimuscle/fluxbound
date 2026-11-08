@@ -46,39 +46,39 @@ export const FORGED_FIRE_EFFECTS = {
   },
   // Starfire Bolt
   "1f9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Crownfire
   "1fa": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Crucible Fury
   "1fb": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Solar Detonation
   "1fc": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Cinderbrand
   "1fd": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Afterglow Reserve
   "1fo": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Inferno Pact
   "1fp": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Crucible Exchange
   "1fq": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Final Flare
   "1fr": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Crownfire Rampart
   "1fe": {

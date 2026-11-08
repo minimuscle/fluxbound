@@ -48,39 +48,39 @@ export const LIGHT_EFFECTS = {
   },
   // Guiding Glimmer
   "0li9": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Clear Horizon
   "0lia": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Prismatic Reversal
   "0lib": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Honest Measure
   "0lic": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Watchful Dawn
   "0lid": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Ray of Certainty
   "0lio": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Morning Safeguard
   "0lip": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Read the Gleam
   "0liq": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Luminous Resolve
   "0lir": {
-    onActivated: () => {},
+    onPlayed: () => {},
   },
   // Firstlight Aegis
   "0lie": {
