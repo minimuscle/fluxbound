@@ -124,11 +124,12 @@ export const FIRE_CARDS = defineCardDefinition({
     activationCost: { domain: "FIRE", amount: 1 },
     activations: 1,
     name: "Glassmane Jackal",
-    description: "1 Fire Flux, once per your turn: If you control another Fire creature, deal 2 damage to an enemy creature.",
+    description: "1 Fire Flux: Deal 1 damage to the target per fire creature",
     cost: 4,
     price: 10,
     damage: 3,
     health: 3,
+    targets: ["creature"],
   },
   "0f9": {
     domain: "FIRE",
@@ -146,7 +147,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "3 Damage to all creatures",
     cost: 7,
     price: 50,
-    targets: ["opponentCreatures"],
+    targets: [],
   },
   "0fb": {
     domain: "FIRE",

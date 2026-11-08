@@ -1,4 +1,4 @@
-import { CARD_LIBRARY, getCardTriggers, type Cards, type Game } from "@fluxbound/schema";
+import { CARD_LIBRARY, getCardTriggers, type Cards, type EffectContext, type Game } from "@fluxbound/schema";
 import { CARD_EFFECTS } from "game/effects";
 import { getPlayer } from "game/helpers/get-player";
 import { getOpponent } from "game/helpers/get-opponent";
@@ -9,6 +9,7 @@ export const resolveCardEffect = (
   trigger: Cards.Trigger,
   target?: Game.Target,
   playerId: Game.PlayerId = state.activePlayer,
+  damageContext: Pick<EffectContext, "attacker" | "damage"> = {},
 ): Game.GameState => {
   const definition = CARD_LIBRARY[card.cardId];
   if (!definition || !getCardTriggers(definition).includes(trigger)) return state;
@@ -18,6 +19,7 @@ export const resolveCardEffect = (
     player: getPlayer(state, playerId),
     opponent: getOpponent(state, playerId),
     target,
+    ...damageContext,
   });
   return state;
 };

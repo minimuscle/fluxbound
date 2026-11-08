@@ -1,9 +1,11 @@
-import type { CardEffectRegistry, FIRE_CARDS } from "@fluxbound/schema";
+import { CARD_LIBRARY, type CardEffectRegistry, type FIRE_CARDS } from "@fluxbound/schema";
 import { applyCondition } from "game/effects/effects/condition/apply";
 import { removeCondition } from "game/effects/effects/condition/remove";
+import { attackCreature } from "game/effects/effects/creature/attack";
 import { createCreature } from "game/effects/effects/creature/create";
 import { destroyCreature } from "game/effects/effects/creature/destroy";
 import { generateFlux } from "game/effects/effects/flux/generate";
+import { attackPlayer } from "game/effects/effects/player/attack";
 import { updateStats } from "game/effects/effects/stats/update";
 
 export const FIRE_EFFECTS = {
@@ -126,19 +128,55 @@ export const FIRE_EFFECTS = {
   },
   // Coalcoil Pangolin
   "0fj": {
-    onDamaged: () => {},
+    onDamaged: ({ player, damage }) => {
+      if (damage) {
+        generateFlux({ player, domain: "FIRE", quantity: damage });
+      }
+    },
   },
   // Glassmane Jackal
   "0fl": {
-    onActivated: () => {},
+    onActivated: ({ state, player, card, target }) => {
+      target?.forEach((attack) => {
+        if (attack === "opponent") return;
+        const numberOfFireCreatures = player.field.filter(
+          (creatures) => CARD_LIBRARY[creatures.cardId].type === "CREATURE" && CARD_LIBRARY[creatures.cardId].domain === "FIRE",
+        ).length;
+        const creature = state.player1.field.find(({ id }) => id === attack) ?? state.player2.field.find(({ id }) => id === attack);
+        if (creature) {
+          console.log("number of fire creatures: ", numberOfFireCreatures);
+          attackCreature({ state, attacker: card, gameCardId: creature.id, damage: numberOfFireCreatures });
+        }
+      });
+    },
   },
   // Fireball
   "0f9": {
-    onPlayed: () => {},
+    onPlayed: ({ state, card, target, opponent }) => {
+      target?.forEach((attack) => {
+        if (attack === "opponent") {
+          attackPlayer({ state, player: opponent, attacker: card, damage: 3 });
+          attackPlayer({ state, player: opponent, attacker: card, damage: 3 });
+          attackPlayer({ state, player: opponent, attacker: card, damage: 3 });
+        } else if (typeof attack === "string") {
+          const creature = state.player1.field.find(({ id }) => id === attack) ?? state.player2.field.find(({ id }) => id === attack);
+          if (creature) {
+            attackCreature({ state, gameCardId: creature.id, attacker: card, damage: 3 });
+            attackCreature({ state, gameCardId: creature.id, attacker: card, damage: 3 });
+            attackCreature({ state, gameCardId: creature.id, attacker: card, damage: 3 });
+          }
+        }
+      });
+    },
   },
   // Wildfire
   "0fa": {
-    onPlayed: () => {},
+    onPlayed: ({ state, card, opponent }) => {
+      const creatures = opponent.field.filter((creature) => CARD_LIBRARY[creature.cardId].type === "CREATURE");
+      for (const creature of creatures) {
+        attackCreature({ state, gameCardId: creature.id, attacker: card, damage: 3 });
+      }
+    },
   },
   // Molten Rage
   "0fb": {

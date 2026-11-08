@@ -64,6 +64,7 @@ export const game = {
     server: Bun.Server<GameSocketData>,
     ws: Bun.ServerWebSocket<GameSocketData>,
     cardId: Game.CardId,
+    target?: Game.Target,
   ) => {
     if (!ws.data.roomId || !gameStatesByRoomId.has(ws.data.roomId)) {
       return void ws.send(
@@ -78,7 +79,7 @@ export const game = {
     const gameState = gameStatesByRoomId.get(ws.data.roomId)!;
     const engine = new GameEngine(gameState, ws.data.userId);
 
-    const result = await engine.activateCard(cardId);
+    const result = await engine.activateCard(cardId, target);
     if (!result.ok)
       return void ws.send(GameResponse({ type: "game/error", ...result }));
 

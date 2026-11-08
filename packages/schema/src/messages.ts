@@ -74,6 +74,7 @@ export const clientGame = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("game/activate-card"),
     cardId: z.custom<Game.CardId>(z.coerce.string().parse),
+    target: z.array(z.custom<Game.CardId>(z.coerce.string().parse)).optional(),
   }),
   z.object({
     type: z.literal("game/end-turn"),

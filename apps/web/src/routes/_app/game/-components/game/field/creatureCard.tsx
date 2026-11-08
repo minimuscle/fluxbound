@@ -5,7 +5,7 @@ import type React from "react";
 import { DOMAIN_BACKGROUND_COLOR } from "routes/_app/game/-components/game/context/color";
 import { CARD_IMAGE } from "routes/_app/game/-components/game/context/images";
 import { useInvariant } from "utils/hooks/useInvariant";
-import { SpellContext, WebSocketContext } from "../../context";
+import { GameContext, SpellContext, WebSocketContext } from "../../context";
 import { PlayerContext } from "../context";
 import styles from "./play.module.css";
 
@@ -23,6 +23,7 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
   /***** HOOKS *****/
   const { player, stage } = useInvariant(PlayerContext);
   const { websocket: ws } = useInvariant(WebSocketContext);
+  const { state } = useInvariant(GameContext);
   const { spellTargets, cardId: spellCardId, setSpellTargets, setSpellCardId } = useInvariant(SpellContext);
 
   const gameCardData = player.field.find((card) => card.id === cardId);
@@ -31,15 +32,19 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
   const cardData = CARD_LIBRARY[gameCardData.cardId];
   if (!cardData || cardData.type !== "CREATURE") return null;
   const activationCost = getCardActivationCost(cardData);
-  const isActivatable = getCardTriggers(cardData).includes("onActivated") &&
+  const isActivatable =
+    getCardTriggers(cardData).includes("onActivated") &&
     (gameCardData.activations ?? ("activations" in cardData ? cardData.activations : 0)) > 0 &&
-    !!activationCost && player.flux[activationCost.domain] >= activationCost.amount;
+    !!activationCost &&
+    player.flux[activationCost.domain] >= activationCost.amount;
 
   /***** FUNCTIONS *****/
   const handleClick = () => {
     if (spellTargets?.includes("creature") && !!spellCardId) {
+      const sourceCard = [...state.you.hand, ...state.you.field].find((card) => card.id === spellCardId);
+      if (!sourceCard) return;
       ws?.send({
-        type: "game/play-card",
+        type: CARD_LIBRARY[sourceCard.cardId]?.type === "SPELL" ? "game/play-card" : "game/activate-card",
         cardId: spellCardId,
         target: [cardId],
       });
@@ -48,10 +53,14 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
       return;
     }
     if (isActivatable && stage === "PLAYER") {
-      ws?.send({ type: "game/activate-card", cardId });
+      if (!("targets" in cardData)) {
+        ws?.send({ type: "game/activate-card", cardId });
+      } else {
+        setSpellTargets(cardData.targets);
+        setSpellCardId(cardId);
+      }
     }
   };
-  console.log("card conditions: ", gameCardData.conditions);
 
   /***** RENDER *****/
   if (!cardData) return null;
@@ -60,7 +69,7 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
       title={activationCost ? `Activate: ${activationCost.amount} ${activationCost.domain} Flux` : undefined}
       className={classNames(styles.creatureCard, {
         [styles.isActivatable]: isActivatable && stage === "PLAYER",
-        [styles.isTarget]: spellTargets?.includes("creature"),
+        [styles.isTarget]: spellTargets?.includes("creature") && spellCardId !== cardId,
 
         /***** CONDITIONS *****/
         [styles.burning]: gameCardData.conditions?.some(({ id }) => id === "burning"),

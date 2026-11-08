@@ -31,7 +31,7 @@ export function message(
     case "game/play-card":
       return game.playCard(server, ws, parsed.cardId, parsed.target);
     case "game/activate-card":
-      return game.activateCard(server, ws, parsed.cardId);
+      return game.activateCard(server, ws, parsed.cardId, parsed.target);
     case "game/end-turn":
       return game.endTurn(server, ws);
     case "game/discard-card":

@@ -1,20 +1,10 @@
-import type {
-  ERROR_CODES,
-  Game,
-  ServerGame,
-  ServerLobby,
-} from "@fluxbound/schema";
+import type { ERROR_CODES, Game, ServerGame, ServerLobby } from "@fluxbound/schema";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { user } from "api/user";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createTypedWebSocketSender } from "utils/functions";
-import {
-  GameContext,
-  GameErrorContext,
-  SpellContext,
-  WebSocketContext,
-} from "./-components/context";
+import { GameContext, GameErrorContext, SpellContext, WebSocketContext } from "./-components/context";
 
 export const Route = createFileRoute("/_app/game")({
   component: RouteComponent,
@@ -22,25 +12,18 @@ export const Route = createFileRoute("/_app/game")({
 
 function RouteComponent() {
   /***** HOOKS *****/
-  const [websocketState, setWebsocket] = useState<ReturnType<
-    typeof createTypedWebSocketSender
-  > | null>(null);
+  const [websocketState, setWebsocket] = useState<ReturnType<typeof createTypedWebSocketSender> | null>(null);
   const [gameState, setGameState] = useState<Game.GameStateView | null>(null);
   const [lobbyError, setLobbyError] = useState<string | null>(null);
-  const [gameError, setGameError] = useState<
-    (typeof ERROR_CODES)[number] | null
-  >(null);
+  const [gameError, setGameError] = useState<(typeof ERROR_CODES)[number] | null>(null);
   const [ended, setEnded] = useState<false | Game.PlayerId>(false);
   const [connectionVersion, setConnectionVersion] = useState(0);
   const [lobby, setLobby] = useState<{
     player1: { name: Game.PlayerName; id: Game.PlayerId };
     player2?: { name: Game.PlayerName; id: Game.PlayerId };
   } | null>(null);
-  const [spellTargets, setSpellTargets] =
-    useState<SpellContext["spellTargets"]>(null);
-  const [spellCardId, setSpellCardId] = useState<SpellContext["cardId"] | null>(
-    null,
-  );
+  const [spellTargets, setSpellTargets] = useState<SpellContext["spellTargets"]>(null);
+  const [spellCardId, setSpellCardId] = useState<SpellContext["cardId"] | null>(null);
 
   const [roomId, setRoomId] = useState<Game.RoomId | null>(null);
   const isIntentionalClose = useRef(false);
@@ -54,6 +37,18 @@ function RouteComponent() {
 
   /***** EFFECTS *****/
   useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSpellTargets(null);
+        setSpellCardId(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  useEffect(() => {
     isIntentionalClose.current = false;
     const accessToken = localStorage.getItem("access_token");
     if (!accessToken) {
@@ -61,9 +56,7 @@ function RouteComponent() {
       return;
     }
 
-    const websocketUrl = new URL(
-      `${import.meta.env.VITE_BASE_URL.includes("localhost") ? "ws" : "wss"}://${import.meta.env.VITE_BASE_URL}/game`,
-    );
+    const websocketUrl = new URL(`${import.meta.env.VITE_BASE_URL.includes("localhost") ? "ws" : "wss"}://${import.meta.env.VITE_BASE_URL}/game`);
 
     websocketUrl.searchParams.set("access_token", accessToken);
 
@@ -95,6 +88,8 @@ function RouteComponent() {
           setGameState(parsed.state);
           return navigate({ to: "/game", replace: true });
         case "game/turnEnded":
+          setSpellTargets(null);
+          setSpellCardId(null);
           setGameError(null);
           setGameState(parsed.state);
           typedWebsocket.send({ type: "game/start-turn" });
@@ -171,13 +166,7 @@ function RouteComponent() {
   return (
     <GameErrorContext value={{ gameError, setGameError }}>
       <WebSocketContext value={context}>
-        <GameContext
-          value={
-            gameState
-              ? { state: gameState, playerId: userData?.data?.id, ended }
-              : null
-          }
-        >
+        <GameContext value={gameState ? { state: gameState, playerId: userData?.data?.id, ended } : null}>
           <SpellContext
             value={{
               spellTargets,

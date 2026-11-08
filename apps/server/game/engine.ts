@@ -85,7 +85,7 @@ export class GameEngine {
   }
 
   // Activate a card
-  public async activateCard(cardId: Game.CardId): Promise<GameResponse> {
+  public async activateCard(cardId: Game.CardId, target?: Game.Target): Promise<GameResponse> {
     const turnValidation = isPlayersTurn(this.state, this.playerId);
     if (!turnValidation.ok) return turnValidation;
 
@@ -93,7 +93,7 @@ export class GameEngine {
     const cardValidation = canActivateCard(player, cardId);
     if (!cardValidation.ok) return cardValidation;
 
-    this.state = await activateCard(this.state, cardId);
+    this.state = await activateCard(this.state, cardId, target);
 
     return { ok: true };
   }

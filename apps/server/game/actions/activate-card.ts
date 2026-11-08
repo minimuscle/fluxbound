@@ -6,7 +6,7 @@ import { resolveCardEffect } from "game/rules/resolve-triggers";
 /**********************************************************************************************************
  *   FUNCTION START
  **********************************************************************************************************/
-export const activateCard = async (state: Game.GameState, cardId: Game.CardId): Promise<Game.GameState> => {
+export const activateCard = async (state: Game.GameState, cardId: Game.CardId, target?: Game.Target): Promise<Game.GameState> => {
   const player = getPlayer(state, state.activePlayer);
   if (!canActivateCard(player, cardId).ok) return state;
 
@@ -19,5 +19,5 @@ export const activateCard = async (state: Game.GameState, cardId: Game.CardId): 
 
   player.flux[cost.domain] -= cost.amount;
   card.activations = (card.activations ?? 0) - 1;
-  return resolveCardEffect(state, card, "onActivated");
+  return resolveCardEffect(state, card, "onActivated", target);
 };

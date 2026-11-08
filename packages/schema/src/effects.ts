@@ -7,6 +7,8 @@ export type EffectContext = {
   player: Game.PlayerState;
   opponent: Game.PlayerState;
   target?: Game.Target;
+  attacker?: Game.GameCard;
+  damage?: number;
 };
 
 export type CardEffect = (context: EffectContext) => void;
