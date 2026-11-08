@@ -1,7 +1,9 @@
 import type { CardEffectRegistry, FIRE_CARDS } from "@fluxbound/schema";
+import { applyCondition } from "game/effects/effects/condition/apply";
 import { createCreature } from "game/effects/effects/creature/create";
 import { destroyCreature } from "game/effects/effects/creature/destroy";
 import { generateFlux } from "game/effects/effects/flux/generate";
+import { updateStats } from "game/effects/effects/stats/update";
 
 export const FIRE_EFFECTS = {
   // Fire Rune
@@ -27,21 +29,79 @@ export const FIRE_EFFECTS = {
   },
   // Blazehorn Ram
   "0f4": {
-    onActivated: () => {},
+    onActivated: ({ player, card }) => {
+      updateStats({
+        player,
+        gameCardId: card.id,
+        statOptions: {
+          damage: (card.damage ?? 0) + 1,
+          health: (card.health ?? 1) - 1,
+        },
+      });
+      if ((card.health ?? 1) <= 0) {
+        destroyCreature({ player, gameCardId: card.id });
+      }
+    },
   },
   // Steamforged Drake
   "0f5": {
-    onActivated: () => {},
+    onActivated: ({ player, card }) => {
+      updateStats({
+        player,
+        gameCardId: card.id,
+        statOptions: {
+          damage: (card.damage ?? 0) + 2,
+        },
+      });
+      applyCondition({
+        player,
+        gameCardId: card.id,
+        condition: {
+          id: "enhanced",
+          length: 0,
+        },
+      });
+    },
+    onEndTurn: ({ player, card }) => {
+      if (card.conditions?.some((condition) => condition.id === "enhanced" && condition.length === 0)) {
+        updateStats({
+          player,
+          gameCardId: card.id,
+          statOptions: {
+            damage: (card.damage ?? 0) - 2,
+          },
+        });
+      }
+    },
   },
   // Ember
   "0f7": {
-    onActivated: () => {},
+    onActivated: ({ player, card }) => {
+      updateStats({
+        player,
+        gameCardId: card.id,
+        statOptions: {
+          damage: (card.damage ?? 0) + 2,
+        },
+      });
+    },
   },
   // Ruby Elemental
   "0f8": {},
   // Kilnback Skink
   "0fi": {
-    onEndTurn: () => {},
+    onEndTurn: ({ player, card }) => {
+      if (card.health < card.maxHealth) {
+        // TODO: handle card health and maxHealth and damage being possibly undefined for all creatures. By this point they will be defined if its a creature which we will know
+        updateStats({
+          player,
+          gameCardId: card.id,
+          statOptions: {
+            damage: (card.damage ?? 0) + 1,
+          },
+        });
+      }
+    },
   },
   // Coalcoil Pangolin
   "0fj": {

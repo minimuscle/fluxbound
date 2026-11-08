@@ -5,6 +5,4 @@ import type { Cards } from "@fluxbound/schema";
 //     " ",
 //   ) as Cards.CardId[];
 
-export const playerStarterTestDeck: Cards.CardId[] = "0f0 0f0 0f0 0f0 0f0 0f0 0f0 0f0 0f0 0f0 0f0 0f3 0f3 0f3 0f3 0f3 0f3 0f3 0f3 0f3 0f3 0f3".split(
-  " ",
-) as Cards.CardId[];
+export const playerStarterTestDeck = "0f0 0f0 0f0 0f0 0f0 0f0 0f0 0f0 0f0 0f0 0f0 0f5 0f5 0f5 0f5 0w0 0w0 0w0 0w0 0w0 0w0".split(" ") as Cards.CardId[];

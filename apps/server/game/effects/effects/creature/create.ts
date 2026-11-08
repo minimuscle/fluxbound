@@ -13,21 +13,16 @@ type CreateCreatureProps = {
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
-export const createCreature = ({
-  player,
-  cardId,
-  cardOptions,
-}: CreateCreatureProps) => {
+export const createCreature = ({ player, cardId, cardOptions }: CreateCreatureProps) => {
   const card = CARD_LIBRARY[cardId];
   if (!card || card.type !== "CREATURE") {
     throw new Error(`Cannot create creature from card: ${cardId}`);
   }
   const creatureCard: Game.GameCard = {
     ...card,
-    id: z
-      .custom<Game.CardId>((value) => typeof value === "string")
-      .parse(crypto.randomUUID()),
+    id: z.custom<Game.CardId>((value) => typeof value === "string").parse(crypto.randomUUID()),
     cardId,
+    activations: 0,
     ...cardOptions,
   };
   player.field.push(creatureCard);

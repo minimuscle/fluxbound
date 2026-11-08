@@ -1,4 +1,4 @@
-import { CARD_LIBRARY, getCardTriggers, type Game, type GameResponse } from "@fluxbound/schema";
+import { type Game, type GameResponse } from "@fluxbound/schema";
 import { drawCard } from "game/actions/draw-card";
 import { endTurn } from "game/actions/end-turn";
 import { playAITurn } from "game/actions/play-ai-turn";
@@ -7,6 +7,7 @@ import { checkEndGame } from "game/helpers/check-end-game";
 import { getOpponent } from "game/helpers/get-opponent";
 import { getPlayer } from "game/helpers/get-player";
 import { canPlayCard } from "game/rules/can-play-card";
+import { canActivateCard } from "game/rules/can-activate-card";
 import { isPlayersTurn } from "game/rules/is-players-turn";
 import { activateCard } from "./actions/activate-card";
 import { discardCard } from "./actions/discard-card";
@@ -89,22 +90,10 @@ export class GameEngine {
     if (!turnValidation.ok) return turnValidation;
 
     const player = getPlayer(this.state, this.playerId);
-    const card = player.field.find(({ id }) => id === cardId);
-    if (!card)
-      return {
-        ok: false,
-        code: "CARD_NOT_FOUND",
-        message: "The card you are trying to activate does not exist",
-      };
-    const definition = CARD_LIBRARY[card.cardId];
-    if (!definition || !getCardTriggers(definition).includes("onActivated") || (card.activations ?? 0) <= 0)
-      return {
-        ok: false,
-        code: "CARD_NOT_ACTIVATABLE",
-        message: "The card you are trying to activate is not activable",
-      };
+    const cardValidation = canActivateCard(player, cardId);
+    if (!cardValidation.ok) return cardValidation;
 
-    this.state = await activateCard(this.state, card.id);
+    this.state = await activateCard(this.state, cardId);
 
     return { ok: true };
   }

@@ -1,5 +1,6 @@
-import { CARD_LIBRARY, getCardTriggers, type Game } from "@fluxbound/schema";
+import { CARD_LIBRARY, getCardActivationCost, type Game } from "@fluxbound/schema";
 import { getPlayer } from "game/helpers/get-player";
+import { canActivateCard } from "game/rules/can-activate-card";
 import { resolveCardEffect } from "game/rules/resolve-triggers";
 
 /**********************************************************************************************************
@@ -7,12 +8,16 @@ import { resolveCardEffect } from "game/rules/resolve-triggers";
  **********************************************************************************************************/
 export const activateCard = async (state: Game.GameState, cardId: Game.CardId): Promise<Game.GameState> => {
   const player = getPlayer(state, state.activePlayer);
+  if (!canActivateCard(player, cardId).ok) return state;
 
   const card = player.field.find((card) => card.id === cardId);
   if (!card) return state;
   const definition = CARD_LIBRARY[card.cardId];
-  if (!definition || !getCardTriggers(definition).includes("onActivated") || (card.activations ?? 0) <= 0) return state;
+  if (!definition) return state;
+  const cost = getCardActivationCost(definition);
+  if (!cost) return state;
 
+  player.flux[cost.domain] -= cost.amount;
   card.activations = (card.activations ?? 0) - 1;
   return resolveCardEffect(state, card, "onActivated");
 };

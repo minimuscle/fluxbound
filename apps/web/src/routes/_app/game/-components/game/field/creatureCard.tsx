@@ -1,4 +1,4 @@
-import { CARD_LIBRARY, getCardTriggers, type Game } from "@fluxbound/schema";
+import { CARD_LIBRARY, getCardActivationCost, getCardTriggers, type Game } from "@fluxbound/schema";
 import { HeartIcon, SwordIcon } from "@phosphor-icons/react";
 import classNames from "classnames";
 import type React from "react";
@@ -30,7 +30,10 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
 
   const cardData = CARD_LIBRARY[gameCardData.cardId];
   if (!cardData || cardData.type !== "CREATURE") return null;
-  const isActivatable = getCardTriggers(cardData).includes("onActivated") && (gameCardData.activations ?? cardData.activations ?? 0) > 0;
+  const activationCost = getCardActivationCost(cardData);
+  const isActivatable = getCardTriggers(cardData).includes("onActivated") &&
+    (gameCardData.activations ?? ("activations" in cardData ? cardData.activations : 0)) > 0 &&
+    !!activationCost && player.flux[activationCost.domain] >= activationCost.amount;
 
   /***** FUNCTIONS *****/
   const handleClick = () => {
@@ -54,6 +57,7 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
   if (!cardData) return null;
   return (
     <div
+      title={activationCost ? `Activate: ${activationCost.amount} ${activationCost.domain} Flux` : undefined}
       className={classNames(styles.creatureCard, {
         [styles.isActivatable]: isActivatable && stage === "PLAYER",
         [styles.isTarget]: spellTargets?.includes("creature"),

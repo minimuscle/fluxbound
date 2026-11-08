@@ -56,11 +56,17 @@ export namespace Cards {
     price: number;
   };
 
-  type Triggered = {
-    triggers?: readonly Trigger[];
-    activations?: number;
-    targets?: Targets[];
+  export type FluxCost = {
+    domain: Domain;
+    amount: number;
   };
+
+  type Triggered = {
+    targets?: Targets[];
+  } & (
+    | { triggers: readonly Trigger[]; activations: number; activationCost: FluxCost }
+    | { triggers?: readonly Exclude<Trigger, "onActivated">[]; activations?: never; activationCost?: never }
+  );
 
   export type Creature = Base &
     Triggered & {
@@ -80,6 +86,7 @@ export namespace Cards {
     type: "SPELL";
     triggers?: never;
     activations?: never;
+    activationCost?: never;
     targets: Targets[];
   };
 
@@ -95,7 +102,23 @@ export namespace Cards {
 
 export const defineCardDefinition = <const TCards extends Cards.CardDefinition>(
   cards: TCards,
-) => cards;
+) => {
+  for (const card of Object.values<Cards.Card>(cards)) {
+    if (card.type === "SPELL") {
+      if (!Number.isFinite(card.cost) || card.cost <= 0) {
+        throw new Error(`${card.name} must have a positive spell flux cost`);
+      }
+    } else if (card.triggers?.some((trigger) => trigger === "onActivated")) {
+      if (!card.activationCost || !Number.isFinite(card.activationCost.amount) || card.activationCost.amount <= 0) {
+        throw new Error(`${card.name} must have a positive activation flux cost`);
+      }
+    }
+  }
+  return cards;
+};
+
+export const getCardActivationCost = (card: Cards.Card): Cards.FluxCost | undefined =>
+  card.type === "SPELL" ? { domain: card.domain, amount: card.cost } : card.activationCost;
 
 export const getCardTriggers = (card: Cards.Card): readonly Cards.Trigger[] =>
   card.type === "SPELL" ? ["onActivated"] : (card.triggers ?? []);

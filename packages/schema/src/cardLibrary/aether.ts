@@ -36,6 +36,7 @@ export const AETHER_CARDS = defineCardDefinition({
     domain: "AETHER",
     type: "CREATURE",
     triggers: ["onActivated"],
+    activationCost: { domain: "AETHER", amount: 1 },
     activations: 1,
     name: "Prismwhisker Ferret",
     description:
@@ -84,6 +85,7 @@ export const AETHER_CARDS = defineCardDefinition({
     domain: "AETHER",
     type: "CREATURE",
     triggers: ["onActivated"],
+    activationCost: { domain: "AETHER", amount: 1 },
     activations: 1,
     name: "Crossweave Apprentice",
     description: "1 Aether Flux, once per your turn: Another allied creature from a different domain than this gains +1 maximum and current HP.",
@@ -96,6 +98,7 @@ export const AETHER_CARDS = defineCardDefinition({
     domain: "AETHER",
     type: "CREATURE",
     triggers: ["onActivated"],
+    activationCost: { domain: "AETHER", amount: 1 },
     activations: 1,
     name: "Chromatic Effigy",
     description:
@@ -109,6 +112,7 @@ export const AETHER_CARDS = defineCardDefinition({
     domain: "AETHER",
     type: "CREATURE",
     triggers: ["onActivated"],
+    activationCost: { domain: "AETHER", amount: 1 },
     activations: 1,
     name: "Stitchgate Custodian",
     description:
@@ -122,6 +126,7 @@ export const AETHER_CARDS = defineCardDefinition({
     domain: "AETHER",
     type: "CREATURE",
     triggers: ["onActivated"],
+    activationCost: { domain: "AETHER", amount: 2 },
     activations: 1,
     name: "Astral Mosaic",
     description: "2 Aether Flux, once per your turn: Each other allied non-Aether creature gains +1 maximum and current HP.",

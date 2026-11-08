@@ -36,6 +36,7 @@ export const FORGED_AETHER_CARDS = defineCardDefinition({
     domain: "AETHER",
     type: "CREATURE",
     triggers: ["onActivated"],
+    activationCost: { domain: "AETHER", amount: 1 },
     activations: 1,
     name: "Leyglass Ferret",
     description:
@@ -84,6 +85,7 @@ export const FORGED_AETHER_CARDS = defineCardDefinition({
     domain: "AETHER",
     type: "CREATURE",
     triggers: ["onActivated"],
+    activationCost: { domain: "AETHER", amount: 1 },
     activations: 1,
     name: "Chromatic Mentor",
     description: "1 Aether Flux, once per your turn: Another allied creature from a different domain than this gains +1 maximum and current HP.",
@@ -96,6 +98,7 @@ export const FORGED_AETHER_CARDS = defineCardDefinition({
     domain: "AETHER",
     type: "CREATURE",
     triggers: ["onActivated"],
+    activationCost: { domain: "AETHER", amount: 1 },
     activations: 1,
     name: "Prismatic Effigy",
     description:
@@ -109,6 +112,7 @@ export const FORGED_AETHER_CARDS = defineCardDefinition({
     domain: "AETHER",
     type: "CREATURE",
     triggers: ["onActivated"],
+    activationCost: { domain: "AETHER", amount: 1 },
     activations: 1,
     name: "Worldseam Custodian",
     description:
@@ -122,6 +126,7 @@ export const FORGED_AETHER_CARDS = defineCardDefinition({
     domain: "AETHER",
     type: "CREATURE",
     triggers: ["onActivated"],
+    activationCost: { domain: "AETHER", amount: 2 },
     activations: 1,
     name: "Celestial Mosaic",
     description: "2 Aether Flux, once per your turn: Each other allied non-Aether creature gains +1 maximum and current HP.",
