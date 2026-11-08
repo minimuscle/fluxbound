@@ -144,7 +144,7 @@ export const FIRE_CARDS = defineCardDefinition({
     domain: "FIRE",
     type: "SPELL",
     name: "Wildfire",
-    description: "3 Damage to all creatures",
+    description: "3 Damage to all enemy creatures",
     cost: 7,
     price: 50,
     targets: [],
@@ -192,7 +192,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "Deal 3 damage to yourself. Deal 5 damage to an enemy creature.",
     cost: 3,
     price: 10,
-    targets: [],
+    targets: ["creature"],
   },
   "0fq": {
     domain: "FIRE",
@@ -210,7 +210,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "Deal 3 damage to an enemy creature. If you have no Fire Flux remaining after paying this spell's cost, deal 5 damage instead.",
     cost: 3,
     price: 10,
-    targets: [],
+    targets: ["creature"],
   },
   "0fe": {
     domain: "FIRE",

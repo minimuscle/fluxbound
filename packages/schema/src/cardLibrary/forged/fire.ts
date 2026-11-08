@@ -129,6 +129,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     price: 10,
     damage: 3,
     health: 5,
+    targets: ["creature"],
   },
   "1f9": {
     domain: "FIRE",
@@ -143,10 +144,10 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     domain: "FIRE",
     type: "SPELL",
     name: "Crownfire",
-    description: "3 Damage to all creatures",
+    description: "3 Damage to all enemy creatures",
     cost: 6,
     price: 50,
-    targets: ["opponentCreatures"],
+    targets: [],
   },
   "1fb": {
     domain: "FIRE",
@@ -191,7 +192,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "Deal 3 damage to yourself. Deal 5 damage to an enemy creature.",
     cost: 2,
     price: 10,
-    targets: [],
+    targets: ["creature"],
   },
   "1fq": {
     domain: "FIRE",
@@ -209,7 +210,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "Deal 3 damage to an enemy creature. If you have no Fire Flux remaining after paying this spell's cost, deal 5 damage instead.",
     cost: 2,
     price: 10,
-    targets: [],
+    targets: ["creature"],
   },
   "1fe": {
     domain: "FIRE",

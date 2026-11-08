@@ -159,10 +159,9 @@ export const FIRE_EFFECTS = {
           attackPlayer({ state, player: opponent, attacker: card, damage: 3 });
           attackPlayer({ state, player: opponent, attacker: card, damage: 3 });
         } else if (typeof attack === "string") {
-          const creature = state.player1.field.find(({ id }) => id === attack) ?? state.player2.field.find(({ id }) => id === attack);
-          if (creature) {
-            attackCreature({ state, gameCardId: creature.id, attacker: card, damage: 3 });
-            attackCreature({ state, gameCardId: creature.id, attacker: card, damage: 3 });
+          for (const _hit of [1, 2, 3]) {
+            const creature = [...state.player1.field, ...state.player2.field].find(({ id }) => id === attack);
+            if (!creature) break;
             attackCreature({ state, gameCardId: creature.id, attacker: card, damage: 3 });
           }
         }
@@ -180,42 +179,65 @@ export const FIRE_EFFECTS = {
   },
   // Molten Rage
   "0fb": {
-    onPlayed: () => {},
+    onPlayed: ({ player, opponent, target }) => {
+      for (const owner of [player, opponent]) {
+        for (const creature of owner.field.filter((candidate) => target?.includes(candidate.id))) {
+          if (CARD_LIBRARY[creature.cardId].type !== "CREATURE") continue;
+          updateStats({ player: owner, gameCardId: creature.id, statOptions: { damage: (creature.damage ?? 0) + 5 } });
+        }
+      }
+    },
   },
   // Flash Ignition
+  // Skipped: Needs permanent targeting and a permanent destruction effect.
   "0fc": {
     onPlayed: () => {},
   },
   // Burn
+  // Skipped: The existing burning condition deals 1 damage per turn, rather than 2.
   "0fd": {
     onPlayed: () => {},
   },
   // Banked Embers
+  // Skipped: Needs a delayed next-turn flux effect.
   "0fo": {
     onPlayed: () => {},
   },
   // Flashover Pact
   "0fp": {
-    onPlayed: () => {},
+    onPlayed: ({ state, player, opponent, card, target }) => {
+      const creature = opponent.field.find((candidate) => target?.includes(candidate.id) && CARD_LIBRARY[candidate.cardId].type === "CREATURE");
+      if (!creature) return;
+      attackPlayer({ state, player, attacker: card, damage: 3 });
+      attackCreature({ state, attacker: card, gameCardId: creature.id, damage: 5 });
+    },
   },
   // Heat Exchange
+  // Skipped: Needs selection of an allied creature and an enemy creature in one cast.
   "0fq": {
     onPlayed: () => {},
   },
   // Last Spark
   "0fr": {
-    onPlayed: () => {},
+    onPlayed: ({ state, player, opponent, card, target }) => {
+      const creature = opponent.field.find((candidate) => target?.includes(candidate.id) && CARD_LIBRARY[candidate.cardId].type === "CREATURE");
+      if (!creature) return;
+      attackCreature({ state, attacker: card, gameCardId: creature.id, damage: player.flux.FIRE === 0 ? 5 : 3 });
+    },
   },
   // Wall of Fire
+  // Skipped: Needs normal combat to dispatch attacks through shield effects.
   "0fe": {
     onDamaged: () => {},
     onBeforeDamage: () => {},
   },
   // Heat Shield
+  // Skipped: Needs an attack reduction effect and shield integration in normal combat.
   "0ff": {
     onBeforeDamage: () => {},
   },
   // Flametongue Blade
+  // Skipped: Needs continuous-state trigger dispatch for its flux-dependent bonus.
   "0fg": {
     onStateChanged: () => {},
   },
