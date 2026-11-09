@@ -1,7 +1,7 @@
 import z from "zod";
 import { ERROR_CODES, SUCCESS_CODES } from "./codes";
-import { EFFECTS } from "./effects";
 import type { Game } from "./game";
+import { EFFECTS } from "./gameEffects";
 
 type ServerGameState = typeof process.env.DEBUG extends "true" ? Game.GameState : Game.GameStateView;
 

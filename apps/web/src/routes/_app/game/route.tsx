@@ -5,6 +5,7 @@ import { user } from "api/user";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createTypedWebSocketSender } from "utils/functions";
 import { GameContext, GameErrorContext, SpellContext, WebSocketContext } from "./-components/context";
+import { EffectsContext, useGameEffects } from "./-components/game/effects/context";
 
 export const Route = createFileRoute("/_app/game")({
   component: RouteComponent,
@@ -24,6 +25,8 @@ function RouteComponent() {
   } | null>(null);
   const [spellTargets, setSpellTargets] = useState<SpellContext["spellTargets"]>(null);
   const [spellCardId, setSpellCardId] = useState<SpellContext["cardId"] | null>(null);
+  const effects = useGameEffects();
+  const { enqueueEffect, clearEffects } = effects;
 
   const [roomId, setRoomId] = useState<Game.RoomId | null>(null);
   const isIntentionalClose = useRef(false);
@@ -83,6 +86,7 @@ function RouteComponent() {
           setLobby({ player1: parsed.player1 });
           break;
         case "game/started":
+          clearEffects();
           setLobbyError(null);
           setGameError(null);
           setGameState(parsed.state);
@@ -103,6 +107,10 @@ function RouteComponent() {
           setGameError(null);
           setGameState(parsed.state);
           break;
+        case "game/effect": {
+          enqueueEffect(parsed);
+          break;
+        }
         case "game/error":
           switch (parsed.code) {
             case "NOT_PLAYERS_TURN":
@@ -132,6 +140,7 @@ function RouteComponent() {
       }
     };
     websocket.onclose = () => {
+      clearEffects();
       setRoomId(null);
       if (isIntentionalClose.current) return;
       // return navigate({ to: "/game/lobby" });
@@ -140,10 +149,12 @@ function RouteComponent() {
       isIntentionalClose.current = true;
       websocket.close();
       setWebsocket(null);
+      clearEffects();
     };
-  }, [connectionVersion, navigate]);
+  }, [connectionVersion, navigate, enqueueEffect, clearEffects]);
 
   const restartSinglePlayer = useCallback(() => {
+    clearEffects();
     shouldStartSoloOnConnect.current = true;
     isIntentionalClose.current = true;
     websocketState?.close();
@@ -154,11 +165,11 @@ function RouteComponent() {
     setEnded(false);
     setRoomId(null);
     setConnectionVersion((version) => version + 1);
-  }, [websocketState]);
+  }, [websocketState, clearEffects]);
 
   const context: WebSocketContext = {
-    websocket: websocketState,
-    roomId: roomId,
+    websocket: websocketState!,
+    roomId: roomId!,
     restartSinglePlayer,
   };
 
@@ -176,7 +187,9 @@ function RouteComponent() {
             }}
           >
             {lobbyError && <div role="alert">{lobbyError}</div>}
-            <Outlet />
+            <EffectsContext value={effects}>
+              <Outlet />
+            </EffectsContext>
           </SpellContext>
         </GameContext>
       </WebSocketContext>

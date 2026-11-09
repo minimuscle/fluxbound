@@ -2,11 +2,13 @@ import { CARD_LIBRARY, getCardActivationCost, getCardTriggers, type Game } from 
 import { HeartIcon, SwordIcon } from "@phosphor-icons/react";
 import classNames from "classnames";
 import type React from "react";
+import { useCallback } from "react";
 import { DOMAIN_BACKGROUND_COLOR } from "routes/_app/game/-components/game/context/color";
 import { CARD_IMAGE } from "routes/_app/game/-components/game/context/images";
 import { useInvariant } from "utils/hooks/useInvariant";
 import { GameContext, SpellContext, WebSocketContext } from "../../context";
 import { PlayerContext } from "../context";
+import { EffectsContext } from "../effects/context";
 import styles from "./play.module.css";
 
 /**********************************************************************************************************
@@ -25,6 +27,10 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
   const { websocket: ws } = useInvariant(WebSocketContext);
   const { state } = useInvariant(GameContext);
   const { spellTargets, cardId: spellCardId, setSpellTargets, setSpellCardId } = useInvariant(SpellContext);
+  const { registerTarget } = useInvariant(EffectsContext);
+  const targetRef = useCallback((element: HTMLDivElement | null) => {
+    if (element) return registerTarget(cardId, element);
+  }, [cardId, registerTarget]);
 
   const gameCardData = player.field.find((card) => card.id === cardId);
   if (!gameCardData) return null;
@@ -66,6 +72,7 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
   if (!cardData) return null;
   return (
     <div
+      ref={targetRef}
       title={activationCost ? `Activate: ${activationCost.amount} ${activationCost.domain} Flux` : undefined}
       className={classNames(styles.creatureCard, {
         [styles.isActivatable]: isActivatable && stage === "PLAYER",
