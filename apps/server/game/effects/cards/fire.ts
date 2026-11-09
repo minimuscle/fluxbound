@@ -253,4 +253,5 @@ export const FIRE_EFFECTS = {
   "0fg": {
     onStateChanged: () => {},
   },
+  "0fh": {},
 } satisfies CardEffectRegistry<typeof FIRE_CARDS>;

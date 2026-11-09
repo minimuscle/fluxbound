@@ -2,7 +2,7 @@ import { CARD_LIBRARY, type CardEffectRegistry, type FORGED_FIRE_CARDS } from "@
 import { FIRE_EFFECTS } from "../fire";
 import { attackCreature } from "game/effects/effects/creature/attack";
 import { createCreature } from "game/effects/effects/creature/create";
-import { destroyCreature } from "game/effects/effects/creature/destroy";
+import { destroyCard } from "game/effects/effects/creature/destroy";
 import { generateFlux } from "game/effects/effects/flux/generate";
 
 export const FORGED_FIRE_EFFECTS = {
@@ -23,7 +23,7 @@ export const FORGED_FIRE_EFFECTS = {
   // Everglow Ash
   "1f3": {
     onActivated: ({ player, card }) => {
-      destroyCreature({ player, gameCardId: card.id });
+      destroyCard({ player, gameCardId: card.id });
       createCreature({ player, cardId: "1f2" });
     },
   },

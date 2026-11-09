@@ -1,6 +1,8 @@
-import { CARD_LIBRARY, type Game } from "@fluxbound/schema";
+import { CARD_LIBRARY, type Cards, type Game } from "@fluxbound/schema";
 import { getPlayer } from "game/helpers/get-player";
 import { resolveCardEffect } from "game/rules/resolve-triggers";
+
+const initialConditions = ({ conditions = [] }: Cards.Creature) => conditions.map((id) => ({ id, length: 999 }));
 
 /**********************************************************************************************************
  *   FUNCTION START
@@ -24,14 +26,10 @@ export function playACard(state: Game.GameState, cardId: Game.CardId, target?: G
     const creatureCard = {
       ...playedCard,
       damage: gameCard.damage,
-      health: gameCard.health - 1,
+      health: gameCard.health,
       maxHealth: gameCard.health,
       activations: 0,
-      conditions:
-        gameCard.conditions?.map((condition) => ({
-          id: condition,
-          length: 999,
-        })) ?? [],
+      conditions: initialConditions(gameCard),
     };
 
     player.field.push(creatureCard);
