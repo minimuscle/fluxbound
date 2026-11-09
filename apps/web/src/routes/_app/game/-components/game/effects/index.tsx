@@ -15,13 +15,6 @@ export function EffectsLayer() {
 
   switch (activeEffect.message.effect) {
     case "fireball":
-      return (
-        <FireballEffect
-          key={activeEffect.id}
-          effect={activeEffect}
-          target={target}
-          onComplete={() => finishEffect(activeEffect.id)}
-        />
-      );
+      return <FireballEffect key={activeEffect.id} target={target} onComplete={() => finishEffect(activeEffect.id)} />;
   }
 }

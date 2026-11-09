@@ -1,0 +1,87 @@
+{"frames": {
+
+"fireball_termplate-0.png":
+{
+	"frame": {"x":280,"y":33,"w":64,"h":30},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":23,"w":64,"h":30},
+	"sourceSize": {"w":96,"h":64}
+},
+"fireball_termplate-2.png":
+{
+	"frame": {"x":210,"y":33,"w":68,"h":30},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":23,"w":68,"h":30},
+	"sourceSize": {"w":96,"h":64}
+},
+"fireball_termplate-3.png":
+{
+	"frame": {"x":210,"y":1,"w":72,"h":30},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":23,"w":72,"h":30},
+	"sourceSize": {"w":96,"h":64}
+},
+"fireball_termplate-4.png":
+{
+	"frame": {"x":346,"y":1,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":22,"w":32,"h":32},
+	"sourceSize": {"w":96,"h":64}
+},
+"fireball_termplate-5.png":
+{
+	"frame": {"x":284,"y":1,"w":25,"h":38},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":51,"y":18,"w":25,"h":38},
+	"sourceSize": {"w":96,"h":64}
+},
+"fireball_termplate-6.png":
+{
+	"frame": {"x":163,"y":1,"w":45,"h":49},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":37,"y":13,"w":45,"h":49},
+	"sourceSize": {"w":96,"h":64}
+},
+"fireball_termplate-7.png":
+{
+	"frame": {"x":112,"y":1,"w":49,"h":54},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":33,"y":10,"w":49,"h":54},
+	"sourceSize": {"w":96,"h":64}
+},
+"fireball_termplate-8.png":
+{
+	"frame": {"x":58,"y":1,"w":52,"h":57},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":29,"y":7,"w":52,"h":57},
+	"sourceSize": {"w":96,"h":64}
+},
+"fireball_termplate-9.png":
+{
+	"frame": {"x":1,"y":1,"w":55,"h":58},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":26,"y":6,"w":55,"h":58},
+	"sourceSize": {"w":96,"h":64}
+}},
+"animations": {
+	"fireball_termplate": ["fireball_termplate-0.png","fireball_termplate-2.png","fireball_termplate-3.png","fireball_termplate-4.png","fireball_termplate-5.png","fireball_termplate-6.png","fireball_termplate-7.png","fireball_termplate-8.png","fireball_termplate-9.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "fireball.png",
+	"format": "RGBA8888",
+	"size": {"w":379,"h":64},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e0b9e0e25afdf81453430fdd7323b9df:3d7b01f501eee8e9d658d35a87b8fa68:cf4d7da423ed931a533dcca7b8983428$"
+}
+}

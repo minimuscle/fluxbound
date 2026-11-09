@@ -2,7 +2,7 @@ import type { ERROR_CODES, Game, ServerGame, ServerLobby } from "@fluxbound/sche
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { user } from "api/user";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createTypedWebSocketSender } from "utils/functions";
 import { GameContext, GameErrorContext, SpellContext, WebSocketContext } from "./-components/context";
 import { EffectsContext, useGameEffects } from "./-components/game/effects/context";
@@ -26,7 +26,7 @@ function RouteComponent() {
   const [spellTargets, setSpellTargets] = useState<SpellContext["spellTargets"]>(null);
   const [spellCardId, setSpellCardId] = useState<SpellContext["cardId"] | null>(null);
   const effects = useGameEffects();
-  const { enqueueEffect, clearEffects } = effects;
+  const { enqueueEffect, clearEffects, runAfterEffects } = effects;
 
   const [roomId, setRoomId] = useState<Game.RoomId | null>(null);
   const isIntentionalClose = useRef(false);
@@ -95,17 +95,19 @@ function RouteComponent() {
           setSpellTargets(null);
           setSpellCardId(null);
           setGameError(null);
-          setGameState(parsed.state);
+          runAfterEffects(() => setGameState(parsed.state));
           typedWebsocket.send({ type: "game/start-turn" });
           break;
         case "game/stateUpdated":
           setGameError(null);
-          setGameState(parsed.state);
+          runAfterEffects(() => setGameState(parsed.state));
           break;
         case "game/gameEnded":
-          setEnded(parsed.winner);
           setGameError(null);
-          setGameState(parsed.state);
+          runAfterEffects(() => {
+            setEnded(parsed.winner);
+            setGameState(parsed.state);
+          });
           break;
         case "game/effect": {
           enqueueEffect(parsed);
@@ -140,7 +142,6 @@ function RouteComponent() {
       }
     };
     websocket.onclose = () => {
-      clearEffects();
       setRoomId(null);
       if (isIntentionalClose.current) return;
       // return navigate({ to: "/game/lobby" });
@@ -151,9 +152,9 @@ function RouteComponent() {
       setWebsocket(null);
       clearEffects();
     };
-  }, [connectionVersion, navigate, enqueueEffect, clearEffects]);
+  }, [connectionVersion, navigate, enqueueEffect, clearEffects, runAfterEffects]);
 
-  const restartSinglePlayer = useCallback(() => {
+  const restartSinglePlayer = () => {
     clearEffects();
     shouldStartSoloOnConnect.current = true;
     isIntentionalClose.current = true;
@@ -165,7 +166,7 @@ function RouteComponent() {
     setEnded(false);
     setRoomId(null);
     setConnectionVersion((version) => version + 1);
-  }, [websocketState, clearEffects]);
+  };
 
   const context: WebSocketContext = {
     websocket: websocketState!,

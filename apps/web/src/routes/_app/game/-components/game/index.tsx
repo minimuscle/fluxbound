@@ -1,5 +1,6 @@
 import { Application, extend } from "@pixi/react";
 import { AnimatedSprite, Container, Graphics, Sprite } from "pixi.js";
+import { useCallback, useEffect } from "react";
 import { GameContext } from "routes/_app/game/-components/context";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
 import { EndGameOverlay } from "routes/_app/game/-components/game/endGameOverlay";
@@ -19,7 +20,6 @@ import { useInvariant } from "utils/hooks/useInvariant";
 import styles from "./game.module.css";
 import { EffectsLayer } from "./effects";
 import { EffectsContext } from "./effects/context";
-import { useCallback, useEffect } from "react";
 
 extend({ Container, Graphics, Sprite, AnimatedSprite });
 
@@ -42,13 +42,7 @@ export const Game = () => {
   /***** RENDER *****/
   return (
     <div className={styles.container}>
-      <Application
-        autoStart
-        width={1920}
-        height={1080}
-        backgroundAlpha={0}
-        className={styles.effectsCanvas}
-      >
+      <Application autoStart width={1920} height={1080} backgroundAlpha={0} className={styles.effectsCanvas}>
         <EffectsLayer />
       </Application>
       <EndGameOverlay />
