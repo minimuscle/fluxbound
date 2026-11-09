@@ -24,6 +24,7 @@ type CardTriggers<TCard extends Cards.Card> = TCard extends Cards.Spell
 
 // Every card and every declared trigger must have an entry.
 export type CardEffectRegistry<TCards extends Cards.CardDefinition> = {
-  [TId in keyof TCards]: Record<CardTriggers<TCards[TId]>, CardEffect> &
-    Partial<Record<Exclude<Cards.Trigger, CardTriggers<TCards[TId]>>, never>>;
+  [TId in keyof TCards]: Record<CardTriggers<TCards[TId]>, CardEffect> & Partial<Record<Exclude<Cards.Trigger, CardTriggers<TCards[TId]>>, never>>;
 };
+
+export const EFFECTS = ["fireball"];

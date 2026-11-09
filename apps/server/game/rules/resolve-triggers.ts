@@ -1,7 +1,7 @@
 import { CARD_LIBRARY, getCardTriggers, type Cards, type EffectContext, type Game } from "@fluxbound/schema";
 import { CARD_EFFECTS } from "game/effects";
-import { getPlayer } from "game/helpers/get-player";
 import { getOpponent } from "game/helpers/get-opponent";
+import { getPlayer } from "game/helpers/get-player";
 
 export const resolveCardEffect = (
   state: Game.GameState,
