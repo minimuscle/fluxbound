@@ -1,5 +1,6 @@
 import type { Game } from "@fluxbound/schema";
 import { GameResponse } from "utils/responses";
+import { sendToRoom } from "utils/messaging";
 import type { GameSocketData } from "../../app/routes";
 
 export type RoomMap = {
@@ -56,7 +57,6 @@ export const lobby = {
     );
   },
   join: (
-    server: Bun.Server<GameSocketData>,
     ws: Bun.ServerWebSocket<GameSocketData>,
     roomId: Game.RoomId,
   ) => {
@@ -81,13 +81,13 @@ export const lobby = {
     ws.data.roomId = roomId;
     connectionsByRoomId.get(roomId)?.add(ws);
 
-    server.publish(
-      `room:${roomId}`,
-      GameResponse({
+    sendToRoom(
+      roomId,
+      {
         type: "lobby/player-joined",
         player1: rooms.get(roomId)!.player1,
         player2: { id: ws.data.userId, name: ws.data.name },
-      }),
+      },
     );
   },
 };

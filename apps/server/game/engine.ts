@@ -135,6 +135,7 @@ export class GameEngine {
     };
 
     return {
+      roomId: this.state.roomId,
       activePlayer: this.state.activePlayer,
       turn: this.state.turn,
       you: player,

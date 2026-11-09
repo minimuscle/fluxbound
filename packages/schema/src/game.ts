@@ -47,6 +47,7 @@ export namespace Game {
   };
 
   export type GameState = {
+    roomId: RoomId;
     activePlayer: PlayerId;
     player1: PlayerState;
     player2: PlayerState;
@@ -59,6 +60,7 @@ export namespace Game {
   };
 
   export type GameStateView = {
+    roomId: RoomId;
     activePlayer: PlayerId;
     you: PlayerState;
     opponent: PublicPlayerStateView;

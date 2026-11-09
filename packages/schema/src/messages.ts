@@ -1,5 +1,4 @@
 import z from "zod";
-import type { Cards } from "./cards";
 import { ERROR_CODES, SUCCESS_CODES } from "./codes";
 import { EFFECTS } from "./effects";
 import type { Game } from "./game";
@@ -94,7 +93,7 @@ export const serverGame = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("game/effect"),
     effect: z.enum(EFFECTS),
-    target: z.union([z.enum(["player", "opponent"]), z.custom<Cards.CardId>()]),
+    target: z.union([z.enum(["player", "opponent"]), z.custom<Game.GameCard["id"]>()]),
   }),
 ]);
 

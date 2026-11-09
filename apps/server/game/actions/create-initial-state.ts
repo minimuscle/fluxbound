@@ -6,6 +6,7 @@ import type { Cards, Game } from "@fluxbound/schema";
 export function createInitialState(
   player1: Game.InitialPlayerState,
   player2: Game.InitialPlayerState,
+  roomId: Game.RoomId,
 ): Game.GameState {
   const player1Deck = assignCardIds(player1.deck, player1.id);
   const player2Deck = assignCardIds(player2.deck, player2.id);
@@ -18,6 +19,7 @@ export function createInitialState(
   const turn = "1-1";
   const activePlayer = player1.id; //Math.random() < 0.5 ? player1.id : player2.id; // TEMP
   return {
+    roomId,
     activePlayer,
     player1: {
       ...player1,

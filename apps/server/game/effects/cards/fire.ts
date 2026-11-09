@@ -7,6 +7,7 @@ import { destroyCard } from "game/effects/effects/creature/destroy";
 import { generateFlux } from "game/effects/effects/flux/generate";
 import { attackPlayer } from "game/effects/effects/player/attack";
 import { updateStats } from "game/effects/effects/stats/update";
+import { sendToRoom } from "utils/messaging";
 
 export const FIRE_EFFECTS = {
   // Fire Rune
@@ -154,15 +155,15 @@ export const FIRE_EFFECTS = {
   "0f9": {
     onPlayed: ({ state, card, target, opponent }) => {
       target?.forEach((attack) => {
-        if (attack === "opponent") {
-          attackPlayer({ state, player: opponent, attacker: card, damage: 3 });
-          attackPlayer({ state, player: opponent, attacker: card, damage: 3 });
-          attackPlayer({ state, player: opponent, attacker: card, damage: 3 });
-        } else if (typeof attack === "string") {
-          for (const _hit of [1, 2, 3]) {
+        for (const _hit of [1, 2, 3]) {
+          if (attack === "opponent") {
+            attackPlayer({ state, player: opponent, attacker: card, damage: 3 });
+            sendToRoom(state.roomId, { type: "game/effect", effect: "fireball", target: "opponent" });
+          } else if (typeof attack === "string") {
             const creature = [...state.player1.field, ...state.player2.field].find(({ id }) => id === attack);
             if (!creature) break;
             attackCreature({ state, gameCardId: creature.id, attacker: card, damage: 3 });
+            sendToRoom(state.roomId, { type: "game/effect", effect: "fireball", target: creature.id });
           }
         }
       });

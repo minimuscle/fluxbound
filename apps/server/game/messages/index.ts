@@ -21,7 +21,7 @@ export function message(
     case "lobby/create":
       return lobby.create(ws);
     case "lobby/join":
-      return lobby.join(server, ws, parsed.roomId);
+      return lobby.join(ws, parsed.roomId);
     case "game/start":
       return startGame(server, ws);
     case "game/startSolo":

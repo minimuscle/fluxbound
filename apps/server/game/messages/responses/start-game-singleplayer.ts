@@ -108,7 +108,7 @@ export const startGameSingleplayer = async (server: Bun.Server<GameSocketData>, 
     healthMax: level === 0 ? 50 : 100,
   };
 
-  const initialGameState = createInitialState(player1, player2);
+  const initialGameState = createInitialState(player1, player2, room.roomId);
   const engine = new GameEngine(initialGameState, ws.data.userId);
 
   enginesByRoomId.set(room.roomId, engine);

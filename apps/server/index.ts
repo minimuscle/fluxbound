@@ -1,6 +1,7 @@
 import { type GameSocketData, routes } from "./app/routes";
 import { message as wsMessage } from "./game/messages";
 import { GameResponse } from "./utils/responses";
+import { initializeMessaging } from "./utils/messaging";
 
 const server = Bun.serve<GameSocketData>({
   routes,
@@ -30,5 +31,7 @@ const server = Bun.serve<GameSocketData>({
     },
   },
 });
+
+initializeMessaging(server);
 
 console.log(`Listening on http://${server.url}:${server.port}/`);

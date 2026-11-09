@@ -48,7 +48,7 @@ export const startGame = (
     name: room.player2.name,
   };
 
-  const initialGameState = createInitialState(player1, player2);
+  const initialGameState = createInitialState(player1, player2, room.roomId);
   const engine = new GameEngine(initialGameState, ws.data.userId);
   enginesByRoomId.set(room.roomId, engine);
   gameStatesByRoomId.set(room.roomId, engine.gameState);
