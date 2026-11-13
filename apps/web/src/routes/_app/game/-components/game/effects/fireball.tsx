@@ -10,6 +10,8 @@ export type FireballEffectProps = {
 };
 
 export function FireballEffect({ target, onComplete }: FireballEffectProps) {
+  console.log(target);
+
   /***** HOOKS *****/
   const { app } = useApplication();
   const [frames, setFrames] = useState<Texture[]>([]);
@@ -35,8 +37,8 @@ export function FireballEffect({ target, onComplete }: FireballEffectProps) {
 
   const targetBounds = target.getBoundingClientRect();
   const canvasBounds = app.canvas.getBoundingClientRect();
-  const x = ((targetBounds.x + targetBounds.width / 2 - canvasBounds.x) * app.screen.width) / canvasBounds.width;
-  const y = ((targetBounds.y + targetBounds.height / 2 - canvasBounds.y) * app.screen.height) / canvasBounds.height;
+  const x = ((targetBounds.x + targetBounds.width / 2 - canvasBounds.x) * app.screen.width) / canvasBounds.width + 18;
+  const y = ((targetBounds.y + targetBounds.height / 2 - canvasBounds.y) * app.screen.height) / canvasBounds.height - 25;
 
   return (
     <pixiAnimatedSprite
@@ -48,7 +50,7 @@ export function FireballEffect({ target, onComplete }: FireballEffectProps) {
       y={y}
       anchor={0.5}
       scale={3}
-      // animationSpeed={0.2}
+      animationSpeed={0.5}
       rotation={Math.PI / 2}
       autoPlay
       loop={false}

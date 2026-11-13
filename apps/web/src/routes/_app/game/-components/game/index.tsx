@@ -17,9 +17,9 @@ import { PlayerShields } from "routes/_app/game/-components/game/info/shields";
 import { PlayerInfoSwordCard } from "routes/_app/game/-components/game/info/swordCard";
 import { NextTurnButton } from "routes/_app/game/-components/game/nextTurnButton";
 import { useInvariant } from "utils/hooks/useInvariant";
-import styles from "./game.module.css";
 import { EffectsLayer } from "./effects";
 import { EffectsContext } from "./effects/context";
+import styles from "./game.module.css";
 
 extend({ Container, Graphics, Sprite, AnimatedSprite });
 
@@ -30,12 +30,18 @@ export const Game = () => {
   /***** HOOKS *****/
   const { state } = useInvariant(GameContext);
   const { registerTarget, clearEffects } = useInvariant(EffectsContext);
-  const playerTargetRef = useCallback((element: HTMLDivElement | null) => {
-    if (element) return registerTarget("player", element);
-  }, [registerTarget]);
-  const opponentTargetRef = useCallback((element: HTMLDivElement | null) => {
-    if (element) return registerTarget("opponent", element);
-  }, [registerTarget]);
+  const playerTargetRef = useCallback(
+    (element: HTMLDivElement | null) => {
+      if (element) return registerTarget("player", element);
+    },
+    [registerTarget],
+  );
+  const opponentTargetRef = useCallback(
+    (element: HTMLDivElement | null) => {
+      if (element) return registerTarget("opponent", element);
+    },
+    [registerTarget],
+  );
 
   useEffect(() => () => clearEffects(), [clearEffects]);
 
@@ -48,8 +54,8 @@ export const Game = () => {
       <EndGameOverlay />
       <div className={styles.leftSection}>
         <PlayerContext value={{ stage: "PLAYER", player: state.you }}>
-          <div className={styles.playerInfo} ref={playerTargetRef}>
-            <PlayerInfoAttunement />
+          <div className={styles.playerInfo}>
+            <PlayerInfoAttunement ref={playerTargetRef} />
             <PlayerShields>
               <PlayerInfoSwordCard />
               <PlayerInfoSwordCard />
@@ -61,7 +67,6 @@ export const Game = () => {
             <PlayerInfoDivider />
             <PlayerInfoPermanents />
             <PlayerInfoLargeRunes />
-
             <h1 className={styles.heading}>Runes</h1>
           </div>
         </PlayerContext>
@@ -80,8 +85,8 @@ export const Game = () => {
       </div>
       <div className={styles.rightSection}>
         <PlayerContext value={{ stage: "ENEMY", player: state.opponent }}>
-          <div className={styles.enemyInfo} ref={opponentTargetRef}>
-            <PlayerInfoAttunement />
+          <div className={styles.enemyInfo}>
+            <PlayerInfoAttunement ref={opponentTargetRef} />
             <PlayerShields>
               <PlayerInfoSwordCard />
               <PlayerInfoSwordCard />

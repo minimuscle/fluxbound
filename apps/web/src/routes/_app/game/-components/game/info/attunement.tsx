@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import type { Ref } from "react";
 import {
   GameContext,
   SpellContext,
@@ -13,7 +14,7 @@ import styles from "./info.module.css";
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
-export const PlayerInfoAttunement = () => {
+export const PlayerInfoAttunement = ({ ref }: { ref?: Ref<HTMLDivElement> }) => {
   const { player } = useInvariant(PlayerContext);
   const { state } = useInvariant(GameContext);
   const { websocket: ws } = useInvariant(WebSocketContext);
@@ -40,6 +41,7 @@ export const PlayerInfoAttunement = () => {
   /***** RENDER *****/
   return (
     <div
+      ref={ref}
       className={classNames(styles.player, {
         [styles.isPlayerTarget]: spellTargets?.includes(
           state.you.id === player.id ? "self" : "opponent",
