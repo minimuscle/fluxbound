@@ -56,7 +56,12 @@ export const clientGame = z.discriminatedUnion("type", [
     type: z.enum(["game/play-card", "game/discard-card"]),
     cardId: z.custom<Game.CardId>(z.coerce.string().parse),
     target: z
-      .array(z.union([z.enum(["self", "opponent", "all", "selfCreatures", "opponentCreatures"]), z.custom<Game.CardId>(z.coerce.string().parse)]))
+      .array(
+        z.union([
+          z.enum(["self", "opponent", "all", "selfCreatures", "opponentCreatures", "creature", "permanent", "multiCreatures"]),
+          z.custom<Game.CardId>(z.coerce.string().parse),
+        ]),
+      )
       .optional(),
   }),
   z.object({
@@ -93,7 +98,7 @@ export const serverGame = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("game/effect"),
     effect: z.enum(EFFECTS),
-    target: z.union([z.enum(["player", "opponent"]), z.custom<Game.GameCard["id"]>()]),
+    target: z.union([z.custom<Game.PlayerId>(), z.custom<Game.GameCard["id"]>()]),
   }),
 ]);
 

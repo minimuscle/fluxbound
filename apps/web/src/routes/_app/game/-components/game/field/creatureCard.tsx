@@ -28,9 +28,12 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
   const { state } = useInvariant(GameContext);
   const { spellTargets, cardId: spellCardId, setSpellTargets, setSpellCardId } = useInvariant(SpellContext);
   const { registerTarget } = useInvariant(EffectsContext);
-  const targetRef = useCallback((element: HTMLDivElement | null) => {
-    if (element) return registerTarget(cardId, element);
-  }, [cardId, registerTarget]);
+  const targetRef = useCallback(
+    (element: HTMLDivElement | null) => {
+      if (element) return registerTarget(cardId, element);
+    },
+    [cardId, registerTarget],
+  );
 
   const gameCardData = player.field.find((card) => card.id === cardId);
   if (!gameCardData) return null;
@@ -76,7 +79,7 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
       title={activationCost ? `Activate: ${activationCost.amount} ${activationCost.domain} Flux` : undefined}
       className={classNames(styles.creatureCard, {
         [styles.isActivatable]: isActivatable && stage === "PLAYER",
-        [styles.isTarget]: spellTargets?.includes("creature") && spellCardId !== cardId,
+        [styles.isTarget]: (spellTargets?.includes("creature") && spellCardId !== cardId) || spellTargets?.includes("multiCreatures"),
 
         /***** CONDITIONS *****/
         [styles.burning]: gameCardData.conditions?.some(({ id }) => id === "burning"),

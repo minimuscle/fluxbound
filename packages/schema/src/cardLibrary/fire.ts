@@ -180,10 +180,10 @@ export const FIRE_CARDS = defineCardDefinition({
     domain: "FIRE",
     type: "SPELL",
     name: "Banked Embers",
-    description: "Choose an allied creature. It gains -2 attack permanently; at the start of your next turn, gain 2 Fire Flux.",
+    description: "Choose an allied creature. It gains -1 attack permanently; gain 1 Fire Flux.",
     cost: 2,
     price: 10,
-    targets: [],
+    targets: ["creature"],
   },
   "0fp": {
     domain: "FIRE",

@@ -7,7 +7,7 @@ export namespace Game {
   export type CardId = Tagged<string, "gameCardId">;
   export type PlayerName = Tagged<string, "playerName">;
 
-  export type Target = Array<CardId | Omit<Cards.Targets, "creature">>;
+  export type Target = Array<CardId | Exclude<Cards.Targets, "creature">>;
 
   export type GameCard = {
     id: CardId;
@@ -38,10 +38,7 @@ export namespace Game {
     flux: Record<Cards.Domain, number>;
   };
 
-  export type InitialPlayerState = Omit<
-    PlayerState,
-    "deck" | "hand" | "field"
-  > & {
+  export type InitialPlayerState = Omit<PlayerState, "deck" | "hand" | "field"> & {
     deck: Cards.CardId[];
     hand: never[];
     field: never[];

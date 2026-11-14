@@ -7,6 +7,7 @@ import { destroyCard } from "game/effects/effects/creature/destroy";
 import { generateFlux } from "game/effects/effects/flux/generate";
 import { attackPlayer } from "game/effects/effects/player/attack";
 import { updateStats } from "game/effects/effects/stats/update";
+import { getCard } from "game/helpers/get-card";
 import { sendToRoom } from "utils/messaging";
 
 export const FIRE_EFFECTS = {
@@ -145,7 +146,6 @@ export const FIRE_EFFECTS = {
         ).length;
         const creature = state.player1.field.find(({ id }) => id === attack) ?? state.player2.field.find(({ id }) => id === attack);
         if (creature) {
-          console.log("number of fire creatures: ", numberOfFireCreatures);
           attackCreature({ state, attacker: card, gameCardId: creature.id, damage: numberOfFireCreatures });
         }
       });
@@ -158,7 +158,7 @@ export const FIRE_EFFECTS = {
         for (const _hit of [1, 2, 3]) {
           if (attack === "opponent") {
             attackPlayer({ state, player: opponent, attacker: card, damage: 3 });
-            sendToRoom(state.roomId, { type: "game/effect", effect: "fireball", target: "opponent" });
+            sendToRoom(state.roomId, { type: "game/effect", effect: "fireball", target: opponent.id });
           } else if (typeof attack === "string") {
             const creature = [...state.player1.field, ...state.player2.field].find(({ id }) => id === attack);
             if (!creature) break;
@@ -211,11 +211,12 @@ export const FIRE_EFFECTS = {
     onPlayed: ({ player, opponent, target }) => {
       target?.forEach((cardTarget) => {
         if (typeof cardTarget !== "string") return;
-        const owner = cardTarget === "opponent"
-          ? opponent
-          : [player, opponent].find((candidate) =>
-              candidate.field.some((creature) => creature.id === cardTarget && CARD_LIBRARY[creature.cardId].type === "CREATURE"),
-            );
+        const owner =
+          cardTarget === "opponent"
+            ? opponent
+            : [player, opponent].find((candidate) =>
+                candidate.field.some((creature) => creature.id === cardTarget && CARD_LIBRARY[creature.cardId].type === "CREATURE"),
+              );
         if (!owner) return;
         const creature = owner.field.find((candidate) => candidate.id === cardTarget);
         for (const _stack of [1, 2]) {
@@ -232,9 +233,28 @@ export const FIRE_EFFECTS = {
     },
   },
   // Banked Embers
-  // Skipped: Needs a delayed next-turn flux effect.
   "0fo": {
-    onPlayed: () => {},
+    onPlayed: ({ state, player, target }) => {
+      target?.forEach((cardTarget) => {
+        const card = getCard(state, cardTarget);
+        if (!card) return;
+        updateStats({
+          player,
+          gameCardId: card.id,
+          statOptions: {
+            damage: (card.damage ?? 0) - 1,
+          },
+        });
+        applyCondition({
+          player,
+          gameCardId: card.id,
+          condition: {
+            id: "generating",
+            length: 99,
+          },
+        });
+      });
+    },
   },
   // Flashover Pact
   "0fp": {
