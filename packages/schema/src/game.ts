@@ -26,6 +26,7 @@ export namespace Game {
   }>;
 
   export type PlayerState = {
+    conditions?: GameCreatureCard["conditions"];
     id: PlayerId;
     name: PlayerName;
     deck: GameCard[];

@@ -207,9 +207,29 @@ export const FIRE_EFFECTS = {
     },
   },
   // Burn
-  // Skipped: The existing burning condition deals 1 damage per turn, rather than 2.
   "0fd": {
-    onPlayed: () => {},
+    onPlayed: ({ player, opponent, target }) => {
+      target?.forEach((cardTarget) => {
+        if (typeof cardTarget !== "string") return;
+        const owner = cardTarget === "opponent"
+          ? opponent
+          : [player, opponent].find((candidate) =>
+              candidate.field.some((creature) => creature.id === cardTarget && CARD_LIBRARY[creature.cardId].type === "CREATURE"),
+            );
+        if (!owner) return;
+        const creature = owner.field.find((candidate) => candidate.id === cardTarget);
+        for (const _stack of [1, 2]) {
+          applyCondition({
+            player: owner,
+            gameCardId: creature?.id,
+            condition: {
+              id: "burning",
+              length: 99,
+            },
+          });
+        }
+      });
+    },
   },
   // Banked Embers
   // Skipped: Needs a delayed next-turn flux effect.

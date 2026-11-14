@@ -1,6 +1,5 @@
 import { Application, extend } from "@pixi/react";
 import { AnimatedSprite, Container, Graphics, Sprite } from "pixi.js";
-import { useCallback, useEffect } from "react";
 import { GameContext } from "routes/_app/game/-components/context";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
 import { EndGameOverlay } from "routes/_app/game/-components/game/endGameOverlay";
@@ -18,7 +17,6 @@ import { PlayerInfoSwordCard } from "routes/_app/game/-components/game/info/swor
 import { NextTurnButton } from "routes/_app/game/-components/game/nextTurnButton";
 import { useInvariant } from "utils/hooks/useInvariant";
 import { EffectsLayer } from "./effects";
-import { EffectsContext } from "./effects/context";
 import styles from "./game.module.css";
 
 extend({ Container, Graphics, Sprite, AnimatedSprite });
@@ -29,21 +27,6 @@ extend({ Container, Graphics, Sprite, AnimatedSprite });
 export const Game = () => {
   /***** HOOKS *****/
   const { state } = useInvariant(GameContext);
-  const { registerTarget, clearEffects } = useInvariant(EffectsContext);
-  const playerTargetRef = useCallback(
-    (element: HTMLDivElement | null) => {
-      if (element) return registerTarget("player", element);
-    },
-    [registerTarget],
-  );
-  const opponentTargetRef = useCallback(
-    (element: HTMLDivElement | null) => {
-      if (element) return registerTarget("opponent", element);
-    },
-    [registerTarget],
-  );
-
-  useEffect(() => () => clearEffects(), [clearEffects]);
 
   /***** RENDER *****/
   return (
@@ -55,7 +38,7 @@ export const Game = () => {
       <div className={styles.leftSection}>
         <PlayerContext value={{ stage: "PLAYER", player: state.you }}>
           <div className={styles.playerInfo}>
-            <PlayerInfoAttunement ref={playerTargetRef} />
+            <PlayerInfoAttunement />
             <PlayerShields>
               <PlayerInfoSwordCard />
               <PlayerInfoSwordCard />
@@ -86,7 +69,7 @@ export const Game = () => {
       <div className={styles.rightSection}>
         <PlayerContext value={{ stage: "ENEMY", player: state.opponent }}>
           <div className={styles.enemyInfo}>
-            <PlayerInfoAttunement ref={opponentTargetRef} />
+            <PlayerInfoAttunement />
             <PlayerShields>
               <PlayerInfoSwordCard />
               <PlayerInfoSwordCard />

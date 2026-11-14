@@ -1,12 +1,9 @@
 import classNames from "classnames";
-import type { Ref } from "react";
-import {
-  GameContext,
-  SpellContext,
-  WebSocketContext,
-} from "routes/_app/game/-components/context";
+import { useEffect } from "react";
+import { GameContext, SpellContext, WebSocketContext } from "routes/_app/game/-components/context";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
 import { DOMAIN_ICON } from "routes/_app/game/-components/game/context/images";
+import { EffectsContext } from "routes/_app/game/-components/game/effects/context";
 import { useInvariant } from "utils/hooks/useInvariant";
 import { truncate } from "utils/methods/truncate";
 import styles from "./info.module.css";
@@ -14,19 +11,25 @@ import styles from "./info.module.css";
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
-export const PlayerInfoAttunement = ({ ref }: { ref?: Ref<HTMLDivElement> }) => {
-  const { player } = useInvariant(PlayerContext);
+export const PlayerInfoAttunement = () => {
+  const { player, stage } = useInvariant(PlayerContext);
+  const { registerTarget } = useInvariant(EffectsContext);
   const { state } = useInvariant(GameContext);
   const { websocket: ws } = useInvariant(WebSocketContext);
-  const { spellTargets, cardId, setSpellCardId, setSpellTargets } =
-    useInvariant(SpellContext);
+  const { clearEffects } = useInvariant(EffectsContext);
+  const { spellTargets, cardId, setSpellCardId, setSpellTargets } = useInvariant(SpellContext);
 
   /***** FUNCTIONS *****/
+  const targetRef = (element: HTMLDivElement | null) => {
+    if (element) {
+      return registerTarget(stage === "PLAYER" ? "player" : "opponent", element);
+    }
+  };
+
+  useEffect(() => () => clearEffects(), [clearEffects]);
+
   const handleClick = () => {
-    if (
-      (spellTargets?.includes("self") || spellTargets?.includes("opponent")) &&
-      !!cardId
-    ) {
+    if ((spellTargets?.includes("self") || spellTargets?.includes("opponent")) && !!cardId) {
       ws?.send({
         type: "game/play-card",
         cardId,
@@ -41,11 +44,9 @@ export const PlayerInfoAttunement = ({ ref }: { ref?: Ref<HTMLDivElement> }) => 
   /***** RENDER *****/
   return (
     <div
-      ref={ref}
+      ref={targetRef}
       className={classNames(styles.player, {
-        [styles.isPlayerTarget]: spellTargets?.includes(
-          state.you.id === player.id ? "self" : "opponent",
-        ),
+        [styles.isPlayerTarget]: spellTargets?.includes(state.you.id === player.id ? "self" : "opponent"),
       })}
       onClick={handleClick}
     >

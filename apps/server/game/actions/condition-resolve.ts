@@ -1,9 +1,9 @@
 import type { Game } from "@fluxbound/schema";
 import { getPlayer } from "game/helpers/get-player";
 
-export const conditionResolve = (state: Game.GameState, cardId: Game.CardId): Game.GameState => {
+export const conditionResolve = (state: Game.GameState, cardId?: Game.CardId): Game.GameState => {
   const player = getPlayer(state, state.activePlayer);
-  const card = player.field.find(({ id }) => id === cardId);
+  const card = cardId === undefined ? player : player.field.find(({ id }) => id === cardId);
   if (!card) return state;
 
   for (const condition of card.conditions ?? []) {
@@ -19,9 +19,7 @@ export const conditionResolve = (state: Game.GameState, cardId: Game.CardId): Ga
         break;
     }
     condition.length--;
-    if (condition.length <= 0) {
-      card.conditions = card.conditions?.filter((condition) => condition.id !== condition.id);
-    }
   }
+  card.conditions = card.conditions?.filter((condition) => condition.length > 0);
   return state;
 };

@@ -40,7 +40,7 @@ export const endTurn = (state: Game.GameState): Game.GameState => {
   const nextOpponentHealth = getOpponent(nextStateHealth).health;
 
   // Resolve any condition effects.
-  const resolvedState = player.field.reduce((currentState, card) => conditionResolve(currentState, card.id), nextState);
+  const resolvedState = player.field.reduce((currentState, card) => conditionResolve(currentState, card.id), conditionResolve(nextState));
 
   // Plus 1 flux for the players attunement
   getPlayer(resolvedState, player.id).flux[player.attunement] += 1;
