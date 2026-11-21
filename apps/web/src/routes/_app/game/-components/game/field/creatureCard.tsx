@@ -1,6 +1,7 @@
 import { CARD_LIBRARY, getCardActivationCost, getCardTriggers, type Game } from "@fluxbound/schema";
 import { HeartIcon, SwordIcon } from "@phosphor-icons/react";
 import classNames from "classnames";
+import { CardHoverPreview } from "components/GameCard/cardHoverPreview";
 import type React from "react";
 import { useCallback } from "react";
 import { DOMAIN_BACKGROUND_COLOR } from "routes/_app/game/-components/game/context/color";
@@ -91,36 +92,38 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
   /***** RENDER *****/
   if (!cardData) return null;
   return (
-    <div
-      ref={targetRef}
-      title={activationCost ? `Activate: ${activationCost.amount} ${activationCost.domain} Flux` : undefined}
-      className={classNames(styles.creatureCard, {
-        [styles.isActivatable]: isActivatable && stage === "PLAYER",
-        [styles.isTarget]: isAllyThenEnemy
-          ? isEligibleAllyThenEnemyTarget
-          : (spellTargets?.includes("creature") && spellCardId !== cardId) || spellTargets?.includes("multiCreatures"),
+    <CardHoverPreview card={gameCardData}>
+      <div
+        ref={targetRef}
+        title={activationCost ? `Activate: ${activationCost.amount} ${activationCost.domain} Flux` : undefined}
+        className={classNames(styles.creatureCard, {
+          [styles.isActivatable]: isActivatable && stage === "PLAYER",
+          [styles.isTarget]: isAllyThenEnemy
+            ? isEligibleAllyThenEnemyTarget
+            : (spellTargets?.includes("creature") && spellCardId !== cardId) || spellTargets?.includes("multiCreatures"),
 
-        /***** CONDITIONS *****/
-        [styles.burning]: gameCardData.conditions?.some(({ id }) => id === "burning"),
-        [styles.frozen]: gameCardData.conditions?.some(({ id }) => id === "frozen"),
-      })}
-      style={
-        {
-          "--background-color": DOMAIN_BACKGROUND_COLOR[cardData.domain],
-        } as React.CSSProperties
-      }
-      onClick={handleClick}
-    >
-      <img src={CARD_IMAGE[gameCardData.cardId]} />
-      <p className={styles.name}>{cardData.name}</p>
-      <p className={styles.damage}>
-        <SwordIcon weight="fill" color="#666666" size="18px" />
-        {gameCardData.damage ?? cardData.damage}
-      </p>
-      <p className={styles.health}>
-        <HeartIcon weight="fill" color="#6D1414" size="18px" />
-        {gameCardData.health ?? cardData.health}
-      </p>
-    </div>
+          /***** CONDITIONS *****/
+          [styles.burning]: gameCardData.conditions?.some(({ id }) => id === "burning"),
+          [styles.frozen]: gameCardData.conditions?.some(({ id }) => id === "frozen"),
+        })}
+        style={
+          {
+            "--background-color": DOMAIN_BACKGROUND_COLOR[cardData.domain],
+          } as React.CSSProperties
+        }
+        onClick={handleClick}
+      >
+        <img src={CARD_IMAGE[gameCardData.cardId]} />
+        <p className={styles.name}>{cardData.name}</p>
+        <p className={styles.damage}>
+          <SwordIcon weight="fill" color="#666666" size="18px" />
+          {gameCardData.damage ?? cardData.damage}
+        </p>
+        <p className={styles.health}>
+          <HeartIcon weight="fill" color="#6D1414" size="18px" />
+          {gameCardData.health ?? cardData.health}
+        </p>
+      </div>
+    </CardHoverPreview>
   );
 };

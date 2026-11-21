@@ -1,4 +1,5 @@
 import { CARD_LIBRARY, type Cards, type Game } from "@fluxbound/schema";
+import { CardHoverPreview } from "components/GameCard/cardHoverPreview";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
 import { DOMAIN_COLOR } from "routes/_app/game/-components/game/context/color";
 import { DOMAIN_ICON } from "routes/_app/game/-components/game/context/images";
@@ -39,35 +40,28 @@ export const PlayerInfoLargeRunes = () => {
       .values(),
   );
   const runeSlotCount = Math.max(4, Math.ceil(groupedRunes.length / 4) * 4);
-  const runeSlots = Array.from(
-    { length: runeSlotCount },
-    (_, index) => groupedRunes[index],
-  );
+  const runeSlots = Array.from({ length: runeSlotCount }, (_, index) => groupedRunes[index]);
 
   /***** RENDER *****/
   return (
     <div className={styles.largeRunes}>
       {runeSlots.map((rune, index) => {
         return (
-          <div
-            key={rune?.domain ?? `empty-rune-${index}`}
-            className={styles.rune}
-          >
+          <div key={rune?.domain ?? `empty-rune-${index}`} className={styles.rune}>
             {rune?.domain ? (
-              <div
-                className={styles.runeContent}
-                style={
-                  {
-                    "--backgroundColor": DOMAIN_COLOR[rune.domain],
-                  } as React.CSSProperties
-                }
-              >
-                <img
-                  src={DOMAIN_ICON[rune.domain]}
-                  className={styles.runeImage}
-                />
-                <p className={styles.runeText}>{rune.amount}</p>
-              </div>
+              <CardHoverPreview card={rune}>
+                <div
+                  className={styles.runeContent}
+                  style={
+                    {
+                      "--backgroundColor": DOMAIN_COLOR[rune.domain],
+                    } as React.CSSProperties
+                  }
+                >
+                  <img src={DOMAIN_ICON[rune.domain]} className={styles.runeImage} />
+                  <p className={styles.runeText}>{rune.amount}</p>
+                </div>
+              </CardHoverPreview>
             ) : (
               <div className={styles.runeEmpty} />
             )}

@@ -147,7 +147,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "3 Damage to all enemy creatures",
     cost: 7,
     price: 50,
-    targets: [],
+    targets: ["opponentCreatures"],
   },
   "0fb": {
     domain: "FIRE",

@@ -1,5 +1,6 @@
 import { CARD_LIBRARY } from "@fluxbound/schema";
 import { ShieldCheckeredIcon } from "@phosphor-icons/react";
+import { CardHoverPreview } from "components/GameCard/cardHoverPreview";
 import { PlayerContext } from "routes/_app/game/-components/game/context";
 import { CARD_IMAGE } from "routes/_app/game/-components/game/context/images";
 import { useInvariant } from "utils/hooks/useInvariant";
@@ -13,10 +14,7 @@ export const PlayerInfoShieldCard = () => {
     player: { field },
   } = useInvariant(PlayerContext);
 
-  const shieldCard = field.find(
-    ({ cardId }) =>
-      CARD_LIBRARY[cardId as keyof typeof CARD_LIBRARY].type === "SHIELD",
-  );
+  const shieldCard = field.find(({ cardId }) => CARD_LIBRARY[cardId as keyof typeof CARD_LIBRARY].type === "SHIELD");
   if (!shieldCard)
     return (
       <div className={styles.playerShield}>
@@ -27,8 +25,10 @@ export const PlayerInfoShieldCard = () => {
     );
 
   return (
-    <div className={styles.playerShield}>
-      <img src={CARD_IMAGE[shieldCard.cardId]} className={styles.infoCard} />
-    </div>
+    <CardHoverPreview card={shieldCard}>
+      <div className={styles.playerShield}>
+        <img src={CARD_IMAGE[shieldCard.cardId]} className={styles.infoCard} />
+      </div>
+    </CardHoverPreview>
   );
 };
