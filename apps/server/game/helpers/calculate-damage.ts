@@ -12,14 +12,10 @@ export const calculateDamage = (state: Game.GameState): Game.GameState => {
   // Get a list of cards in a players field that have the damage property and not conditions that prevent attacking
   const damageCards = player.field
     .filter((card) => card.damage !== undefined)
-    .filter(
-      ({ conditions }) =>
-        !conditions?.some(({ id }) =>
-          ["frozen", "paralyzed", "sleeping", "stunned"].includes(id),
-        ),
-    );
+    .filter(({ conditions }) => !conditions?.some(({ id }) => ["frozen", "paralyzed", "sleeping", "stunned"].includes(id)));
 
   for (const card of damageCards) {
+    //  TODO run each card with the affect onBeforeDamage ensuring that the opponent health is affected by that butn also anything permanent
     opponent.health -= card.damage ?? 0;
   }
 

@@ -2,7 +2,7 @@ import type { ERROR_CODES, Game, ServerGame, ServerLobby } from "@fluxbound/sche
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { user } from "api/user";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createTypedWebSocketSender } from "utils/functions";
 import { GameContext, GameErrorContext, SpellContext, WebSocketContext } from "./-components/context";
 import { EffectsContext, useGameEffects } from "./-components/game/effects/context";
@@ -23,7 +23,12 @@ function RouteComponent() {
     player1: { name: Game.PlayerName; id: Game.PlayerId };
     player2?: { name: Game.PlayerName; id: Game.PlayerId };
   } | null>(null);
-  const [spellTargets, setSpellTargets] = useState<SpellContext["spellTargets"]>(null);
+  const [spellTargets, updateSpellTargets] = useState<SpellContext["spellTargets"]>(null);
+  const [selectedCreatureTargets, setSelectedCreatureTargets] = useState<Array<Game.CardId>>([]);
+  const setSpellTargets: SpellContext["setSpellTargets"] = useCallback((targets) => {
+    setSelectedCreatureTargets([]);
+    updateSpellTargets(targets);
+  }, []);
   const [spellCardId, setSpellCardId] = useState<SpellContext["cardId"] | null>(null);
   const effects = useGameEffects();
   const { enqueueEffect, clearEffects, runAfterEffects } = effects;
@@ -183,6 +188,8 @@ function RouteComponent() {
             value={{
               spellTargets,
               setSpellTargets,
+              selectedCreatureTargets,
+              setSelectedCreatureTargets,
               cardId: spellCardId,
               setSpellCardId,
             }}

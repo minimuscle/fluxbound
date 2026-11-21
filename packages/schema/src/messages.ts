@@ -58,7 +58,7 @@ export const clientGame = z.discriminatedUnion("type", [
     target: z
       .array(
         z.union([
-          z.enum(["self", "opponent", "all", "selfCreatures", "opponentCreatures", "creature", "permanent", "multiCreatures"]),
+          z.enum(["self", "opponent", "all", "selfCreatures", "opponentCreatures", "creature", "permanent", "multiCreatures", "allyThenEnemy"]),
           z.custom<Game.CardId>(z.coerce.string().parse),
         ]),
       )

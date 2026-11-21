@@ -26,7 +26,14 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
   const { player, stage } = useInvariant(PlayerContext);
   const { websocket: ws } = useInvariant(WebSocketContext);
   const { state } = useInvariant(GameContext);
-  const { spellTargets, cardId: spellCardId, setSpellTargets, setSpellCardId } = useInvariant(SpellContext);
+  const {
+    spellTargets,
+    cardId: spellCardId,
+    setSpellTargets,
+    setSpellCardId,
+    selectedCreatureTargets,
+    setSelectedCreatureTargets,
+  } = useInvariant(SpellContext);
   const { registerTarget } = useInvariant(EffectsContext);
   const targetRef = useCallback(
     (element: HTMLDivElement | null) => {
@@ -46,16 +53,26 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
     (gameCardData.activations ?? ("activations" in cardData ? cardData.activations : 0)) > 0 &&
     !!activationCost &&
     player.flux[activationCost.domain] >= activationCost.amount;
+  const isAllyThenEnemy = spellTargets?.includes("allyThenEnemy") ?? false;
+  const isEligibleAllyThenEnemyTarget = selectedCreatureTargets.length === 0 ? stage === "PLAYER" : stage === "ENEMY";
 
   /***** FUNCTIONS *****/
   const handleClick = () => {
-    if (spellTargets?.includes("creature") && !!spellCardId) {
+    if ((spellTargets?.includes("creature") || spellTargets?.includes("multiCreatures") || isAllyThenEnemy) && !!spellCardId) {
+      if (isAllyThenEnemy && !isEligibleAllyThenEnemyTarget) return;
       const sourceCard = [...state.you.hand, ...state.you.field].find((card) => card.id === spellCardId);
       if (!sourceCard) return;
+      const isMultiCreature = spellTargets?.includes("multiCreatures") || isAllyThenEnemy;
+      if (isMultiCreature && selectedCreatureTargets.includes(cardId)) return;
+      const targets = isMultiCreature ? [...selectedCreatureTargets, cardId] : [cardId];
+      if (isMultiCreature && targets.length < 2) {
+        setSelectedCreatureTargets(targets);
+        return;
+      }
       ws?.send({
         type: CARD_LIBRARY[sourceCard.cardId]?.type === "SPELL" ? "game/play-card" : "game/activate-card",
         cardId: spellCardId,
-        target: [cardId],
+        target: targets,
       });
       setSpellTargets(null);
       setSpellCardId(null);
@@ -79,7 +96,9 @@ export const CreatureCard: CreatureCard = ({ cardId }) => {
       title={activationCost ? `Activate: ${activationCost.amount} ${activationCost.domain} Flux` : undefined}
       className={classNames(styles.creatureCard, {
         [styles.isActivatable]: isActivatable && stage === "PLAYER",
-        [styles.isTarget]: (spellTargets?.includes("creature") && spellCardId !== cardId) || spellTargets?.includes("multiCreatures"),
+        [styles.isTarget]: isAllyThenEnemy
+          ? isEligibleAllyThenEnemyTarget
+          : (spellTargets?.includes("creature") && spellCardId !== cardId) || spellTargets?.includes("multiCreatures"),
 
         /***** CONDITIONS *****/
         [styles.burning]: gameCardData.conditions?.some(({ id }) => id === "burning"),

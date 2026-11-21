@@ -201,7 +201,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "Deal 2 damage to an allied creature. If it survives, deal 4 damage to an enemy creature.",
     cost: 2,
     price: 10,
-    targets: [],
+    targets: ["allyThenEnemy"],
   },
   "0fr": {
     domain: "FIRE",
@@ -215,7 +215,7 @@ export const FIRE_CARDS = defineCardDefinition({
   "0fe": {
     domain: "FIRE",
     type: "SHIELD",
-    triggers: ["onDamaged", "onBeforeDamage"],
+    triggers: ["onBeforeDamage"],
     name: "Wall of Fire",
     description: "Each attacking creature takes 1 damage",
     cost: 5,

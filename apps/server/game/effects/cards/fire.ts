@@ -266,9 +266,17 @@ export const FIRE_EFFECTS = {
     },
   },
   // Heat Exchange
-  // Skipped: Needs selection of an allied creature and an enemy creature in one cast.
   "0fq": {
-    onPlayed: () => {},
+    onPlayed: ({ state, card, target }) => {
+      if (!(target?.length === 2)) throw new Error("Too many or not enough targets");
+      const ally = getCard(state, target[0]!);
+      const enemy = getCard(state, target[1]!);
+      if (!ally || !enemy) throw new Error("Something went wrong");
+      attackCreature({ state, attacker: card, gameCardId: ally.id, damage: 2 });
+      if (getCard(state, ally.id)) {
+        attackCreature({ state, attacker: card, gameCardId: enemy.id, damage: 4 });
+      }
+    },
   },
   // Last Spark
   "0fr": {
@@ -281,8 +289,10 @@ export const FIRE_EFFECTS = {
   // Wall of Fire
   // Skipped: Needs normal combat to dispatch attacks through shield effects.
   "0fe": {
-    onDamaged: () => {},
-    onBeforeDamage: () => {},
+    onBeforeDamage: (what) => {
+      console.log(what);
+      // attackCreature({state, attacker: card})
+    },
   },
   // Heat Shield
   // Skipped: Needs an attack reduction effect and shield integration in normal combat.

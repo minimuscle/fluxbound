@@ -9,7 +9,7 @@ export namespace Cards {
 
   export type CardId = keyof typeof CARD_LIBRARY;
 
-  export type Targets = "self" | "creature" | "opponent" | "permanent" | "all" | "selfCreatures" | "opponentCreatures" | "multiCreatures";
+  export type Targets = "self" | "creature" | "opponent" | "permanent" | "all" | "selfCreatures" | "opponentCreatures" | "multiCreatures" | "allyThenEnemy";
 
   export type Conditions = (typeof CONDITIONS)[number];
 

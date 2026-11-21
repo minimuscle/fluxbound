@@ -30,6 +30,8 @@ export type SpellContext = {
     React.SetStateAction<Game.CardId | null | undefined>
   >;
   spellTargets: Array<Cards.Targets> | null;
+  selectedCreatureTargets: Array<Game.CardId>;
+  setSelectedCreatureTargets: React.Dispatch<React.SetStateAction<Array<Game.CardId>>>;
   setSpellTargets: React.Dispatch<
     React.SetStateAction<Array<Cards.Targets> | null>
   >;
