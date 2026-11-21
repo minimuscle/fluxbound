@@ -1,4 +1,4 @@
-import type { Game } from "@fluxbound/schema";
+import type { Cards, Game } from "@fluxbound/schema";
 import type { GameSocketData } from "app/routes";
 import { createInitialState } from "game/actions/create-initial-state";
 import { GameEngine } from "game/engine";
@@ -8,7 +8,6 @@ import { lobby, rooms } from "game/messages/lobby";
 import { gameStatesByRoomId } from "game/messages/responses";
 import { checkForRoom } from "game/messages/utils/checkForRoom";
 import { enemyStarterTestDeck } from "game/testData/enemyDeck";
-import { playerStarterTestDeck } from "game/testData/playerDeck";
 import { GameResponse } from "utils/responses";
 
 /**********************************************************************************************************
@@ -72,7 +71,7 @@ export const startGameSingleplayer = async (server: Bun.Server<GameSocketData>, 
   });
 
   const basePlayerStats = {
-    deck: activeDeck.deck.split(" "),
+    deck: activeDeck.deck.split(" ") as Cards.CardId[],
     hand: [],
     field: [],
     health: 100,
@@ -94,7 +93,7 @@ export const startGameSingleplayer = async (server: Bun.Server<GameSocketData>, 
 
   const player1: Game.InitialPlayerState = {
     ...basePlayerStats,
-    deck: playerStarterTestDeck, // JUST FOR TESTING
+    // deck: playerStarterTestDeck, // JUST FOR TESTING
     id: room.player1.id,
     name: room.player1.name,
   };

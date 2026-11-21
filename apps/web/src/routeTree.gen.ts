@@ -17,6 +17,7 @@ import { Route as AppCardsIndexRouteImport } from './routes/_app/cards/index'
 import { Route as AppHomeIndexRouteImport } from './routes/_app/_home/index'
 import { Route as AppHomeLogoutRouteImport } from './routes/_app/_home/logout'
 import { Route as AppGameLobbyIndexRouteImport } from './routes/_app/game/lobby/index'
+import { Route as AppHomeSignupIndexRouteImport } from './routes/_app/_home/signup/index'
 import { Route as AppHomeLoginIndexRouteImport } from './routes/_app/_home/login/index'
 import { Route as AppGameLobbySingleRouteImport } from './routes/_app/game/lobby/single'
 
@@ -59,6 +60,11 @@ const AppGameLobbyIndexRoute = AppGameLobbyIndexRouteImport.update({
   path: '/lobby/',
   getParentRoute: () => AppGameRouteRoute,
 } as any)
+const AppHomeSignupIndexRoute = AppHomeSignupIndexRouteImport.update({
+  id: '/_home/signup/',
+  path: '/signup/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
 const AppHomeLoginIndexRoute = AppHomeLoginIndexRouteImport.update({
   id: '/_home/login/',
   path: '/login/',
@@ -79,6 +85,7 @@ export interface FileRoutesByFullPath {
   '/setup/': typeof AppSetupIndexRoute
   '/game/lobby/single': typeof AppGameLobbySingleRoute
   '/login/': typeof AppHomeLoginIndexRoute
+  '/signup/': typeof AppHomeSignupIndexRoute
   '/game/lobby/': typeof AppGameLobbyIndexRoute
 }
 export interface FileRoutesByTo {
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/setup': typeof AppSetupIndexRoute
   '/game/lobby/single': typeof AppGameLobbySingleRoute
   '/login': typeof AppHomeLoginIndexRoute
+  '/signup': typeof AppHomeSignupIndexRoute
   '/game/lobby': typeof AppGameLobbyIndexRoute
 }
 export interface FileRoutesById {
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/_app/setup/': typeof AppSetupIndexRoute
   '/_app/game/lobby/single': typeof AppGameLobbySingleRoute
   '/_app/_home/login/': typeof AppHomeLoginIndexRoute
+  '/_app/_home/signup/': typeof AppHomeSignupIndexRoute
   '/_app/game/lobby/': typeof AppGameLobbyIndexRoute
 }
 export interface FileRouteTypes {
@@ -115,6 +124,7 @@ export interface FileRouteTypes {
     | '/setup/'
     | '/game/lobby/single'
     | '/login/'
+    | '/signup/'
     | '/game/lobby/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -125,6 +135,7 @@ export interface FileRouteTypes {
     | '/setup'
     | '/game/lobby/single'
     | '/login'
+    | '/signup'
     | '/game/lobby'
   id:
     | '__root__'
@@ -137,6 +148,7 @@ export interface FileRouteTypes {
     | '/_app/setup/'
     | '/_app/game/lobby/single'
     | '/_app/_home/login/'
+    | '/_app/_home/signup/'
     | '/_app/game/lobby/'
   fileRoutesById: FileRoutesById
 }
@@ -202,6 +214,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppGameLobbyIndexRouteImport
       parentRoute: typeof AppGameRouteRoute
     }
+    '/_app/_home/signup/': {
+      id: '/_app/_home/signup/'
+      path: '/signup'
+      fullPath: '/signup/'
+      preLoaderRoute: typeof AppHomeSignupIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/_app/_home/login/': {
       id: '/_app/_home/login/'
       path: '/login'
@@ -242,6 +261,7 @@ interface AppRouteRouteChildren {
   AppCardsIndexRoute: typeof AppCardsIndexRoute
   AppSetupIndexRoute: typeof AppSetupIndexRoute
   AppHomeLoginIndexRoute: typeof AppHomeLoginIndexRoute
+  AppHomeSignupIndexRoute: typeof AppHomeSignupIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
@@ -251,6 +271,7 @@ const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppCardsIndexRoute: AppCardsIndexRoute,
   AppSetupIndexRoute: AppSetupIndexRoute,
   AppHomeLoginIndexRoute: AppHomeLoginIndexRoute,
+  AppHomeSignupIndexRoute: AppHomeSignupIndexRoute,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(

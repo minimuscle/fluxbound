@@ -17,7 +17,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
       queryFn: user.details.GET,
     });
 
-    if (userData.status !== 200 && location.pathname !== "/login") {
+    if (userData.status !== 200 && location.pathname !== "/login" && location.pathname !== "/signup") {
       console.log("redirecting", userData);
       throw redirect({ to: "/login" });
     }
