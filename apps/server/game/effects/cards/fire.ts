@@ -287,22 +287,23 @@ export const FIRE_EFFECTS = {
     },
   },
   // Wall of Fire
-  // Skipped: Needs normal combat to dispatch attacks through shield effects.
   "0fe": {
-    onBeforeDamage: (what) => {
-      console.log(what);
-      // attackCreature({state, attacker: card})
+    onAfterDamage: ({ state, attacker, card }) => {
+      if (!attacker || CARD_LIBRARY[attacker.cardId].type !== "CREATURE" || !getCard(state, attacker.id)) return;
+      attackCreature({ state, attacker: card, gameCardId: attacker.id, damage: 1 });
     },
   },
   // Heat Shield
-  // Skipped: Needs an attack reduction effect and shield integration in normal combat.
   "0ff": {
-    onBeforeDamage: () => {},
+    onBeforeDamage: (context) => {
+      context.damage = Math.max(0, (context.damage ?? 0) - 1);
+    },
   },
   // Flametongue Blade
-  // Skipped: Needs continuous-state trigger dispatch for its flux-dependent bonus.
   "0fg": {
-    onStateChanged: () => {},
+    onBeforeAttack: (context) => {
+      context.damage = (context.damage ?? 0) + Math.round(Math.min(1, context.player.flux.FIRE / 10));
+    },
   },
   "0fh": {},
 } satisfies CardEffectRegistry<typeof FIRE_CARDS>;

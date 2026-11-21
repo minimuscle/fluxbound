@@ -215,7 +215,7 @@ export const FIRE_CARDS = defineCardDefinition({
   "0fe": {
     domain: "FIRE",
     type: "SHIELD",
-    triggers: ["onBeforeDamage"],
+    triggers: ["onAfterDamage"],
     name: "Wall of Fire",
     description: "Each attacking creature takes 1 damage",
     cost: 5,
@@ -233,7 +233,7 @@ export const FIRE_CARDS = defineCardDefinition({
   "0fg": {
     domain: "FIRE",
     type: "WEAPON",
-    triggers: ["onStateChanged"],
+    triggers: ["onBeforeAttack"],
     name: "Flametongue Blade",
     description: "\\+1 damage for every 10F in the users pool",
     cost: 4,

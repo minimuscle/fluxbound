@@ -19,6 +19,7 @@ export const attackPlayer = ({ state, player, attacker, damage }: AttackPlayerPr
       if (getCardTriggers(CARD_LIBRARY[card.cardId]).includes("onBeforeDamage")) {
         CARD_EFFECTS[card.cardId]?.onBeforeDamage?.(context);
       }
+      console.log("damage left: ", context.damage);
       context.damage = Math.max(0, context.damage ?? 0);
       return context;
     },
@@ -41,5 +42,12 @@ export const attackPlayer = ({ state, player, attacker, damage }: AttackPlayerPr
         damage: damageContext.damage,
       });
     }
+  }
+
+  for (const shield of shields) {
+    resolveCardEffect(state, shield, "onAfterDamage", undefined, player.id, {
+      attacker,
+      damage: damageContext.damage,
+    });
   }
 };

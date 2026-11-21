@@ -22,6 +22,7 @@ export namespace Cards {
     | "onCreatureDeath"
     | "onBeforeAttack"
     | "onBeforeDamage"
+    | "onAfterDamage"
     | "onDamaged"
     | "onStateChanged";
 

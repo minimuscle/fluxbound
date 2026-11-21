@@ -13,10 +13,7 @@ export const PlayerInfoSwordCard = () => {
     player: { field },
   } = useInvariant(PlayerContext);
 
-  const shieldCard = field.find(
-    ({ cardId }) =>
-      CARD_LIBRARY[cardId as keyof typeof CARD_LIBRARY].type === "WEAPON",
-  );
+  const shieldCard = field.find(({ cardId }) => CARD_LIBRARY[cardId as keyof typeof CARD_LIBRARY].type === "WEAPON");
   if (!shieldCard)
     return (
       <div className={styles.playerShield}>
@@ -27,8 +24,11 @@ export const PlayerInfoSwordCard = () => {
     );
 
   return (
-    <div className={styles.playerShield}>
-      <img src={CARD_IMAGE[shieldCard.cardId]} />
+    <div
+      className={styles.playerShield}
+      // TODO: implement a hover state for when you hover for 2s it will show the DisplayCard component and ensure that it does not go off the screen (so will go to the top-left or botom-right or whatever) the card component should show about 20px away from wherre its hovered. Make it dynamic to handle this use for other locations.
+    >
+      <img src={CARD_IMAGE[shieldCard.cardId]} className={styles.infoCard} />
     </div>
   );
 };

@@ -35,13 +35,26 @@ export function playACard(state: Game.GameState, cardId: Game.CardId, target?: G
     player.field.push(creatureCard);
   }
 
-  if (gameCard.type !== "SPELL" && gameCard.type !== "CREATURE") {
+  if (gameCard.type === "WEAPON") {
+    const weaponCard = {
+      ...playedCard,
+      damage: gameCard.damage,
+      activations: 0,
+    };
+    player.field.push(weaponCard);
+  }
+
+  if (gameCard.type !== "SPELL" && gameCard.type !== "CREATURE" && gameCard.type !== "WEAPON") {
     player.field.push(playedCard);
   }
 
   if (gameCard.type === "SPELL") {
     const playedCardIndex = player.hand.findIndex(({ id }) => id === cardId);
     if (playedCardIndex !== -1) player.hand.splice(playedCardIndex, 1);
+  }
+
+  if (gameCard.type === "WEAPON" || gameCard.type === "SHIELD") {
+    player.field = player.field.filter((card) => card.id === cardId || CARD_LIBRARY[card.cardId].type !== gameCard.type);
   }
 
   // Update the flux of the player
