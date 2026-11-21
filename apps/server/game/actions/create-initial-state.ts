@@ -22,11 +22,11 @@ export function createInitialState(
     roomId,
     activePlayer,
     player1: {
-      ...player1,
+      ...structuredClone(player1),
       ...initialPlayer1Hand,
     },
     player2: {
-      ...player2,
+      ...structuredClone(player2),
       ...initialPlayer2Hand,
     },
     turn,

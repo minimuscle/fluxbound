@@ -19,10 +19,7 @@ function RouteComponent() {
   const [gameError, setGameError] = useState<(typeof ERROR_CODES)[number] | null>(null);
   const [ended, setEnded] = useState<false | Game.PlayerId>(false);
   const [connectionVersion, setConnectionVersion] = useState(0);
-  const [lobby, setLobby] = useState<{
-    player1: { name: Game.PlayerName; id: Game.PlayerId };
-    player2?: { name: Game.PlayerName; id: Game.PlayerId };
-  } | null>(null);
+  const [lobby, setLobby] = useState<WebSocketContext["lobby"]>(null);
   const [spellTargets, updateSpellTargets] = useState<SpellContext["spellTargets"]>(null);
   const [selectedCreatureTargets, setSelectedCreatureTargets] = useState<Array<Game.CardId>>([]);
   const setSpellTargets: SpellContext["setSpellTargets"] = useCallback((targets) => {
@@ -90,6 +87,9 @@ function RouteComponent() {
           setRoomId(parsed.roomId);
           setLobby({ player1: parsed.player1 });
           break;
+        case "lobby/player-joined":
+          setLobby({ player1: parsed.player1, player2: parsed.player2 });
+          break;
         case "game/started":
           clearEffects();
           setLobbyError(null);
@@ -101,7 +101,6 @@ function RouteComponent() {
           setSpellCardId(null);
           setGameError(null);
           runAfterEffects(() => setGameState(parsed.state));
-          typedWebsocket.send({ type: "game/start-turn" });
           break;
         case "game/stateUpdated":
           setGameError(null);
@@ -176,6 +175,7 @@ function RouteComponent() {
   const context: WebSocketContext = {
     websocket: websocketState!,
     roomId: roomId!,
+    lobby,
     restartSinglePlayer,
   };
 

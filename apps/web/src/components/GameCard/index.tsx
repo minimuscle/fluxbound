@@ -40,14 +40,15 @@ export const Card: Card = ({ card, action = "play", className, onAnimationEnd, s
       ws?.send({ type: "game/discard-card", cardId: card.id });
     }
     if (action === "play" && cardInfo.type === "SPELL" && !!spellContext) {
-      if ((cardInfo as Cards.Spell).targets.includes("selfCreatures") || (cardInfo as Cards.Spell).targets.includes("opponentCreatures")) {
+      const spell: Cards.Spell = cardInfo;
+      if (spell.targets.includes("selfCreatures") || spell.targets.includes("opponentCreatures")) {
         ws?.send({
           type: "game/play-card",
           cardId: card.id,
-          target: (cardInfo as Cards.Spell).targets,
+          target: spell.targets.filter((target) => target !== "creature"),
         });
       }
-      spellContext.setSpellTargets((cardInfo as Cards.Spell).targets);
+      spellContext.setSpellTargets(spell.targets);
       spellContext.setSpellCardId(card.id);
     }
   };

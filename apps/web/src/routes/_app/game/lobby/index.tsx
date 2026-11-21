@@ -1,5 +1,7 @@
 import type { Game } from "@fluxbound/schema";
+import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
+import { user } from "api/user";
 import { Button } from "components/Button";
 import { useContext, useState } from "react";
 import { WebSocketContext } from "../-components/context";
@@ -16,7 +18,12 @@ function RouteComponent() {
   const context = useContext(WebSocketContext);
   const ws = context?.websocket;
   const roomId = context?.roomId;
+  const lobby = context?.lobby;
   const navigate = Route.useNavigate();
+  const { data: userData } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => user.details.GET(),
+  });
 
   /***** RENDER *****/
   if (!ws) return null;
@@ -42,7 +49,18 @@ function RouteComponent() {
         </Button>
       </div>
       <div>
-        <Button onClick={() => ws.send({ type: "game/start" })}>Start Game</Button>
+        {lobby && lobby.player1.id === userData?.data?.id && (
+          <Button disabled={!lobby.player2} onClick={() => ws.send({ type: "game/start" })}>
+            Start Game
+          </Button>
+        )}
+      </div>
+      <div>
+        <h1>Players in lobby:</h1>
+        <ul>
+          {lobby && <li key={lobby.player1.id}>{lobby.player1.name}</li>}
+          {lobby?.player2 && <li key={lobby.player2.id}>{lobby.player2.name}</li>}
+        </ul>
       </div>
     </div>
   );

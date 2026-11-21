@@ -23,7 +23,7 @@ export const user = {
   }),
   details: {
     GET: withAuth(async ({ supabase, userId }) => {
-      const { data: existingUser, error: fetchError } = await supabase.from("users").select("*").maybeSingle();
+      const { data: existingUser, error: fetchError } = await supabase.from("users").select("*").eq("id", userId).maybeSingle();
       if (fetchError) {
         return ErrorResponse(fetchError.message, 500);
       }

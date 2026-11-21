@@ -43,25 +43,20 @@ export class GameEngine {
     return { ok: true };
   }
 
-  public startTurn(): GameResponse {
-    const turnValidation = isPlayersTurn(this.state, this.playerId);
-    if (!turnValidation.ok) return turnValidation;
-
+  private startTurn(): void {
     this.state = drawCard(this.state, 1);
-
-    return { ok: true };
   }
 
   // Play the turn for the AI
   public async playAITurn(): Promise<GameResponse> {
     console.log("playing AI turn");
-    this.state = drawCard(this.state, 1);
     this.state = await playAITurn(this.state);
     const endGameCheck = checkEndGame(this.state);
     console.log("ai checking engame", endGameCheck);
     if (endGameCheck.ended) {
       return { ok: true, code: "GAME_ENDED", winner: endGameCheck.winner }; //TODO: need to create a game save code and save the data to be reviewed
     }
+    this.startTurn();
     return { ok: true };
   }
 
@@ -121,6 +116,7 @@ export class GameEngine {
       return { ok: true, code: "GAME_ENDED", winner: endGameCheck.winner }; //TODO: need to create a game save code and save the data to be reviewed
     }
 
+    this.startTurn();
     return { ok: true };
   }
 

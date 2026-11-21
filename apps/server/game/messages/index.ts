@@ -26,8 +26,6 @@ export function message(
       return startGame(server, ws);
     case "game/startSolo":
       return startGameSingleplayer(server, ws, 0); // TODO: implement level selection when it's implemented
-    case "game/start-turn":
-      return game.startTurn(server, ws);
     case "game/play-card":
       return game.playCard(server, ws, parsed.cardId, parsed.target);
     case "game/activate-card":

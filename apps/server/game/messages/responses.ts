@@ -8,31 +8,6 @@ import { GameResponse } from "utils/responses";
 export const gameStatesByRoomId = new Map<string, Game.GameState>();
 
 export const game = {
-  startTurn: (
-    server: Bun.Server<GameSocketData>,
-    ws: Bun.ServerWebSocket<GameSocketData>,
-  ) => {
-    if (!ws.data.roomId || !gameStatesByRoomId.has(ws.data.roomId)) {
-      return void ws.send(
-        GameResponse({
-          type: "game/error",
-          ok: false,
-          code: "NO_ROOM_ID",
-          message: "No Room ID",
-        }),
-      );
-    }
-    const gameState = gameStatesByRoomId.get(ws.data.roomId)!;
-    const engine = new GameEngine(gameState, ws.data.userId);
-
-    const result = engine.startTurn();
-    if (!result.ok)
-      return void ws.send(GameResponse({ type: "game/error", ...result }));
-
-    gameStatesByRoomId.set(ws.data.roomId, engine.gameState);
-    return void updateGameState(server, engine, ws.data.roomId);
-  },
-
   playCard: (
     server: Bun.Server<GameSocketData>,
     ws: Bun.ServerWebSocket<GameSocketData>,
@@ -137,7 +112,6 @@ export const game = {
     if (engine.gameState.activePlayer.includes("AI")) {
       //TODO: actually have a robust way to check if the AI is playing as this is not a good way
       // Do AI Turn
-      engine.startTurn();
       const AIResult = await engine.playAITurn();
       if (!AIResult.ok) {
         return void ws.send(GameResponse({ type: "game/error", ...AIResult }));
