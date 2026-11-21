@@ -10,6 +10,8 @@
     "ig": "cd ./apps/web && bun install && cd ../server && bun install && cd ../../packages/schema && bun install",
     "dev": "nx run-many -t dev --parallel",
     "build": "nx run-many -t build",
+    "build:frontend": "cd ./apps/web && bun run build",
+    "preview:frontend": "cd ./apps/web && bun run preview",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix"
   },
