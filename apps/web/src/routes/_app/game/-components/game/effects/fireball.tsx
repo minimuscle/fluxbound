@@ -1,8 +1,8 @@
 import { useApplication } from "@pixi/react";
-import fireballJson from "assets/effects/fireball.json?url";
+import fireballJson from "assets/effects/fireball.json";
 import fireballSheet from "assets/effects/fireball.png";
 import { Assets, Spritesheet, Texture } from "pixi.js";
-import { useEffect, useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 
 export type FireballEffectProps = {
   target: HTMLDivElement;
@@ -10,26 +10,32 @@ export type FireballEffectProps = {
 };
 
 export function FireballEffect({ target, onComplete }: FireballEffectProps) {
-  console.log(target);
-
   /***** HOOKS *****/
   const { app } = useApplication();
   const [frames, setFrames] = useState<Texture[]>([]);
+  const complete = useEffectEvent(onComplete);
 
   /***** EFFECTS *****/
   useEffect(() => {
-    Assets.load<Texture>(fireballSheet).then((sheet) => {
-      const id = crypto.randomUUID();
+    const controller = new AbortController();
 
-      Assets.add({
-        alias: id,
-        src: fireballJson,
-        data: { texture: sheet },
+    // Parse bundled atlas data directly: production URLs may be inlined data URLs.
+    Assets.load<Texture>(fireballSheet)
+      .then(async (texture) => {
+        const atlas = new Spritesheet({ texture, data: fireballJson });
+        await atlas.parse();
+        if (controller.signal.aborted) return;
+        const animation = atlas.animations.fireball_termplate ?? [];
+        if (animation.length === 0) complete();
+        else setFrames(animation);
+      })
+      .catch((error: Error) => {
+        if (controller.signal.aborted) return;
+        console.error("Failed to load fireball animation", error);
+        complete();
       });
-      Assets.load<Spritesheet>(id).then((atlas) => {
-        setFrames(atlas.animations.fireball_termplate ?? []);
-      });
-    });
+
+    return () => controller.abort();
   }, []);
 
   /***** RENDER *****/

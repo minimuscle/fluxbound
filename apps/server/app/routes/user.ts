@@ -42,7 +42,7 @@ export const user = {
   signup: {
     POST: withJsonBody(signupSchema, async ({ body }) => {
       const { email, password } = body;
-      const { data, error } = await supabase.auth.signUp({ email, password });
+      const { error } = await supabase.auth.signUp({ email, password });
       if (error) {
         return ErrorResponse(error.message);
       }
