@@ -9,6 +9,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "Plus 1 Death Flux per turn.",
     cost: 0,
     price: 10,
+    purchasable: true,
   },
   "0d1": {
     domain: "DEATH",
@@ -18,6 +19,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "The first time another allied creature dies on your turn, this gains +1 attack permanently.",
     cost: 1,
     price: 10,
+    purchasable: true,
     damage: 1,
     health: 2,
   },
@@ -29,6 +31,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "The first time an allied creature dies each turn, gain 1 Death Flux.",
     cost: 3,
     price: 10,
+    purchasable: true,
     damage: 1,
     health: 4,
   },
@@ -40,6 +43,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "When this dies, an allied creature of your choice gains +2 maximum and current HP.",
     cost: 2,
     price: 10,
+    purchasable: true,
     damage: 2,
     health: 3,
   },
@@ -53,6 +57,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "1 Death Flux, once per your turn: Destroy another allied creature with 2 or less current HP. If destroyed, draw a card.",
     cost: 4,
     price: 10,
+    purchasable: true,
     damage: 2,
     health: 4,
   },
@@ -65,6 +70,7 @@ export const DEATH_CARDS = defineCardDefinition({
       "At the end of your turn, before attacks, this gains +1 attack for each allied creature that died this turn, up to +3, until the end of that turn.",
     cost: 5,
     price: 10,
+    purchasable: true,
     damage: 3,
     health: 6,
   },
@@ -76,6 +82,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "",
     cost: 10,
     price: 10,
+    purchasable: true,
     damage: 11,
     health: 5,
   },
@@ -87,6 +94,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "When this dies, gain 1 Death Flux.",
     cost: 1,
     price: 10,
+    purchasable: true,
     damage: 1,
     health: 3,
   },
@@ -100,6 +108,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "1 Death Flux, once per your turn: If an allied creature died this turn, draw a card.",
     cost: 3,
     price: 10,
+    purchasable: true,
     damage: 2,
     health: 3,
   },
@@ -111,6 +120,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "When this dies, look at the top two cards of your deck. Put one on top and the other on the bottom.",
     cost: 2,
     price: 10,
+    purchasable: true,
     damage: 1,
     health: 4,
   },
@@ -122,6 +132,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "The first time another allied creature dies each turn, this gains +1 maximum and current HP.",
     cost: 8,
     price: 10,
+    purchasable: true,
     damage: 5,
     health: 7,
   },
@@ -132,6 +143,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "Destroy an allied creature. If destroyed, another allied creature gains attack equal to its current attack, up to +4, permanently.",
     cost: 2,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0da": {
@@ -141,6 +153,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "Destroy an allied creature. If destroyed, restore HP to yourself equal to its current HP, up to 8, and draw a card.",
     cost: 2,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0db": {
@@ -150,6 +163,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "Deal 2 damage to an enemy creature, plus 1 for each allied creature that died this turn, up to 6 total damage.",
     cost: 3,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0dc": {
@@ -159,6 +173,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "An allied creature gains +4 attack permanently. Destroy it at the start of your next turn.",
     cost: 2,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0dd": {
@@ -168,6 +183,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "For each allied creature that died this turn, gain 1 Death Flux and restore 1 HP to yourself, up to three creatures.",
     cost: 1,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0do": {
@@ -177,6 +193,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "Destroy an allied creature. If destroyed, gain Death Flux equal to its printed Cost, up to 4.",
     cost: 1,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0dp": {
@@ -186,6 +203,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "Choose an allied creature. Until the start of your next turn, when it dies, draw two cards.",
     cost: 2,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0dq": {
@@ -195,6 +213,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "Destroy an allied creature. If destroyed, each other allied creature gains +1 attack until the end of your turn.",
     cost: 3,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0dr": {
@@ -205,6 +224,7 @@ export const DEATH_CARDS = defineCardDefinition({
       "Choose an allied creature. Destroy it at the start of your next turn. When it is destroyed by this effect, gain 3 Death Flux and draw a card.",
     cost: 1,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0de": {
@@ -215,6 +235,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "Reduce each attack against you by 1. If an allied creature died earlier in the current turn, reduce each attack by 2 instead.",
     cost: 5,
     price: 10,
+    purchasable: true,
   },
   "0ds": {
     domain: "DEATH",
@@ -225,6 +246,7 @@ export const DEATH_CARDS = defineCardDefinition({
       "Reduce each attack against you by 1. The first time an allied creature dies each turn, the next damage dealt to yourself that turn is reduced by 3 in addition to this shield's normal reduction.",
     cost: 5,
     price: 10,
+    purchasable: true,
   },
   "0df": {
     domain: "DEATH",
@@ -234,6 +256,7 @@ export const DEATH_CARDS = defineCardDefinition({
     description: "Before this attacks on your turn, it gains +1 attack for each allied creature that died this turn, up to +3, until the end of the turn.",
     cost: 5,
     price: 10,
+    purchasable: true,
     damage: 3,
   },
 });

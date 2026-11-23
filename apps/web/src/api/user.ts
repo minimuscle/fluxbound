@@ -9,6 +9,11 @@ export const user = {
       return apiFetch("/api/user/details");
     },
   },
+  stats: {
+    GET: () => {
+      return apiFetch("/api/user/stats");
+    },
+  },
   login: {
     POST: async ({ email, password }: { email: string; password: string }) => {
       const { data } = await apiFetch("/api/user/login", {

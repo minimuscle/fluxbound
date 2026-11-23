@@ -22,6 +22,7 @@ const menuRoutes = new Set([
   "/login/",
   "/signup/",
   "/cards/",
+  "/bazaar",
   "/cards/bazaar/",
   "/cards/astralForge/",
   "/cards/archives/",

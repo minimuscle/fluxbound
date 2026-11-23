@@ -9,6 +9,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
     description: "Gain 2 Light Flux per turn.",
     cost: 0,
     price: 10,
+    purchasable: false,
   },
   "1li2": {
     domain: "LIGHT",
@@ -18,6 +19,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
     description: "The first damage dealt to this each turn is reduced by 2.",
     cost: 3,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 6,
   },
@@ -31,6 +33,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
     description: "1 Light Flux, once per your turn: The next damage dealt to another allied creature before the start of your next turn is reduced by 3.",
     cost: 3,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 5,
   },
@@ -44,6 +47,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
     description: "1 Light Flux, once per your turn: The next damage dealt to yourself before the start of your next turn is reduced by 4.",
     cost: 5,
     price: 10,
+    purchasable: false,
     damage: 4,
     health: 5,
   },
@@ -55,6 +59,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
     description: "",
     cost: 10,
     price: 10,
+    purchasable: false,
     damage: 9,
     health: 9,
   },
@@ -66,6 +71,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
     description: "The first damage dealt to this each turn is reduced by 1.",
     cost: 1,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 3,
   },
@@ -79,6 +85,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
     description: "1 Light Flux, once per your turn: Look at the top two cards of your deck and return them in either order.",
     cost: 3,
     price: 10,
+    purchasable: false,
     damage: 1,
     health: 7,
   },
@@ -93,6 +100,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
       "1 Light Flux, once per your turn: Look at the top card of your deck and return it to the top. If it is a creature, this gains +2 maximum and current HP, up to +4 maximum HP from this ability.",
     cost: 4,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 6,
   },
@@ -107,6 +115,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
       "1 Light Flux, once per your turn: Choose another allied creature below full HP. The next damage dealt to it before the start of your next turn is reduced by 4.",
     cost: 5,
     price: 10,
+    purchasable: false,
     damage: 3,
     health: 7,
   },
@@ -120,6 +129,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
     description: "2 Light Flux, once per your turn: Deal 3 damage to an enemy creature with at least 5 current attack.",
     cost: 6,
     price: 10,
+    purchasable: false,
     damage: 5,
     health: 6,
   },
@@ -131,6 +141,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
     description: "At the end of your turn, before attacks, if you have at least 80 HP, this gains +3 attack for that turn.",
     cost: 9,
     price: 10,
+    purchasable: false,
     damage: 5,
     health: 10,
   },
@@ -141,6 +152,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
     description: "Look at the top two cards of your deck. Put one on the bottom and the other on top. Draw a card. Restore 1 HP to yourself.",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1lia": {
@@ -151,6 +163,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
       "Remove poison and attack-preventing effects from an allied creature. The next damage dealt to it before the start of your next turn is reduced by 2.",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1lib": {
@@ -160,6 +173,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
     description: "An allied creature whose current HP exceeds its attack gains +3 attack until the end of your turn.",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1lic": {
@@ -169,6 +183,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
     description: "Deal 3 damage to an enemy creature, or 6 if its current attack is at least 6.",
     cost: 2,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1lid": {
@@ -179,6 +194,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
       "Look at the top three cards of your deck and return them in any order. The next damage dealt to yourself before the start of your next turn is reduced by 5.",
     cost: 2,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1lio": {
@@ -188,6 +204,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
     description: "Look at the top card of your deck and return it to the top or bottom. Then deal 2 damage to an enemy creature.",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1lip": {
@@ -197,6 +214,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
     description: "The next damage dealt to each allied creature before the start of your next turn is reduced by 2.",
     cost: 3,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1liq": {
@@ -207,6 +225,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
       "Look at the top card of your deck. You may spend 1 additional Light Flux to draw it; otherwise return it to the top or bottom. Restore 1 HP to yourself.",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1lir": {
@@ -217,6 +236,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
       "Choose an allied creature. Until the start of your next turn, whenever damage dealt to it is reduced by an allied spell or ability, it gains +1 attack permanently, up to +3 from this spell.",
     cost: 2,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1lie": {
@@ -228,6 +248,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
       "Reduce each attack against you by 1. At the start of your turn, if you have full HP, the next damage dealt to yourself is reduced by 3 in addition to this shield's normal reduction; this bonus does not stack.",
     cost: 4,
     price: 10,
+    purchasable: false,
   },
   "1lis": {
     domain: "LIGHT",
@@ -237,6 +258,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
     description: "Attacks with 1 or less current attack deal no damage to you. Reduce all other attacks against you by 1.",
     cost: 3,
     price: 10,
+    purchasable: false,
   },
   "1lif": {
     domain: "LIGHT",
@@ -246,6 +268,7 @@ export const FORGED_LIGHT_CARDS = defineCardDefinition({
     description: "Before this attacks on your turn, if you looked at any cards in your deck this turn, it gains +2 attack until the end of the turn.",
     cost: 5,
     price: 10,
+    purchasable: false,
     damage: 4,
   },
 });

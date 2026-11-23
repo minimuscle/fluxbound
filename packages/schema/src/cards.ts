@@ -32,6 +32,7 @@ export namespace Cards {
     description: string;
     cost: number;
     price: number;
+    purchasable: boolean;
   };
 
   export type FluxCost = {

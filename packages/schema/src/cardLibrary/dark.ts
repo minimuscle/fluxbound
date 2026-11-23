@@ -9,6 +9,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "Plus 1 Dark Flux per turn.",
     cost: 0,
     price: 10,
+    purchasable: true,
   },
   "0da1": {
     domain: "DARK",
@@ -20,6 +21,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "1 Dark Flux, once per your turn: An enemy creature loses 1 attack until the start of your next turn, to a minimum of 0.",
     cost: 1,
     price: 10,
+    purchasable: true,
     damage: 2,
     health: 2,
   },
@@ -31,6 +33,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "At the end of your turn, before attacks, if an enemy creature currently has 0 attack, this gains +2 attack until the end of that turn.",
     cost: 3,
     price: 10,
+    purchasable: true,
     damage: 2,
     health: 3,
   },
@@ -44,6 +47,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "1 Dark Flux, once per your turn: An enemy creature loses 1 attack permanently, to a minimum of 0.",
     cost: 4,
     price: 10,
+    purchasable: true,
     damage: 1,
     health: 5,
   },
@@ -56,6 +60,7 @@ export const DARK_CARDS = defineCardDefinition({
       "At the end of your turn, before attacks, if an enemy creature currently has less attack than its printed Damage value, this gains +2 attack for that turn.",
     cost: 5,
     price: 10,
+    purchasable: true,
     damage: 3,
     health: 5,
   },
@@ -69,6 +74,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "2 Dark Flux, once per your turn: Deal 3 damage to an enemy creature with 2 or less current attack.",
     cost: 5,
     price: 10,
+    purchasable: true,
     damage: 4,
     health: 4,
   },
@@ -82,6 +88,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "",
     cost: 10,
     price: 10,
+    purchasable: true,
     damage: 11,
     health: 5,
   },
@@ -95,6 +102,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "1 Dark Flux, once per your turn: An enemy creature loses 2 attack until the start of your next turn, to a minimum of 0.",
     cost: 3,
     price: 10,
+    purchasable: true,
     damage: 2,
     health: 4,
   },
@@ -106,6 +114,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "At the end of your turn, if an enemy creature lost attack because of your card or ability this turn, restore 2 HP to yourself.",
     cost: 4,
     price: 10,
+    purchasable: true,
     damage: 2,
     health: 5,
   },
@@ -119,6 +128,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "2 Dark Flux, once per your turn: If an enemy creature has 0 current attack, draw a card.",
     cost: 4,
     price: 10,
+    purchasable: true,
     damage: 2,
     health: 4,
   },
@@ -132,6 +142,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "2 Dark Flux, once per your turn: Up to two enemy creatures each lose 2 attack until the start of your next turn, to a minimum of 0.",
     cost: 8,
     price: 10,
+    purchasable: true,
     damage: 5,
     health: 7,
   },
@@ -143,6 +154,7 @@ export const DARK_CARDS = defineCardDefinition({
       "An enemy creature loses 2 attack until the start of your next turn, to a minimum of 0. An allied creature gains +2 attack for the same duration.",
     cost: 2,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0daa": {
@@ -152,6 +164,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "An enemy creature's activated abilities cannot be used until the start of your next turn. Passive abilities are unaffected. Draw a card.",
     cost: 3,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0dab": {
@@ -162,6 +175,7 @@ export const DARK_CARDS = defineCardDefinition({
       "Choose an allied creature with 2 or less attack. The next spell or activated ability targeting it before the start of your next turn has no effect on it.",
     cost: 2,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0dac": {
@@ -171,6 +185,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "Deal 4 damage to an enemy creature. If its current attack is 1 or less, restore 4 HP to yourself.",
     cost: 3,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0dad": {
@@ -180,6 +195,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "An enemy creature permanently loses 1 attack, to a minimum of 0. If you have fewer creatures than the opponent, it loses 3 attack instead.",
     cost: 3,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0dao": {
@@ -189,6 +205,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "Choose an enemy creature with at least 5 current attack. It permanently loses 2 attack.",
     cost: 2,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0dap": {
@@ -199,6 +216,7 @@ export const DARK_CARDS = defineCardDefinition({
       "Choose an enemy creature. It loses up to 3 attack until the start of your next turn. An allied creature gains that much attack for the same duration.",
     cost: 3,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0daq": {
@@ -208,6 +226,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "Each enemy creature with at least 3 current attack loses 1 attack until the start of your next turn.",
     cost: 2,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0dar": {
@@ -218,6 +237,7 @@ export const DARK_CARDS = defineCardDefinition({
       "Choose an enemy creature with 1 or less current attack. Its activated abilities cannot be used until the start of your next turn. Draw a card.",
     cost: 2,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0dae": {
@@ -228,6 +248,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "Reduce each attack against you by 1, or by 2 if the attacker currently has 2 or less attack.",
     cost: 4,
     price: 10,
+    purchasable: true,
   },
   "0das": {
     domain: "DARK",
@@ -238,6 +259,7 @@ export const DARK_CARDS = defineCardDefinition({
       "Reduce each attack against you by 1. The first time an attack with at least 5 current attack damages you each turn, its attacker permanently loses 1 attack.",
     cost: 5,
     price: 10,
+    purchasable: true,
   },
   "0daf": {
     domain: "DARK",
@@ -247,6 +269,7 @@ export const DARK_CARDS = defineCardDefinition({
     description: "Before this attacks on your turn, if an enemy creature has 1 or less attack, it gains +2 attack until the end of the turn.",
     cost: 5,
     price: 10,
+    purchasable: true,
     damage: 3,
   },
 });

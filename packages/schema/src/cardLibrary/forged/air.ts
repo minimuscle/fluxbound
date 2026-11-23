@@ -9,6 +9,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "Gain 2 Air Flux per turn.",
     cost: 0,
     price: 10,
+    purchasable: false,
   },
   "1a1": {
     domain: "AIR",
@@ -18,6 +19,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "Astral-forged upgrade of Gale Finch.",
     cost: 1,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 3,
   },
@@ -29,6 +31,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "Astral-forged upgrade of Cloudrunner Hare.",
     cost: 2,
     price: 10,
+    purchasable: false,
     damage: 4,
     health: 2,
   },
@@ -42,6 +45,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "1A - Stormcall - Deals 2 damage to the target",
     cost: 4,
     price: 10,
+    purchasable: false,
     damage: 4,
     health: 4,
   },
@@ -55,6 +59,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "",
     cost: 10,
     price: 10,
+    purchasable: false,
     damage: 10,
     health: 8,
   },
@@ -67,6 +72,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
       "At the end of your turn, before attacks, if you played at least two non-Rune cards this turn, this gains +2 attack until the end of that turn.",
     cost: 2,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 3,
   },
@@ -79,6 +85,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
       "At the end of your turn, before attacks, if you activated another allied creature's ability this turn, this gains +1 attack until the end of that turn.",
     cost: 3,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 6,
   },
@@ -90,6 +97,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "At the end of your turn, if you played at least two non-Rune cards this turn, gain 1 Air Flux.",
     cost: 3,
     price: 10,
+    purchasable: false,
     damage: 4,
     health: 2,
   },
@@ -103,6 +111,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "1 Air Flux, once per your turn: The next non-Rune card you play this turn costs 1 less Flux of its own domain, to a minimum of 1.",
     cost: 4,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 6,
   },
@@ -116,6 +125,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "1 Air Flux, once per your turn: Give up to two other allied creatures +1 attack until the end of your turn.",
     cost: 5,
     price: 10,
+    purchasable: false,
     damage: 5,
     health: 4,
   },
@@ -127,6 +137,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "At the end of your turn, before attacks, if you played at least three non-Rune cards this turn, this gains +3 attack for that turn.",
     cost: 8,
     price: 10,
+    purchasable: false,
     damage: 5,
     health: 8,
   },
@@ -137,6 +148,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "Deal 4 damage the the target",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1a7": {
@@ -146,6 +158,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "Return the target creature / permanent to the owner's deck",
     cost: 3,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1a8": {
@@ -155,6 +168,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "Deal 2 damage for every air creature you have in play",
     cost: 4,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1a9": {
@@ -164,6 +178,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "Grants the target creature the flight ability",
     cost: 4,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1aa": {
@@ -173,6 +188,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "Deal 1 damage to every creature",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1ak": {
@@ -182,6 +198,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "An allied creature gains +2 attack until the end of your turn. If you already played another non-Rune card this turn, draw a card.",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1al": {
@@ -191,6 +208,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "Swap the current attack of two allied creatures until the start of your next turn. Restore 1 HP to yourself.",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1am": {
@@ -201,6 +219,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
       "The next creature you play this turn costs 2 less Flux of its own domain, to a minimum of 1. That creature gains +1 attack until the end of the turn.",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1an": {
@@ -210,6 +229,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "Deal 2 damage to an enemy creature. If this is your third non-Rune card played this turn, deal 5 damage instead.",
     cost: 2,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1as": {
@@ -220,6 +240,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
       "Each allied Air creature gains +1 attack until the end of your turn. If this is your third non-Rune card played this turn, they gain +2 instead.",
     cost: 2,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1ab": {
@@ -230,6 +251,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "Blocks 1 damage. Flying creatures do no damage",
     cost: 4,
     price: 10,
+    purchasable: false,
   },
   "1ao": {
     domain: "AIR",
@@ -239,6 +261,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "Reduce the first enemy attack against you each turn by 3, and all other attacks against you that turn by 1.",
     cost: 3,
     price: 10,
+    purchasable: false,
   },
   "1ap": {
     domain: "AIR",
@@ -248,6 +271,7 @@ export const FORGED_AIR_CARDS = defineCardDefinition({
     description: "Before this attacks on your turn, it gains +1 attack for each spell you played this turn, up to +3, until the end of the turn.",
     cost: 5,
     price: 10,
+    purchasable: false,
     damage: 3,
   },
 });

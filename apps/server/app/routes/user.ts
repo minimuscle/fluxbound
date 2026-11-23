@@ -23,20 +23,24 @@ export const user = {
   }),
   details: {
     GET: withAuth(async ({ supabase, userId }) => {
-      const { data: existingUser, error: fetchError } = await supabase.from("users").select("*").eq("id", userId).maybeSingle();
+      const { data: existingUser, error: fetchError } = await supabase.from("users").select("*").eq("id", userId).single();
       if (fetchError) {
         return ErrorResponse(fetchError.message, 500);
       }
-      if (existingUser) {
-        return SuccessResponse(existingUser);
+
+      return SuccessResponse(existingUser);
+    }),
+  },
+  stats: {
+    GET: withAuth(async ({ supabase, userId }) => {
+      const { data: existingUser, error: fetchError } = await supabase.from("user_stats").select("*").eq("id", userId).single();
+      if (fetchError) {
+        return ErrorResponse(fetchError.message, 500);
       }
 
-      const { data: newUser, error: insertError } = await supabase.from("users").insert({ id: userId, display_name: "Anon" }).select("*").single();
-      if (insertError) {
-        return ErrorResponse(insertError.message, 500);
-      }
+      console.log(existingUser);
 
-      return SuccessResponse(newUser);
+      return SuccessResponse(existingUser);
     }),
   },
   signup: {

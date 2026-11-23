@@ -9,6 +9,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "Gain 2 Earth Flux per turn.",
     cost: 0,
     price: 10,
+    purchasable: false,
   },
   "1e1": {
     domain: "EARTH",
@@ -18,6 +19,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "Astral-forged upgrade of Mossling.",
     cost: 1,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 2,
   },
@@ -31,6 +33,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "1E - Burrow - Target creature cannot be targeted but its attack is halved",
     cost: 4,
     price: 10,
+    purchasable: false,
     damage: 4,
     health: 6,
   },
@@ -44,6 +47,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "1Ae - Awaken, gains +2/0 damage",
     cost: 6,
     price: 10,
+    purchasable: false,
     damage: 1,
     health: 7,
   },
@@ -55,6 +59,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "",
     cost: 10,
     price: 10,
+    purchasable: false,
     damage: 8,
     health: 12,
   },
@@ -68,6 +73,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "1 Earth Flux, once while this is in play: If another allied creature has at least 6 maximum HP, this gains +2 maximum and current HP.",
     cost: 2,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 5,
   },
@@ -79,6 +85,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "The first time this survives damage from an enemy attack each turn, it gains +1 maximum and current HP.",
     cost: 4,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 7,
   },
@@ -93,6 +100,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
       "1 Earth Flux, once per your turn: Another allied creature gains +2 maximum and current HP; this permanently loses 1 attack, to a minimum of 0. Requires at least 1 attack.",
     cost: 4,
     price: 10,
+    purchasable: false,
     damage: 4,
     health: 5,
   },
@@ -104,6 +112,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "At the end of your turn, if this has full HP, gain 1 Earth Flux.",
     cost: 4,
     price: 10,
+    purchasable: false,
     damage: 3,
     health: 6,
   },
@@ -116,6 +125,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
       "Its maximum and current HP are increased by 1 for each other allied Earth creature, up to +4. When the number changes, adjust both by the change in this bonus; damage already taken is retained.",
     cost: 8,
     price: 10,
+    purchasable: false,
     damage: 5,
     health: 10,
   },
@@ -129,6 +139,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "1 Earth Flux, once per your turn: This gains +1 maximum and current HP, up to +3 maximum HP from this ability.",
     cost: 2,
     price: 10,
+    purchasable: false,
     damage: 1,
     health: 6,
   },
@@ -139,6 +150,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "4 damage to the target creature",
     cost: 2,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1e8": {
@@ -148,6 +160,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "Target creature cannot attack next turn",
     cost: 2,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1e9": {
@@ -157,6 +170,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "Deals 2 damage to all creatures",
     cost: 4,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1ea": {
@@ -166,6 +180,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "The target creature gains +0/+10",
     cost: 3,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1eb": {
@@ -175,6 +190,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "Burrows the target creature",
     cost: 2,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1el": {
@@ -184,6 +200,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "Choose an allied creature. It permanently loses 2 attack, to a minimum of 0, and gains +5 maximum and current HP.",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1em": {
@@ -193,6 +210,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "Move up to 3 maximum and current HP from one allied creature to another. The donor must retain at least 1 maximum and current HP.",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1en": {
@@ -202,6 +220,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "Deal 2 damage to an enemy creature, plus 1 for each allied creature with at least 6 current HP, up to 5 total damage.",
     cost: 3,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1eo": {
@@ -211,6 +230,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "An allied creature gains +2 maximum and current HP. Until the start of your next turn, reduce damage dealt to it by 1 per instance.",
     cost: 2,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1es": {
@@ -220,6 +240,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "Choose an enemy creature. Deal damage equal to the number of your Earth creatures with at least 4 current HP, up to 4. Draw a card.",
     cost: 2,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1ec": {
@@ -230,6 +251,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "Prevents 3 damage",
     cost: 5,
     price: 10,
+    purchasable: false,
   },
   "1ep": {
     domain: "EARTH",
@@ -239,6 +261,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "Reduce each attack against you by 1. After this survives to the start of three of your turns, reduce each attack by 2 instead.",
     cost: 4,
     price: 10,
+    purchasable: false,
   },
   "1eq": {
     domain: "EARTH",
@@ -248,6 +271,7 @@ export const FORGED_EARTH_CARDS = defineCardDefinition({
     description: "Before this attacks on your turn, if you control a creature with at least 8 current HP, it gains +2 attack until the end of the turn.",
     cost: 5,
     price: 10,
+    purchasable: false,
     damage: 4,
   },
 });

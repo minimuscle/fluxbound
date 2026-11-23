@@ -9,6 +9,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "Gain 2 Fire Flux per turn.",
     cost: 0,
     price: 10,
+    purchasable: false,
   },
   "1f1": {
     domain: "FIRE",
@@ -18,6 +19,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "Astral-forged upgrade of Cinder Rat.",
     cost: 1,
     price: 60,
+    purchasable: false,
     damage: 2,
     health: 3,
   },
@@ -29,6 +31,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "Turns to ash when killed",
     cost: 7,
     price: 100,
+    purchasable: false,
     damage: 1,
     health: 9,
   },
@@ -42,6 +45,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "1F - Rebirth - turn into a phoenix",
     cost: 7,
     price: 100,
+    purchasable: false,
     damage: 1,
     health: 4,
   },
@@ -55,6 +59,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "1F - Overheat - At the end of the turn, deal +1/-1",
     cost: 3,
     price: 50,
+    purchasable: false,
     damage: 4,
     health: 4,
   },
@@ -68,6 +73,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "1W - Steam Burst - +2/0 for 1 turn",
     cost: 5,
     price: 75,
+    purchasable: false,
     damage: 4,
     health: 4,
   },
@@ -81,6 +87,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "1F - Ablaze - +2/0",
     cost: 2,
     price: 50,
+    purchasable: false,
     damage: 0,
     health: 4,
   },
@@ -92,6 +99,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "",
     cost: 10,
     price: 100,
+    purchasable: false,
     damage: 11,
     health: 7,
   },
@@ -103,6 +111,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "At the end of your turn, before attacks, if this has less than its starting HP, it gains +1 attack until the end of that turn.",
     cost: 1,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 3,
   },
@@ -114,6 +123,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "The first time this survives damage from an enemy attack each turn, gain 1 Fire Flux.",
     cost: 4,
     price: 10,
+    purchasable: false,
     damage: 3,
     health: 5,
   },
@@ -127,6 +137,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "1 Fire Flux, once per your turn: If you control another Fire creature, deal 2 damage to an enemy creature.",
     cost: 4,
     price: 10,
+    purchasable: false,
     damage: 3,
     health: 5,
     targets: ["creature"],
@@ -138,6 +149,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "3x3 damage",
     cost: 1,
     price: 50,
+    purchasable: false,
     targets: ["creature", "opponent"],
   },
   "1fa": {
@@ -147,6 +159,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "3 Damage to all enemy creatures",
     cost: 6,
     price: 50,
+    purchasable: false,
     targets: [],
   },
   "1fb": {
@@ -156,6 +169,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "gain +5/0 to the target creature",
     cost: 4,
     price: 50,
+    purchasable: false,
     targets: ["creature"],
   },
   "1fc": {
@@ -165,6 +179,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "Destroy the target permanent",
     cost: 2,
     price: 50,
+    purchasable: false,
     targets: [],
   },
   "1fd": {
@@ -174,6 +189,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "-2 health to the target per turn. Restore 1 HP to yourself.",
     cost: 1,
     price: 50,
+    purchasable: false,
     targets: [],
   },
   "1fo": {
@@ -183,6 +199,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "Choose an allied creature. It gains +1 attack permanently; at the start of your next turn, gain 2 Fire Flux.",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1fp": {
@@ -192,6 +209,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "Deal 3 damage to yourself. Deal 5 damage to an enemy creature.",
     cost: 2,
     price: 10,
+    purchasable: false,
     targets: ["creature"],
   },
   "1fq": {
@@ -201,6 +219,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "Deal 2 damage to an allied creature. If it survives, deal 4 damage to an enemy creature.",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1fr": {
@@ -210,6 +229,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "Deal 3 damage to an enemy creature. If you have no Fire Flux remaining after paying this spell's cost, deal 5 damage instead.",
     cost: 2,
     price: 10,
+    purchasable: false,
     targets: ["creature"],
   },
   "1fe": {
@@ -220,6 +240,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "Each attacking creature takes 1 damage",
     cost: 4,
     price: 60,
+    purchasable: false,
   },
   "1ff": {
     domain: "FIRE",
@@ -229,6 +250,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "Reduces enemies attacks by 1",
     cost: 2,
     price: 60,
+    purchasable: false,
   },
   "1fg": {
     domain: "FIRE",
@@ -238,6 +260,7 @@ export const FORGED_FIRE_CARDS = defineCardDefinition({
     description: "\\+1 damage for every 10F in the users pool",
     cost: 4,
     price: 60,
+    purchasable: false,
     damage: 5,
   },
 });

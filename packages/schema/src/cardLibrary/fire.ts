@@ -9,6 +9,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "Plus 1 Fire Flux per turn",
     cost: 0,
     price: 10,
+    purchasable: true,
   },
   "0f1": {
     domain: "FIRE",
@@ -18,6 +19,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "",
     cost: 1,
     price: 60,
+    purchasable: true,
     damage: 2,
     health: 1,
   },
@@ -29,6 +31,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "Turns to ash when killed",
     cost: 7,
     price: 100,
+    purchasable: true,
     damage: 7,
     health: 1,
   },
@@ -42,6 +45,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "1F - Rebirth - turn into a phoenix",
     cost: 7,
     price: 100,
+    purchasable: false,
     damage: 0,
     health: 4,
   },
@@ -55,6 +59,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "1F - Overheat - Take +1/-1",
     cost: 3,
     price: 50,
+    purchasable: true,
     damage: 3,
     health: 4,
   },
@@ -68,6 +73,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "1W - Steam Burst - +2/0 for 1 turn",
     cost: 5,
     price: 75,
+    purchasable: true,
     damage: 4,
     health: 2,
   },
@@ -81,6 +87,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "1F - Ablaze - +2/0",
     cost: 2,
     price: 50,
+    purchasable: true,
     damage: 0,
     health: 2,
   },
@@ -92,6 +99,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "",
     cost: 10,
     price: 100,
+    purchasable: true,
     damage: 11,
     health: 5,
   },
@@ -103,6 +111,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "At the end of your turn, if this has less than its max HP, it gains +2 attack until the end of that turn.",
     cost: 2,
     price: 10,
+    purchasable: true,
     damage: 2,
     health: 3,
   },
@@ -114,6 +123,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "Gain 1 Fire Flux for every damage this creature takes",
     cost: 4,
     price: 10,
+    purchasable: true,
     damage: 2,
     health: 5,
   },
@@ -127,6 +137,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "1 Fire Flux: Deal 1 damage to the target per fire creature",
     cost: 4,
     price: 10,
+    purchasable: true,
     damage: 3,
     health: 3,
     targets: ["creature"],
@@ -138,6 +149,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "3x3 damage",
     cost: 2,
     price: 50,
+    purchasable: true,
     targets: ["creature", "opponent"],
   },
   "0fa": {
@@ -147,6 +159,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "3 Damage to all enemy creatures",
     cost: 7,
     price: 50,
+    purchasable: true,
     targets: ["opponentCreatures"],
   },
   "0fb": {
@@ -156,6 +169,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "gain +5/0 to the target creature",
     cost: 5,
     price: 50,
+    purchasable: true,
     targets: ["creature"],
   },
   "0fc": {
@@ -165,6 +179,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "Destroy the target permanent",
     cost: 3,
     price: 50,
+    purchasable: true,
     targets: ["permanent"],
   },
   "0fd": {
@@ -174,6 +189,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "-2 health to the target per turn",
     cost: 1,
     price: 50,
+    purchasable: true,
     targets: ["creature", "opponent"],
   },
   "0fo": {
@@ -183,6 +199,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "Choose an allied creature. It gains -1 attack permanently; gain 1 Fire Flux.",
     cost: 2,
     price: 10,
+    purchasable: true,
     targets: ["creature"],
   },
   "0fp": {
@@ -192,6 +209,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "Deal 3 damage to yourself. Deal 5 damage to an enemy creature.",
     cost: 3,
     price: 10,
+    purchasable: true,
     targets: ["creature"],
   },
   "0fq": {
@@ -201,6 +219,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "Deal 2 damage to an allied creature. If it survives, deal 4 damage to an enemy creature.",
     cost: 2,
     price: 10,
+    purchasable: true,
     targets: ["allyThenEnemy"],
   },
   "0fr": {
@@ -210,6 +229,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "Deal 3 damage to an enemy creature. If you have no Fire Flux remaining after paying this spell's cost, deal 5 damage instead.",
     cost: 3,
     price: 10,
+    purchasable: true,
     targets: ["creature"],
   },
   "0fe": {
@@ -220,6 +240,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "Each attacking creature takes 1 damage",
     cost: 5,
     price: 60,
+    purchasable: true,
   },
   "0ff": {
     domain: "FIRE",
@@ -229,6 +250,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "Reduces enemies attacks by 1",
     cost: 3,
     price: 60,
+    purchasable: true,
   },
   "0fg": {
     domain: "FIRE",
@@ -238,6 +260,7 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "\\+1 damage for every 10F in the users pool",
     cost: 4,
     price: 60,
+    purchasable: true,
     damage: 4,
   },
   "0fh": {
@@ -247,5 +270,6 @@ export const FIRE_CARDS = defineCardDefinition({
     description: "does nothing",
     cost: 3,
     price: 10,
+    purchasable: false,
   },
 });

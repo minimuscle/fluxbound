@@ -9,6 +9,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "Gain 2 Water Flux per turn.",
     cost: 0,
     price: 10,
+    purchasable: false,
   },
   "1w1": {
     domain: "WATER",
@@ -18,6 +19,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "Astral-forged upgrade of River Sprite.",
     cost: 1,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 2,
   },
@@ -29,6 +31,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "Astral-forged upgrade of Coral Guardian.",
     cost: 3,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 8,
   },
@@ -42,6 +45,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "2W - Freeze - target creature cannot attack this turn",
     cost: 4,
     price: 10,
+    purchasable: false,
     damage: 4,
     health: 4,
   },
@@ -55,6 +59,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "1 Life - Renewal - Restore 3HP to the target",
     cost: 4,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 4,
   },
@@ -66,6 +71,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "",
     cost: 10,
     price: 10,
+    purchasable: false,
     damage: 10,
     health: 8,
   },
@@ -80,6 +86,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
       "1 Water Flux, once per your turn: Move up to 2 current HP from another allied creature to this. The donor must retain at least 1 HP; this cannot exceed its maximum HP.",
     cost: 2,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 6,
   },
@@ -91,6 +98,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "At the end of your turn, if you restored HP to an allied creature this turn, gain 1 Water Flux.",
     cost: 3,
     price: 10,
+    purchasable: false,
     damage: 2,
     health: 5,
   },
@@ -105,6 +113,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
       "1 Water Flux, once per your turn: This gains attack equal to its current HP, up to +4, until the end of your turn. Then it loses 2 HP. Requires at least 3 current HP.",
     cost: 4,
     price: 10,
+    purchasable: false,
     damage: 3,
     health: 6,
   },
@@ -117,6 +126,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
       "At the end of your turn, before attacks, this gains +2 attack for that turn if your Water Flux pool is even; otherwise, restore 2 HP to this.",
     cost: 6,
     price: 10,
+    purchasable: false,
     damage: 4,
     health: 6,
   },
@@ -130,6 +140,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "1 Water Flux, once per your turn: Restore 2 HP to another allied creature.",
     cost: 7,
     price: 10,
+    purchasable: false,
     damage: 4,
     health: 10,
   },
@@ -140,6 +151,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "Destroy any non-water creatures with 2 or less hp",
     cost: 4,
     price: 10,
+    purchasable: false,
     targets: ["selfCreatures", "opponentCreatures"],
   },
   "1w8": {
@@ -149,6 +161,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "Freeze the target creature for 4 turns.",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: ["creature"],
   },
   "1w9": {
@@ -158,6 +171,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "up to 3 random creatures are healed 2 HP",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1wa": {
@@ -167,6 +181,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "Returns the targets permanent to their deck",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1wb": {
@@ -176,6 +191,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "Deal 3 damage to the target. Target may freeze 25% chance",
     cost: 3,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1wm": {
@@ -186,6 +202,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
       "Move up to 4 current HP from one allied creature to another. The donor must retain at least 1 HP; the recipient cannot exceed its maximum HP. Restore 1 HP to yourself.",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1wn": {
@@ -195,6 +212,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "An allied creature permanently loses up to 3 attack, to a minimum of 0. Restore 2 HP to yourself for each attack lost.",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1wo": {
@@ -204,6 +222,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "Choose an enemy creature. If its current attack exceeds its current HP, deal damage to it equal to the difference, up to 5.",
     cost: 2,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1wp": {
@@ -213,6 +232,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "An enemy creature loses 3 attack until the start of your next turn. At the start of your next turn, gain 1 Water Flux.",
     cost: 1,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1wt": {
@@ -223,6 +243,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
       "Choose two allied creatures. Until the end of your turn, the one with lower attack gains attack equal to the difference between them, up to +4. If tied, neither gains attack.",
     cost: 2,
     price: 10,
+    purchasable: false,
     targets: [],
   },
   "1wc": {
@@ -233,6 +254,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "Reduces damage by 2",
     cost: 4,
     price: 10,
+    purchasable: false,
   },
   "1wq": {
     domain: "WATER",
@@ -243,6 +265,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
       "Reduce each attack against you by 1. The first attack dealing exactly 1 damage to you each turn also restores 1 HP to one allied creature of your choice.",
     cost: 3,
     price: 10,
+    purchasable: false,
   },
   "1wr": {
     domain: "WATER",
@@ -252,6 +275,7 @@ export const FORGED_WATER_CARDS = defineCardDefinition({
     description: "Before this attacks on your turn, if you restored HP to an allied creature this turn, it gains +2 attack until the end of the turn.",
     cost: 5,
     price: 10,
+    purchasable: false,
     damage: 4,
   },
 });

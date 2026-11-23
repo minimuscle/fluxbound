@@ -9,6 +9,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "Plus 1 Void Flux per turn.",
     cost: 0,
     price: 10,
+    purchasable: true,
   },
   "0v1": {
     domain: "VOID",
@@ -20,6 +21,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "1 Void Flux, once while this is in play: This gains +1 attack permanently.",
     cost: 1,
     price: 10,
+    purchasable: true,
     damage: 1,
     health: 3,
   },
@@ -31,6 +33,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "At the end of your turn, before attacks, if your Void Flux pool is empty, this gains +2 attack for that turn.",
     cost: 3,
     price: 10,
+    purchasable: true,
     damage: 2,
     health: 4,
   },
@@ -45,6 +48,7 @@ export const VOID_CARDS = defineCardDefinition({
       "1 Void Flux, once per your turn: Spend up to 2 additional Void Flux. This gains +1 attack for each additional Flux spent until the end of your turn.",
     cost: 4,
     price: 10,
+    purchasable: true,
     damage: 2,
     health: 4,
   },
@@ -58,6 +62,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "",
     cost: 10,
     price: 10,
+    purchasable: true,
     damage: 12,
     health: 4,
   },
@@ -70,6 +75,7 @@ export const VOID_CARDS = defineCardDefinition({
       "At the end of your turn, if your Void Flux pool is empty, this gains +1 maximum and current HP. This can trigger only once while this is in play.",
     cost: 1,
     price: 10,
+    purchasable: true,
     damage: 2,
     health: 1,
   },
@@ -81,6 +87,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "While your Void Flux pool is empty, this has +1 attack.",
     cost: 3,
     price: 10,
+    purchasable: true,
     damage: 2,
     health: 3,
   },
@@ -94,6 +101,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "1 Void Flux, once per your turn: Spend 1 additional stored Flux of another domain to restore 3 HP to this.",
     cost: 4,
     price: 10,
+    purchasable: true,
     damage: 2,
     health: 5,
   },
@@ -105,6 +113,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "At the end of your turn, if the opponent has more total stored Flux than you, gain 1 Void Flux.",
     cost: 4,
     price: 10,
+    purchasable: true,
     damage: 3,
     health: 4,
   },
@@ -116,6 +125,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "The first damage dealt to this each turn is reduced by 2 while your Void Flux pool is empty.",
     cost: 6,
     price: 10,
+    purchasable: true,
     damage: 4,
     health: 6,
   },
@@ -127,6 +137,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "At the end of your turn, if your Void Flux pool is empty, restore 4 HP to yourself.",
     cost: 8,
     price: 10,
+    purchasable: true,
     damage: 5,
     health: 7,
   },
@@ -137,6 +148,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "Spend all your remaining Void Flux, up to 5. An allied creature gains that much attack until the end of your turn.",
     cost: 1,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0va": {
@@ -146,6 +158,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "Choose a domain in which the opponent has at least 5 stored Flux. They lose 3 Flux of that domain.",
     cost: 3,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0vb": {
@@ -155,6 +168,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "Each player loses up to 2 stored Flux from a domain of their own choice. Draw a card.",
     cost: 2,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0vc": {
@@ -164,6 +178,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "Deal 3 damage to an enemy creature. If your Void Flux pool is now empty, deal 5 damage instead.",
     cost: 3,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0vd": {
@@ -174,6 +189,7 @@ export const VOID_CARDS = defineCardDefinition({
       "Choose an allied creature. Until the start of your next turn, the first damage that would kill it leaves it at 1 HP instead. Then spend all your remaining Void Flux.",
     cost: 2,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0vo": {
@@ -183,6 +199,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "Spend up to 2 additional Void Flux. Deal 1 damage to an enemy creature, plus 2 per additional Void Flux spent.",
     cost: 2,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0vp": {
@@ -192,6 +209,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "Choose a domain. If the opponent has at least 8 stored Flux in that domain, they lose 4 Flux of that domain. Otherwise, they lose up to 1.",
     cost: 3,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0vq": {
@@ -202,6 +220,7 @@ export const VOID_CARDS = defineCardDefinition({
       "An allied creature gains +2 attack until the end of your turn. If your Void Flux pool is empty after paying this spell's cost, it also gains +2 maximum and current HP permanently.",
     cost: 2,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0vr": {
@@ -211,6 +230,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "If the opponent has at least 5 more total stored Flux than you, draw two cards. Otherwise, draw one card.",
     cost: 3,
     price: 10,
+    purchasable: true,
     targets: [],
   },
   "0ve": {
@@ -221,6 +241,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "Reduce each attack against you by 1, or by 2 while your Void Flux pool is empty.",
     cost: 5,
     price: 10,
+    purchasable: true,
   },
   "0vs": {
     domain: "VOID",
@@ -231,6 +252,7 @@ export const VOID_CARDS = defineCardDefinition({
       "Reduce each attack against you by 1. At the start of your turn, if your Void Flux pool is empty, the next damage dealt to yourself is reduced by 3 in addition to this shield's normal reduction; this bonus does not stack.",
     cost: 5,
     price: 10,
+    purchasable: true,
   },
   "0vf": {
     domain: "VOID",
@@ -240,6 +262,7 @@ export const VOID_CARDS = defineCardDefinition({
     description: "Before this attacks on your turn, if your Void Flux pool is empty, it gains +2 attack until the end of the turn.",
     cost: 5,
     price: 10,
+    purchasable: true,
     damage: 3,
   },
 });

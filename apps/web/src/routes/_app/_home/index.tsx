@@ -6,9 +6,11 @@ import {
   UsersIcon,
 } from "@phosphor-icons/react";
 import { createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import Logo from "assets/images/ui/menu/main/logo.svg";
 import MenuHolder from "assets/images/ui/menu/main/menuHolder.svg";
 import MenuSpacer from "assets/images/ui/menu/main/menuSpacer.svg";
+import { getUserStatsOptions } from "queries/getUserStats";
 import { NavButton } from "routes/_app/_home/-components/navButton";
 import styles from "./-components/home.module.css";
 
@@ -17,6 +19,11 @@ export const Route = createFileRoute("/_app/_home/")({
 });
 
 function RouteComponent() {
+  const { data: gold } = useSuspenseQuery({
+    ...getUserStatsOptions,
+    select: ({ data }) => data.gold ?? 0,
+  });
+
   /***** RENDER *****/
   return (
     <div className={styles.menu}>
@@ -31,7 +38,7 @@ function RouteComponent() {
       </NavButton>
       <img src={MenuSpacer} alt="" className={styles.menuSpacer} />
       <NavButton options={{ to: "/cards" }} icon={StackIcon}>
-        Cards
+        Cards <small>({gold.toLocaleString()} gold)</small>
       </NavButton>
       <img src={MenuSpacer} alt="" className={styles.menuSpacer} />
       <NavButton options={{ to: "/game/lobby/single" }} icon={GearSixIcon}>

@@ -23,36 +23,25 @@ export const routes = {
     GET: async (request: Request, server: Server<GameSocketData>) => {
       const authorizationHeader = request.headers.get("authorization");
       const match = authorizationHeader?.match(/^Bearer\s+(.+)$/i);
-      const accessToken =
-        match?.[1] ?? new URL(request.url).searchParams.get("access_token");
+      const accessToken = match?.[1] ?? new URL(request.url).searchParams.get("access_token");
 
       console.log("logging");
       if (!accessToken) return new Response("Unauthorized", { status: 401 });
 
-      const supabase = createClient(
-        process.env.DATABASE_URL!,
-        process.env.DATABASE_SECRET_KEY!,
-        {
-          global: { headers: { Authorization: `Bearer ${accessToken}` } },
-          auth: {
-            persistSession: false,
-            autoRefreshToken: false,
-            detectSessionInUrl: false,
-          },
+      const supabase = createClient(process.env.DATABASE_URL!, process.env.DATABASE_SECRET_KEY!, {
+        global: { headers: { Authorization: `Bearer ${accessToken}` } },
+        auth: {
+          persistSession: false,
+          autoRefreshToken: false,
+          detectSessionInUrl: false,
         },
-      );
+      });
 
       const { data, error } = await supabase.auth.getUser();
-      if (error || !data.user)
-        return new Response("Unauthorized", { status: 401 });
+      if (error || !data.user) return new Response("Unauthorized", { status: 401 });
 
-      const { data: playerDetails, error: detailsError } = await supabase
-        .from("users")
-        .select("display_name")
-        .eq("id", data.user.id)
-        .maybeSingle();
-      if (detailsError)
-        return new Response(detailsError.message, { status: 500 });
+      const { data: playerDetails, error: detailsError } = await supabase.from("users").select("display_name").eq("id", data.user.id).maybeSingle();
+      if (detailsError) return new Response(detailsError.message, { status: 500 });
 
       const playerName = playerDetails?.display_name ?? "Anon";
 
@@ -75,6 +64,10 @@ export const routes = {
   },
   "/api/user/details": {
     GET: withCors(user.details.GET),
+    OPTIONS: corsPreflight,
+  },
+  "/api/user/stats": {
+    GET: withCors(user.stats.GET),
     OPTIONS: corsPreflight,
   },
   "/api/user/signup": {
