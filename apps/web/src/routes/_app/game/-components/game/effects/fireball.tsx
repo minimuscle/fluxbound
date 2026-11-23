@@ -2,7 +2,7 @@ import { useApplication } from "@pixi/react";
 import fireballJson from "assets/effects/fireball.json";
 import fireballSheet from "assets/effects/fireball.png";
 import { Assets, Spritesheet, Texture } from "pixi.js";
-import { useEffect, useEffectEvent, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export type FireballEffectProps = {
   target: HTMLDivElement;
@@ -13,9 +13,13 @@ export function FireballEffect({ target, onComplete }: FireballEffectProps) {
   /***** HOOKS *****/
   const { app } = useApplication();
   const [frames, setFrames] = useState<Texture[]>([]);
-  const complete = useEffectEvent(onComplete);
+  const complete = useRef(onComplete);
 
   /***** EFFECTS *****/
+  useEffect(() => {
+    complete.current = onComplete;
+  }, [onComplete]);
+
   useEffect(() => {
     const controller = new AbortController();
 
@@ -26,13 +30,13 @@ export function FireballEffect({ target, onComplete }: FireballEffectProps) {
         await atlas.parse();
         if (controller.signal.aborted) return;
         const animation = atlas.animations.fireball_termplate ?? [];
-        if (animation.length === 0) complete();
+        if (animation.length === 0) complete.current();
         else setFrames(animation);
       })
       .catch((error: Error) => {
         if (controller.signal.aborted) return;
         console.error("Failed to load fireball animation", error);
-        complete();
+        complete.current();
       });
 
     return () => controller.abort();
